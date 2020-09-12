@@ -17,5 +17,9 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("mehhhffssage");
 
         myRef.setValue("Hello, World!ggggg");//lklkklklkl
+
+        DatabaseReference de = database.getReference("jojo");
+
+        de.setValue("Hello!");//lklkklklkl
     }
 }
