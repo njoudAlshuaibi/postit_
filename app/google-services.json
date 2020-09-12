@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "593761216496",
+    "firebase_url": "https://postitdatabase.firebaseio.com",
+    "project_id": "postitdatabase",
+    "storage_bucket": "postitdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593761216496:android:9bfcee310a4697a7741f35",
+        "android_client_info": {
+          "package_name": "com.postit.postit_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593761216496-ilg4s4efge8q2j73ut67gb93f90ti1dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5dHT4_fmHFyrPV8MQJ37ijt9tSfsw9BY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593761216496-ilg4s4efge8q2j73ut67gb93f90ti1dv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
