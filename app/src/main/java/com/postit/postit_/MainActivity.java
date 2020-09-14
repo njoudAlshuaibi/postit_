@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView createAccount;
+    private TextView createAccount;//test
 
 
     protected void onCreate(Bundle savedInstanceState) {
