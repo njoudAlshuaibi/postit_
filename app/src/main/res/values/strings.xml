@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">postit_</string>
+
+    <string-array name="Collage">
+        <item>CCIS</item>
+    </string-array>
+
+
+    <string-array name="Major">
+        <item>Software Engineering</item>
+        <item>Information System</item>
+        <item>Information Technology</item>
+        <item>Computer Science</item>
+
+    </string-array>
 </resources>
