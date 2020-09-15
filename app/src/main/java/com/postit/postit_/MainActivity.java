@@ -1,6 +1,9 @@
 package com.postit.postit_;
 
+<<<<<<< HEAD
 import androidx.annotation.NonNull;
+=======
+>>>>>>> parent of 99e4724... home page
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,10 +14,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+=======
+>>>>>>> parent of 99e4724... home page
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 //raya,,,
@@ -23,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView createAccount;//test
     private TextView forgetPassword;
 
+<<<<<<< HEAD
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView logIn;
@@ -30,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
 
 
+=======
+>>>>>>> parent of 99e4724... home page
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -39,11 +48,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         createAccount = (TextView) findViewById(R.id.createAccount);
+<<<<<<< HEAD
         createAccount.setOnClickListener(this);
+=======
+        forgetPassword  = (TextView) findViewById(R.id.forgetPassword);
+
+        createAccount.setOnClickListener(new View.OnClickListener() {
+>>>>>>> parent of 99e4724... home page
 
         forgetPassword = (TextView) findViewById(R.id.forgetPassword);
         forgetPassword.setOnClickListener(this);
 
+<<<<<<< HEAD
         logIn = (TextView) findViewById(R.id.loginButton);
         logIn.setOnClickListener(this);
 
@@ -64,6 +80,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //     startActivity(new Intent(MainActivity.this, forgetPasswordActivity.class));
         // }
         // });
+=======
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, forgetPasswordActivity.class));
+            }
+        });
+>>>>>>> parent of 99e4724... home page
     }
 
     public void onClick(View view) {
