@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("");
 
-        createAccount=findViewById(R.id.createAccount);
+
+        createAccount = (TextView) findViewById(R.id.createAccount);
+
         createAccount.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
