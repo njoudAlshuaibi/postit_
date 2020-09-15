@@ -1,5 +1,6 @@
 package com.postit.postit_;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,19 +11,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
-public class CreateAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class CreateAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private EditText editTextuserName, editTextsignupEmail, editTextsignupPass, editTextsignupcPass;
     private String college, major;
     Spinner spinner, spinner2;
-    private Button registerButton;
+    private TextView registerButton;
 
 
     @Override
@@ -34,7 +40,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
 
         registerButton= findViewById(R.id.signupBtn);
         /* teset it later */
-        registerButton.setOnClickListener((View.OnClickListener) this);
+        registerButton.setOnClickListener(this);
         editTextuserName =(EditText) findViewById((R.id.userName));
         editTextsignupEmail =(EditText) findViewById((R.id.signupEmail));
         editTextsignupPass= (EditText) findViewById((R.id.signupPass));
@@ -86,12 +92,12 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
     }
     //creat an account and validate it
     private void registration() {
-        String suserName= editTextuserName.getText().toString().trim();
-        String semail= editTextsignupEmail.getText().toString().trim();
-        String ssignupPass= editTextsignupPass.getText().toString().trim();
+        final String suserName= editTextuserName.getText().toString().trim();
+        final String semail= editTextsignupEmail.getText().toString().trim();
+        final String ssignupPass= editTextsignupPass.getText().toString().trim();
         String ssignupcPass= editTextsignupcPass.getText().toString().trim();
-        String scollege= college.trim();
-        String smajor=major.trim();
+        final String scollege= college.trim();
+        final String smajor=major.trim();
 
         if(suserName.isEmpty()){
             editTextuserName.setError("User name is required");
@@ -100,6 +106,11 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
         }
         if(semail.isEmpty()){
             editTextsignupEmail.setError("Email is required");
+            editTextsignupEmail.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(semail).matches()){
+            editTextsignupEmail.setError("Please provide valid email");
             editTextsignupEmail.requestFocus();
             return;
         }
@@ -118,11 +129,42 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
             editTextsignupcPass.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(semail).matches()){
-            editTextsignupEmail.setError("Please provide valid email");
-            editTextsignupEmail.requestFocus();
+        if(!ssignupcPass.equals(ssignupPass)){
+            editTextsignupcPass.setError("not matching password");
+            editTextsignupcPass.requestFocus();
             return;
         }
+
+        mAuth.createUserWithEmailAndPassword(semail,ssignupPass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                         if(task.isSuccessful()){
+                             user USER = new user(suserName,semail,ssignupPass,scollege,smajor);
+                             FirebaseDatabase.getInstance().getReference("users")
+                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                     .setValue(USER).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+                                     if (task.isSuccessful()) {
+                                         Toast.makeText(CreateAccountActivity.this, "User registered Successfully ", Toast.LENGTH_LONG).show();
+                                     }
+                                     else {
+                                         Toast.makeText(CreateAccountActivity.this, "Registration failed ", Toast.LENGTH_LONG).show();
+
+                                     }
+                                 }
+                             }  );
+                         }
+                         else {
+                             Toast.makeText(CreateAccountActivity.this, "this email is Already taken", Toast.LENGTH_LONG).show();
+
+                         }
+
+                         }
+                    }
+                );
+
 
 
 
