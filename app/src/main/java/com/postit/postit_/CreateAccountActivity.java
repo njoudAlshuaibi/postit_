@@ -1,26 +1,24 @@
 package com.postit.postit_;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.regex.Pattern;
 
 public class CreateAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -29,7 +27,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
     private String college, major;
     Spinner spinner, spinner2;
     private TextView registerButton;
-
+    private TextView haveAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +43,14 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
         editTextsignupEmail =(EditText) findViewById((R.id.signupEmail));
         editTextsignupPass= (EditText) findViewById((R.id.signupPass));
         editTextsignupcPass =(EditText) findViewById((R.id.signupcPass));
+//switch between sign up and sign in
+        haveAccount=findViewById(R.id.haveAccount);
+        haveAccount.setOnClickListener(new View.OnClickListener() {
 
-
+            public void onClick(View view) {
+                startActivity(new Intent(CreateAccountActivity.this, MainActivity.class));
+            }//End onClick()
+        });
         // save the selected college to a string
         spinner = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Collage,android.R.layout.simple_spinner_item);

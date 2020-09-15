@@ -94,6 +94,8 @@
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="#888383">
 
+
+
             <EditText
                 android:id="@+id/signupcPass"
                 android:layout_width="match_parent"
@@ -108,54 +110,92 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_width="474dp"
+            android:layout_height="108dp"
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="250dp"
-            android:hint="Collage"/>
+            <LinearLayout
+                android:layout_width="187dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="111dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Chose Collage:"
+                    android:textAlignment="center"
+                    android:textSize="14sp" />
 
 
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="123dp"
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="250dp"
+                    android:hint="Collage"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="205dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-165dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="3dp"
-                android:hint="Major"
+                android:orientation="vertical">
 
-                />
+                <TextView
+                    android:layout_width="172dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="-10dp"
+                    android:text="Chose Major:"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
 
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="3dp"
+                    android:hint="Major"
+
+
+                    />
+            </LinearLayout>
 
             />
 
 
+        </LinearLayout>
 
-
-
-
-
-    </LinearLayout>
         <TextView
             android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="40dp"
             android:background="#EB75B2"
             android:text="Create Account"
             android:textColor="#fff" />
+        <TextView
+            android:id="@+id/haveAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:text="already have an account?Sing in"
+            android:textColor="#03A9F4" />
 
 </LinearLayout>
 
