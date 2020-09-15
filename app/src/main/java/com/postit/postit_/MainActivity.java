@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     private TextView createAccount;//test
-
+    private TextView forgetPassword;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         createAccount = (TextView) findViewById(R.id.createAccount);
+        forgetPassword  = (TextView) findViewById(R.id.forgetPassword);
 
         createAccount.setOnClickListener(new View.OnClickListener() {
 
@@ -32,10 +33,36 @@ public class MainActivity extends AppCompatActivity {
             }//End onClick()
         });
 
-
-        }
-
-
-
-
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, forgetPasswordActivity.class));
+            }
+        });
     }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

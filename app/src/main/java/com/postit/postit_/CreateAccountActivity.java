@@ -91,7 +91,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
         switch (v.getId()){
             case R.id.signupBtn:
                 registration();
-            break;
+                break;
         }
     }
     //creat an account and validate it
@@ -141,32 +141,32 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
 
         mAuth.createUserWithEmailAndPassword(semail,ssignupPass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                         if(task.isSuccessful()){
-                             user USER = new user(suserName,semail,ssignupPass,scollege,smajor);
-                             FirebaseDatabase.getInstance().getReference("users")
-                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                     .setValue(USER).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
-                                     if (task.isSuccessful()) {
-                                         Toast.makeText(CreateAccountActivity.this, "User registered Successfully ", Toast.LENGTH_LONG).show();
-                                     }
-                                     else {
-                                         Toast.makeText(CreateAccountActivity.this, "Registration failed ", Toast.LENGTH_LONG).show();
+                                           @Override
+                                           public void onComplete(@NonNull Task<AuthResult> task) {
+                                               if(task.isSuccessful()){
+                                                   user USER = new user(suserName,semail,ssignupPass,scollege,smajor);
+                                                   FirebaseDatabase.getInstance().getReference("users")
+                                                           .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                           .setValue(USER).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                       @Override
+                                                       public void onComplete(@NonNull Task<Void> task) {
+                                                           if (task.isSuccessful()) {
+                                                               Toast.makeText(CreateAccountActivity.this, "User registered Successfully ", Toast.LENGTH_LONG).show();
+                                                           }
+                                                           else {
+                                                               Toast.makeText(CreateAccountActivity.this, "Registration failed ", Toast.LENGTH_LONG).show();
 
-                                     }
-                                 }
-                             }  );
-                         }
-                         else {
-                             Toast.makeText(CreateAccountActivity.this, "this email is Already taken", Toast.LENGTH_LONG).show();
+                                                           }
+                                                       }
+                                                   }  );
+                                               }
+                                               else {
+                                                   Toast.makeText(CreateAccountActivity.this, "this email is Already taken", Toast.LENGTH_LONG).show();
 
-                         }
+                                               }
 
-                         }
-                    }
+                                           }
+                                       }
                 );
 
 
@@ -187,3 +187,5 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
 
 
 }
+
+
