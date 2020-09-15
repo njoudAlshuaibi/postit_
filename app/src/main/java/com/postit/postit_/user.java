@@ -14,5 +14,5 @@ public class user {
                 this.college = scollege;
                 this.major = major;
     }
-
+// test
 }
