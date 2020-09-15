@@ -128,7 +128,8 @@
                     android:layout_marginRight="5dp"
                     android:text="Choose Collage:"
                     android:textAlignment="center"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
 
                 <Spinner
@@ -139,7 +140,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="250dp"
                     android:hint="Collage"
-                    android:textStyle="bold" />
+                     />
 
 
             </LinearLayout>
