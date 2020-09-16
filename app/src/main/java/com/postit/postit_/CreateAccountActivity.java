@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.lang.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -129,6 +130,13 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
             editTextsignupPass.requestFocus();
             return;
         }
+
+        if(!passwordValidation(ssignupPass)){
+            editTextsignupPass.setError("Password should contains at least one capital letter, one small letter and one number");
+            editTextsignupPass.requestFocus();
+            return;
+        }
+
         if(ssignupcPass.isEmpty()){
             editTextsignupcPass.setError("Confirm your Password");
             editTextsignupcPass.requestFocus();
@@ -188,7 +196,25 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    private boolean passwordValidation(String pass){
+        boolean CH = false;
+        boolean ch = false;
+        boolean num = false;
 
+        for(int i = 0 ; i < pass.length() ; i++ ){
+
+            if(Character.isUpperCase(pass.charAt(i))){
+                CH = true;
+            }
+            if(Character.isLowerCase(pass.charAt(i))){
+                ch = true;
+            }
+            if(Character.isDigit(pass.charAt(i))){
+                num = true;
+            }
+        }
+        return CH&&ch&&num;
+    }
 
 
 }
