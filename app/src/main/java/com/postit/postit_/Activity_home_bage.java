@@ -11,6 +11,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Activity_home_bage extends AppCompatActivity {
 
     @Override
@@ -39,29 +41,17 @@ public class Activity_home_bage extends AppCompatActivity {
             builder.setCancelable(true);
 
             builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+
+               // signOut
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                  // FirebaseAuth.getInstance().signOut();
-//                    startActivity(new intent(Activity_home_bage.this, MainActivity.class));
-                    //
-
-//private Button logout;
-//
-//logout = (Button)FindviewById(R.id.signout);
-//
-//logout.setOnClickListener(new View.OnClickListener() {
-//
-//        public void onClick(View view) {
-//            FirebaseAuth.getInstance().signOut();
-//            startActivity(new intent(profile.this, MainActivity.class));
-//        }//End onClick()
-//    });
-                    finish();
-                    Intent intent = new Intent(Activity_home_bage.this,MainActivity.class);
-                    startActivity(intent);
-
+                   FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(Activity_home_bage.this, MainActivity.class));
+//                    finish();
                 }
             });
+
+
 
             builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
                 @Override
