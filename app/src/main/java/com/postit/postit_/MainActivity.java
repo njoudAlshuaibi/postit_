@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("");
 
+        //juju start
+        mAuth = FirebaseAuth.getInstance();
+        // juju end
 
         createAccount = (TextView) findViewById(R.id.createAccount);
         forgetPassword  = (TextView) findViewById(R.id.forgetPassword);
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, forgetPasswordActivity.class));
+                    startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
                 }else{
                     Toast.makeText(MainActivity.this, "failed to login", Toast.LENGTH_LONG).show();
                 }
