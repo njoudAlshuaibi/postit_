@@ -124,8 +124,8 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
             editTextsignupPass.requestFocus();
             return;
         }
-        if(ssignupPass.length()<6){
-            editTextsignupPass.setError("Min password length should be 6 characters!");
+        if(ssignupPass.length()<8){
+            editTextsignupPass.setError("Min password length should be 8 characters!");
             editTextsignupPass.requestFocus();
             return;
         }
