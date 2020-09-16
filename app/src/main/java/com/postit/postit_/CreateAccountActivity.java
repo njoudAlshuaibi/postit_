@@ -92,6 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
             case R.id.signupBtn:
                 registration();
                 break;
+
         }
     }
     //creat an account and validate it
@@ -152,6 +153,8 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
                                                        public void onComplete(@NonNull Task<Void> task) {
                                                            if (task.isSuccessful()) {
                                                                Toast.makeText(CreateAccountActivity.this, "User registered Successfully ", Toast.LENGTH_LONG).show();
+                                                               startActivity(new Intent(CreateAccountActivity.this, MainActivity.class));
+
                                                            }
                                                            else {
                                                                Toast.makeText(CreateAccountActivity.this, "Registration failed ", Toast.LENGTH_LONG).show();
@@ -184,6 +187,8 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 
 
 }

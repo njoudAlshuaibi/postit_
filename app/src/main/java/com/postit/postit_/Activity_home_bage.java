@@ -11,14 +11,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class home_page extends AppCompatActivity {
+public class Activity_home_bage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-Toolbar toolbar = findViewById(R.id.toolbar_homepage);
-setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_home_bage);
+        Toolbar toolbar = findViewById(R.id.toolbar_homepage);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     }
@@ -34,7 +34,7 @@ setSupportActionBar(toolbar);
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id==R.id.exit){
-            AlertDialog.Builder builder = new AlertDialog.Builder(home_page.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(Activity_home_bage.this);
             builder.setMessage("Are you Sure you want to exit?");
             builder.setCancelable(true);
 
@@ -43,7 +43,7 @@ setSupportActionBar(toolbar);
                 public void onClick(DialogInterface dialog, int which) {
                     //fireBase auth.signout
                     finish();
-                    Intent intent = new Intent(home_page.this,MainActivity.class);
+                    Intent intent = new Intent(Activity_home_bage.this,MainActivity.class);
                     startActivity(intent);
 
                 }
