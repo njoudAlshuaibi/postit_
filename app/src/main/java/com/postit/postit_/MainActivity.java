@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         // juju start
     private void login(){
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if(email.isEmpty()){
@@ -113,7 +113,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    if(email.equals("swe444@gmail.com"))
                     startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
+                    else {
+                        startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
+                    }
                 }else{
                     Toast.makeText(MainActivity.this, "failed to login", Toast.LENGTH_LONG).show();
                 }
