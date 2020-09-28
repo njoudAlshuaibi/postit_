@@ -36,7 +36,17 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <Spinner
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="26dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="50dp"
+            app:srcCompat="@drawable/ic_baseline_add_box_24"
+            tools:ignore="VectorDrawableCompat" />
+
+        <Spinner
                 android:id="@+id/spinner1"
                 android:layout_width="283dp"
                 android:layout_height="52dp"
@@ -44,6 +54,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="250dp"
                 android:hint="Collage" />
+
+
 
             <TextView
                 android:layout_width="289dp"
@@ -55,6 +67,16 @@
                 android:textAlignment="center"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="26dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="50dp"
+            app:srcCompat="@drawable/ic_baseline_add_box_24"
+            tools:ignore="VectorDrawableCompat" />
 
             <Spinner
                 android:id="@+id/spinner2"
@@ -75,7 +97,9 @@
                 android:background="#EB75B2"
                 android:text="Browse Notes"
                 android:textColor="#fff" />
-        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
