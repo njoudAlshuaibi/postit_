@@ -24,7 +24,7 @@ public class AdminActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     }
-
+//
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
