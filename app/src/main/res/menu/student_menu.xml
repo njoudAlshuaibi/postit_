@@ -6,11 +6,12 @@
 
 
     <item
-        android:icon="@drawable/active"
+
+        android:id="@+id/favoriteList"
+        android:title="favoriteList"
+        android:icon="@drawable/ic_baseline_favorite_24"
         android:orderInCategory="300"
-        android:title="Item"
-        app:showAsAction="ifRoom"
-      />
+        app:showAsAction="ifRoom" />
     <item
 
         android:id="@+id/exit"

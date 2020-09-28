@@ -7,10 +7,19 @@
 
 
     <string-array name="Major">
-        <item>Software Engineering</item>
-        <item>Information System</item>
-        <item>Information Technology</item>
-        <item>Computer Science</item>
+        <item>SWE</item>
+        <item>IS</item>
+        <item>IT</item>
+        <item>CS</item>
 
     </string-array>
+
+    <string-array name="AdminMajor">
+        <item>SWE</item>
+        <item>IS</item>
+        <item>IT</item>
+        <item>CS</item>
+    </string-array>
+
+
 </resources>
