@@ -21,7 +21,7 @@ public class AdminActivity extends AppCompatActivity  {
     Spinner spinner3;
     private String adminmajor;
 
-
+// mesho l love you <3
 
 
 
