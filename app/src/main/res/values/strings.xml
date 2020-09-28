@@ -14,12 +14,7 @@
 
     </string-array>
 
-    <string-array name="AdminMajor">
-        <item>SWE</item>
-        <item>IS</item>
-        <item>IT</item>
-        <item>CS</item>
-    </string-array>
+
 
 
 </resources>
