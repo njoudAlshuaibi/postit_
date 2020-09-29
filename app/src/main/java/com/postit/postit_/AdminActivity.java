@@ -3,6 +3,7 @@ package com.postit.postit_;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 import java.lang.*;
-
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import java.util.*;
 
-import java.util.ArrayList;
 
 public class AdminActivity extends AppCompatActivity  {
 
@@ -38,10 +39,16 @@ private ImageButton deleteMajor, deleteCoure,deleteChapter;
 private major newmajor;
 private course newCourse;
 private FirebaseDatabase database;
+private DatabaseReference ref;
 private DatabaseReference majorRef;
 private DatabaseReference courseRef;
 private DatabaseReference chapterRef;
 private Button add;
+private Spinner majorSpinner;
+private Spinner courseSpineer;
+public String courseMajor;
+public String majID;
+
 
 
 
@@ -65,8 +72,9 @@ private Button add;
         deleteCoure= (ImageButton) findViewById(R.id.imageButton4);
         deleteChapter= (ImageButton) findViewById(R.id.imageButton6);
         database= FirebaseDatabase.getInstance();
-        majorRef=database.getReference("Majors");
-        courseRef=database.getReference("Courses");
+        ref=FirebaseDatabase.getInstance().getReference();
+        majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
+        courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         chapterRef=database.getReference("Chapters");
         addMajor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +94,58 @@ private Button add;
                 addNewChapter();
             }
         });
-        //lujain
+        majorSpinner=findViewById(R.id.spinnerMajor);
+        final ArrayList<String> majorList=new ArrayList<>();
+        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
+        majorSpinner.setAdapter(adapter);
+        majorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    major majorObj = postSnapshot.getValue(major.class);
+                    majorList.add(majorObj.getMajorName());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+        majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                courseMajor= parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        courseSpineer=findViewById(R.id.spinnerCourse);
+        final ArrayList<String> coourseList=new ArrayList<>();
+        final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
+        courseSpineer.setAdapter(adapter1);
+        courseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot22) {
+                coourseList.clear();
+                for (DataSnapshot courseSnapshot : dataSnapshot22.getChildren()) {
+                    course courseObj = courseSnapshot.getValue(course.class);
+                    coourseList.add(courseObj.getCourseName());
+                }
+                adapter1.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+        //end lujain
 
 
     }
@@ -133,35 +192,29 @@ private Button add;
         return true;
     }
 
-    public void addNewMajor(){
-        final String name= MajorName.getText().toString().trim();
-        newmajor =new major ("CCIS",name);
-        majorRef.push().setValue(newmajor);
+    public void addNewMajor() {
+
+        final String name = MajorName.getText().toString().trim().toLowerCase();
+
+        newmajor = new major("CCIS", name,"");
+        String majorID = majorRef.push().getKey();
+        majorRef.child(majorID).setValue(newmajor);
         Toast.makeText(AdminActivity.this, "Major added Successfully ", Toast.LENGTH_LONG).show();
     }
-    public void addNewCourse(){
-        String courseN=CourseID.getText().toString().trim().toUpperCase();
-        String majorCut=courseN.substring(0,2);
-        String fullMajor="";
-        if(majorCut.equals("IS")){
-            fullMajor="Information System";
-        }
-        if(majorCut.equals("CS")){
-            fullMajor="Computer Science";
-        }
-        if(majorCut.equals("IT")){
-            fullMajor="Information Technology";
-        }
-        if(majorCut.equals("SW")){
-            fullMajor="Software Engineering";
-        }
-        newCourse= new course("CCIS",fullMajor,courseN);
-        courseRef.push().setValue(newCourse);
-        Toast.makeText(AdminActivity.this, "Course added Successfully ", Toast.LENGTH_LONG).show();
+
+    public void addNewCourse() {
+        String courseN = CourseID.getText().toString().trim();
+        String fff =courseMajor;
+        String id=courseRef.push().getKey();
+        course courObj=new course("CCIS",fff,courseN,id);
+        courseRef.child(id).setValue(courObj);
 
     }
     public void addNewChapter(){
 
     }
 
+
 }
+
+
