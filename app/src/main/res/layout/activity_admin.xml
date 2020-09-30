@@ -47,10 +47,10 @@
 
             <Spinner
                 android:id="@+id/spinnerMajor"
-                android:layout_width="160dp"
-                android:layout_height="42dp"
-                android:layout_marginLeft="85dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="3dp"
                 android:hint="Major" />
 
@@ -119,10 +119,10 @@
 
             <Spinner
                 android:id="@+id/spinnerCourse"
-                android:layout_width="160dp"
-                android:layout_height="42dp"
-                android:layout_marginLeft="85dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="3dp"
                 android:hint="Major" />
 
@@ -189,10 +189,10 @@
 
             <Spinner
                 android:id="@+id/spinnerChapter"
-                android:layout_width="160dp"
-                android:layout_height="42dp"
-                android:layout_marginLeft="85dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="300dp"
+                android:layout_height="65dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="3dp"
                 android:hint="Major" />
 
