@@ -44,9 +44,8 @@ private DatabaseReference majorRef;
 private DatabaseReference courseRef;
 private DatabaseReference chapterRef;
 private Button add;
-private Spinner majorSpinner;
-private Spinner courseSpineer;
-public String courseMajor;
+private Spinner majorSpinner,courseSpineer,chapterSpinner;
+public String courseMajor,chapterCourse;
 public String majID;
 
 
@@ -75,7 +74,8 @@ public String majID;
         ref=FirebaseDatabase.getInstance().getReference();
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
-        chapterRef=database.getReference("Chapters");
+        chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+
         addMajor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +147,38 @@ public String majID;
 
         });
         //end lujain
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterCourse= parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        chapterSpinner=findViewById(R.id.spinnerChapter);
+        final ArrayList<String> chapterList=new ArrayList<>();
+        final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
+        chapterSpinner.setAdapter(adapter2);
+        chapterRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                chapterList.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    chapter chapterObj = postSnapshot.getValue(chapter.class);
+                    chapterList.add(chapterObj.getChapterNum());
+                }
+                adapter2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
 
     }
 
@@ -215,7 +246,14 @@ public String majID;
 
     }
     public void addNewChapter(){
-
+        String chapterN = chapterID.getText().toString().trim();
+        String FFF =courseMajor;
+        String fff =chapterCourse;
+        String id=chapterRef.push().getKey();
+        chapter chapObj=new chapter("CCIS",FFF,fff,chapterN,id);
+        chapterRef.child(id).setValue(chapObj);
+        Toast.makeText(AdminActivity.this, "chapter added Successfully ", Toast.LENGTH_LONG).show();
+        chapterID.setText("");
     }
 
 

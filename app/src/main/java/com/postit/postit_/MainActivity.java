@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     if(email.equals("swe444@gmail.com"))
                     startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
                     else {
-                        startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
+                        startActivity(new Intent(MainActivity.this, StudentActivity.class));
                     }
                 }else{
                     Toast.makeText(MainActivity.this, "failed to login", Toast.LENGTH_LONG).show();

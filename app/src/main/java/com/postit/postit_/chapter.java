@@ -5,15 +5,17 @@ public class chapter {
     private String major;
     private String course;
     private String chapterNum;
+    private String id;
 
     public chapter() {
     }
 
-    public chapter(String college, String major, String course, String chapterNum) {
+    public chapter(String college, String major, String course, String chapterNum, String id) {
         this.college = college;
         this.major = major;
         this.course = course;
         this.chapterNum = chapterNum;
+        this.id = id;
     }
 
     public String getCollege() {
@@ -46,5 +48,13 @@ public class chapter {
 
     public void setChapterNum(String chapterNum) {
         this.chapterNum = chapterNum;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
