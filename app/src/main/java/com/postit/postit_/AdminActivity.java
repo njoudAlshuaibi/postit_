@@ -101,6 +101,7 @@ public String majID;
         majorRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                majorList.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     major majorObj = postSnapshot.getValue(major.class);
                     majorList.add(majorObj.getMajorName());
@@ -194,12 +195,13 @@ public String majID;
 
     public void addNewMajor() {
 
-        final String name = MajorName.getText().toString().trim().toLowerCase();
-
-        newmajor = new major("CCIS", name,"");
+        final String name = MajorName.getText().toString().trim();
         String majorID = majorRef.push().getKey();
+        newmajor = new major("CCIS", name,majorID);
+
         majorRef.child(majorID).setValue(newmajor);
         Toast.makeText(AdminActivity.this, "Major added Successfully ", Toast.LENGTH_LONG).show();
+        MajorName.setText("");
     }
 
     public void addNewCourse() {
@@ -208,6 +210,8 @@ public String majID;
         String id=courseRef.push().getKey();
         course courObj=new course("CCIS",fff,courseN,id);
         courseRef.child(id).setValue(courObj);
+        Toast.makeText(AdminActivity.this, "Course added Successfully ", Toast.LENGTH_LONG).show();
+        CourseID.setText("");
 
     }
     public void addNewChapter(){

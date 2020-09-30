@@ -23,8 +23,7 @@
             android:layout_height="42dp"
             android:background="#FFFBD4" />
 
-
-            <TextView
+        <TextView
                 android:layout_width="289dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="60dp"
