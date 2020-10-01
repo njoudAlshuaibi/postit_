@@ -13,18 +13,17 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class BrowseNotes extends AppCompatActivity {
+public class mynotes extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_notes);
+        setContentView(R.layout.activity_mynotes);
 
-        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
-        setSupportActionBar(tool);
+        Toolbar toolba = findViewById(R.id.toolbar_mynotes);
+        setSupportActionBar(toolba);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -36,7 +35,7 @@ public class BrowseNotes extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(mynotes.this);
             builder.setMessage("Are you Sure you want to exit?");
             builder.setCancelable(true);
 
@@ -46,7 +45,7 @@ public class BrowseNotes extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(BrowseNotes.this, MainActivity.class));
+                    startActivity(new Intent(mynotes.this, MainActivity.class));
 //                    finish();
                 }
             });
@@ -64,7 +63,7 @@ public class BrowseNotes extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+            startActivity(new Intent(mynotes.this,StudentActivity.class));
         }
         return true;
     }

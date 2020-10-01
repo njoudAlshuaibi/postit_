@@ -10,25 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BrowseNotes"></activity>
-        <activity android:name=".AdminActivity" />
-
+        <activity android:name=".mynotes" />
+        <activity android:name=".favoritelist" />
+        <activity android:name=".requestadmin" />
+        <activity android:name=".StudentActivity" />
         <activity android:name=".Visitors_activity" />
         <activity android:name=".splashActivity" />
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".StudentActivity">
-
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-<activity android:name=".Pop"
-    android:theme="@style/AppTheme.CustomTheme"></activity>
-
+        <activity android:name=".AdminActivity" />
+        <activity
+            android:name=".Pop"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".popUpWindow"
+            android:theme="@style/AppTheme.pop" />
     </application>
 
 </manifest>

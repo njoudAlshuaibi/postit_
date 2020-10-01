@@ -10,33 +10,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class BrowseNotes extends AppCompatActivity {
+public class requestadmin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_notes);
+        setContentView(R.layout.activity_requestadmin);
 
-        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
-        setSupportActionBar(tool);
+        Toolbar tb = findViewById(R.id.toolbar_request);
+        setSupportActionBar(tb);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-    }
 
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.mynotes, menu);
+        getMenuInflater().inflate(R.menu.admin_menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(requestadmin.this);
             builder.setMessage("Are you Sure you want to exit?");
             builder.setCancelable(true);
 
@@ -46,7 +49,7 @@ public class BrowseNotes extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(BrowseNotes.this, MainActivity.class));
+                    startActivity(new Intent(requestadmin.this, MainActivity.class));
 //                    finish();
                 }
             });
@@ -64,7 +67,7 @@ public class BrowseNotes extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+            startActivity(new Intent(requestadmin.this,AdminActivity.class));
         }
         return true;
     }

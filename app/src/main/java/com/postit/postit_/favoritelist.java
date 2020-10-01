@@ -4,31 +4,32 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class BrowseNotes extends AppCompatActivity {
+public class favoritelist extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_notes);
-
-        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
-        setSupportActionBar(tool);
+        setContentView(R.layout.activity_favoritelist);
+        Toolbar toolb = findViewById(R.id.toolbar_favoritelist);
+        setSupportActionBar(toolb);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-    }
 
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.mynotes, menu);
+        getMenuInflater().inflate(R.menu.favoritelist, menu);
         return true;
     }
 
@@ -36,7 +37,7 @@ public class BrowseNotes extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(favoritelist.this);
             builder.setMessage("Are you Sure you want to exit?");
             builder.setCancelable(true);
 
@@ -46,7 +47,7 @@ public class BrowseNotes extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(BrowseNotes.this, MainActivity.class));
+                    startActivity(new Intent(favoritelist.this, MainActivity.class));
 //                    finish();
                 }
             });
@@ -64,7 +65,7 @@ public class BrowseNotes extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+            startActivity(new Intent(favoritelist.this,StudentActivity.class));
         }
         return true;
     }

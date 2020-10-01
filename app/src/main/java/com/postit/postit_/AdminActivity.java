@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.lang.*;
 import android.util.Log;
@@ -32,7 +33,7 @@ import java.util.*;
 
 
 public class AdminActivity extends AppCompatActivity  {
-
+   private TextView StudentRequest;
 private EditText MajorName, CourseID,chapterID;
 private ImageButton addMajor, addCoure,addChapter;
 private ImageButton deleteMajor, deleteCoure,deleteChapter;
@@ -59,6 +60,16 @@ public String majID;
         Toolbar toolbar = findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        StudentRequest = (TextView) findViewById(R.id.StudentRequest);
+        StudentRequest.setOnClickListener(new View.OnClickListener() {
+
+
+
+            public void onClick(View view) {
+                startActivity(new Intent(AdminActivity.this, requestadmin.class));
+            }//End onClick()
+        });
 
         //lujain
         MajorName =(EditText) findViewById(R.id.MajorName);
