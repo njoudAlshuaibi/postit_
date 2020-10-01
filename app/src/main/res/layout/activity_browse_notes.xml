@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".StudentActivity"
+android:orientation="vertical"
+android:background="@drawable/bg"
+android:autoMirrored="true"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A6FFFFFF"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_Student"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#FFFBD4" />
+
+
+    <LinearLayout
+
+        android:layout_width="362dp"
+        android:layout_height="240dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="5dp"
+            android:text="Choose Major:"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="258dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
+
+        <TextView
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="5dp"
+            android:text="Choose Course:"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="266dp"
+            android:layout_height="47dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
+
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

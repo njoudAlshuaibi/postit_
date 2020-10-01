@@ -5,13 +5,7 @@
     tools:context =".StudentActivity">
 
 
-    <item
 
-        android:id="@+id/favoriteList"
-        android:title="favoriteList"
-        android:icon="@drawable/ic_baseline_favorite_24"
-        android:orderInCategory="300"
-        app:showAsAction="ifRoom" />
     <item
 
         android:id="@+id/exit"
