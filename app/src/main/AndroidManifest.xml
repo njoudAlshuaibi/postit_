@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BrowseNotes"></activity>
-        <activity android:name=".mynotes" />
+        <activity android:name=".mynotes"></activity>
+        <activity android:name=".BrowseNotes" />
         <activity android:name=".favoritelist" />
         <activity android:name=".requestadmin" />
         <activity android:name=".StudentActivity" />

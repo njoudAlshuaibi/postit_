@@ -4,28 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".requestadmin"
-    android:orientation="vertical"
+    tools:context=".mynotes"
     android:background="@drawable/bg"
+    android:orientation="vertical"
     android:autoMirrored="true"
-    >
-
+>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#A6FFFFFF"
         android:orientation="vertical">
 
-
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_request"
+            android:id="@+id/toolbar_mynotes"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="#FFFBD4" />
+            android:background="#FFFBD4"/>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-></ListView>
     </LinearLayout>
 </LinearLayout>
