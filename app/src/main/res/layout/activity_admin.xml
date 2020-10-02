@@ -30,9 +30,9 @@
         <LinearLayout
 
             android:layout_width="344dp"
-            android:layout_height="162dp"
+            android:layout_height="583dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/border"
             android:orientation="vertical">
@@ -41,6 +41,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
+                android:layout_marginLeft="22dp"
                 android:text="MAJOR"
                 android:textAlignment="center"
                 android:textSize="18dp" />
@@ -79,9 +80,9 @@
                     android:layout_height="28dp"
                     android:layout_marginLeft="-30dp"
                     android:layout_marginTop="29dp"
+                    android:hint="ADD COURSE"
                     app:srcCompat="@drawable/ic_baseline_add_box_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:hint="ADD COURSE" />
+                    tools:ignore="VectorDrawableCompat" />
 
                 <ImageButton
                     android:id="@+id/imageButton8"
@@ -89,179 +90,157 @@
                     android:layout_height="27dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="29dp"
+                    android:hint="DELETE COURSE"
                     app:srcCompat="@drawable/ic_baseline_delete_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:hint="DELETE COURSE"/>
-
-
+                    tools:ignore="VectorDrawableCompat" />
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="344dp"
-            android:layout_height="162dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="50dp"
-            android:background="@drawable/border"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="31dp"
-                android:text="COURSE"
-                android:textAlignment="center"
-                android:textSize="18dp" />
-
-            <Spinner
-                android:id="@+id/spinnerCourse"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="3dp"
-                android:hint="Major" />
 
             <LinearLayout
-                android:layout_width="326dp"
-                android:layout_height="86dp"
-                android:orientation="horizontal">
+                android:layout_width="344dp"
+                android:layout_height="162dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="50dp"
 
-                <EditText
-                    android:id="@+id/CourseID"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginBottom="10dp"
-                    android:ems="10"
-                    android:hint="Enter Course Code"
-                    android:inputType="textPersonName"
-                    android:textSize="15dp"
-                    android:textStyle="italic" />
+                android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="25dp"
-                    android:layout_height="28dp"
-                    android:layout_marginLeft="-30dp"
-                    android:layout_marginTop="29dp"
-                    app:srcCompat="@drawable/ic_baseline_add_box_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:hint="ADD COURSE" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:text="COURSE"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
 
-                <ImageButton
-                    android:id="@+id/imageButton4"
-                    android:layout_width="20dp"
-                    android:layout_height="27dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="29dp"
-                    app:srcCompat="@drawable/ic_baseline_delete_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:hint="DELETE COURSE"/>
+                <Spinner
+                    android:id="@+id/spinnerCourse"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="3dp"
+                    android:hint="Major" />
+
+                <LinearLayout
+                    android:layout_width="326dp"
+                    android:layout_height="86dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/CourseID"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:ems="10"
+                        android:hint="Enter Course Code"
+                        android:inputType="textPersonName"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="25dp"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="-30dp"
+                        android:layout_marginTop="29dp"
+                        android:hint="ADD COURSE"
+                        app:srcCompat="@drawable/ic_baseline_add_box_24"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="20dp"
+                        android:layout_height="27dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="29dp"
+                        android:hint="DELETE COURSE"
+                        app:srcCompat="@drawable/ic_baseline_delete_24"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="344dp"
-            android:layout_height="162dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="50dp"
-            android:background="@drawable/border"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="31dp"
-                android:text="CHAPTER"
-                android:textAlignment="center"
-                android:textSize="18dp" />
-
-            <Spinner
-                android:id="@+id/spinnerChapter"
-                android:layout_width="300dp"
-                android:layout_height="65dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="3dp"
-                android:hint="Major" />
 
             <LinearLayout
-                android:layout_width="326dp"
-                android:layout_height="86dp"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/chapterID"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginBottom="10dp"
-                    android:ems="10"
-                    android:hint="Enter Chapter"
-                    android:inputType="textPersonName"
-                    android:textSize="15dp"
-                    android:textStyle="italic" />
+                android:layout_width="344dp"
+                android:layout_height="162dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
 
-                <ImageButton
-                    android:id="@+id/imageButton5"
-                    android:layout_width="25dp"
-                    android:layout_height="28dp"
-                    android:layout_marginLeft="-30dp"
-                    android:layout_marginTop="29dp"
-                    app:srcCompat="@drawable/ic_baseline_add_box_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:hint="ADD CHAPTER" />
+                android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton6"
-                    android:layout_width="20dp"
-                    android:layout_height="27dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="29dp"
-                    app:srcCompat="@drawable/ic_baseline_delete_24"
-                    tools:ignore="VectorDrawableCompat"
-                    android:hint="DELETE CHAPTER"/>
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:text="CHAPTER"
+                    android:textAlignment="center"
+                    android:textSize="18dp" />
+
+                <Spinner
+                    android:id="@+id/spinnerChapter"
+                    android:layout_width="300dp"
+                    android:layout_height="65dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="3dp"
+                    android:hint="Major" />
+
+                <LinearLayout
+                    android:layout_width="326dp"
+                    android:layout_height="86dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/chapterID"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:ems="10"
+                        android:hint="Enter Chapter"
+                        android:inputType="textPersonName"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton5"
+                        android:layout_width="25dp"
+                        android:layout_height="28dp"
+                        android:layout_marginLeft="-30dp"
+                        android:layout_marginTop="29dp"
+                        android:hint="ADD CHAPTER"
+                        app:srcCompat="@drawable/ic_baseline_add_box_24"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton6"
+                        android:layout_width="20dp"
+                        android:layout_height="27dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="29dp"
+                        android:hint="DELETE CHAPTER"
+                        app:srcCompat="@drawable/ic_baseline_delete_24"
+                        tools:ignore="VectorDrawableCompat" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/AdminBrowseButton"
-            android:layout_width="129dp"
-            android:layout_height="38dp"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="20dp"
-            android:background="#EB75B2"
-            android:text="Browse Notes"
-            android:textColor="#fff" />
-
-        <TextView
-            android:id="@+id/StudentRequest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="138dp"
-            android:layout_marginTop="20dp"
-            android:text="View Student Request "
-            android:textColor="#03A9F4" />
-
-
     </LinearLayout>
-
-    </LinearLayout>
+</LinearLayout>
 
 
 

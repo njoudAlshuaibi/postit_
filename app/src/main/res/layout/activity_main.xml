@@ -114,10 +114,10 @@
             android:id="@+id/visitor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
+
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="center"
+
+            android:layout_marginLeft="145dp"
             android:text="Continue as a guest"
             android:textColor="#03A9F4" />
 

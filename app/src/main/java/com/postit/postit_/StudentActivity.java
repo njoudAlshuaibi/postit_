@@ -113,8 +113,11 @@ public class StudentActivity extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
+        }else if (id==R.id.home){
+            startActivity(new Intent(StudentActivity.this,StudentActivity.class));
         }
         return true;
+
     }
 
 }

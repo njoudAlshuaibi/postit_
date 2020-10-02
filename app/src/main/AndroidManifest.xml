@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mynotes"></activity>
+        <activity android:name=".mainAdmin"></activity>
+        <activity android:name=".mynotes" />
         <activity android:name=".BrowseNotes" />
         <activity android:name=".favoritelist" />
         <activity android:name=".requestadmin" />
@@ -33,6 +34,9 @@
         <activity
             android:name=".popUpWindow"
             android:theme="@style/AppTheme.pop" />
+        <activity
+            android:name=".PopUpWindowAdmin"
+            android:theme="@style/AppTheme.pop2" />
     </application>
 
 </manifest>

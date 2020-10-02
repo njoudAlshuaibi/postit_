@@ -24,8 +24,8 @@
             android:background="#FFFBD4" />
 
         <ListView
+            android:id="@+id/viewReq"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-></ListView>
+            android:layout_height="792dp"></ListView>
     </LinearLayout>
 </LinearLayout>
