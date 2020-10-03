@@ -1,6 +1,7 @@
 package com.postit.postit_;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Pop extends Activity {
     private EditText requestedMajor, requestedCourse, requestedChapter;
-    private Button requestChapter;
+    private Button request;
     private DatabaseReference requestsRef;
     private requests newRequest;
 
@@ -35,23 +36,38 @@ getWindow().setLayout((int)(width*.8),(int)(height*.5));
         requestedMajor = (EditText) findViewById(R.id.MajorCode);
         requestedCourse = (EditText) findViewById(R.id.CourseCode);
         requestedChapter = (EditText) findViewById(R.id.chapterCode);
-        requestChapter =  (Button) findViewById(R.id.reqBtn);
+        request =  (Button) findViewById(R.id.reqBtn);
         requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
-        requestChapter.setOnClickListener(new View.OnClickListener() {
+        request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addNewRequest();
+                final String requestedMajorS = requestedMajor.getText().toString().trim();
+                final String requestedCourseS = requestedCourse.getText().toString().trim();
+                final String requestedChapterS = requestedChapter.getText().toString().trim();
+                String requestID = requestsRef.push().getKey();
+                if(requestedMajorS.isEmpty()){
+                    requestedMajor.setError("please enter major");
+                    requestedMajor.requestFocus();
+                    return;
+                }
+                if(requestedCourseS.isEmpty()){
+                    requestedCourse.setError("please enter course");
+                    requestedCourse.requestFocus();
+                    return;
+                }if(requestedChapterS.isEmpty()){
+                    requestedChapter.setError("please enter Chapter");
+                    requestedChapter.requestFocus();
+                    return;
+                }
+                newRequest = new requests(requestedMajorS,requestedCourseS,requestedChapterS,requestID);
+
+                requestsRef.child(requestID).setValue(newRequest);
+                Toast.makeText(Pop.this, "Request send successfully", Toast.LENGTH_LONG).show();
+
+            startActivity(new Intent(Pop.this,StudentActivity.class));
+
             }
         });
 
-    }
-    public void addNewRequest(){
-        final String requestedMajorS = requestedMajor.getText().toString().trim();
-        final String requestedCourseS = requestedCourse.getText().toString().trim();
-        final String requestedChapterS = requestedChapter.getText().toString().trim();
-        String requestID = requestsRef.push().getKey();
-        newRequest = new requests(requestedMajorS,requestedCourseS,requestedChapterS,requestID);
-
-        requestsRef.child(requestID).setValue(newRequest);
     }
 }

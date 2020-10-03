@@ -10,6 +10,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,7 +31,8 @@ public class popUpWindow extends AppCompatActivity {
     private Spinner majorSpinner;
     private Spinner courseSpineer;
     private String courseMajor;
-    private ImageButton Buttun1;
+    private Button d ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class popUpWindow extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         majorSpinner=findViewById(R.id.spinner1);
-        Buttun1= (ImageButton) findViewById(R.id.imageButton7);
+        d = (CheckBox) findViewById(R.id.checkBox);
 
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
@@ -88,7 +91,7 @@ public class popUpWindow extends AppCompatActivity {
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
 
-        Buttun1.setOnClickListener(new View.OnClickListener() {
+        d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

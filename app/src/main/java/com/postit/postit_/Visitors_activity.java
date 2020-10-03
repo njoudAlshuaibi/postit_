@@ -36,14 +36,13 @@ public class Visitors_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_visitors_activity);
-
         Toolbar toolb = findViewById(R.id.toolbar_Vistor);
         setSupportActionBar(toolb);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
 
         CardView nj = (CardView) findViewById(R.id.BrowseNotes2);
         nj.setOnClickListener(new View.OnClickListener() {
