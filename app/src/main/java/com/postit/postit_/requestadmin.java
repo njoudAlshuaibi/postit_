@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -47,7 +48,7 @@ public class requestadmin extends AppCompatActivity {
                 requestsList.clear();
                 for (DataSnapshot snapshotx : snapshotr.getChildren()){
                     requests reqObj = snapshotx.getValue(requests.class);
-                    String reqdisplay="Major: " +reqObj.getRequestedMajor()+"\nCourse: "+reqObj.getRequestedCourse()+"\nChapter/s: "+reqObj.getRequestedChapter();
+                    String reqdisplay="Major: " +reqObj.getRequestedMajor()+"\nCourse: "+reqObj.getRequestedCourse()+"\nChapter/s: "+reqObj.getRequestedChapter()+"\nID: "+reqObj.getId();
                     requestsList.add(reqdisplay);
                 }
                 adapter.notifyDataSetChanged();
@@ -56,6 +57,32 @@ public class requestadmin extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        requestsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final int whichItem= position;
+                String hh=parent.getItemAtPosition(position).toString();
+                final String requestKey=hh.substring(hh.indexOf("ID:") + 3 , hh.length());
+                new AlertDialog.Builder(requestadmin.this)
+                        .setIcon(android.R.drawable.ic_delete)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you want to delete this request")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestsRef.child(requestKey).removeValue();
+                                requestsList.remove(whichItem);
+                                adapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
+
+
+                return true;
             }
         });
 
