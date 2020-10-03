@@ -67,7 +67,7 @@ public class requestadmin extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            startActivity(new Intent(requestadmin.this,AdminActivity.class));
+            startActivity(new Intent(requestadmin.this,mainAdmin.class));
         }
         return true;
     }

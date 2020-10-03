@@ -49,7 +49,7 @@ public class mainAdmin extends AppCompatActivity {
         juju.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent (mainAdmin.this,BrowseNotes.class));
+                startActivity(new Intent (mainAdmin.this,PopUpWindowAdmin.class));
             }
         });
 

@@ -33,7 +33,7 @@ import java.util.*;
 
 
 public class AdminActivity extends AppCompatActivity  {
-   private TextView StudentRequest;
+
 private EditText MajorName, CourseID,chapterID;
 private ImageButton addMajor, addCoure,addChapter;
 private ImageButton deleteMajor, deleteCoure,deleteChapter;
@@ -61,15 +61,7 @@ public String majID;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        StudentRequest = (TextView) findViewById(R.id.StudentRequest);
-        StudentRequest.setOnClickListener(new View.OnClickListener() {
 
-
-
-            public void onClick(View view) {
-                startActivity(new Intent(AdminActivity.this, requestadmin.class));
-            }//End onClick()
-        });
 
         //lujain
         MajorName =(EditText) findViewById(R.id.MajorName);
@@ -231,6 +223,9 @@ public String majID;
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
+        }
+        else if (id==R.id.home){
+            startActivity(new Intent(AdminActivity.this,mainAdmin.class));
         }
         return true;
     }
