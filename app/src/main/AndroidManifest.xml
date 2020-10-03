@@ -15,13 +15,13 @@
         <activity android:name=".BrowseNotes" />
         <activity android:name=".favoritelist" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".mynotes" />
         <activity android:name=".Visitors_activity" />
+        <activity android:name=".mainAdmin" />
         <activity android:name=".splashActivity" />
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".mainAdmin">
+        <activity android:name=".mynotes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,6 +45,9 @@
         <activity
             android:name=".popupwindowchapters"
             android:theme="@style/AppTheme.pop5" />
+        <activity
+            android:name=".popupwindowvisitors"
+            android:theme="@style/AppTheme.pop6" />
     </application>
 
 </manifest>

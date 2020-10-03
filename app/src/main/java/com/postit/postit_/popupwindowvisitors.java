@@ -18,6 +18,6 @@ public class popupwindowvisitors extends AppCompatActivity {
 
         int width = sa.widthPixels;
         int height = sa.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * .5));
+        getWindow().setLayout((int) (width * .8), (int) (height * .6));
     }
 }
