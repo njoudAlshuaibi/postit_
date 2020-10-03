@@ -15,12 +15,12 @@
         <activity android:name=".favoritelist" />
         <activity android:name=".MainActivity" />
         <activity android:name=".StudentActivity" />
-        <activity android:name=".mainAdmin" />
+        <activity android:name=".Visitors_activity" />
         <activity android:name=".splashActivity" />
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".Visitors_activity">
+        <activity android:name=".mainAdmin">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,10 +38,6 @@
         <activity
             android:name=".PopUpWindowAdmin"
             android:theme="@style/AppTheme.pop2" />
-
-        <activity
-            android:name=".popupwindowvisitors"
-            android:theme="@style/AppTheme.pop3" />
     </application>
 
 </manifest>

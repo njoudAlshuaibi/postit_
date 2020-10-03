@@ -7,8 +7,7 @@ android:layout_height="match_parent"
 tools:context=".StudentActivity"
 android:orientation="vertical"
 android:background="@drawable/bg"
-android:autoMirrored="true"
-    >
+android:autoMirrored="true">
 
 <LinearLayout
     android:layout_width="match_parent"
