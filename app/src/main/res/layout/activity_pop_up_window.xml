@@ -23,16 +23,26 @@
             android:textSize="20dp"
             android:textStyle="italic" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="258dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="250dp"
-        android:hint="Collage" />
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="258dp"
+            android:layout_height="53dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
 
-    <TextView
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="29dp"
+            android:hint="ADD COURSE"
+            app:srcCompat="@drawable/ic_baseline_add_box_24"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
             android:layout_width="267dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -46,7 +56,7 @@
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="266dp"
-            android:layout_height="47dp"
+            android:layout_height="49dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="250dp"

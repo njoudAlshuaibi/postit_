@@ -276,7 +276,6 @@ public String majID;
         final String name = MajorName.getText().toString().trim();
         String majorID = majorRef.push().getKey();
         newmajor = new major("CCIS", name,majorID);
-
         majorRef.child(majorID).setValue(newmajor);
         Toast.makeText(AdminActivity.this, "Major added Successfully ", Toast.LENGTH_LONG).show();
         MajorName.setText("");

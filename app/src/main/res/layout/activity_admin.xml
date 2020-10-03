@@ -224,8 +224,8 @@
 
                     <ImageButton
                         android:id="@+id/imageButton6"
-                        android:layout_width="20dp"
-                        android:layout_height="27dp"
+                        android:layout_width="16dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="29dp"
                         android:hint="DELETE CHAPTER"
