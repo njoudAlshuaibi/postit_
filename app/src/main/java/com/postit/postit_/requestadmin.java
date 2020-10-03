@@ -28,6 +28,7 @@ public class requestadmin extends AppCompatActivity {
     private ListView requestsListView;
     private FirebaseDatabase database;
     private DatabaseReference requestsRef;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class requestadmin extends AppCompatActivity {
         final ArrayList<String> requestsList= new ArrayList<>();
         final ArrayAdapter adapter=new ArrayAdapter<String>(this,R.layout.listitem, requestsList);
         requestsListView.setAdapter(adapter);
+        ref=FirebaseDatabase.getInstance().getReference();
         requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
         requestsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,7 +74,7 @@ public class requestadmin extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                requestsRef.child(requestKey).removeValue();
+                                requestsRef.child(requestKey.trim()).removeValue();
                                 requestsList.remove(whichItem);
                                 adapter.notifyDataSetChanged();
                             }
