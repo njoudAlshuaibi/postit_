@@ -210,6 +210,7 @@ public String majID;
                                 break;
                             }
                             else{
+                                Toast.makeText(AdminActivity.this, "failed to delete chapter", Toast.LENGTH_LONG).show();
                                 break;
                             }
                         }
