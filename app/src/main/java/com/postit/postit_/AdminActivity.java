@@ -46,7 +46,7 @@ private DatabaseReference courseRef;
 private DatabaseReference chapterRef;
 private Button add;
 private Spinner majorSpinner,courseSpineer,chapterSpinner;
-public String courseMajor,chapterCourse;
+public String courseMajor,chapterCourse, chapterChapter;
 public String majID;
 
 
@@ -182,6 +182,46 @@ public String majID;
             }
 
         });
+        chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterChapter= parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        deleteChapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chapterRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot child : snapshot.getChildren()){
+                            chapter findChapter = child.getValue(chapter.class);
+                            String courseId = findChapter.getCourse();
+                            String chapterId = findChapter.getChapterNum();
+                            String majorID = findChapter.getMajor();
+
+                            if(courseId.equals(chapterCourse) && chapterId.equals(chapterChapter) && majorID.equals(courseMajor)){
+                                String deletedChapter =findChapter.getId();
+                                deleteChapter(deletedChapter);
+                                break;
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
 
     }
 
@@ -260,6 +300,13 @@ public String majID;
         chapterRef.child(id).setValue(chapObj);
         Toast.makeText(AdminActivity.this, "chapter added Successfully ", Toast.LENGTH_LONG).show();
         chapterID.setText("");
+    }
+
+    public void deleteChapter(String chapterKey) {
+        chapterRef.child(chapterKey.trim()).removeValue();
+        Toast.makeText(AdminActivity.this, "chapter deleted Successfully ", Toast.LENGTH_LONG).show();
+
+
     }
 
 
