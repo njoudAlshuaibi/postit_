@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,7 +45,20 @@ public class Visitors_activity extends AppCompatActivity {
         setSupportActionBar(toolb);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        CardView nj = (CardView) findViewById(R.id.BrowseNotes2);
+        nj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openpopupwindowvisitors();
+            }
+        });
     }
+
+    private void openpopupwindowvisitors() {
+        Intent popupwindow3 = new Intent(Visitors_activity.this,popupwindowvisitors.class);
+        startActivity(popupwindow3);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

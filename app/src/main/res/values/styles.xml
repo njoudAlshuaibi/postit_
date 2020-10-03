@@ -36,4 +36,11 @@
 
     </style>
 
+    <style name="AppTheme.pop3">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+
+
+    </style>
+
 </resources>

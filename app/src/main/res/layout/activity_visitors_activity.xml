@@ -86,7 +86,7 @@
             <androidx.cardview.widget.CardView
 
 
-                android:id="@+id/BrowseNotes"
+                android:id="@+id/BrowseNotes2"
                 android:layout_width="159dp"
                 android:layout_height="222dp"
                 android:layout_marginLeft="16dp"
