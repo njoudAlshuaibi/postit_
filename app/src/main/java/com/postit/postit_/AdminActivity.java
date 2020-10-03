@@ -70,8 +70,6 @@ public String majID;
         addMajor= (ImageButton) findViewById(R.id.imageButton7);
         addCoure= (ImageButton) findViewById((R.id.imageButton3));
         addChapter= (ImageButton) findViewById(R.id.imageButton5);
-        deleteMajor=(ImageButton) findViewById(R.id.imageButton8);
-        deleteCoure= (ImageButton) findViewById(R.id.imageButton4);
         deleteChapter= (ImageButton) findViewById(R.id.imageButton6);
         database= FirebaseDatabase.getInstance();
         ref=FirebaseDatabase.getInstance().getReference();

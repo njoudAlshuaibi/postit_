@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mynotes"
+    tools:context=".chapters"
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:autoMirrored="true"
->
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,13 +16,13 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_mynotes"
+            android:id="@+id/toolbar_chapters"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="#FFFBD4"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fab2"
             android:layout_width="93dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="650dp"
