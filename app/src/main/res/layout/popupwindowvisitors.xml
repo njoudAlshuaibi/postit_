@@ -16,7 +16,7 @@
             android:layout_width="261dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
             android:text="Choose Major:"
             android:textAlignment="center"
@@ -28,7 +28,7 @@
             android:layout_width="258dp"
             android:layout_height="52dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 
@@ -38,6 +38,7 @@
             android:layout_width="231dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
             android:text="Load Related Courses" />
 
 
@@ -46,7 +47,7 @@
             android:layout_width="267dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
             android:text="Choose Course:"
             android:textAlignment="center"
@@ -58,7 +59,7 @@
             android:layout_width="266dp"
             android:layout_height="49dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 

@@ -14,13 +14,6 @@ tools:context =".Visitors_activity">
     app:showAsAction="ifRoom" />
 
 
-<item
-
-    android:id="@+id/exit"
-    android:title="Exit"
-    android:icon="@drawable/ic_baseline_exit_to_app_24"
-    android:orderInCategory="300"
-    app:showAsAction="ifRoom" />
 
 
 

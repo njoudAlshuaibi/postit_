@@ -97,7 +97,7 @@ public class Visitors_activity extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            startActivity(new Intent(Visitors_activity.this,Visitors_activity.class));
+            startActivity(new Intent(Visitors_activity.this,MainActivity.class));
         }
         return true;
 
