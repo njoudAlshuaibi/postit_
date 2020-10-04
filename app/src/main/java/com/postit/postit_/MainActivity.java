@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    if(email.equals("swe444@gmail.com"))
+                    if(mAuth.getCurrentUser().getEmail().equalsIgnoreCase("swe444@gmail.com"))
                     startActivity(new Intent(MainActivity.this, mainAdmin.class));
                     else {
                         startActivity(new Intent(MainActivity.this, StudentActivity.class));
