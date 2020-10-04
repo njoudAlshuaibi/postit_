@@ -56,7 +56,7 @@ public class popupwindowvisitors extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 majorList.clear();
 
-                majorList.add("Choose major");
+                majorList.add("select");
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     major majorObj = postSnapshot.getValue(major.class);
                     majorList.add(majorObj.getMajorName());
@@ -95,7 +95,7 @@ public class popupwindowvisitors extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot2) {
                         coourseList.clear();
-                        coourseList.add("Choose Course");
+                        coourseList.add("select");
 
                         for (DataSnapshot courseSnapshot : dataSnapshot2.getChildren()) {
                             course courseObj = courseSnapshot.getValue(course.class);

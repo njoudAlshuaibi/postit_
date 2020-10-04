@@ -4,12 +4,16 @@ public class note {
     private String college;
     private String major;
     private String course;
-    private int chapterNum;
+    private String chapterNum;
     private String title;
     private String caption;
     private String email;
+    private String id;
 
-    public note(String college, String major, String course, int chapterNum, String title, String caption, String email) {
+    public note() {
+    }
+
+    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -17,7 +21,9 @@ public class note {
         this.title = title;
         this.caption = caption;
         this.email = email;
+        this.id = id;
     }
+
 
     public String getCollege() {
         return college;
@@ -43,11 +49,11 @@ public class note {
         this.course = course;
     }
 
-    public int getChapterNum() {
+    public String getChapterNum() {
         return chapterNum;
     }
 
-    public void setChapterNum(int chapterNum) {
+    public void setChapterNum(String chapterNum) {
         this.chapterNum = chapterNum;
     }
 
@@ -73,5 +79,13 @@ public class note {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

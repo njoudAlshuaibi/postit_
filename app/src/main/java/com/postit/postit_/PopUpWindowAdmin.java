@@ -1,5 +1,6 @@
 package com.postit.postit_;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +30,11 @@ public class PopUpWindowAdmin extends AppCompatActivity {
     private Spinner majorSpinner;
     private Spinner courseSpineer;
     private String courseMajor;
+    private String coursename;
     private Button d ;
+    private TextView browse;
+    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,9 @@ public class PopUpWindowAdmin extends AppCompatActivity {
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         majorSpinner =findViewById(R.id.spinnerAdmin);
         d = (CheckBox) findViewById(R.id.checkBox);
+        browse = findViewById(R.id.browseAdmin);
+
+
 
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
@@ -119,11 +128,35 @@ public class PopUpWindowAdmin extends AppCompatActivity {
                     }
 
                 });
+                courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        coursename = parent.getItemAtPosition(position).toString();
 
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
             }
 
         });
 
+        browse.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
+                intent.putExtra(EXTRA_TEXT,courseMajor);
+                intent.putExtra(EXTRA_TEXT2,coursename);
+
+                startActivity(intent);
+
+            }//End onClick()
+        });
 
     }
 }

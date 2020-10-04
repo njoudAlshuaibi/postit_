@@ -12,16 +12,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class mynotes extends AppCompatActivity {
 private FloatingActionButton fab;
+private note b;
+    private FirebaseDatabase database;
+    private DatabaseReference notesRef;
+    private DatabaseReference ref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mynotes);
+
+    ref = FirebaseDatabase.getInstance().getReference();
+    notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
 
         Toolbar toolba = findViewById(R.id.toolbar_mynotes);
         setSupportActionBar(toolba);

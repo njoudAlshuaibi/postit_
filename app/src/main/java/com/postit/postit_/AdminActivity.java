@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -48,6 +49,10 @@ private Button add;
 private Spinner majorSpinner,courseSpineer,chapterSpinner;
 public String courseMajor,chapterCourse, chapterChapter;
 public String majID;
+    private Button dd ;
+    private Button ddd ;
+    boolean f = false;
+
 
 
 //i love uoy
@@ -99,10 +104,15 @@ public String majID;
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
         majorSpinner.setAdapter(adapter);
+        dd = (CheckBox) findViewById(R.id.checkBox3);
+        ddd = (CheckBox) findViewById(R.id.checkBox4);
+
+
         majorRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 majorList.clear();
+                majorList.add("select");
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     major majorObj = postSnapshot.getValue(major.class);
                     majorList.add(majorObj.getMajorName());
@@ -130,23 +140,34 @@ public String majID;
         final ArrayList<String> coourseList=new ArrayList<>();
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
-        courseRef.addValueEventListener(new ValueEventListener() {
+
+        dd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot22) {
-                coourseList.clear();
-                for (DataSnapshot courseSnapshot : dataSnapshot22.getChildren()) {
-                    course courseObj = courseSnapshot.getValue(course.class);
-                    coourseList.add(courseObj.getCourseName());
-                }
-                adapter1.notifyDataSetChanged();
+            public void onClick(View view) {
+                courseRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot22) {
+                        coourseList.clear();
+                        coourseList.add("select");
+                        for (DataSnapshot courseSnapshot : dataSnapshot22.getChildren()) {
+                            course courseObj = courseSnapshot.getValue(course.class);
+                            String x = courseObj.getMajorName();
+                            if (x.equalsIgnoreCase(courseMajor))
+                            coourseList.add(courseObj.getCourseName());
+
+                        }
+                        adapter1.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+
+                });
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
         });
+
         //end lujain
         courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -163,23 +184,35 @@ public String majID;
         final ArrayList<String> chapterList=new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
         chapterSpinner.setAdapter(adapter2);
-        chapterRef.addValueEventListener(new ValueEventListener() {
+
+        ddd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                chapterList.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    chapter chapterObj = postSnapshot.getValue(chapter.class);
-                    chapterList.add(chapterObj.getChapterNum());
-                }
-                adapter2.notifyDataSetChanged();
+            public void onClick(View view) {
+                chapterRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        chapterList.clear();
+                        chapterList.add("select");
+
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            chapter chapterObj = postSnapshot.getValue(chapter.class);
+
+                            String x = chapterObj.getCourse();
+                            if (x.equalsIgnoreCase(chapterCourse))
+                            chapterList.add(chapterObj.getChapterNum());
+                        }
+                        adapter2.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+
+                });
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
         });
+
         chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
