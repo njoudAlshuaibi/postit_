@@ -104,8 +104,6 @@ public String majID;
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
         majorSpinner.setAdapter(adapter);
-        dd = (CheckBox) findViewById(R.id.checkBox3);
-        ddd = (CheckBox) findViewById(R.id.checkBox4);
 
 
         majorRef.addValueEventListener(new ValueEventListener() {
@@ -126,24 +124,15 @@ public String majID;
             }
 
         });
-        majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                courseMajor= parent.getItemAtPosition(position).toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         courseSpineer=findViewById(R.id.spinnerCourse);
         final ArrayList<String> coourseList=new ArrayList<>();
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
 
-        dd.setOnClickListener(new View.OnClickListener() {
+        majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                courseMajor= parent.getItemAtPosition(position).toString();
                 courseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot22) {
@@ -153,7 +142,7 @@ public String majID;
                             course courseObj = courseSnapshot.getValue(course.class);
                             String x = courseObj.getMajorName();
                             if (x.equalsIgnoreCase(courseMajor))
-                            coourseList.add(courseObj.getCourseName());
+                                coourseList.add(courseObj.getCourseName());
 
                         }
                         adapter1.notifyDataSetChanged();
@@ -166,28 +155,23 @@ public String majID;
 
                 });
             }
-        });
-
-        //end lujain
-        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterCourse= parent.getItemAtPosition(position).toString();
-            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
+
+        //end lujain
         chapterSpinner=findViewById(R.id.spinnerChapter);
         final ArrayList<String> chapterList=new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
         chapterSpinner.setAdapter(adapter2);
 
-        ddd.setOnClickListener(new View.OnClickListener() {
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterCourse= parent.getItemAtPosition(position).toString();
                 chapterRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -199,7 +183,7 @@ public String majID;
 
                             String x = chapterObj.getCourse();
                             if (x.equalsIgnoreCase(chapterCourse))
-                            chapterList.add(chapterObj.getChapterNum());
+                                chapterList.add(chapterObj.getChapterNum());
                         }
                         adapter2.notifyDataSetChanged();
                     }
@@ -211,7 +195,14 @@ public String majID;
 
                 });
             }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
+
+
+
 
         chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

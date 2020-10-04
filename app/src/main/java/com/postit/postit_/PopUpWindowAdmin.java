@@ -81,28 +81,14 @@ public class PopUpWindowAdmin extends AppCompatActivity {
             }
 
         });
-        majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                courseMajor = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         courseSpineer=findViewById(R.id.spinnerAdmin2);
         final ArrayList<String> coourseList =new ArrayList<>();
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
-
-        d.setOnClickListener(new View.OnClickListener() {
+        majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                courseMajor = parent.getItemAtPosition(position).toString();
                 courseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot2) {
@@ -128,21 +114,28 @@ public class PopUpWindowAdmin extends AppCompatActivity {
                     }
 
                 });
-                courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        coursename = parent.getItemAtPosition(position).toString();
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
+
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                coursename = parent.getItemAtPosition(position).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         browse.setOnClickListener(new View.OnClickListener() {
 
