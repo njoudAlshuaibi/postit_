@@ -55,9 +55,9 @@ getWindow().setLayout((int)(width*.8),(int)(height*.5));
                     requestedMajor.requestFocus();
                     return;
                 }
-                if(requestedCourseS.isEmpty()){
-                    requestedCourse.setError("please enter course");
-                    requestedCourse.requestFocus();
+                if(!(requestedMajorS.matches("[a-zA-Z]+"))){
+                    requestedMajor.setError("please enter valid major");
+                    requestedMajor.requestFocus();
                     return;
                 }
 
@@ -70,6 +70,7 @@ getWindow().setLayout((int)(width*.8),(int)(height*.5));
                     requestedChapter.requestFocus();
                     return;
                 }
+
                 newRequest = new requests(requestedMajorS,requestedCourseS,requestedChapterS,requestID);
 
                 requestsRef.child(requestID).setValue(newRequest);
