@@ -21,6 +21,20 @@
             android:layout_height="42dp"
             android:background="#FFFBD4"/>
 
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/noteRecycleView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginStart="2.dp"
+    android:layout_marginEnd="2.dp"
+    android:clipToPadding="false"
+    android:paddingStart="0dp"
+    android:paddingEnd="12.00dp"
+    android:paddingBottom="12dp"
+    app:layout_constraintBottom_toBottomof="@id/toolbar_mynotes"
+    />
+
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
