@@ -1,6 +1,7 @@
 package com.postit.postit_;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +30,11 @@ public class popupwindowvisitors extends AppCompatActivity {
     private Spinner majorSpinner;
     private Spinner courseSpineer;
     private String courseMajor;
-    private Button d ;
+    private Button browseVisitor ;
+    private String coursename;
+
+    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,7 @@ public class popupwindowvisitors extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         majorSpinner=findViewById(R.id.spinnerVisitor);
-
+        browseVisitor = findViewById(R.id.browseVisitor);
 
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
@@ -111,7 +117,37 @@ public class popupwindowvisitors extends AppCompatActivity {
 
             }
         });
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                coursename = parent.getItemAtPosition(position).toString();
 
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        browseVisitor.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")){
+
+                    Toast.makeText(popupwindowvisitors.this, "please select major and course", Toast.LENGTH_LONG).show();
+
+                }
+                else {
+
+                    Intent intent = new Intent(popupwindowvisitors.this, BrowseNotes.class);
+                    intent.putExtra(EXTRA_TEXT, courseMajor);
+                    intent.putExtra(EXTRA_TEXT2, coursename);
+
+                    startActivity(intent);
+
+                }  }//End onClick()
+        });
     }
 }

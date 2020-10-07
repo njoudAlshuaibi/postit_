@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -140,14 +141,20 @@ public class PopUpWindowAdmin extends AppCompatActivity {
 
             public void onClick(View view) {
 
+                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")){
 
-                Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
-                intent.putExtra(EXTRA_TEXT,courseMajor);
-                intent.putExtra(EXTRA_TEXT2,coursename);
+                    Toast.makeText(PopUpWindowAdmin.this, "please select major and course", Toast.LENGTH_LONG).show();
 
-                startActivity(intent);
+                }
+                else {
 
-            }//End onClick()
+    Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
+    intent.putExtra(EXTRA_TEXT, courseMajor);
+    intent.putExtra(EXTRA_TEXT2, coursename);
+
+    startActivity(intent);
+
+}  }//End onClick()
         });
 
     }
