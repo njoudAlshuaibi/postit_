@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +22,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class mynotes extends AppCompatActivity {
 private FloatingActionButton fab;
 private note b;
     private FirebaseDatabase database;
     private DatabaseReference notesRef;
     private DatabaseReference ref;
+
+    private RecyclerView notesRecyclerview;
+    private List<note> Notes;
+    private notesAdapter NoteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +55,29 @@ private note b;
                 opencreatnotepopup();
             }
         });
+
+
+
+        //RecycleView
+
+        notesRecyclerview=findViewById(R.id.noteRecycleView);
+        notesRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+
+        Notes=new ArrayList<>();
+        NoteAdapter=new notesAdapter(Notes);
+
+        notesRecyclerview.setAdapter(NoteAdapter);
+        getNote();
+
     }
+
+    private void getNote() {
+        //@SuppressLint("StaticFieldLeak")
+
+
+
+    }
+
 
     private void opencreatnotepopup() {
         Intent popupwindow4 = new Intent(mynotes.this,creatnotepopup.class);
