@@ -50,6 +50,17 @@ getWindow().setLayout((int)(width*.8),(int)(height*.5));
                     requestedMajor.requestFocus();
                     return;
                 }
+                if((requestedMajorS.matches("[0-9]+"))){
+                    requestedMajor.setError("please enter valid major");
+                    requestedMajor.requestFocus();
+                    return;
+                }
+                if(requestedCourseS.isEmpty()){
+                    requestedCourse.setError("please enter course");
+                    requestedCourse.requestFocus();
+                    return;
+                }
+
                 if(requestedCourseS.isEmpty()){
                     requestedCourse.setError("please enter course");
                     requestedCourse.requestFocus();
