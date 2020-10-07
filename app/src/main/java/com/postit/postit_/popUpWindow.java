@@ -50,7 +50,7 @@ public class popUpWindow extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         majorSpinner=findViewById(R.id.spinner1);
-        d = (CheckBox) findViewById(R.id.checkBox);
+
 
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
@@ -60,7 +60,7 @@ public class popUpWindow extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 majorList.clear();
 
-                majorList.add("Choose major");
+                majorList.add("select");
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     major majorObj = postSnapshot.getValue(major.class);
                     majorList.add(majorObj.getMajorName());
@@ -87,7 +87,7 @@ public class popUpWindow extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot2) {
                         coourseList.clear();
-                        coourseList.add("Choose Course");
+                        coourseList.add("select");
 
                         for (DataSnapshot courseSnapshot : dataSnapshot2.getChildren()) {
                             course courseObj = courseSnapshot.getValue(course.class);

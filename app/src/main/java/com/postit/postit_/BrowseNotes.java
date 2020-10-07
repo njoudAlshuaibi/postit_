@@ -20,52 +20,52 @@ public class BrowseNotes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_notes);
 
-        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
-        setSupportActionBar(tool);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
+//        setSupportActionBar(tool);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.mynotes, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
-            builder.setMessage("Are you Sure you want to exit?");
-            builder.setCancelable(true);
-
-            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-
-                // signOut
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(BrowseNotes.this, MainActivity.class));
-//                    finish();
-                }
-            });
-
-
-            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-
-        }
-        else if (id==R.id.home){
-            startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
-        }
-        return true;
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.mynotes, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.exit) {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
+//            builder.setMessage("Are you Sure you want to exit?");
+//            builder.setCancelable(true);
+//
+//            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+//
+//                // signOut
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    FirebaseAuth.getInstance().signOut();
+//                    startActivity(new Intent(BrowseNotes.this, MainActivity.class));
+////                    finish();
+//                }
+//            });
+//
+//
+//            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.cancel();
+//                }
+//            });
+//
+//            AlertDialog alertDialog = builder.create();
+//            alertDialog.show();
+//
+//        }
+//        else if (id==R.id.home){
+//            startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+//        }
+//        return true;
+//    }
 }
