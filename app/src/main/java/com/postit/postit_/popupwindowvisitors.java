@@ -46,7 +46,7 @@ public class popupwindowvisitors extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         majorSpinner=findViewById(R.id.spinnerVisitor);
-        d = (CheckBox) findViewById(R.id.checkBox);
+
 
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);

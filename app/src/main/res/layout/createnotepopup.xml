@@ -26,19 +26,13 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:id="@+id/spinnerAdmin"
+            android:id="@+id/spinnerA"
             android:layout_width="336dp"
             android:layout_height="46dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="250dp"
             android:hint="Collage" />
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="137dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="Load Courses" />
 
         <TextView
             android:layout_width="327dp"
@@ -52,7 +46,7 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:id="@+id/spinnerAdmin2"
+            android:id="@+id/spinnerAd"
             android:layout_width="333dp"
             android:layout_height="49dp"
             android:layout_marginLeft="20dp"
@@ -60,12 +54,7 @@
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="137dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="Load Chapters" />
+
 
 
         <TextView
@@ -80,7 +69,7 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:id="@+id/spinnerAdmin3"
+            android:id="@+id/spinnerAdmaaa"
             android:layout_width="322dp"
             android:layout_height="49dp"
             android:layout_marginLeft="20dp"
