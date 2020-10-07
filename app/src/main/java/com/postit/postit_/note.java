@@ -88,4 +88,9 @@ public class note {
     public void setId(String id) {
         this.id = id;
     }
+
+
+    public int getDateTime() {
+        return 0;
+    }
 }

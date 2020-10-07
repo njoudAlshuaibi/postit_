@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin_browse_notes"
-            android:parentActivityName=".PopUpWindowAdmin"></activity>
+        <activity android:name=".chapterDesign"></activity>
+        <activity android:name=".noteDesign" />
+        <activity
+            android:name=".admin_browse_notes"
+            android:parentActivityName=".PopUpWindowAdmin" />
         <activity android:name=".StudentActivity" />
         <activity android:name=".requestadmin" />
         <activity android:name=".chapters" />
