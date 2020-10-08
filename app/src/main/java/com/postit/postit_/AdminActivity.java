@@ -217,6 +217,12 @@ public String majID;
         deleteChapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String FFF =courseMajor;
+                String fff =chapterCourse;
+               String d =  chapterChapter;
+                if(fff=="select"||fff ==""||FFF==""||FFF=="select"||d=="select"){
+                    Toast.makeText(AdminActivity.this, "please select major and course, then select chapter to delete ", Toast.LENGTH_LONG).show();
+                }else{
                 chapterRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -225,6 +231,7 @@ public String majID;
                             String courseId = findChapter.getCourse();
                             String chapterId = findChapter.getChapterNum();
                             String majorID = findChapter.getMajor();
+
 
                             if(courseId.equals(chapterCourse) && chapterId.equals(chapterChapter) && majorID.equals(courseMajor)){
                                 String deletedChapter =findChapter.getId();
@@ -243,7 +250,7 @@ public String majID;
 
                     }
                 });
-            }
+            }}
         });
 
     }
@@ -295,40 +302,62 @@ public String majID;
 
     public void addNewMajor() {
 
-        final String name = MajorName.getText().toString().trim();
+       String s = MajorName.getText().toString();
+            String  name=  s.trim();
+if(s.equalsIgnoreCase(" ")||s.isEmpty()){
+    MajorName.setError("enter valid major ");
+    MajorName.requestFocus();
+}else{
         String majorID = majorRef.push().getKey();
         newmajor = new major("CCIS", name,majorID);
         majorRef.child(majorID).setValue(newmajor);
         Toast.makeText(AdminActivity.this, "Major added Successfully ", Toast.LENGTH_LONG).show();
         MajorName.setText("");
-    }
+    }}
 
     public void addNewCourse() {
-        String courseN = CourseID.getText().toString().trim();
-        String fff =courseMajor;
-        String id=courseRef.push().getKey();
-        course courObj=new course("CCIS",fff,courseN,id);
-        courseRef.child(id).setValue(courObj);
-        Toast.makeText(AdminActivity.this, "Course added Successfully ", Toast.LENGTH_LONG).show();
-        CourseID.setText("");
 
-    }
+        String fff =courseMajor;
+        if(fff=="select"||fff ==""){
+            Toast.makeText(AdminActivity.this, "can't be added , please select major ", Toast.LENGTH_LONG).show();
+        }
+        else{
+            String courseN = CourseID.getText().toString();
+           String v= courseN.trim();
+            if(v.equalsIgnoreCase(" ")||v.isEmpty()){
+            CourseID.setError("enter valid major ");
+            CourseID.requestFocus();
+        }else {
+            String id = courseRef.push().getKey();
+            course courObj = new course("CCIS", fff, courseN, id);
+            courseRef.child(id).setValue(courObj);
+            Toast.makeText(AdminActivity.this, "Course added Successfully ", Toast.LENGTH_LONG).show();
+            CourseID.setText("");
+        }
+    }}
     public void addNewChapter(){
-        String chapterN = chapterID.getText().toString().trim();
         String FFF =courseMajor;
         String fff =chapterCourse;
+        if(fff=="select"||fff ==""||FFF==""||FFF=="select"){
+            Toast.makeText(AdminActivity.this, "can't be added , please select major and course ", Toast.LENGTH_LONG).show();
+        }else{
+            String chapterN = chapterID.getText().toString();
+            String h = chapterN.trim();
+            if(h.equalsIgnoreCase(" ")||h.isEmpty()){
+            chapterID.setError("enter valid major ");
+            chapterID.requestFocus();
+        }
+        else{
         String id=chapterRef.push().getKey();
         chapter chapObj=new chapter("CCIS",FFF,fff,chapterN,id);
         chapterRef.child(id).setValue(chapObj);
         Toast.makeText(AdminActivity.this, "chapter added Successfully ", Toast.LENGTH_LONG).show();
         chapterID.setText("");
-    }
+    }}}
 
     public void deleteChapter(String chapterKey) {
         chapterRef.child(chapterKey.trim()).removeValue();
         Toast.makeText(AdminActivity.this, "chapter deleted Successfully ", Toast.LENGTH_LONG).show();
-
-
     }
     ////اشتغل يا حلو
 

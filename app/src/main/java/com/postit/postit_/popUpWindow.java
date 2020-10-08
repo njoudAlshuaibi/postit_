@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -31,9 +32,11 @@ public class popUpWindow extends AppCompatActivity {
     private Spinner majorSpinner;
     private Spinner courseSpineer;
     private String courseMajor;
-    private Button d ;
+    private Button reqBtn ;
+    private String coursename;
 
-
+    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,7 @@ public class popUpWindow extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         majorSpinner=findViewById(R.id.spinner1);
-
+        reqBtn = findViewById(R.id.browsen);
 
         final ArrayList<String> majorList=new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
@@ -116,7 +119,38 @@ public class popUpWindow extends AppCompatActivity {
 
             }
         });
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                coursename = parent.getItemAtPosition(position).toString();
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        reqBtn.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")){
+
+                    Toast.makeText(popUpWindow.this, "please select major and course", Toast.LENGTH_LONG).show();
+
+                }
+                else {
+
+                    Intent intent = new Intent(popUpWindow.this, BrowseNotes.class);
+                    intent.putExtra(EXTRA_TEXT, courseMajor);
+                    intent.putExtra(EXTRA_TEXT2, coursename);
+
+                    startActivity(intent);
+
+                }  }//End onClick()
+        });
 
 // r
     }
