@@ -85,13 +85,14 @@
             android:layout_marginTop="90dp"
             android:ems="10"
             android:hint="Note Body"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:background="@drawable/border"/>
 
         <Button
             android:id="@+id/ResetButton"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="135dp"
+            android:layout_marginLeft="120dp"
             android:layout_marginTop="30dp"
             android:background="#EB75B2"
             android:text="Post"
@@ -104,12 +105,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="390dp">
+        android:layout_marginTop="390dp"
+        >
 
         <EditText
             android:id="@+id/Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="219dp"
+            android:layout_height="52dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="700dp"
             android:layout_marginRight="40dp"
