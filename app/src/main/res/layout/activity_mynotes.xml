@@ -9,42 +9,29 @@
     android:orientation="vertical"
     android:autoMirrored="true"
 >
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="#A6FFFFFF"-->
-<!--        android:orientation="vertical">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A6FFFFFF"
+        android:orientation="vertical">
 
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar_mynotes"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="42dp"-->
-<!--            android:background="#FFFBD4"/>-->
-
-<!--&lt;!&ndash;<androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
-<!--&lt;!&ndash;    android:id="@+id/noteRecycleView"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:layout_height="0dp"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:layout_marginStart="2.dp"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:layout_marginEnd="2.dp"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:clipToPadding="false"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:paddingStart="0dp"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:paddingEnd="12.00dp"&ndash;&gt;-->
-<!--&lt;!&ndash;    android:paddingBottom="12dp"&ndash;&gt;-->
-<!--&lt;!&ndash;    app:layout_constraintBottom_toBottomof="@id/toolbar_mynotes"&ndash;&gt;-->
-<!--&lt;!&ndash;    />&ndash;&gt;-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_mynotes"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="#FFFBD4"/>
 
 
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="300dp"-->
-<!--            android:layout_marginTop="650dp"-->
-<!--            android:background="#2B926C"-->
-<!--            app:backgroundTint="#75BBA2"-->
-<!--            app:srcCompat="@drawable/add" />-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="650dp"
+            android:background="#2B926C"
+            app:backgroundTint="#75BBA2"
+            app:srcCompat="@drawable/add" />
 
 
-<!--    </LinearLayout>-->
+    </LinearLayout>
 </LinearLayout>

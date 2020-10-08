@@ -71,6 +71,12 @@ getWindow().setLayout((int)(width*.8),(int)(height*.5));
                     return;
                 }
 
+                if(!(requestedChapterS.toLowerCase().startsWith("ch"))){
+                    requestedChapter.setError("please write the requested chapter in this format: ch#");
+                    requestedChapter.requestFocus();
+                    return;
+                }
+
                 newRequest = new requests(requestedMajorS,requestedCourseS,requestedChapterS,requestID);
 
                 requestsRef.child(requestID).setValue(newRequest);

@@ -90,7 +90,5 @@ public class note {
     }
 
 
-    public int getDateTime() {
-        return 0;
-    }
+
 }

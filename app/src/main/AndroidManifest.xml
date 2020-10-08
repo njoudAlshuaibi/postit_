@@ -19,11 +19,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".mynotes" />
         <activity android:name=".Visitors_activity" />
-        <activity android:name=".splashActivity" />
+        <activity android:name=".mainAdmin" />
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".mainAdmin">
+        <activity android:name="splashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

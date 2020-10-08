@@ -9,35 +9,32 @@ android:orientation="vertical"
 android:background="@drawable/bg"
 android:autoMirrored="true">
 
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="#A6FFFFFF"-->
-<!--    android:orientation="vertical">-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A6FFFFFF"
+    android:orientation="vertical">
 
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar_Browsenotes"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="42dp"-->
-<!--        android:background="#FFFBD4" />-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_Browsenotes"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#FFFBD4" />
 
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/noteRecycleView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginStart="2.dp"-->
-<!--        android:layout_marginEnd="2.dp"-->
-<!--        android:clipToPadding="false"-->
-<!--        android:paddingStart="0dp"-->
-<!--        android:paddingEnd="12.00dp"-->
-<!--        android:paddingBottom="12dp"-->
-<!--        app:layout_constraintBottom_toBottomof="@id/toolbar_mynotes"/>-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="93dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="650dp"
+        android:layout_marginLeft="300dp"
+        android:background="#2B926C"
+        app:backgroundTint="#75BBA2"
+        app:srcCompat="@drawable/add" />
 
 
 
 
 
-<!--    </LinearLayout>-->
+    </LinearLayout>
 </LinearLayout>
