@@ -16,6 +16,13 @@ android:autoMirrored="true">
     android:orientation="vertical">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/myRecycleView"
+        />
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_Browsenotes"
         android:layout_width="match_parent"

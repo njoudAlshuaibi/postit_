@@ -1,6 +1,7 @@
 package com.postit.postit_;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -8,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +23,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseAuth;
+
+import android.os.AsyncTask;
+
 
 public class creatnotepopup extends AppCompatActivity {
 
         private FirebaseDatabase database;
+        private FirebaseUser user;
         private DatabaseReference majorRef;
         private DatabaseReference courseRef;
         private Spinner majorSpinner;
@@ -31,9 +40,12 @@ public class creatnotepopup extends AppCompatActivity {
         private String courseMajor;
         private Button d ;
     private DatabaseReference chapterRef;
+    private DatabaseReference noteRef;
     private Button add;
     private Spinner chapterSpinner;
     public String chapterCourse, chapterChapter;
+    private EditText inputNoteTitle, inputNoteBody;
+    private String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +63,7 @@ public class creatnotepopup extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
-
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         majorSpinner=findViewById(R.id.spinnerA);
 
         final ArrayList<String> majorList=new ArrayList<>();
@@ -158,16 +170,62 @@ public class creatnotepopup extends AppCompatActivity {
         });
 
 
-//        chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                chapterChapter= parent.getItemAtPosition(position).toString();
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+        chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterChapter= parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-    } }
+           }
+        });
+
+        inputNoteTitle = findViewById(R.id.Title);
+        inputNoteBody = findViewById(R.id.editTextTextMultiLine2);
+
+
+         user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userEmail = user.getEmail();
+        } else {
+            // No user is signed in
+        }
+
+        add = findViewById(R.id.ResetButton);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveNote();
+            }
+        });
+
+    }
+    private void saveNote(){
+
+        if(inputNoteTitle.getText().toString().trim().isEmpty()){
+            Toast.makeText(creatnotepopup.this, "Note title can not be empty!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(inputNoteBody.getText().toString().trim().isEmpty()){
+            Toast.makeText(creatnotepopup.this, "Note body can not be empty!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        final note noteObj = new note();
+        noteObj.setTitle(inputNoteTitle.getText().toString());
+        noteObj.setCaption(inputNoteBody.getText().toString());
+        noteObj.setCollege("CCIS");
+        noteObj.setMajor(courseMajor);
+        noteObj.setCourse(chapterCourse);
+        noteObj.setChapterNum(chapterChapter);
+        noteObj.setId(noteRef.push().getKey());
+        noteObj.setEmail(userEmail);
+
+
+
+      }
+
+
+}
 

@@ -14,7 +14,7 @@
         <activity android:name=".StudentActivity" />
         <activity android:name=".requestadmin" />
         <activity android:name=".chapters" />
-        <activity android:name=".BrowseNotes" />
+        <activity android:name=".splashActivity" />
         <activity android:name=".favoritelist" />
         <activity android:name=".MainActivity" />
         <activity android:name=".mynotes" />
@@ -23,7 +23,7 @@
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name="splashActivity">
+        <activity android:name="BrowseNotes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
