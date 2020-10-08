@@ -1,5 +1,15 @@
 package com.postit.postit_;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,29 +17,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
     private RecyclerView titleList;
     private DatabaseReference noteRef;
+    private FloatingActionButton fab2;
+
 
 
 
@@ -42,6 +43,14 @@ public class BrowseNotes extends AppCompatActivity {
         Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
         setSupportActionBar(tool);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openpopupwindowchapters();
+            }
+        });
+
 
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
@@ -49,6 +58,11 @@ public class BrowseNotes extends AppCompatActivity {
         titleList.setHasFixedSize(true);
         titleList.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    private void openpopupwindowchapters() {
+        Intent popupwindow5 = new Intent(BrowseNotes.this,popupwindowchapters.class);
+        startActivity(popupwindow5);
     }
 
     @Override

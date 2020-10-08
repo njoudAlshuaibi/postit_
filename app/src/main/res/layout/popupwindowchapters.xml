@@ -17,10 +17,10 @@
 
         <EditText
             android:id="@+id/editTextTextMultiLine2"
-            android:layout_width="393dp"
+            android:layout_width="wrap_content"
             android:layout_height="153dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="130dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="200dp"
             android:ems="10"
             android:hint="Note Body"
             android:inputType="textMultiLine" />
@@ -29,8 +29,8 @@
             android:id="@+id/post2"
             android:layout_width="129dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="50dp"
             android:background="#EB75B2"
             android:text="Post"
             android:textColor="#fff" />
@@ -42,14 +42,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="50dp">
 
         <EditText
             android:id="@+id/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="10dp"
             android:ems="10"

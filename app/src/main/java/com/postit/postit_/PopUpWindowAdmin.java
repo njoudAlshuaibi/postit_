@@ -47,7 +47,7 @@ public class PopUpWindowAdmin extends AppCompatActivity {
 
         int width = ma.widthPixels;
         int height = ma.heightPixels;
-        getWindow().setLayout((int)(width*.8),(int)(height*.5));
+        getWindow().setLayout((int)(width*.8),(int)(height*.7));
 
         // retrieve data
 

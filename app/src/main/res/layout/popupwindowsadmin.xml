@@ -54,6 +54,27 @@
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 
+        <TextView
+            android:layout_width="267dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
+            android:text="Choose Chapter:"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/spinnerAdmin3"
+            android:layout_width="266dp"
+            android:layout_height="49dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
+
+
         <Button
             android:id="@+id/browseAdmin"
             android:layout_width="match_parent"

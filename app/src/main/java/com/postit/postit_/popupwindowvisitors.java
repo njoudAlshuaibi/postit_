@@ -46,7 +46,7 @@ public class popupwindowvisitors extends AppCompatActivity {
 
         int width = sa.widthPixels;
         int height = sa.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * .5));
+        getWindow().setLayout((int) (width * .8), (int) (height * .7));
 
         database= FirebaseDatabase.getInstance();
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");

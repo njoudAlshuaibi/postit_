@@ -27,10 +27,10 @@
 
         <Spinner
             android:id="@+id/spinnerA"
-            android:layout_width="336dp"
-            android:layout_height="46dp"
+            android:layout_width="342dp"
+            android:layout_height="57dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 
@@ -38,7 +38,7 @@
             android:layout_width="327dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="5dp"
             android:text="Choose Course:"
             android:textAlignment="center"
@@ -48,9 +48,9 @@
         <Spinner
             android:id="@+id/spinnerAd"
             android:layout_width="333dp"
-            android:layout_height="49dp"
+            android:layout_height="57dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 
@@ -61,7 +61,7 @@
             android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="5dp"
             android:text="Choose Chapter:"
             android:textAlignment="center"
@@ -71,17 +71,17 @@
         <Spinner
             android:id="@+id/spinnerAdmaaa"
             android:layout_width="322dp"
-            android:layout_height="49dp"
+            android:layout_height="57dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
             android:hint="Collage" />
 
         <EditText
             android:id="@+id/editTextTextMultiLine2"
-            android:layout_width="393dp"
+            android:layout_width="255dp"
             android:layout_height="153dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="90dp"
             android:ems="10"
             android:hint="Note Body"
@@ -92,7 +92,7 @@
             android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:background="#EB75B2"
             android:text="Post"
             android:textColor="#fff" />

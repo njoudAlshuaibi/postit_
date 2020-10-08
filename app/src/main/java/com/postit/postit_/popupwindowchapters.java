@@ -18,7 +18,7 @@ public class popupwindowchapters extends AppCompatActivity {
 
         int width = ja.widthPixels;
         int height = ja.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * .5));
+        getWindow().setLayout((int) (width * .8), (int) (height * .7));
     }
 
 }
