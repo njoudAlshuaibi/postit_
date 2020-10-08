@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin_browse_notes"
-            android:parentActivityName=".PopUpWindowAdmin"></activity>
-        <activity android:name=".StudentActivity" />
+        <activity android:name=".previewnote"></activity>
+        <activity
+            android:name=".admin_browse_notes"
+            android:parentActivityName=".PopUpWindowAdmin" />
+        <activity android:name=".BrowseNotes" />
         <activity android:name=".requestadmin" />
         <activity android:name=".chapters" />
         <activity android:name=".splashActivity" />
@@ -23,7 +25,7 @@
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />
-        <activity android:name="BrowseNotes">
+        <activity android:name=".StudentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

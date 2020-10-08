@@ -16,32 +16,30 @@ android:autoMirrored="true">
     android:orientation="vertical">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/myRecycleView"
-        />
-
-
-    <androidx.appcompat.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_Browsenotes"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:background="#FFFBD4" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myRecycleView"
+        android:layout_width="391dp"
+        android:layout_height="670dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="-999dp"
+        android:layout_marginBottom="29dp" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab2"
-        android:layout_width="93dp"
+
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="650dp"
-        android:layout_marginLeft="300dp"
         android:background="#2B926C"
         app:backgroundTint="#75BBA2"
         app:srcCompat="@drawable/add" />
 
 
-
-
-
-    </LinearLayout>
+</LinearLayout>
 </LinearLayout>

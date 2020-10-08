@@ -54,8 +54,9 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // juju
-    compile'com.firebaseui:firebase-ui-database:1.1.1'
-    compile 'com.firebaseui:firebase-ui-database:0.4.0'
+    implementation'com.firebaseui:firebase-ui-database:1.1.1'
+    implementation 'com.firebaseui:firebase-ui-database:0.4.0'
+    implementation 'com.firebaseui:firebase-ui-database:4.3.2'
 
 
 

@@ -1,6 +1,7 @@
 package com.postit.postit_;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -46,6 +47,8 @@ public class creatnotepopup extends AppCompatActivity {
     public String chapterCourse, chapterChapter;
     private EditText inputNoteTitle, inputNoteBody;
     private String userEmail;
+    final note noteObj = new note();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,23 +212,29 @@ public class creatnotepopup extends AppCompatActivity {
         }
         if(inputNoteBody.getText().toString().trim().isEmpty()){
             Toast.makeText(creatnotepopup.this, "Note body can not be empty!", Toast.LENGTH_LONG).show();
-            return;
+            return;}
+
+       String id =  noteRef.push().getKey();
+            noteObj.setTitle(inputNoteTitle.getText().toString());
+            noteObj.setCaption(inputNoteBody.getText().toString());
+            noteObj.setCollege("CCIS");
+            noteObj.setMajor(courseMajor);
+            noteObj.setCourse(chapterCourse);
+            noteObj.setChapterNum(chapterChapter);
+            noteObj.setId(id);
+            noteObj.setEmail(userEmail);
+
+        noteRef.child(id).setValue(noteObj);
+        Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(creatnotepopup.this,mynotes.class));
         }
 
-        final note noteObj = new note();
-        noteObj.setTitle(inputNoteTitle.getText().toString());
-        noteObj.setCaption(inputNoteBody.getText().toString());
-        noteObj.setCollege("CCIS");
-        noteObj.setMajor(courseMajor);
-        noteObj.setCourse(chapterCourse);
-        noteObj.setChapterNum(chapterChapter);
-        noteObj.setId(noteRef.push().getKey());
-        noteObj.setEmail(userEmail);
+
 
 
 
       }
 
 
-}
+
 
