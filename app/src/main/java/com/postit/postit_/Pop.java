@@ -17,7 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Pop extends Activity {
     private EditText requestedMajor, requestedCourse, requestedChapter;
     private Button request;
-    private DatabaseReference requestsRef;
+    private FirebaseDatabase database;
+    private DatabaseReference requestsRef, notetsRef;
     private requests newRequest;
 
 
@@ -32,12 +33,14 @@ public class Pop extends Activity {
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-getWindow().setLayout((int)(width*.8),(int)(height*.5));
+        getWindow().setLayout((int) (width * .8), (int) (height * .5));
         requestedMajor = (EditText) findViewById(R.id.MajorCode);
         requestedCourse = (EditText) findViewById(R.id.CourseCode);
         requestedChapter = (EditText) findViewById(R.id.chapterCode);
-        request =  (Button) findViewById(R.id.reqBtn);
+        request = (Button) findViewById(R.id.reqBtn);
+        database = FirebaseDatabase.getInstance();
         requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,44 +48,48 @@ getWindow().setLayout((int)(width*.8),(int)(height*.5));
                 final String requestedCourseS = requestedCourse.getText().toString().trim();
                 final String requestedChapterS = requestedChapter.getText().toString().trim();
                 String requestID = requestsRef.push().getKey();
-                if(requestedMajorS.isEmpty()){
+
+                if (requestedMajorS.isEmpty()) {
                     requestedMajor.setError("please enter major");
                     requestedMajor.requestFocus();
                     return;
                 }
-                if((requestedMajorS.matches("[0-9]+"))){
+                if ((requestedMajorS.matches("[0-9]+"))) {
                     requestedMajor.setError("please enter valid major");
                     requestedMajor.requestFocus();
                     return;
                 }
-                if(!(requestedMajorS.matches("[a-zA-Z]+"))){
+                if (!(requestedMajorS.matches("[a-zA-Z]+"))) {
                     requestedMajor.setError("please enter valid major");
                     requestedMajor.requestFocus();
                     return;
                 }
 
-                if(requestedCourseS.isEmpty()){
+                if (requestedCourseS.isEmpty()) {
                     requestedCourse.setError("please enter course");
                     requestedCourse.requestFocus();
                     return;
-                }if(requestedChapterS.isEmpty()){
+                }
+                if (requestedChapterS.isEmpty()) {
                     requestedChapter.setError("please enter Chapter");
                     requestedChapter.requestFocus();
                     return;
                 }
 
-                if(!(requestedChapterS.toLowerCase().startsWith("ch"))){
-                    requestedChapter.setError("please write the requested chapter in this format: ch#");
+                if (!(requestedChapterS.toLowerCase().startsWith("ch"))) {
+                    requestedChapter.setError("Please write the requested chapter in this format: ch#");
                     requestedChapter.requestFocus();
                     return;
                 }
 
-                newRequest = new requests(requestedMajorS,requestedCourseS,requestedChapterS,requestID);
+                newRequest = new requests(requestedMajorS, requestedCourseS, requestedChapterS, requestID);
+
 
                 requestsRef.child(requestID).setValue(newRequest);
+
                 Toast.makeText(Pop.this, "Request send successfully", Toast.LENGTH_LONG).show();
 
-            startActivity(new Intent(Pop.this,StudentActivity.class));
+                startActivity(new Intent(Pop.this, StudentActivity.class));
 
             }
         });

@@ -20,8 +20,8 @@
         <activity android:name=".favoritelist" />
         <activity android:name=".MainActivity" />
         <activity android:name=".mynotes" />
-        <activity android:name=".Visitors_activity" />
         <activity android:name=".mainAdmin" />
+        <activity android:name=".Visitors_activity" />
         <activity android:name=".Activity_home_bage" />
         <activity android:name=".forgetPasswordActivity" />
         <activity android:name=".CreateAccountActivity" />

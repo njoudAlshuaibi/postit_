@@ -16,8 +16,11 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.lang.*;
+
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,30 +33,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.*;
+import java.util.regex.Pattern;
 
 
-public class AdminActivity extends AppCompatActivity  {
+public class AdminActivity extends AppCompatActivity {
 
-private EditText MajorName, CourseID,chapterID;
-private ImageButton addMajor, addCoure,addChapter;
-private ImageButton deleteMajor, deleteCoure,deleteChapter;
-private major newmajor;
-private course newCourse;
-private FirebaseDatabase database;
-private DatabaseReference ref;
-private DatabaseReference majorRef;
-private DatabaseReference courseRef;
-private DatabaseReference chapterRef;
-private Button add;
-private Spinner majorSpinner,courseSpineer,chapterSpinner;
-public String courseMajor,chapterCourse, chapterChapter;
-public String majID;
-    private Button dd ;
-    private Button ddd ;
-    boolean f = false;
-
-
+    private EditText MajorName, CourseID, chapterID;
+    private ImageButton addMajor, addCoure, addChapter;
+    private ImageButton deleteMajor, deleteCoure, deleteChapter;
+    private major newmajor;
+    private course newCourse;
+    private DatabaseReference majorRef;
+    private DatabaseReference courseRef;
+    private DatabaseReference chapterRef;
+    private Spinner majorSpinner, courseSpineer, chapterSpinner;
+    public String courseMajor, chapterCourse, chapterChapter;
 
 //i love uoy
 
@@ -67,20 +63,17 @@ public String majID;
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-
         //lujain
-        MajorName =(EditText) findViewById(R.id.MajorName);
-        CourseID= (EditText) findViewById(R.id.CourseID);
-        chapterID= (EditText) findViewById(R.id.chapterID);
-        addMajor= (ImageButton) findViewById(R.id.imageButton7);
-        addCoure= (ImageButton) findViewById((R.id.imageButton3));
-        addChapter= (ImageButton) findViewById(R.id.imageButton5);
-        deleteChapter= (ImageButton) findViewById(R.id.imageButton6);
-        database= FirebaseDatabase.getInstance();
-        ref=FirebaseDatabase.getInstance().getReference();
-        majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
-        courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
-        chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+        MajorName = (EditText) findViewById(R.id.MajorName);
+        CourseID = (EditText) findViewById(R.id.CourseID);
+        chapterID = (EditText) findViewById(R.id.chapterID);
+        addMajor = (ImageButton) findViewById(R.id.imageButton7);
+        addCoure = (ImageButton) findViewById((R.id.imageButton3));
+        addChapter = (ImageButton) findViewById(R.id.imageButton5);
+        deleteChapter = (ImageButton) findViewById(R.id.imageButton6);
+        majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
+        courseRef = FirebaseDatabase.getInstance().getReference().child("Courses");
+        chapterRef = FirebaseDatabase.getInstance().getReference().child("Chapters");
 
         addMajor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +93,8 @@ public String majID;
                 addNewChapter();
             }
         });
-        majorSpinner=findViewById(R.id.spinnerMajor);
-        final ArrayList<String> majorList=new ArrayList<>();
+        majorSpinner = findViewById(R.id.spinnerMajor);
+        final ArrayList<String> majorList = new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
         majorSpinner.setAdapter(adapter);
 
@@ -124,15 +117,15 @@ public String majID;
             }
 
         });
-        courseSpineer=findViewById(R.id.spinnerCourse);
-        final ArrayList<String> coourseList=new ArrayList<>();
+        courseSpineer = findViewById(R.id.spinnerCourse);
+        final ArrayList<String> coourseList = new ArrayList<>();
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
 
         majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                courseMajor= parent.getItemAtPosition(position).toString();
+                courseMajor = parent.getItemAtPosition(position).toString();
                 courseRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot22) {
@@ -155,6 +148,7 @@ public String majID;
 
                 });
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -163,15 +157,15 @@ public String majID;
 
 
         //end lujain
-        chapterSpinner=findViewById(R.id.spinnerChapter);
-        final ArrayList<String> chapterList=new ArrayList<>();
+        chapterSpinner = findViewById(R.id.spinnerChapter);
+        final ArrayList<String> chapterList = new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
         chapterSpinner.setAdapter(adapter2);
 
         courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterCourse= parent.getItemAtPosition(position).toString();
+                chapterCourse = parent.getItemAtPosition(position).toString();
                 chapterRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -195,6 +189,7 @@ public String majID;
 
                 });
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -202,13 +197,12 @@ public String majID;
         });
 
 
-
-
         chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterChapter= parent.getItemAtPosition(position).toString();
+                chapterChapter = parent.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -217,40 +211,40 @@ public String majID;
         deleteChapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String FFF =courseMajor;
-                String fff =chapterCourse;
-               String d =  chapterChapter;
-                if(fff=="select"||fff ==""||FFF==""||FFF=="select"||d=="select"){
+                String FFF = courseMajor;
+                String fff = chapterCourse;
+                String d = chapterChapter;
+                if (fff == "select" || fff == "" || FFF == "" || FFF == "select" || d == "select") {
                     Toast.makeText(AdminActivity.this, "please select major and course, then select chapter to delete ", Toast.LENGTH_LONG).show();
-                }else{
-                chapterRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot child : snapshot.getChildren()){
-                            chapter findChapter = child.getValue(chapter.class);
-                            String courseId = findChapter.getCourse();
-                            String chapterId = findChapter.getChapterNum();
-                            String majorID = findChapter.getMajor();
+                } else {
+                    chapterRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot child : snapshot.getChildren()) {
+                                chapter findChapter = child.getValue(chapter.class);
+                                String courseId = findChapter.getCourse();
+                                String chapterId = findChapter.getChapterNum();
+                                String majorID = findChapter.getMajor();
 
 
-                            if(courseId.equals(chapterCourse) && chapterId.equals(chapterChapter) && majorID.equals(courseMajor)){
-                                String deletedChapter =findChapter.getId();
-                                deleteChapter(deletedChapter);
-                                break;
-                            }
-                            else{
-                                Toast.makeText(AdminActivity.this, "failed to delete chapter", Toast.LENGTH_LONG).show();
-                                break;
+                                if (courseId.equals(chapterCourse) && chapterId.equals(chapterChapter) && majorID.equals(courseMajor)) {
+                                    String deletedChapter = findChapter.getId();
+                                    deleteChapter(deletedChapter);
+                                    break;
+                                } else {
+                                    Toast.makeText(AdminActivity.this, "failed to delete chapter", Toast.LENGTH_LONG).show();
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-            }}
+                        }
+                    });
+                }
+            }
         });
 
     }
@@ -293,74 +287,84 @@ public String majID;
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-        }
-        else if (id==R.id.home){
-            startActivity(new Intent(AdminActivity.this,mainAdmin.class));
+        } else if (id == R.id.home) {
+            startActivity(new Intent(AdminActivity.this, mainAdmin.class));
         }
         return true;
     }
 
     public void addNewMajor() {
+        boolean flag = true;
+        String s = MajorName.getText().toString();
+        String name = s.trim();
+        String majorID;
+        if ((s.length() < 10) || (s.equalsIgnoreCase(" ")) || (s.isEmpty())) {
+            MajorName.setError("Please enter valid major,\nEnter full major name\ne.g. software engineering");
+            MajorName.requestFocus();
 
-       String s = MajorName.getText().toString();
-            String  name=  s.trim();
-if(s.equalsIgnoreCase(" ")||s.isEmpty()){
-    MajorName.setError("enter valid major ");
-    MajorName.requestFocus();
-}else{
-        String majorID = majorRef.push().getKey();
-        newmajor = new major("CCIS", name,majorID);
-        majorRef.child(majorID).setValue(newmajor);
-        Toast.makeText(AdminActivity.this, "Major added Successfully ", Toast.LENGTH_LONG).show();
-        MajorName.setText("");
-    }}
+        } else if (!(Pattern.matches("[a-zA-Z]+", s.replaceAll("\\s+", "")))) {
+            MajorName.setError("Please enter valid major,\nSymbols not allow\nDigit not allowed\ne.g. software engineering");
+            MajorName.requestFocus();
+
+        } else {
+            majorID = majorRef.push().getKey();
+            newmajor = new major("CCIS", name, majorID);
+            majorRef.child(majorID).setValue(newmajor);
+            Toast.makeText(AdminActivity.this, "Major added Successfully ", Toast.LENGTH_LONG).show();
+            MajorName.setText("");
+        }
+    }
 
     public void addNewCourse() {
 
-        String fff =courseMajor;
-        if(fff=="select"||fff ==""){
+        String fff = courseMajor;
+        if (fff == "select" || fff == "") {
             Toast.makeText(AdminActivity.this, "can't be added , please select major ", Toast.LENGTH_LONG).show();
-        }
-        else{
+        } else {
             String courseN = CourseID.getText().toString();
-           String v= courseN.trim();
-            if(v.equalsIgnoreCase(" ")||v.isEmpty()){
-            CourseID.setError("enter valid major ");
-            CourseID.requestFocus();
-        }else {
-            String id = courseRef.push().getKey();
-            course courObj = new course("CCIS", fff, courseN, id);
-            courseRef.child(id).setValue(courObj);
-            Toast.makeText(AdminActivity.this, "Course added Successfully ", Toast.LENGTH_LONG).show();
-            CourseID.setText("");
+            String v = courseN.trim();
+            if (v.equalsIgnoreCase(" ") || v.isEmpty()) {
+                CourseID.setError("Please enter valid course code,\ne.g. SWE434 ");
+                CourseID.requestFocus();
+            } else if ((!(courseN.matches("^(?=.*[A-Z])(?=.*[0-9])[A-Z0-9]+$"))) || (courseN.length() > 8)) {
+                CourseID.setError("Please enter valid course code,\ne.g. SWE434");
+                CourseID.requestFocus();
+            } else {
+                String id = courseRef.push().getKey();
+                course courObj = new course("CCIS", fff, courseN, id);
+                courseRef.child(id).setValue(courObj);
+                Toast.makeText(AdminActivity.this, "Course added Successfully ", Toast.LENGTH_LONG).show();
+                CourseID.setText("");
+            }
         }
-    }}
-    public void addNewChapter(){
-        String FFF =courseMajor;
-        String fff =chapterCourse;
-        if(fff=="select"||fff ==""||FFF==""||FFF=="select"){
+    }
+
+    public void addNewChapter() {
+        String FFF = courseMajor;
+        String fff = chapterCourse;
+        if (fff == "select" || fff == "" || FFF == "" || FFF == "select") {
             Toast.makeText(AdminActivity.this, "can't be added , please select major and course ", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             String chapterN = chapterID.getText().toString();
             String h = chapterN.trim();
-            if(h.equalsIgnoreCase(" ")||h.isEmpty()){
-            chapterID.setError("enter valid major ");
-            chapterID.requestFocus();
+            if ((h.equalsIgnoreCase(" ")) || (h.isEmpty()) || (!(h.startsWith("Chapter"))) || (h.length() > 10) || (!(chapterN.matches("^.*\\d$")))) {
+                chapterID.setError("Please enter valid chapter follow this format: Chapter#\ne.g. Chapter4");
+                chapterID.requestFocus();
+            } else {
+                String id = chapterRef.push().getKey();
+                chapter chapObj = new chapter("CCIS", FFF, fff, chapterN, id);
+                chapterRef.child(id).setValue(chapObj);
+                Toast.makeText(AdminActivity.this, "chapter added Successfully ", Toast.LENGTH_LONG).show();
+                chapterID.setText("");
+            }
         }
-        else{
-        String id=chapterRef.push().getKey();
-        chapter chapObj=new chapter("CCIS",FFF,fff,chapterN,id);
-        chapterRef.child(id).setValue(chapObj);
-        Toast.makeText(AdminActivity.this, "chapter added Successfully ", Toast.LENGTH_LONG).show();
-        chapterID.setText("");
-    }}}
+    }
 
     public void deleteChapter(String chapterKey) {
         chapterRef.child(chapterKey.trim()).removeValue();
         Toast.makeText(AdminActivity.this, "chapter deleted Successfully ", Toast.LENGTH_LONG).show();
     }
     ////اشتغل يا حلو
-
 
 }
 

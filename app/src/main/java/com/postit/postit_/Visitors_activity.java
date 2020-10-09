@@ -43,7 +43,7 @@ public class Visitors_activity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-
+        //browse note card
         CardView nj = (CardView) findViewById(R.id.BrowseNotes2);
         nj.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +51,63 @@ public class Visitors_activity extends AppCompatActivity {
                 openpopupwindowvisitors();
             }
         });
+
+        //fav list card
+        CardView favList = (CardView) findViewById(R.id.FavoriteList);
+        favList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Visitors_activity.this)
+                        .setTitle("you need to login first")
+                        .setMessage("Do you want to login ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent (Visitors_activity.this,MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+        //my notes card
+        CardView myNotes = (CardView) findViewById(R.id.Mynote);
+        myNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Visitors_activity.this)
+                        .setTitle("you need to login first")
+                        .setMessage("Do you want to login ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent (Visitors_activity.this,MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+        //my notes card
+        CardView request = (CardView) findViewById(R.id.Request);
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(Visitors_activity.this)
+                        .setTitle("you need to login first")
+                        .setMessage("Do you want to login ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent (Visitors_activity.this,MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
+
     }
 
     private void openpopupwindowvisitors() {

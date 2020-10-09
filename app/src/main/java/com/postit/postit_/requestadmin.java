@@ -41,18 +41,18 @@ public class requestadmin extends AppCompatActivity {
 
 
         requestsListView = findViewById(R.id.viewReq);
-        final ArrayList<String> requestsList= new ArrayList<>();
-        final ArrayAdapter adapter=new ArrayAdapter<String>(this,R.layout.listitem, requestsList);
+        final ArrayList<String> requestsList = new ArrayList<>();
+        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, requestsList);
         requestsListView.setAdapter(adapter);
-        ref=FirebaseDatabase.getInstance().getReference();
+        ref = FirebaseDatabase.getInstance().getReference();
         requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
         requestsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshotr) {
                 requestsList.clear();
-                for (DataSnapshot snapshotx : snapshotr.getChildren()){
+                for (DataSnapshot snapshotx : snapshotr.getChildren()) {
                     requests reqObj = snapshotx.getValue(requests.class);
-                    String reqdisplay="Major: " +reqObj.getRequestedMajor()+"\nCourse: "+reqObj.getRequestedCourse()+"\nChapter/s: "+reqObj.getRequestedChapter()+"\nID: "+reqObj.getId();
+                    String reqdisplay = "Major: " + reqObj.getRequestedMajor() + "\nCourse: " + reqObj.getRequestedCourse() + "\nChapter/s: " + reqObj.getRequestedChapter() + "\nID: " + reqObj.getId();
                     requestsList.add(reqdisplay);
                 }
                 adapter.notifyDataSetChanged();
@@ -66,9 +66,9 @@ public class requestadmin extends AppCompatActivity {
         requestsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int whichItem= position;
-                String hh=parent.getItemAtPosition(position).toString();
-                final String requestKey=hh.substring(hh.indexOf("ID:") + 3 , hh.length());
+                final int whichItem = position;
+                String hh = parent.getItemAtPosition(position).toString();
+                final String requestKey = hh.substring(hh.indexOf("ID:") + 3, hh.length());
                 new AlertDialog.Builder(requestadmin.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure?")
@@ -85,13 +85,13 @@ public class requestadmin extends AppCompatActivity {
                         .show();
 
 
-
                 return true;
             }
         });
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -130,9 +130,8 @@ public class requestadmin extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-        }
-        else if (id==R.id.home){
-            startActivity(new Intent(requestadmin.this,mainAdmin.class));
+        } else if (id == R.id.home) {
+            startActivity(new Intent(requestadmin.this, mainAdmin.class));
         }
         return true;
     }

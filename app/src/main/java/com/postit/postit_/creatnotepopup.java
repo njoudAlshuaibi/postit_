@@ -26,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -34,14 +36,14 @@ import android.os.AsyncTask;
 
 public class creatnotepopup extends AppCompatActivity {
 
-        private FirebaseDatabase database;
-        private FirebaseUser user;
-        private DatabaseReference majorRef;
-        private DatabaseReference courseRef;
-        private Spinner majorSpinner;
-        private Spinner courseSpineer;
-        private String courseMajor;
-        private Button d ;
+    private FirebaseDatabase database;
+    private FirebaseUser user;
+    private DatabaseReference majorRef;
+    private DatabaseReference courseRef;
+    private Spinner majorSpinner;
+    private Spinner courseSpineer;
+    private String courseMajor;
+    private Button d;
     private DatabaseReference chapterRef;
     private DatabaseReference noteRef;
     private Button add;
@@ -50,6 +52,7 @@ public class creatnotepopup extends AppCompatActivity {
     private EditText inputNoteTitle, inputNoteBody;
     private String userEmail;
     final note noteObj = new note();
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -63,15 +66,15 @@ public class creatnotepopup extends AppCompatActivity {
         int width = ja.widthPixels;
         int height = ja.heightPixels;
         getWindow().setLayout((int) (width * .9), (int) (height * .9));
-
-        database= FirebaseDatabase.getInstance();
-        majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
-        courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
-        chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
+        courseRef = FirebaseDatabase.getInstance().getReference().child("Courses");
+        chapterRef = FirebaseDatabase.getInstance().getReference().child("Chapters");
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
-        majorSpinner=findViewById(R.id.spinnerA);
+        majorSpinner = findViewById(R.id.spinnerA);
 
-        final ArrayList<String> majorList=new ArrayList<>();
+        final ArrayList<String> majorList = new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
         majorSpinner.setAdapter(adapter);
         majorRef.addValueEventListener(new ValueEventListener() {
@@ -93,8 +96,8 @@ public class creatnotepopup extends AppCompatActivity {
             }
 
         });
-        courseSpineer=findViewById(R.id.spinnerAd);
-        final ArrayList<String> coourseList =new ArrayList<>();
+        courseSpineer = findViewById(R.id.spinnerAd);
+        final ArrayList<String> coourseList = new ArrayList<>();
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
 
@@ -136,15 +139,15 @@ public class creatnotepopup extends AppCompatActivity {
             }
         });
 //
-        chapterSpinner=findViewById(R.id.spinnerAdmaaa);
-        final ArrayList<String> chapterList=new ArrayList<>();
+        chapterSpinner = findViewById(R.id.spinnerAdmaaa);
+        final ArrayList<String> chapterList = new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
         chapterSpinner.setAdapter(adapter2);
 //
         courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterCourse= parent.getItemAtPosition(position).toString();
+                chapterCourse = parent.getItemAtPosition(position).toString();
                 chapterRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot3) {
@@ -168,6 +171,7 @@ public class creatnotepopup extends AppCompatActivity {
 
                 });
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -177,20 +181,20 @@ public class creatnotepopup extends AppCompatActivity {
 
         chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterChapter= parent.getItemAtPosition(position).toString();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterChapter = parent.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
-           }
+            }
         });
 
         inputNoteTitle = findViewById(R.id.Title);
         inputNoteBody = findViewById(R.id.editTextTextMultiLine2);
 
-
-         user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userEmail = user.getEmail();
         } else {
@@ -206,17 +210,19 @@ public class creatnotepopup extends AppCompatActivity {
         });
 
     }
-    private void saveNote(){
 
-        if(inputNoteTitle.getText().toString().trim().isEmpty()){
+    private void saveNote() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (courseMajor.equals("select") || courseMajor == "" || chapterCourse == "" || chapterCourse.equals("select") || chapterChapter.equals("select") || chapterChapter == "") {
+            Toast.makeText(creatnotepopup.this, "can't be added , please select major, course and chapter ", Toast.LENGTH_LONG).show();
+        } else if (inputNoteTitle.getText().toString().trim().isEmpty()) {
             Toast.makeText(creatnotepopup.this, "Note title can not be empty!", Toast.LENGTH_LONG).show();
             return;
-        }
-        if(inputNoteBody.getText().toString().trim().isEmpty()){
+        } else if (inputNoteBody.getText().toString().trim().isEmpty()) {
             Toast.makeText(creatnotepopup.this, "Note body can not be empty!", Toast.LENGTH_LONG).show();
-            return;}
-
-       String id =  noteRef.push().getKey();
+            return;
+        } else if (currentUser != null) {
+            String id = noteRef.push().getKey();
             noteObj.setTitle(inputNoteTitle.getText().toString());
             noteObj.setCaption(inputNoteBody.getText().toString());
             noteObj.setCollege("CCIS");
@@ -226,26 +232,26 @@ public class creatnotepopup extends AppCompatActivity {
             noteObj.setId(id);
             noteObj.setEmail(userEmail);
 
-        noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(creatnotepopup.this,mynotes.class));
-            }else{  Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
+            noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(creatnotepopup.this, mynotes.class));
+                    } else {
+                        Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
+                    }
+
                 }
-
-            }
-        });
-
-       // Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
+            });
+        } else {
+            Toast.makeText(creatnotepopup.this, "you need to login first", Toast.LENGTH_LONG).show();
         }
 
+    }
 
 
-
-
-      }
+}
 
 
 

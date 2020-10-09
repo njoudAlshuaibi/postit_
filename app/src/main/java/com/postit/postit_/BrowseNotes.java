@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
     private RecyclerView titleList;
     private DatabaseReference noteRef;
     private FloatingActionButton fab2;
@@ -104,10 +105,13 @@ return new NoteViewHolder(v);
 
                                    String s = note.getId();
                                    String a = note.getCaption();
+                                   String d = note.getFormattedDate();
 
                                    Intent n = new Intent(BrowseNotes.this, previewnote.class);
                                    n.putExtra(EXTRA_TEXT,""+s );
                                    n.putExtra(EXTRA_TEXT2,""+a );
+                                   n.putExtra(EXTRA_TEXT3, ""+d);
+
 
                                    startActivity(n);
 
@@ -129,10 +133,12 @@ return new NoteViewHolder(v);
 
                                    String s = note.getId();
                                    String a = note.getCaption();
+                                   String d = note.getFormattedDate();
 
                                    Intent n = new Intent(BrowseNotes.this, previewnote.class);
                                    n.putExtra(EXTRA_TEXT,""+s );
                                    n.putExtra(EXTRA_TEXT2,""+a );
+                                   n.putExtra(EXTRA_TEXT3, ""+d);
 
                                    startActivity(n);
 
