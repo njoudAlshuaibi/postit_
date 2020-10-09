@@ -127,18 +127,7 @@ public class popUpWindow extends AppCompatActivity {
 
             }
         });
-        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                coursename = parent.getItemAtPosition(position).toString();
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         chapterSpinner=findViewById(R.id.spinner3);
         final ArrayList<String> chapterList=new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
@@ -195,7 +184,7 @@ public class popUpWindow extends AppCompatActivity {
 
             public void onClick(View view) {
 
-                if ((courseMajor == null)||(courseMajor == "select")||(coursename == null)||(coursename == "select")||(chapterChapter == null)||(chapterChapter == "select")){
+                if ((courseMajor.isEmpty())||(courseMajor == "select")||(chapterCourse.isEmpty())||(chapterCourse == "select")||(chapterChapter.isEmpty())||(chapterChapter == "select")){
 
                     Toast.makeText(popUpWindow.this, "please select major and course and chapter", Toast.LENGTH_LONG).show();
 
@@ -203,9 +192,9 @@ public class popUpWindow extends AppCompatActivity {
                 else {
 
                     Intent intent = new Intent(popUpWindow.this, BrowseNotes.class);
-                    intent.putExtra(EXTRA_TEXT, courseMajor);
-                    intent.putExtra(EXTRA_TEXT2, coursename);
-                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
+//                    intent.putExtra(EXTRA_TEXT, courseMajor);
+//                    intent.putExtra(EXTRA_TEXT2, chapterCourse);
+//                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
 
                     startActivity(intent);
 

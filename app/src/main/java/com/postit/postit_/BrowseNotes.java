@@ -1,15 +1,5 @@
 package com.postit.postit_;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,31 +7,30 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
-    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
     private RecyclerView titleList;
     private DatabaseReference noteRef;
-    private FloatingActionButton fab2;
 
-    Intent intent = getIntent();
-    final String MajorN = intent.getStringExtra(popUpWindow.EXTRA_TEXT);
-    final String CourseN = intent.getStringExtra(popUpWindow.EXTRA_TEXT2);
-    final String chapterN = intent.getStringExtra(popUpWindow.EXTRA_TEXT3);
-
-
-    Intent in = getIntent();
-    final String MajorN1 = intent.getStringExtra(popupwindowvisitors.EXTRA_TEXT);
-    final String CourseN1 = intent.getStringExtra(popupwindowvisitors.EXTRA_TEXT2);
-    final String chapterN1 = intent.getStringExtra(popupwindowvisitors.EXTRA_TEXT3);
 
 
 
@@ -53,16 +42,6 @@ public class BrowseNotes extends AppCompatActivity {
         Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
         setSupportActionBar(tool);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openpopupwindowchapters();
-            }
-        });
-
-
-
 
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
@@ -70,11 +49,6 @@ public class BrowseNotes extends AppCompatActivity {
         titleList.setHasFixedSize(true);
         titleList.setLayoutManager(new LinearLayoutManager(this));
 
-    }
-
-    private void openpopupwindowchapters() {
-        Intent popupwindow5 = new Intent(BrowseNotes.this,popupwindowchapters.class);
-        startActivity(popupwindow5);
     }
 
     @Override
@@ -87,68 +61,29 @@ public class BrowseNotes extends AppCompatActivity {
             @NonNull
             @Override
             public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-              View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.notedesign,parent,false);
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.notedesign,parent,false);
 
-return new NoteViewHolder(v);
+                return new NoteViewHolder(v);
             }
 
             @Override
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull final note note) {
-               if(intent!=null)
-               {if(MajorN==note.getMajor()){
-                   if(CourseN==note.getCourse()){
-                       if(chapterN==note.getChapterNum()){
-                           noteViewHolder.setTitle(note.getTitle());
-                           noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View view) {
 
-                                   String s = note.getId();
-                                   String a = note.getCaption();
-                                   String d = note.getFormattedDate();
+                noteViewHolder.setTitle(note.getTitle());
+                noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String s = note.getId();
+                        String a = note.getCaption();
 
-                                   Intent n = new Intent(BrowseNotes.this, previewnote.class);
-                                   n.putExtra(EXTRA_TEXT,""+s );
-                                   n.putExtra(EXTRA_TEXT2,""+a );
-                                   n.putExtra(EXTRA_TEXT3, ""+d);
+                        Intent n = new Intent(BrowseNotes.this, previewnote.class);
+                        n.putExtra(EXTRA_TEXT,""+s );
+                        n.putExtra(EXTRA_TEXT2,""+a );
 
+                        startActivity(n);
 
-                                   startActivity(n);
-
-                               }
-                           });
-                       }
-
-                   }
-               }}
-               else
-               if(in!=null)
-               {if(MajorN1==note.getMajor()){
-                   if(CourseN1==note.getCourse()){
-                       if(chapterN1==note.getChapterNum()){
-                           noteViewHolder.setTitle(note.getTitle());
-                           noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View view) {
-
-                                   String s = note.getId();
-                                   String a = note.getCaption();
-                                   String d = note.getFormattedDate();
-
-                                   Intent n = new Intent(BrowseNotes.this, previewnote.class);
-                                   n.putExtra(EXTRA_TEXT,""+s );
-                                   n.putExtra(EXTRA_TEXT2,""+a );
-                                   n.putExtra(EXTRA_TEXT3, ""+d);
-
-                                   startActivity(n);
-
-                               }
-                           });
-                       }
-
-                   }
-               }}
-                       }
+                    }
+                });         }
 
 //            @Override
 //            protected void populateViewHolder(NoteViewHolder viewHolder, note model , int position){
@@ -158,7 +93,7 @@ return new NoteViewHolder(v);
 
 
         };
-firebaseRecyclerAdapter.startListening();
+        firebaseRecyclerAdapter.startListening();
         titleList.setAdapter(firebaseRecyclerAdapter);
 
     }

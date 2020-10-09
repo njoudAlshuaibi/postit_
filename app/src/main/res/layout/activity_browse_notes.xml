@@ -25,7 +25,7 @@ android:autoMirrored="true">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myRecycleView"
         android:layout_width="337dp"
-        android:layout_height="206dp"
+        android:layout_height="532dp"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="1dp"
         android:layout_marginRight="-999dp"
@@ -33,14 +33,14 @@ android:autoMirrored="true">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="185dp"
+        android:layout_height="-3343dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="4dp"
         android:background="#EF7BA4"
         app:backgroundTint="#75BBA2"
-        app:srcCompat="@drawable/add"
-        android:layout_marginLeft="310dp"
-        android:layout_marginTop="420dp"
-        />
+        android:layout_marginBottom="11dp"
+        app:srcCompat="@drawable/add" />
 
 
 </LinearLayout>

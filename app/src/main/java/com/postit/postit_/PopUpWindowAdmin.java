@@ -132,18 +132,7 @@ public class PopUpWindowAdmin extends AppCompatActivity {
             }
         });
 
-        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                coursename = parent.getItemAtPosition(position).toString();
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         chapterSpinner=findViewById(R.id.spinnerAdmin3);
         final ArrayList<String> chapterList=new ArrayList<>();
@@ -210,7 +199,7 @@ public class PopUpWindowAdmin extends AppCompatActivity {
 
     Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
     intent.putExtra(EXTRA_TEXT, courseMajor);
-    intent.putExtra(EXTRA_TEXT2, coursename);
+    intent.putExtra(EXTRA_TEXT2, chapterCourse);
     intent.putExtra(EXTRA_TEXT3, chapterChapter);
 
 

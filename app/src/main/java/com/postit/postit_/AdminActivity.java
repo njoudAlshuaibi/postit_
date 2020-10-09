@@ -231,10 +231,11 @@ public class AdminActivity extends AppCompatActivity {
                                     String deletedChapter = findChapter.getId();
                                     deleteChapter(deletedChapter);
                                     break;
-                                } else {
-                                    Toast.makeText(AdminActivity.this, "failed to delete chapter", Toast.LENGTH_LONG).show();
-                                    break;
                                 }
+//                                else {
+//                                    Toast.makeText(AdminActivity.this, "failed to delete chapter", Toast.LENGTH_LONG).show();
+//                                    break;
+//                                }
                             }
                         }
 

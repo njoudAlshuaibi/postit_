@@ -16,6 +16,8 @@ TextView notepre;
         setContentView(R.layout.activity_previewnote);
         notepre= findViewById(R.id.notepre);
 
+        DisplayMetrics aa = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(aa);
 
         Intent intent = getIntent();
 
