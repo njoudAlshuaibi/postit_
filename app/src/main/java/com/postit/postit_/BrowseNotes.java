@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +31,7 @@ public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
     private RecyclerView titleList;
     private DatabaseReference noteRef;
-
+    private FirebaseAuth mAuth;
 
 
 
@@ -42,6 +43,7 @@ public class BrowseNotes extends AppCompatActivity {
         Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
         setSupportActionBar(tool);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mAuth = FirebaseAuth.getInstance();
 
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
@@ -129,6 +131,7 @@ public class BrowseNotes extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         int id = item.getItemId();
         if (id == R.id.exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
@@ -159,7 +162,21 @@ public class BrowseNotes extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
+            if(currentUser != null){
             startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+        }else {
+                new AlertDialog.Builder(BrowseNotes.this)
+                        .setTitle("you need to login first")
+                        .setMessage("Do you want to login ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent (BrowseNotes.this,MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
         }
         return true;
     }

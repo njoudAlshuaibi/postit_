@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 
 public class Visitors_activity extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
 
 
 
@@ -42,7 +44,7 @@ public class Visitors_activity extends AppCompatActivity {
         setSupportActionBar(toolb);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
+        mAuth = FirebaseAuth.getInstance();
         //browse note card
         CardView nj = (CardView) findViewById(R.id.BrowseNotes2);
         nj.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +126,7 @@ public class Visitors_activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         int id = item.getItemId();
         if (id == R.id.exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Visitors_activity.this);
@@ -154,7 +157,21 @@ public class Visitors_activity extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
+            if(currentUser != null){
             startActivity(new Intent(Visitors_activity.this,MainActivity.class));
+        }else {
+                new AlertDialog.Builder(Visitors_activity.this)
+                        .setTitle("you need to login first")
+                        .setMessage("Do you want to login ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent (Visitors_activity.this,MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
         }
         return true;
 
