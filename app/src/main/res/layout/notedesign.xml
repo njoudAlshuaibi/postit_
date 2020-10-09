@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="248dp"
         android:orientation="vertical"
-        android:background="@color/noteColor2"
+        android:background="@color/noteColor4"
 
         >
        <ImageView
@@ -29,7 +29,8 @@
             android:text="Note Title : "
             android:layout_marginTop="-170dp"
             android:textColor="#ffff"
-            android:textSize="50dp" />
+            android:fontFamily="@font/ubuntu_regular"
+            android:textSize="25dp" />
 
 
     </LinearLayout>

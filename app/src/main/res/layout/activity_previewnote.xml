@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="249dp"
     tools:context=".previewnote"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="12dp"
+    android:elevation="90dp"
    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="248dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
+        android:background="@color/noteColor4"
         android:orientation="vertical"
-        android:background="#FAA8FA"
-        android:layout_marginTop="60dp"
+
+
         >
+
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
             android:id="@+id/post_image"
-            />
+            android:layout_width="377dp"
+            android:layout_height="180dp"
+
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/notepre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-170dp"
-            android:textColor="#F6F5F5"
-            android:textSize="50dp" />
+            android:layout_marginTop="-150dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="Note Title :"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp" />
 
 
     </LinearLayout>
 
 
-
-    </LinearLayout>
+</androidx.cardview.widget.CardView>
 
