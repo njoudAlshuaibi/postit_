@@ -332,7 +332,7 @@ public class AdminActivity extends AppCompatActivity {
             MajorName.requestFocus();
 
         } else if (!(Pattern.matches("[a-zA-Z]+", s.replaceAll("\\s+", "")))) {
-            MajorName.setError("Please enter valid major,\nSymbols not allow\nDigit not allowed\ne.g. software engineering");
+            MajorName.setError("Please enter valid major,\nSymbols not allowed\nDigit not allowed\ne.g. software engineering");
             MajorName.requestFocus();
 
         } else {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.util.regex.Pattern;
 
 import androidx.annotation.Nullable;
 
@@ -59,11 +60,10 @@ public class Pop extends Activity {
                     requestedMajor.requestFocus();
                     return;
                 }
-                if (!(requestedMajorS.matches("[a-zA-Z]+"))) {
-                    requestedMajor.setError("please enter valid major");
-                    requestedMajor.requestFocus();
-                    return;
-                }
+
+                if (!(Pattern.matches("[a-zA-Z]+", requestedMajorS.replaceAll("\\s+", "")))) {
+                    requestedMajor.setError("Please enter valid major,\nSymbols not allowed\nDigit not allowed\ne.g. software engineering");
+                    requestedMajor.requestFocus();}
 
                 if (requestedCourseS.isEmpty()) {
                     requestedCourse.setError("please enter course");

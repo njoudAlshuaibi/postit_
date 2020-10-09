@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +42,7 @@ public class BrowseNotes extends AppCompatActivity {
     private RecyclerView titleList;
     private DatabaseReference noteRef;
     private FirebaseAuth mAuth;
+    private FloatingActionButton fab2;
 
 
 
@@ -61,6 +63,20 @@ public class BrowseNotes extends AppCompatActivity {
         titleList.setHasFixedSize(true);
         titleList.setLayoutManager(new LinearLayoutManager(this));
 
+        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openpopupwindowchapters();
+            }
+        });
+
+    }
+
+    private void openpopupwindowchapters() {
+
+        Intent popupwindow5 = new Intent(BrowseNotes.this,popupwindowchapters.class);
+        startActivity(popupwindow5);
     }
 
     @Override
