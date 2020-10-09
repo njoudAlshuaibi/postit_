@@ -158,7 +158,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 
 
-        //end lujain
+        //end lujainkhhhhh
         chapterSpinner = findViewById(R.id.spinnerChapter);
         final ArrayList<String> chapterList = new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
