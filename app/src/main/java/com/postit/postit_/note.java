@@ -51,7 +51,7 @@ public class note {
         this.college = college;
     }
 
-    public String getMajor() {
+    public  String getMajor() {
         return major;
     }
 
@@ -59,7 +59,7 @@ public class note {
         this.major = major;
     }
 
-    public String getCourse() {
+    public  String getCourse() {
         return course;
     }
 
@@ -67,7 +67,7 @@ public class note {
         this.course = course;
     }
 
-    public String getChapterNum() {
+    public  String getChapterNum() {
         return chapterNum;
     }
 

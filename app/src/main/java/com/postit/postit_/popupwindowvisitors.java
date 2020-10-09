@@ -194,7 +194,7 @@ public class popupwindowvisitors extends AppCompatActivity {
                     Intent intent = new Intent(popupwindowvisitors.this, BrowseNotes.class);
                     intent.putExtra(EXTRA_TEXT, courseMajor);
                     intent.putExtra(EXTRA_TEXT2, chapterCourse);
-//                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
+                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
 
                     startActivity(intent);
 
