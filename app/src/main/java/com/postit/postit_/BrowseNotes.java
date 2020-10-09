@@ -259,4 +259,4 @@ public class BrowseNotes extends AppCompatActivity {
         }
         return true;
     }
-}
+}//rename commit
