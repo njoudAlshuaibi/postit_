@@ -24,6 +24,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +40,7 @@ public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
     private RecyclerView titleList;
     private DatabaseReference noteRef;
+    private FirebaseAuth mAuth;
 
 
 
@@ -52,7 +54,7 @@ public class BrowseNotes extends AppCompatActivity {
         Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
         setSupportActionBar(tool);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        mAuth = FirebaseAuth.getInstance();
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
         titleList=(RecyclerView)findViewById(R.id.myRecycleView);
@@ -208,6 +210,7 @@ public class BrowseNotes extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         int id = item.getItemId();
         if (id == R.id.exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(BrowseNotes.this);
@@ -238,7 +241,21 @@ public class BrowseNotes extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+            if(currentUser != null){
+                startActivity(new Intent(BrowseNotes.this,StudentActivity.class));
+            }else {
+                new AlertDialog.Builder(BrowseNotes.this)
+                        .setTitle("you need to login first")
+                        .setMessage("Do you want to login ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent (BrowseNotes.this,MainActivity.class));
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
         }
         return true;
     }
