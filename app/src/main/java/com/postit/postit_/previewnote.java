@@ -26,5 +26,6 @@ TextView notepre;
 
         notepre.setText(id+"   caption : "+a);
 //vvb
+        //,,,
     }
 }
