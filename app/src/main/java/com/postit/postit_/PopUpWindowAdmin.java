@@ -32,10 +32,18 @@ public class PopUpWindowAdmin extends AppCompatActivity {
     private Spinner courseSpineer;
     private String courseMajor;
     private String coursename;
+    private DatabaseReference chapterRef;
+
     private Button d ;
     private TextView browse;
+
+    private Spinner chapterSpinner;
+    public String chapterCourse, chapterChapter;
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,8 @@ public class PopUpWindowAdmin extends AppCompatActivity {
         database= FirebaseDatabase.getInstance();
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
+        chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+
         majorSpinner =findViewById(R.id.spinnerAdmin);
         browse = findViewById(R.id.browseAdmin);
 
@@ -135,15 +145,65 @@ public class PopUpWindowAdmin extends AppCompatActivity {
             }
         });
 
+        chapterSpinner=findViewById(R.id.spinnerAdmin3);
+        final ArrayList<String> chapterList=new ArrayList<>();
+        final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
+        chapterSpinner.setAdapter(adapter2);
 
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterCourse= parent.getItemAtPosition(position).toString();
+                chapterRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        chapterList.clear();
+                        chapterList.add("select");
+
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            chapter chapterObj = postSnapshot.getValue(chapter.class);
+
+                            String x = chapterObj.getCourse();
+                            if (x.equalsIgnoreCase(chapterCourse))
+                                chapterList.add(chapterObj.getChapterNum());
+                        }
+                        adapter2.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+
+                });
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+        chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterChapter= parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         browse.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
-                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")){
+                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")||(chapterChapter == null)||(chapterChapter == "select")){
 
-                    Toast.makeText(PopUpWindowAdmin.this, "please select major and course", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PopUpWindowAdmin.this, "please select major and course and chapter", Toast.LENGTH_LONG).show();
 
                 }
                 else {
@@ -151,8 +211,10 @@ public class PopUpWindowAdmin extends AppCompatActivity {
     Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
     intent.putExtra(EXTRA_TEXT, courseMajor);
     intent.putExtra(EXTRA_TEXT2, coursename);
+    intent.putExtra(EXTRA_TEXT3, chapterChapter);
 
-    startActivity(intent);
+
+                    startActivity(intent);
 
 }  }//End onClick()
         });

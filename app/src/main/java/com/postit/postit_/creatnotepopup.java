@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -224,9 +226,19 @@ public class creatnotepopup extends AppCompatActivity {
             noteObj.setId(id);
             noteObj.setEmail(userEmail);
 
-        noteRef.child(id).setValue(noteObj);
-        Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(creatnotepopup.this,mynotes.class));
+        noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(creatnotepopup.this,mynotes.class));
+            }else{  Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+       // Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
         }
 
 

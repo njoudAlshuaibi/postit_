@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="248dp"
         android:orientation="vertical"
-        android:background="#FA7CA7"
+        android:background="@color/noteColor2"
 
         >
        <ImageView

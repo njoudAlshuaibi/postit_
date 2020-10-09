@@ -44,6 +44,8 @@ public class admin_browse_notes extends AppCompatActivity {
 
         final String MajorN = intent.getStringExtra(PopUpWindowAdmin.EXTRA_TEXT);
         final String CourseN = intent.getStringExtra(PopUpWindowAdmin.EXTRA_TEXT2);
+        final String chapterN = intent.getStringExtra(PopUpWindowAdmin.EXTRA_TEXT3);
+
 
 //        v= (TextView) findViewById(R.id.tv);
 //        v.setText(text+t);
@@ -66,8 +68,9 @@ public class admin_browse_notes extends AppCompatActivity {
                     if(MajorN.equalsIgnoreCase(noteObj.getMajor()))
                     {
                         if(CourseN.equalsIgnoreCase(noteObj.getCourse())){
+                            if(chapterN.equalsIgnoreCase(noteObj.getChapterNum())){
                     String notedisplay = "collage: " + noteObj.getCollege() + "\nmajor: " + noteObj.getMajor() + "\ncourse: " + noteObj.getCourse() + "\nchapter: " + noteObj.getChapterNum() + "\ntitle: " + noteObj.getTitle() + "\ncaption: " + noteObj.getCaption() + "\nemail: " + noteObj.getEmail()+ "\nID: " +noteObj.getId();
-                    notesList.add(notedisplay);}
+                    notesList.add(notedisplay);}}
                 }}
                 adapter.notifyDataSetChanged();
             }

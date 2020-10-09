@@ -32,9 +32,16 @@ public class popupwindowvisitors extends AppCompatActivity {
     private String courseMajor;
     private Button browseVisitor ;
     private String coursename;
+    private DatabaseReference chapterRef;
+
+
+    private Spinner chapterSpinner;
+    public String chapterCourse, chapterChapter;
 
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,8 @@ public class popupwindowvisitors extends AppCompatActivity {
         database= FirebaseDatabase.getInstance();
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
+        chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+
         majorSpinner=findViewById(R.id.spinnerVisitor);
         browseVisitor = findViewById(R.id.browseVisitor);
 
@@ -129,14 +138,78 @@ public class popupwindowvisitors extends AppCompatActivity {
 
             }
         });
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                coursename = parent.getItemAtPosition(position).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        chapterSpinner=findViewById(R.id.spinnerVisitor3);
+        final ArrayList<String> chapterList=new ArrayList<>();
+        final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
+        chapterSpinner.setAdapter(adapter2);
+
+        courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterCourse= parent.getItemAtPosition(position).toString();
+                chapterRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        chapterList.clear();
+                        chapterList.add("select");
+
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            chapter chapterObj = postSnapshot.getValue(chapter.class);
+
+                            String x = chapterObj.getCourse();
+                            if (x.equalsIgnoreCase(chapterCourse))
+                                chapterList.add(chapterObj.getChapterNum());
+                        }
+                        adapter2.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+
+                });
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+        chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                chapterChapter= parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         browseVisitor.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
-                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")){
+                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")||(chapterChapter == null)||(chapterChapter == "select")){
 
-                    Toast.makeText(popupwindowvisitors.this, "please select major and course", Toast.LENGTH_LONG).show();
+                    Toast.makeText(popupwindowvisitors.this, "please select major and course and chapter", Toast.LENGTH_LONG).show();
 
                 }
                 else {
@@ -144,6 +217,7 @@ public class popupwindowvisitors extends AppCompatActivity {
                     Intent intent = new Intent(popupwindowvisitors.this, BrowseNotes.class);
                     intent.putExtra(EXTRA_TEXT, courseMajor);
                     intent.putExtra(EXTRA_TEXT2, coursename);
+                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
 
                     startActivity(intent);
 
