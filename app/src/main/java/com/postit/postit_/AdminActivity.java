@@ -47,7 +47,7 @@ public class AdminActivity extends AppCompatActivity {
     private course newCourse;
     private DatabaseReference majorRef;
     private DatabaseReference courseRef;
-    private DatabaseReference chapterRef;
+    private DatabaseReference chapterRef, noteRef;
     private Spinner majorSpinner, courseSpineer, chapterSpinner;
     public String courseMajor, chapterCourse, chapterChapter;
 
@@ -74,6 +74,8 @@ public class AdminActivity extends AppCompatActivity {
         majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef = FirebaseDatabase.getInstance().getReference().child("Courses");
         chapterRef = FirebaseDatabase.getInstance().getReference().child("Chapters");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+
 
         addMajor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +158,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 
 
-        //end lujain
+        //end lujainkhhhhh
         chapterSpinner = findViewById(R.id.spinnerChapter);
         final ArrayList<String> chapterList = new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
@@ -230,6 +232,32 @@ public class AdminActivity extends AppCompatActivity {
                                 if (courseId.equals(chapterCourse) && chapterId.equals(chapterChapter) && majorID.equals(courseMajor)) {
                                     String deletedChapter = findChapter.getId();
                                     deleteChapter(deletedChapter);
+                                    noteRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                                            for (DataSnapshot childnn : snapshothh.getChildren()) {
+                                                note findnote = childnn.getValue(note.class);
+                                                String notecourse = findnote.getCourse();
+                                                String notechapter = findnote.getChapterNum();
+
+
+                                                if (notecourse.equals(chapterCourse) && notechapter.equals(chapterChapter)) {
+                                                    String deletednote = findnote.getId();
+                                                    deleteNote(deletednote);
+                                                    break;
+                                                }
+//                                else {
+//                                    Toast.makeText(AdminActivity.this, "failed to delete chapter", Toast.LENGTH_LONG).show();
+//                                    break;
+//                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                     break;
                                 }
 //                                else {
@@ -364,6 +392,9 @@ public class AdminActivity extends AppCompatActivity {
     public void deleteChapter(String chapterKey) {
         chapterRef.child(chapterKey.trim()).removeValue();
         Toast.makeText(AdminActivity.this, "chapter deleted Successfully ", Toast.LENGTH_LONG).show();
+    }
+    public void deleteNote(String noteKey){
+        noteRef.child(noteKey.trim()).removeValue();
     }
     ////اشتغل يا حلو
 

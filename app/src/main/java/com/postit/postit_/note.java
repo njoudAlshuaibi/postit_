@@ -34,7 +34,7 @@ public class note {
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         formattedDate = df.format(c);
     }
-
+//نتغلللل
     public String getFormattedDate() {
         return formattedDate;
     }
