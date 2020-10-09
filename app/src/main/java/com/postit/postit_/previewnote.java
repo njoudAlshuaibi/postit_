@@ -25,6 +25,6 @@ TextView notepre;
         final String a = intent.getStringExtra(BrowseNotes.EXTRA_TEXT2);
 
         notepre.setText(id+"   caption : "+a);
-
+//vvb
     }
 }
