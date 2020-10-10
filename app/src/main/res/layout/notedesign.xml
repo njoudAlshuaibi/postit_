@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="248dp"
         android:orientation="vertical"
-        android:background="@color/noteColor4"
+        android:background="@drawable/note0"
 
         >
         <ImageView
@@ -24,12 +24,13 @@
 
         <TextView
             android:id="@+id/noteTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Note Title : "
+            android:layout_width="271dp"
+            android:layout_height="47dp"
             android:layout_marginTop="-170dp"
-            android:textColor="#ffff"
+            android:layout_marginLeft="30dp"
             android:fontFamily="@font/ubuntu_regular"
+            android:text="Note Title : "
+            android:textColor="#605F5F"
             android:textSize="25dp" />
 
 

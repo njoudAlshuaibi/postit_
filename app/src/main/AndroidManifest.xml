@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".previewnote"></activity>
+        <activity android:name=".browse_note_visitor"></activity>
+        <activity android:name=".previewnote" />
         <activity
             android:name=".admin_browse_notes"
             android:parentActivityName=".PopUpWindowAdmin" />

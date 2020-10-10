@@ -24,7 +24,7 @@ TextView notepre;
         final String id = intent.getStringExtra(BrowseNotes.EXTRA_TEXT);
         final String a = intent.getStringExtra(BrowseNotes.EXTRA_TEXT2);
 
-        notepre.setText(id+"   caption : "+a);
+        notepre.setText("caption :\n"+a);
 //vvb
         //,,,
     }
