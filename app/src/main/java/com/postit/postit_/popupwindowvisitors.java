@@ -33,8 +33,7 @@ public class popupwindowvisitors extends AppCompatActivity {
     private Button browseVisitor ;
     private String coursename;
     private DatabaseReference chapterRef, noteRef;
-    private FirebaseUser user;
-    String majo;
+
 
 
     private Spinner chapterSpinner;
@@ -62,10 +61,7 @@ public class popupwindowvisitors extends AppCompatActivity {
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
-        user = FirebaseAuth.getInstance().getCurrentUser();
 
-         majo="";
-        majo=user.getUid();
 
 
         majorSpinner=findViewById(R.id.spinnerVisitor);
