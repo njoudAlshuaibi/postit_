@@ -24,7 +24,7 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinner1a"
             android:layout_width="266dp"
             android:layout_height="67dp"
             android:layout_marginLeft="30dp"
@@ -45,7 +45,7 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spinner2b"
             android:layout_width="266dp"
             android:layout_height="49dp"
             android:layout_marginLeft="30dp"
@@ -65,7 +65,7 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/spinner3c"
             android:layout_width="266dp"
             android:layout_height="49dp"
             android:layout_marginLeft="30dp"

@@ -39,12 +39,21 @@ import java.util.ArrayList;
 public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT7 = "com.postit.postit_.EXTRA_TEXT7";
+    public static final String EXTRA_TEXT8 = "com.postit.postit_.EXTRA_TEXT8";
+    public static final String EXTRA_TEXT9 = "com.postit.postit_.EXTRA_TEXT9";
+    Intent intent = getIntent();
+
+
+
+
     private RecyclerView titleList;
     private DatabaseReference noteRef;
     private FirebaseAuth mAuth;
     private FloatingActionButton fab2;
-
-
+    String m;
+     String c;
+     String d;
 
 
 
@@ -70,47 +79,53 @@ public class BrowseNotes extends AppCompatActivity {
                 openpopupwindowchapters();
             }
         });
-
+//        Intent intent = getIntent();
+        m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
+        c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
+       d = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
     }
-
     private void openpopupwindowchapters() {
 
-        Intent popupwindow5 = new Intent(BrowseNotes.this,popupwindowchapters.class);
+        Intent popupwindow5 = new Intent(BrowseNotes.this, popupwindowchapters.class);
+        popupwindow5.putExtra(EXTRA_TEXT7, m);
+        popupwindow5.putExtra(EXTRA_TEXT8, c);
+        popupwindow5.putExtra(EXTRA_TEXT9, d);
         startActivity(popupwindow5);
+
     }
+
 
     @Override
     protected void onStart() {
         Boolean w;
 
+        final String MajorN = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
+        final String CourseN = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
+        final String ChapterN = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
 
-        Intent intent = getIntent();
-        final String MajorN = intent.getStringExtra(popupwindowvisitors.EXTRA_TEXT);
-        final String CourseN = intent.getStringExtra(popupwindowvisitors.EXTRA_TEXT2);
-        final String ChapterN = intent.getStringExtra(popupwindowvisitors.EXTRA_TEXT3);
-        final ArrayList<note> noteList = new ArrayList<>();
-        final ArrayList<note> note = new ArrayList<>();
+//        final ArrayList<note> noteList = new ArrayList<>();
+//        final ArrayList<note> note = new ArrayList<>();
 
-        noteRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot3) {
-                noteList.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot3.getChildren()) {
-                    note noteobj = postSnapshot.getValue(note.class);
-
-                    if(noteobj.getCourse().equalsIgnoreCase(CourseN)&&noteobj.getMajor().equalsIgnoreCase(MajorN)&&noteobj.getChapterNum().equalsIgnoreCase(ChapterN))
-                        noteList.add(noteobj);
-                }
-//                adapter2.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-        });
+//        noteRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot3) {
+//                noteList.clear();
+//                for (DataSnapshot postSnapshot : dataSnapshot3.getChildren()) {
+//                    note noteobj = postSnapshot.getValue(note.class);
+//
+//                    if(noteobj.getCourse().equalsIgnoreCase(CourseN)&&noteobj.getMajor().equalsIgnoreCase(MajorN)&&noteobj.getChapterNum().equalsIgnoreCase(ChapterN))
+//                        noteList.add(noteobj);
+//                }
+////                adapter2.notifyDataSetChanged();
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//
+//        });
 
         super.onStart();
         FirebaseRecyclerOptions option = new FirebaseRecyclerOptions.Builder().setQuery(noteRef,note.class).build();
@@ -125,10 +140,10 @@ public class BrowseNotes extends AppCompatActivity {
             @NonNull
             @Override
             public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                int qq = noteList.size();
+//                int qq = noteList.size();
                 View v;
                 NoteViewHolder x = null;
-                viewType = qq;
+//                viewType = qq;
                 ViewGroup s = parent;
 //                ViewGroup aw = s;
 //s.removeViewAt(3);
