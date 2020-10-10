@@ -30,12 +30,13 @@
         <TextView
             android:id="@+id/notetit"
             android:layout_width="298dp"
-            android:layout_height="61dp"
+            android:layout_height="87dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="-350dp"
+            android:layout_marginTop="-340dp"
             android:fontFamily="@font/ubuntu_bold"
             android:textColor="#605F5F"
-            android:textSize="35dp" />
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/notepre"
             android:layout_width="298dp"
