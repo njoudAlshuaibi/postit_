@@ -17,7 +17,7 @@ public class note {
 
 
     public note() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd MMMM yyyy");
         Date dateobj = new Date();
         date = df.format(dateobj);
     }
