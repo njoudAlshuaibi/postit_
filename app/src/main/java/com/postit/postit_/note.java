@@ -1,8 +1,8 @@
 package com.postit.postit_;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class note {
     private String college;
@@ -13,12 +13,17 @@ public class note {
     private String caption;
     private String email;
     private String id;
-    String formattedDate;
+    private String date;
+
 
     public note() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        Date dateobj = new Date();
+        date = df.format(dateobj);
     }
 
     public note(String requestedMajorS, String requestedCourseS, String requestedChapterS, String requestID) {
+
     }
 
     public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id) {
@@ -30,17 +35,18 @@ public class note {
         this.caption = caption;
         this.email = email;
         this.id = id;
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-        formattedDate = df.format(c);
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        Date dateobj = new Date();
+        date = df.format(dateobj);
     }
 //نتغلللل
-    public String getFormattedDate() {
-        return formattedDate;
+
+    public String getDate() {
+        return date;
     }
 
-    public void setFormattedDate(String formattedDate) {
-        this.formattedDate = formattedDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCollege() {

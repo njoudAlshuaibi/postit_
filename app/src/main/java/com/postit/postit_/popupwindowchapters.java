@@ -1,6 +1,5 @@
 package com.postit.postit_;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -23,7 +22,7 @@ public class popupwindowchapters extends AppCompatActivity {
     private Button Post;
     private EditText Title;
     private EditText caption;
-    final note noteObj = new note();
+
     private DatabaseReference noteRef;
     private FirebaseUser user;
     private String userEmail;
@@ -59,6 +58,7 @@ public class popupwindowchapters extends AppCompatActivity {
         Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final note noteObj = new note();
                 if (MajorN.equals("select") || MajorN == "" || CourseN == "" || CourseN.equals("select") || ChapterN.equals("select") || ChapterN == "") {
                     Toast.makeText(popupwindowchapters.this, "can't be added , please select major, course and chapter ", Toast.LENGTH_LONG).show();
                 } else if (Title.getText().toString().trim().isEmpty()) {

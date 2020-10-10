@@ -1,6 +1,5 @@
 package com.postit.postit_;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,9 +36,9 @@ public class popupwindowvisitors extends AppCompatActivity {
     private Spinner chapterSpinner;
     public String chapterCourse, chapterChapter;
 
-    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
-    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
+    public static final String EXTRA_TEXTSM = "com.postit.postit_.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2SC = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT3SCH = "com.postit.postit_.EXTRA_TEXT3";
 
 
     @Override
@@ -105,9 +103,7 @@ public class popupwindowvisitors extends AppCompatActivity {
                             String x = courseObj.getMajorName();
                             if (x.equalsIgnoreCase(courseMajor))
                                 coourseList.add(courseObj.getCourseName());
-//
-//                else
-//                     coourseList.add("juju");
+
 
                         }
                         adapter1.notifyDataSetChanged();
@@ -191,14 +187,13 @@ public class popupwindowvisitors extends AppCompatActivity {
                 }
                 else {
 
-//                    Intent intent = new Intent(popupwindowvisitors.this, BrowseNotes.class);
-//                    intent.putExtra(EXTRA_TEXT, courseMajor);
-//                    intent.putExtra(EXTRA_TEXT2, chapterCourse);
-//                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
+                    Intent intentuu = new Intent(popupwindowvisitors.this, browse_note_visitor.class);
+                    intentuu.putExtra(EXTRA_TEXTSM, courseMajor);
+                    intentuu.putExtra(EXTRA_TEXT2SC, chapterCourse);
+                    intentuu.putExtra(EXTRA_TEXT3SCH, chapterChapter);
 
-//                    startActivity(intent);
+                    startActivity(intentuu);
 
-//                }
                 } }//End onClick()
         });
     }

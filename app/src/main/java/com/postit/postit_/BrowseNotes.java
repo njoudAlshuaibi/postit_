@@ -1,5 +1,15 @@
 package com.postit.postit_;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,34 +17,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.TextView;
-
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
@@ -158,7 +147,10 @@ public class BrowseNotes extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull final note note) {
                 if(note.getCourse().equalsIgnoreCase(CourseN)&&note.getMajor().equalsIgnoreCase(MajorN)&&note.getChapterNum().equalsIgnoreCase(ChapterN))
-                { noteViewHolder.setTitle(note.getTitle());
+                {
+                    //noteViewHolder.setTitle(note.getTitle());
+                    noteViewHolder.setTitle(note.getDate());
+
                     noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

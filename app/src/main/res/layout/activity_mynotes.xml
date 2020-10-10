@@ -21,17 +21,25 @@
             android:layout_height="42dp"
             android:background="#FFFBD4"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecycleViewee"
+            android:layout_width="337dp"
+            android:layout_height="627dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="-999dp"
+            android:layout_marginBottom="29dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="185dp"
+            android:layout_height="-3343dp"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="4dp"
             android:background="#EF7BA4"
             app:backgroundTint="#75BBA2"
-            app:srcCompat="@drawable/add"
-            android:layout_marginLeft="315dp"
-            android:layout_marginTop="620dp" />
-
+            android:layout_marginBottom="11dp"
+            app:srcCompat="@drawable/add" />
 
     </LinearLayout>
 </LinearLayout>
