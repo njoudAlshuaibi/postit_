@@ -42,7 +42,6 @@ public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT7 = "com.postit.postit_.EXTRA_TEXT7";
     public static final String EXTRA_TEXT8 = "com.postit.postit_.EXTRA_TEXT8";
     public static final String EXTRA_TEXT9 = "com.postit.postit_.EXTRA_TEXT9";
-    Intent intent = getIntent();
 
 
 
@@ -79,7 +78,7 @@ public class BrowseNotes extends AppCompatActivity {
                 openpopupwindowchapters();
             }
         });
-//        Intent intent = getIntent();
+        Intent intent = getIntent();
         m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
         c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
        d = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
@@ -91,13 +90,13 @@ public class BrowseNotes extends AppCompatActivity {
         popupwindow5.putExtra(EXTRA_TEXT8, c);
         popupwindow5.putExtra(EXTRA_TEXT9, d);
         startActivity(popupwindow5);
-
     }
 
 
     @Override
     protected void onStart() {
         Boolean w;
+        Intent intent = getIntent();
 
         final String MajorN = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
         final String CourseN = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
