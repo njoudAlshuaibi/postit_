@@ -27,6 +27,10 @@ public class popupwindowchapters extends AppCompatActivity {
     private FirebaseUser user;
     private String userEmail;
 
+    public static final String EXTRA_TEXT9 = "com.postit.postit_.EXTRA_TEXT9";
+    public static final String EXTRA_TEXT99 = "com.postit.postit_.EXTRA_TEXT99";
+    public static final String EXTRA_TEXT999 = "com.postit.postit_.EXTRA_TEXT99";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +87,12 @@ public class popupwindowchapters extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(popupwindowchapters.this, "note added successfully", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(popupwindowchapters.this, BrowseNotes.class));
+                                Intent intent = new Intent(popupwindowchapters.this, BrowseNotes.class);
+                                intent.putExtra(EXTRA_TEXT9, MajorN);
+                                intent.putExtra(EXTRA_TEXT99, CourseN);
+                                intent.putExtra(EXTRA_TEXT999, ChapterN);
+
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(popupwindowchapters.this, "note doesn't added", Toast.LENGTH_LONG).show();
                             }

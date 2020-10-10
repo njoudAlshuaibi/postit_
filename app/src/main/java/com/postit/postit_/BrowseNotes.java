@@ -28,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class BrowseNotes extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
+
     public static final String EXTRA_TEXT7 = "com.postit.postit_.EXTRA_TEXT7";
     public static final String EXTRA_TEXT8 = "com.postit.postit_.EXTRA_TEXT8";
     public static final String EXTRA_TEXT9 = "com.postit.postit_.EXTRA_TEXT9";
@@ -91,6 +93,12 @@ public class BrowseNotes extends AppCompatActivity {
         final String CourseN = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
         final String ChapterN = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
 
+        Intent inten = getIntent();
+
+        final String n = intent.getStringExtra(popupwindowchapters.EXTRA_TEXT9);
+        final String maa = inten.getStringExtra(popupwindowchapters.EXTRA_TEXT99);
+        final String mq = inten.getStringExtra(popupwindowchapters.EXTRA_TEXT999);
+
 //        final ArrayList<note> noteList = new ArrayList<>();
 //        final ArrayList<note> note = new ArrayList<>();
 
@@ -148,14 +156,35 @@ public class BrowseNotes extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull final note note) {
                 if(note.getCourse().equalsIgnoreCase(CourseN)&&note.getMajor().equalsIgnoreCase(MajorN)&&note.getChapterNum().equalsIgnoreCase(ChapterN))
                 {
-                    //noteViewHolder.setTitle(note.getTitle());
-                    noteViewHolder.setTitle(note.getDate());
+                    noteViewHolder.setTitle(note.getTitle(),note.getDate());
+//                    noteViewHolder.setTitle(note.getDate());
 
                     noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String s = note.getId();
+
+                            String title = note.getTitle();
+                            String caption = note.getCaption();
+                            String email =  note.getEmail();
+
+                            Intent n = new Intent(BrowseNotes.this, previewnote.class);
+                            n.putExtra(EXTRA_TEXT,""+ title );
+                            n.putExtra(EXTRA_TEXT2,""+ caption );
+                            n.putExtra(EXTRA_TEXT3,""+ email );
+
+
+                            startActivity(n);
+
+                        }
+                    });    }
+                else if((note.getCourse().equalsIgnoreCase(n)&&note.getMajor().equalsIgnoreCase(maa)&&note.getChapterNum().equalsIgnoreCase(mq))){
+//                    noteViewHolder.setTitle(note.getTitle());
+                    noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String s = note.getDate();
                             String a = note.getCaption();
+                           String f =  note.getEmail();
 
                             Intent n = new Intent(BrowseNotes.this, previewnote.class);
                             n.putExtra(EXTRA_TEXT,""+s );
@@ -164,7 +193,26 @@ public class BrowseNotes extends AppCompatActivity {
                             startActivity(n);
 
                         }
-                    });    }
+                    });
+                }
+//                  else {
+//                    if(note.getCourse().equalsIgnoreCase(ma)&&note.getMajor().equalsIgnoreCase(maa)&&note.getChapterNum().equalsIgnoreCase(mq))
+//                    { noteViewHolder.setTitle(note.getTitle());
+//                        noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                String s = note.getId();
+//                                String a = note.getCaption();
+//
+//                                Intent n = new Intent(BrowseNotes.this, previewnote.class);
+//                                n.putExtra(EXTRA_TEXT,""+s );
+//                                n.putExtra(EXTRA_TEXT2,""+a );
+//
+//                                startActivity(n);
+//
+//                            }
+//                        });    }
+//                }
 //            else
 //                noteViewHolder.mView.setVisibility(View.GONE);
             }
@@ -203,6 +251,7 @@ public class BrowseNotes extends AppCompatActivity {
 
         View mView;
         TextView noteTitleD ;
+        TextView notedate;
 
 
         public  NoteViewHolder(View itemView){
@@ -213,9 +262,12 @@ public class BrowseNotes extends AppCompatActivity {
 
         }
 
-        public void setTitle(String title){
+        public void setTitle(String title,String date){
             noteTitleD = (TextView)mView.findViewById(R.id.noteTitle);
+            notedate = (TextView)mView.findViewById(R.id.notedate);
+
             noteTitleD.setText(title);
+            notedate.setText("\n\n\n\n\n                   "+"                 "+date);
         }
 
 

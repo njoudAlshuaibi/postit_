@@ -31,6 +31,7 @@ public class mynotes extends AppCompatActivity {
     private DatabaseReference ref;
     public static final String EXTRA_TEXTww = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2ee = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String EXTRA_TEXT2e = "com.postit.postit_.EXTRA_TEXT3";
     private RecyclerView titleList;
     String curUserEmail="";
 
@@ -83,16 +84,18 @@ public class mynotes extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull BrowseNotes.NoteViewHolder noteViewHolder, int i, @NonNull final note note) {
                 if (note.getEmail().equals(curUserEmail)) {
-                    noteViewHolder.setTitle(note.getDate());
+                    noteViewHolder.setTitle(note.getTitle(),note.getDate());
                     noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             String s = note.getTitle();
                             String a = note.getCaption();
+                            String q = note.getEmail();
 
                             Intent n = new Intent(mynotes.this, previewnote.class);
                             n.putExtra(EXTRA_TEXTww, "" + s);
                             n.putExtra(EXTRA_TEXT2ee, "" + a);
+                            n.putExtra(EXTRA_TEXT2e, "" + q);
 
                             startActivity(n);
 

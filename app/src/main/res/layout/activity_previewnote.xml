@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="249dp"
+    android:layout_height="722dp"
     tools:context=".previewnote"
     android:layout_margin="7dp"
     app:cardCornerRadius="12dp"
@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="394dp"
+        android:layout_height="722dp"
         android:layout_marginTop="3dp"
         android:background="@drawable/note0"
         android:orientation="vertical"
@@ -28,15 +28,33 @@
             android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/notetit"
+            android:layout_width="298dp"
+            android:layout_height="61dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="-350dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="#605F5F"
+            android:textSize="35dp" />
+        <TextView
             android:id="@+id/notepre"
             android:layout_width="298dp"
-            android:layout_height="333dp"
+            android:layout_height="342dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="-370dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/ubuntu_bold"
-            android:text="Note Title :"
             android:textColor="#605F5F"
             android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/notepr2"
+            android:layout_width="294dp"
+            android:layout_height="221dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="#605F5F"
+            android:textSize="15dp" />
 
 
     </LinearLayout>

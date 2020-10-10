@@ -25,23 +25,23 @@
         <TextView
             android:id="@+id/noteTitle"
             android:layout_width="271dp"
-            android:layout_height="47dp"
+            android:layout_height="99dp"
             android:layout_marginTop="-170dp"
             android:layout_marginLeft="30dp"
             android:fontFamily="@font/ubuntu_regular"
             android:text="Note Title : "
             android:textColor="#605F5F"
             android:textSize="25dp" />
+
         <TextView
-            android:id="@+id/noteDate"
-            android:layout_width="271dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="-170dp"
+            android:id="@+id/notedate"
+            android:layout_width="265dp"
+            android:layout_height="117dp"
             android:layout_marginLeft="30dp"
-            android:fontFamily="@font/ubuntu_regular"
-            android:text="Note Date : "
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ubuntu_bold"
             android:textColor="#605F5F"
-            android:textSize="25dp" />
+            android:textSize="15dp" />
 
 
     </LinearLayout>

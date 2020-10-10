@@ -28,7 +28,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class browse_note_visitor extends AppCompatActivity {
         public static final String EXTRA_TEXTLM = "com.postit.postit_.EXTRA_TEXT";
         public static final String EXTRA_TEXT2LC = "com.postit.postit_.EXTRA_TEXT2";
-        public static final String EXTRA_TEXT7LC = "com.postit.postit_.EXTRA_TEXT7";
+    public static final String EXTRA_TEXT2LCe = "com.postit.postit_.EXTRA_TEXT3";
+
+    public static final String EXTRA_TEXT7LC = "com.postit.postit_.EXTRA_TEXT7";
 
 
         private RecyclerView titleList;
@@ -107,19 +109,22 @@ public class browse_note_visitor extends AppCompatActivity {
                 protected void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i, @NonNull final note note) {
                     if(note.getCourse().equalsIgnoreCase(CourseN)&&note.getMajor().equalsIgnoreCase(MajorN)&&note.getChapterNum().equalsIgnoreCase(ChapterN))
                     {
-                        //noteViewHolder.setTitle(note.getTitle());
-                        noteViewHolder.setTitle(note.getDate());
+                        noteViewHolder.setTitle(note.getTitle(),note.getDate());
+//                        noteViewHolder.setTitle(note.getDate());
 
                         noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String s = note.getId();
-                                String a = note.getCaption();
 
+                                String title = note.getTitle();
+                                String caption = note.getCaption();
+                                String email =  note.getEmail();
 
                                 Intent n = new Intent(browse_note_visitor.this, previewnote.class);
-                                n.putExtra(EXTRA_TEXTLM,""+s );
-                                n.putExtra(EXTRA_TEXT2LC,""+a );
+                                n.putExtra(EXTRA_TEXTLM,""+ title );
+                                n.putExtra(EXTRA_TEXT2LC,""+ caption );
+                                n.putExtra(EXTRA_TEXT2LCe,""+ email );
+
 
                                 startActivity(n);
 
@@ -140,7 +145,7 @@ public class browse_note_visitor extends AppCompatActivity {
 
             View mView;
             TextView noteTitleD ;
-
+            TextView notedate;
 
             public  NoteViewHolder(View itemView){
                 super(itemView);
@@ -149,9 +154,12 @@ public class browse_note_visitor extends AppCompatActivity {
 
             }
 
-            public void setTitle(String title){
+            public void setTitle(String title,String date){
                 noteTitleD = (TextView)mView.findViewById(R.id.noteTitle);
+                notedate = (TextView)mView.findViewById(R.id.notedate);
+
                 noteTitleD.setText(title);
+                notedate.setText("\n\n\n\n\n                   "+"                 "+date);
             }
 
 
