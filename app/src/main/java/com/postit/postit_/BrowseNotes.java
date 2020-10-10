@@ -130,12 +130,11 @@ public class BrowseNotes extends AppCompatActivity {
                 NoteViewHolder x = null;
                 viewType = qq;
                 ViewGroup s = parent;
-                s.removeViewsInLayout(1,2);
-                ViewGroup aw = s;
+//                ViewGroup aw = s;
 //s.removeViewAt(3);
 //                parent.removeViews(1,6);
 
-                v = LayoutInflater.from(aw.getContext()).inflate(R.layout.notedesign,aw,false);
+                v = LayoutInflater.from(s.getContext()).inflate(R.layout.notedesign,s,false);
                 x = new NoteViewHolder(v);
 
 
