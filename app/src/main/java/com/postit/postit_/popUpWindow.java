@@ -1,6 +1,5 @@
 package com.postit.postit_;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -8,13 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +32,9 @@ public class popUpWindow extends AppCompatActivity {
     private String courseMajor;
     private Button browse ;
     private String coursename;
-    private DatabaseReference chapterRef;
+    private DatabaseReference chapterRef, noteRef;
+    private FirebaseUser user;
+    String majo;
 
 
     private Spinner chapterSpinner;
@@ -59,6 +61,12 @@ public class popUpWindow extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        majo="";
+        majo=user.getUid();
 
         majorSpinner=findViewById(R.id.spinner1a);
         browse = findViewById(R.id.browsen);
@@ -70,7 +78,6 @@ public class popUpWindow extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 majorList.clear();
-
                 majorList.add("select");
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     major majorObj = postSnapshot.getValue(major.class);
@@ -181,6 +188,7 @@ public class popUpWindow extends AppCompatActivity {
 
 
         browse.setOnClickListener(new View.OnClickListener() {
+            boolean flag=false;
 
             public void onClick(View view) {
 
@@ -189,7 +197,35 @@ public class popUpWindow extends AppCompatActivity {
                     Toast.makeText(popUpWindow.this, "please select major and course and chapter", Toast.LENGTH_LONG).show();
 
                 }
-                else {
+
+                    else {
+                        noteRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                                for (DataSnapshot childrf : snapshotrf.getChildren()) {
+                                    note findNote = childrf.getValue(note.class);
+                                    String courseId = findNote.getCourse();
+                                    String chapterId = findNote.getChapterNum();
+                                    if (courseId.equals(chapterCourse) && chapterId.equals(chapterChapter)) {
+                                        flag = true;
+                                        break;
+                                    }
+                                    else {
+                                        Toast.makeText(popUpWindow.this, "no existing notes", Toast.LENGTH_LONG).show();
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+
+                 if(flag){
 
                     Intent intent = new Intent(popUpWindow.this, BrowseNotes.class);
                     intent.putExtra(EXTRA_TEXT4, courseMajor);

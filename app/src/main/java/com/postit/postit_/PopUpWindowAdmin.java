@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,14 +25,14 @@ import java.util.ArrayList;
 public class PopUpWindowAdmin extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference majorRef;
-    private DatabaseReference courseRef;
+    private DatabaseReference courseRef, noteRef;
     private Spinner majorSpinner;
     private Spinner courseSpineer;
     private String courseMajor;
     private String coursename;
     private DatabaseReference chapterRef;
 
-    private Button d ;
+    private Button d;
     private TextView browse;
 
     private Spinner chapterSpinner;
@@ -42,7 +40,6 @@ public class PopUpWindowAdmin extends AppCompatActivity {
     public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
     public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
     public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
-
 
 
     @Override
@@ -55,21 +52,22 @@ public class PopUpWindowAdmin extends AppCompatActivity {
 
         int width = ma.widthPixels;
         int height = ma.heightPixels;
-        getWindow().setLayout((int)(width*.8),(int)(height*.7));
+        getWindow().setLayout((int) (width * .8), (int) (height * .7));
 
         // retrieve data
 
-        database= FirebaseDatabase.getInstance();
-        majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
-        courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
-        chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+        database = FirebaseDatabase.getInstance();
+        majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
+        courseRef = FirebaseDatabase.getInstance().getReference().child("Courses");
+        chapterRef = FirebaseDatabase.getInstance().getReference().child("Chapters");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
 
-        majorSpinner =findViewById(R.id.spinnerAdmin);
+
+        majorSpinner = findViewById(R.id.spinnerAdmin);
         browse = findViewById(R.id.browseAdmin);
 
 
-
-        final ArrayList<String> majorList=new ArrayList<>();
+        final ArrayList<String> majorList = new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
         majorSpinner.setAdapter(adapter);
         majorRef.addValueEventListener(new ValueEventListener() {
@@ -91,8 +89,8 @@ public class PopUpWindowAdmin extends AppCompatActivity {
             }
 
         });
-        courseSpineer=findViewById(R.id.spinnerAdmin2);
-        final ArrayList<String> coourseList =new ArrayList<>();
+        courseSpineer = findViewById(R.id.spinnerAdmin2);
+        final ArrayList<String> coourseList = new ArrayList<>();
         final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, coourseList);
         courseSpineer.setAdapter(adapter1);
         majorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -133,16 +131,15 @@ public class PopUpWindowAdmin extends AppCompatActivity {
         });
 
 
-
-        chapterSpinner=findViewById(R.id.spinnerAdmin3);
-        final ArrayList<String> chapterList=new ArrayList<>();
+        chapterSpinner = findViewById(R.id.spinnerAdmin3);
+        final ArrayList<String> chapterList = new ArrayList<>();
         final ArrayAdapter adapter2 = new ArrayAdapter<String>(this, R.layout.listitem, chapterList);
         chapterSpinner.setAdapter(adapter2);
 
         courseSpineer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterCourse= parent.getItemAtPosition(position).toString();
+                chapterCourse = parent.getItemAtPosition(position).toString();
                 chapterRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -166,6 +163,7 @@ public class PopUpWindowAdmin extends AppCompatActivity {
 
                 });
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -173,13 +171,12 @@ public class PopUpWindowAdmin extends AppCompatActivity {
         });
 
 
-
-
         chapterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chapterChapter= parent.getItemAtPosition(position).toString();
+                chapterChapter = parent.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -187,25 +184,53 @@ public class PopUpWindowAdmin extends AppCompatActivity {
         });
 
         browse.setOnClickListener(new View.OnClickListener() {
-
+             boolean flag=false;
             public void onClick(View view) {
 
-                if ((courseMajor == "")||(courseMajor == "select")||(coursename == "")||(coursename == "select")||(chapterChapter == null)||(chapterChapter == "select")){
+
+                if ((courseMajor == "") || (courseMajor == "select") || (coursename == "") || (coursename == "select") || (chapterChapter == null) || (chapterChapter == "select")) {
 
                     Toast.makeText(PopUpWindowAdmin.this, "please select major and course and chapter", Toast.LENGTH_LONG).show();
 
                 }
                 else {
+                    noteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                            for (DataSnapshot childrf : snapshotrf.getChildren()) {
+                                note findNote = childrf.getValue(note.class);
+                                String courseId = findNote.getCourse();
+                                String chapterId = findNote.getChapterNum();
+                                if (courseId.equals(chapterCourse) && chapterId.equals(chapterChapter)) {
+                                    flag = true;
+                                    break;
+                                }
+                                else {
+                                    Toast.makeText(PopUpWindowAdmin.this, "no existing notes", Toast.LENGTH_LONG).show();
 
-    Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
-    intent.putExtra(EXTRA_TEXT, courseMajor);
-    intent.putExtra(EXTRA_TEXT2, chapterCourse);
-    intent.putExtra(EXTRA_TEXT3, chapterChapter);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                if(flag) {
+
+                    Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
+                    intent.putExtra(EXTRA_TEXT, courseMajor);
+                    intent.putExtra(EXTRA_TEXT2, chapterCourse);
+                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
 
 
                     startActivity(intent);
 
-}  }//End onClick()
+                }
+            }//End onClick()
         });
 
     }

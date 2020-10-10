@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +32,9 @@ public class popupwindowvisitors extends AppCompatActivity {
     private String courseMajor;
     private Button browseVisitor ;
     private String coursename;
-    private DatabaseReference chapterRef;
+    private DatabaseReference chapterRef, noteRef;
+    private FirebaseUser user;
+    String majo;
 
 
     private Spinner chapterSpinner;
@@ -57,6 +61,12 @@ public class popupwindowvisitors extends AppCompatActivity {
         majorRef=FirebaseDatabase.getInstance().getReference().child("Majors");
         courseRef=FirebaseDatabase.getInstance().getReference().child("Courses");
         chapterRef=FirebaseDatabase.getInstance().getReference().child("Chapters");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+         majo="";
+        majo=user.getUid();
+
 
         majorSpinner=findViewById(R.id.spinnerVisitor);
         browseVisitor = findViewById(R.id.browseVisitor);
@@ -68,6 +78,7 @@ public class popupwindowvisitors extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 majorList.clear();
+
 
                 majorList.add("select");
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -177,7 +188,7 @@ public class popupwindowvisitors extends AppCompatActivity {
 
 
         browseVisitor.setOnClickListener(new View.OnClickListener() {
-
+boolean flag=false;
             public void onClick(View view) {
 
                 if ((courseMajor.isEmpty())||(courseMajor == "select")||(chapterCourse.isEmpty())||(chapterCourse == "select")||(chapterChapter.isEmpty())||(chapterChapter == "select")){
@@ -186,6 +197,31 @@ public class popupwindowvisitors extends AppCompatActivity {
 
                 }
                 else {
+                    noteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                            for (DataSnapshot childrf : snapshotrf.getChildren()) {
+                                note findNote = childrf.getValue(note.class);
+                                String courseId = findNote.getCourse();
+                                String chapterId = findNote.getChapterNum();
+                                if (courseId.equals(chapterCourse) && chapterId.equals(chapterChapter)) {
+                                    flag = true;
+                                    break;
+                                }
+                                else {
+                                    Toast.makeText(popupwindowvisitors.this, "no existing notes", Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                if(flag) {
 
                     Intent intentuu = new Intent(popupwindowvisitors.this, browse_note_visitor.class);
                     intentuu.putExtra(EXTRA_TEXTSM, courseMajor);
