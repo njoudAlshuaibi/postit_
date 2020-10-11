@@ -95,7 +95,7 @@ public class BrowseNotes extends AppCompatActivity {
 
         Intent inten = getIntent();
 
-        final String n = intent.getStringExtra(popupwindowchapters.EXTRA_TEXT9);
+        final String n = inten.getStringExtra(popupwindowchapters.EXTRA_TEXT9);
         final String maa = inten.getStringExtra(popupwindowchapters.EXTRA_TEXT99);
         final String mq = inten.getStringExtra(popupwindowchapters.EXTRA_TEXT999);
 
@@ -136,19 +136,13 @@ public class BrowseNotes extends AppCompatActivity {
             @NonNull
             @Override
             public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                int qq = noteList.size();
                 View v;
                 NoteViewHolder x = null;
-//                viewType = qq;
                 ViewGroup s = parent;
-//                ViewGroup aw = s;
-//s.removeViewAt(3);
-//                parent.removeViews(1,6);
+
 
                 v = LayoutInflater.from(s.getContext()).inflate(R.layout.notedesign,s,false);
                 x = new NoteViewHolder(v);
-
-
                 return x;
             }
 
@@ -177,21 +171,23 @@ public class BrowseNotes extends AppCompatActivity {
 
                         }
                     });    }
-                else if((note.getCourse().equalsIgnoreCase(n)&&note.getMajor().equalsIgnoreCase(maa)&&note.getChapterNum().equalsIgnoreCase(mq))){
-//                    noteViewHolder.setTitle(note.getTitle());
+                else
+                    if((note.getCourse().equalsIgnoreCase(n)&&note.getMajor().equalsIgnoreCase(maa)&&note.getChapterNum().equalsIgnoreCase(mq))){
+                    noteViewHolder.setTitle(note.getTitle(),note.getDate());
                     noteViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String s = note.getDate();
-                            String a = note.getCaption();
-                           String f =  note.getEmail();
+                            String title = note.getTitle();
+                            String caption = note.getCaption();
+                            String email =  note.getEmail();
 
-                            Intent n = new Intent(BrowseNotes.this, previewnote.class);
-                            n.putExtra(EXTRA_TEXT,""+s );
-                            n.putExtra(EXTRA_TEXT2,""+a );
+                            Intent q = new Intent(BrowseNotes.this, previewnote.class);
+                            q.putExtra(EXTRA_TEXT,""+ title );
+                            q.putExtra(EXTRA_TEXT2,""+ caption );
+                            q.putExtra(EXTRA_TEXT3,""+ email );
 
-                            startActivity(n);
 
+                            startActivity(q);
                         }
                     });
                 }

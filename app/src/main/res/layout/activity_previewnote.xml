@@ -50,7 +50,7 @@
         <TextView
             android:id="@+id/notepr2"
             android:layout_width="294dp"
-            android:layout_height="221dp"
+            android:layout_height="209dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/ubuntu_bold"
