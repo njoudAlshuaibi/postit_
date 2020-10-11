@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "593761216496-3tmr29698qsjibcv43s7piraiii48101.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.postit.postit_",
+            "certificate_hash": "bff1415c49e6d86fb2a98d6eecf451b4c682f1d4"
+          }
+        },
+        {
           "client_id": "593761216496-9op733hl707eshjpbp5nfgaqhphmcm99.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

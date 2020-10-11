@@ -1,8 +1,5 @@
 package com.postit.postit_;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -68,7 +68,7 @@ public class forgetPasswordActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(forgetPasswordActivity.this, "check your email to reset your password",Toast.LENGTH_LONG).show();
                 }else {
-                    Toast.makeText(forgetPasswordActivity.this,"Try again! something wrong happened",Toast.LENGTH_LONG).show();
+                    Toast.makeText(forgetPasswordActivity.this,"Try again! this email not registered ",Toast.LENGTH_LONG).show();
                 }
             }
         });

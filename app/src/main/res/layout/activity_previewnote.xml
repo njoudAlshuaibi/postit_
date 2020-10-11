@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="722dp"
+    tools:context=".previewnote"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="12dp"
+    android:elevation="90dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="722dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/note0"
+        android:orientation="vertical"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/post_image"
+            android:layout_width="404dp"
+            android:layout_height="400dp"
+
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/notetit"
+            android:layout_width="298dp"
+            android:layout_height="87dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="-340dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="#605F5F"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/notepre"
+            android:layout_width="298dp"
+            android:layout_height="342dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="#605F5F"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/notepr2"
+            android:layout_width="294dp"
+            android:layout_height="209dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="#605F5F"
+            android:textSize="15dp" />
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

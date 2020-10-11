@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".browse_note_visitor"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:autoMirrored="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A6FFFFFF"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_Vistor"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="#FFFBD4" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecycleView2"
+            android:layout_width="337dp"
+            android:layout_height="627dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="-999dp"
+            android:layout_marginBottom="29dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="185dp"
+            android:layout_height="-3343dp"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="4dp"
+            android:background="#EF7BA4"
+            app:backgroundTint="#75BBA2"
+            android:layout_marginBottom="11dp"
+            app:srcCompat="@drawable/add" />
+
+
+    </LinearLayout>
+</LinearLayout>

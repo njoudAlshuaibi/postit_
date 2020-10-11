@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFBD4"
+    android:orientation="vertical"
+    tools:context=".creatnotepopup">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="333dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:text="Choose Major:"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/spinnerA"
+            android:layout_width="342dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
+
+        <TextView
+            android:layout_width="327dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:text="Choose Course:"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/spinnerAd"
+            android:layout_width="333dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
+
+
+
+
+        <TextView
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
+            android:text="Choose Chapter:"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/spinnerAdmaaa"
+            android:layout_width="322dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="250dp"
+            android:hint="Collage" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine2"
+            android:layout_width="255dp"
+            android:layout_height="153dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="90dp"
+            android:ems="10"
+            android:hint="Note Body"
+            android:inputType="textMultiLine"
+            android:background="@drawable/border"/>
+
+        <Button
+            android:id="@+id/ResetButton"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="30dp"
+            android:background="#EB75B2"
+            android:text="Post"
+            android:textColor="#fff" />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="390dp"
+        >
+
+        <EditText
+            android:id="@+id/Title"
+            android:layout_width="219dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="700dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="Note Title"
+            android:inputType="textPersonName"
+            android:textSize="15dp"
+            android:textStyle="italic" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</RelativeLayout>

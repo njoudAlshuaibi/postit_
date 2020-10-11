@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.lang.*;
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -29,6 +34,7 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
     Spinner spinner, spinner2;
     private TextView registerButton;
     private TextView haveAccount;
+    private DatabaseReference majorRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,23 +73,30 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
 
             }
         });
+        majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
 
         // save the selected major to a string
         spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.Major,android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        final ArrayList<String> majorList = new ArrayList<>();
+        final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
+        spinner2.setAdapter(adapter1);
+        majorRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                major= parent.getItemAtPosition(position).toString();
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                majorList.clear();
+                majorList.add("select");
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    major majorObj = postSnapshot.getValue(major.class);
+                    majorList.add(majorObj.getMajorName());
+                }
+                adapter1.notifyDataSetChanged();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
 
     }
@@ -218,5 +231,3 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
 
 
 }
-
-

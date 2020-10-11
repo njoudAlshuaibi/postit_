@@ -42,10 +42,10 @@ public class Activity_home_bage extends AppCompatActivity {
 
             builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
 
-               // signOut
+                // signOut
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                   FirebaseAuth.getInstance().signOut();
+                    FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(Activity_home_bage.this, MainActivity.class));
 //                    finish();
                 }

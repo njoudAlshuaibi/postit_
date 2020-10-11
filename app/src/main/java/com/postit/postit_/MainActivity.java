@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView createAccount;//test
     private TextView forgetPassword;
-
+    private TextView visitor;
     //juju start
     private Button login;
     private FirebaseAuth mAuth;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         createAccount = (TextView) findViewById(R.id.createAccount);
         forgetPassword  = (TextView) findViewById(R.id.forgetPassword);
-
+        visitor  = (TextView) findViewById(R.id.visitor);
         //juju start
         login = (Button) findViewById(R.id.loginButton);
         editTextEmail = (EditText) findViewById(R.id.loginEmail);
@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, forgetPasswordActivity.class));
             }
+        });
+        visitor.setOnClickListener(new View.OnClickListener() {
+
+
+
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Visitors_activity.class));
+            }//End onClick()
         });
         // juju start
         login.setOnClickListener(new View.OnClickListener() {
@@ -113,10 +121,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    if(email.equals("swe444@gmail.com"))
-                    startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
+                    if(mAuth.getCurrentUser().getEmail().equalsIgnoreCase("swe444@gmail.com"))
+                    startActivity(new Intent(MainActivity.this, mainAdmin.class));
                     else {
-                        startActivity(new Intent(MainActivity.this, Activity_home_bage.class));
+                        startActivity(new Intent(MainActivity.this, StudentActivity.class));
                     }
                 }else{
                     Toast.makeText(MainActivity.this, "failed to login", Toast.LENGTH_LONG).show();

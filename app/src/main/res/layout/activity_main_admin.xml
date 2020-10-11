@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentActivity"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:autoMirrored="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A6FFFFFF"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_Admin2"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="#FFFBD4" />
+
+        <GridLayout
+            android:layout_width="421dp"
+            android:layout_height="502dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginBottom="60dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:columnOrderPreserved="false"
+            android:padding="14dp"
+            android:rowCount="3"
+            app:layout_editor_absoluteX="0dp">
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/Manage"
+                android:layout_width="159dp"
+                android:layout_height="222dp"
+
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp">
+
+
+                <LinearLayout
+                    android:layout_width="149dp"
+                    android:layout_height="170dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image2"
+                        android:layout_width="100dp"
+                        android:layout_height="118dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/mange2"
+
+                        />
+
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="87dp"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
+                        android:text="Manage"
+                        android:textColor="#00BCD4"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/AdminRequest"
+                android:layout_width="159dp"
+                android:layout_height="222dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp">
+
+
+                <LinearLayout
+                    android:layout_width="149dp"
+                    android:layout_height="222dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image5"
+                        android:layout_width="133dp"
+                        android:layout_height="110dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/req2"
+
+                        />
+
+
+                    <TextView
+                        android:id="@+id/text5"
+                        android:layout_width="91dp"
+                        android:layout_height="wrap_content"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Requests"
+                        android:textColor="#00BCD4"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+
+
+                android:id="@+id/AdminBrowseNotes"
+                android:layout_width="159dp"
+                android:layout_height="222dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp">
+
+
+                <LinearLayout
+                    android:layout_width="149dp"
+                    android:layout_height="170dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_margin="16dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image4"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/browsee"
+
+                        />
+
+
+                    <TextView
+                        android:id="@+id/text4"
+                        android:layout_width="113dp"
+                        android:layout_height="29dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_marginLeft="9dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Browse Notes"
+                        android:textColor="#00BCD4"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+        </GridLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
