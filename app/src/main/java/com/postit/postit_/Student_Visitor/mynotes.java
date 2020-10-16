@@ -49,6 +49,9 @@ public class mynotes extends AppCompatActivity {
     private FirebaseUser user;
     private String userEmail;
 
+    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
+    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +89,10 @@ public class mynotes extends AppCompatActivity {
                 String s = n.getDate();
                 String a = n.getCaption();
 
+                Intent in = new Intent(mynotes.this, previewnote.class);
+                in.putExtra(EXTRA_TEXT,""+s );
+                in.putExtra(EXTRA_TEXT2,""+a );
+                startActivity(in);
 
             } // end on item click listener
         });
