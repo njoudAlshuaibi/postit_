@@ -79,7 +79,7 @@ public class mynotes extends AppCompatActivity {
             public void OnItemClick(View v, int pos) {
 
                 note n = noteList.get(pos);
-                String s = n.getDate();
+                String s = n.getTitle();
                 String a = n.getCaption();
                 String m = n.getEmail();
 
