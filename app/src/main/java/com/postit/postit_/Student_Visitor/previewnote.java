@@ -34,9 +34,9 @@ public class previewnote extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        final String title = intent.getStringExtra(ExplorerNote.EXTRA_TEXT);
-        final String caption = intent.getStringExtra(ExplorerNote.EXTRA_TEXT2);
-        final String email = intent.getStringExtra(ExplorerNote.EXTRA_TEXT3);
+        final String title = intent.getStringExtra(mynotes.preTitel);
+        final String caption = intent.getStringExtra(mynotes.preCaption);
+        final String email = intent.getStringExtra(mynotes.preEmail);
 
 
         notetit.setText(title);

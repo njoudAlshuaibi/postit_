@@ -34,14 +34,6 @@ import java.util.List;
 
 public class mynotes extends AppCompatActivity {
     private FloatingActionButton fab;
-    private note b;
-    private FirebaseDatabase database;
-    private DatabaseReference ref;
-    public static final String EXTRA_TEXTww = "com.postit.postit_.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2ee = "com.postit.postit_.EXTRA_TEXT2";
-    public static final String EXTRA_TEXT2e = "com.postit.postit_.EXTRA_TEXT3";
-    private RecyclerView titleList;
-    String curUserEmail="";
     private DatabaseReference noteRef;
     List<note> noteList = new ArrayList<>();
     BrowseNoteAdapter noteAdapter ;
@@ -49,8 +41,9 @@ public class mynotes extends AppCompatActivity {
     private FirebaseUser user;
     private String userEmail;
 
-    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
+    public static final String preTitel = "com.postit.postit_.preTitel";
+    public static final String preCaption = "com.postit.postit_.preCaption";
+    public static final String preEmail = "com.postit.postit_.preEmail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +81,12 @@ public class mynotes extends AppCompatActivity {
                 note n = noteList.get(pos);
                 String s = n.getDate();
                 String a = n.getCaption();
+                String m = n.getEmail();
 
                 Intent in = new Intent(mynotes.this, previewnote.class);
-                in.putExtra(EXTRA_TEXT,""+s );
-                in.putExtra(EXTRA_TEXT2,""+a );
+                in.putExtra(preTitel,""+s );
+                in.putExtra(preCaption,""+a );
+                in.putExtra(preEmail,""+m );
                 startActivity(in);
 
             } // end on item click listener
