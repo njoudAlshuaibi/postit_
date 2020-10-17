@@ -72,18 +72,21 @@ public class Pop extends Activity {
                     requestedCourse.requestFocus();
                     return;
                 }
+                if ((requestedCourseS.equalsIgnoreCase(" ")) ||  (requestedCourseS.length() > 15) || (!(requestedCourseS.matches("^.*\\d$")))) {
+                    requestedCourse.setError("Please enter valid course \ne.g. SWE321, ethics");
+                    requestedCourse.requestFocus();
+                    return;
+                }
                 if (requestedChapterS.isEmpty()) {
                     requestedChapter.setError("please enter Chapter");
                     requestedChapter.requestFocus();
                     return;
                 }
-
-                if (!(requestedChapterS.toLowerCase().startsWith("ch"))) {
-                    requestedChapter.setError("Please write the requested chapter in this format: ch#");
+                if ((requestedChapterS.equalsIgnoreCase(" ")) || (!(requestedChapterS.toLowerCase().startsWith("chapter"))) || (requestedChapterS.length() > 10) || (!(requestedChapterS.matches("^.*\\d$")))) {
+                    requestedChapter.setError("please enter valid chapter follow this format Chapter#\ne.g. Chapter4");
                     requestedChapter.requestFocus();
                     return;
                 }
-
                 newRequest = new requests(requestedMajorS, requestedCourseS, requestedChapterS, requestID);
 
 
