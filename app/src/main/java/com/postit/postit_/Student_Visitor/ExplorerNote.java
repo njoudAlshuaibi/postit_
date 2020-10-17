@@ -44,6 +44,7 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     String m;
     String c;
@@ -68,7 +69,6 @@ public class ExplorerNote extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         session = new Session(getApplicationContext());
 
         Intent intent = getIntent();
@@ -170,8 +170,11 @@ public class ExplorerNote extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if(user == null){
+            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
-        getMenuInflater().inflate(R.menu.mynotes, menu);
+        else{
+            getMenuInflater().inflate(R.menu.student_menu, menu);}
         return true;
     }
 
@@ -208,21 +211,8 @@ public class ExplorerNote extends AppCompatActivity {
 
         }
         else if (id==R.id.home){
-            if(currentUser != null){
                 startActivity(new Intent(ExplorerNote.this, StudentActivity.class));
-            }else {
-                new AlertDialog.Builder(ExplorerNote.this)
-                        .setTitle("you need to login first")
-                        .setMessage("Do you want to login ")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startActivity(new Intent (ExplorerNote.this,MainActivity.class));
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-            }
+
         }
         return true;
     }
