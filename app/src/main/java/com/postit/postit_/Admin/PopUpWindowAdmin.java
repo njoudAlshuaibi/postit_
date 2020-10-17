@@ -28,6 +28,7 @@ import com.postit.postit_.R;
 import java.util.ArrayList;
 
 public class PopUpWindowAdmin extends AppCompatActivity {
+
     private FirebaseDatabase database;
     private DatabaseReference majorRef;
     private DatabaseReference courseRef, noteRef;
@@ -36,15 +37,13 @@ public class PopUpWindowAdmin extends AppCompatActivity {
     private String courseMajor;
     private String coursename;
     private DatabaseReference chapterRef;
-
     private Button d;
     private TextView browse;
-
     private Spinner chapterSpinner;
     public String chapterCourse, chapterChapter;
-    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
-    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
+    public static final String adminMajorChoicee = "com.postit.postit_.adminMajorChoicee";
+    public static final String adminCourceChoicee = "com.postit.postit_.adminCourceChoicee";
+    public static final String adminChapterChoicee = "com.postit.postit_.adminChapterChoicee";
 
 
     @Override
@@ -189,52 +188,25 @@ public class PopUpWindowAdmin extends AppCompatActivity {
         });
 
         browse.setOnClickListener(new View.OnClickListener() {
-            boolean flag=false;
+
             public void onClick(View view) {
 
 
-                if ((courseMajor == "") || (courseMajor == "select") || (coursename == "") || (coursename == "select") || (chapterChapter == null) || (chapterChapter == "select")) {
+                if ((courseMajor =="") || (courseMajor == "select") || (chapterCourse =="") || (chapterCourse == "select") || (chapterChapter == null) || (chapterChapter == "select")) {
 
                     Toast.makeText(PopUpWindowAdmin.this, "please select major and course and chapter", Toast.LENGTH_LONG).show();
 
                 }
                 else {
-                    noteRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshotrf) {
-                            for (DataSnapshot childrf : snapshotrf.getChildren()) {
-                                note findNote = childrf.getValue(note.class);
-                                String courseId = findNote.getCourse();
-                                String chapterId = findNote.getChapterNum();
-                                if (courseId.equals(chapterCourse) && chapterId.equals(chapterChapter)) {
-                                    flag = true;
-                                    break;
-                                }
-                                else {
-                                    Toast.makeText(PopUpWindowAdmin.this, "no existing notes", Toast.LENGTH_LONG).show();
-
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-
-                if(flag) {
-
                     Intent intent = new Intent(PopUpWindowAdmin.this, admin_browse_notes.class);
-                    intent.putExtra(EXTRA_TEXT, courseMajor);
-                    intent.putExtra(EXTRA_TEXT2, chapterCourse);
-                    intent.putExtra(EXTRA_TEXT3, chapterChapter);
+                    intent.putExtra(adminMajorChoicee, courseMajor);
+                    intent.putExtra(adminCourceChoicee, chapterCourse);
+                    intent.putExtra(adminChapterChoicee, chapterChapter);
 
 
                     startActivity(intent);
-
                 }
+
             }//End onClick()
         });
 

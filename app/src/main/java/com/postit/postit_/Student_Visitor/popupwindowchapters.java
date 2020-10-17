@@ -29,9 +29,6 @@ public class popupwindowchapters extends AppCompatActivity {
     private FirebaseUser user;
     private String userEmail;
 
-    public static final String EXTRA_TEXT9 = "com.postit.postit_.EXTRA_TEXT9";
-    public static final String EXTRA_TEXT99 = "com.postit.postit_.EXTRA_TEXT99";
-    public static final String EXTRA_TEXT999 = "com.postit.postit_.EXTRA_TEXT99";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +46,9 @@ public class popupwindowchapters extends AppCompatActivity {
 
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         Intent intent = getIntent();
-        final String MajorN = intent.getStringExtra(ExplorerNote.EXTRA_TEXT7);
-        final String CourseN = intent.getStringExtra(ExplorerNote.EXTRA_TEXT8);
-        final String ChapterN = intent.getStringExtra(ExplorerNote.EXTRA_TEXT9);
+        final String MajorN = intent.getStringExtra(ExplorerNote.currentMajor);
+        final String CourseN = intent.getStringExtra(ExplorerNote.currentCourse);
+        final String ChapterN = intent.getStringExtra(ExplorerNote.currentChapter);
         Title=(EditText) findViewById(R.id.Title);
         caption = (EditText) findViewById(R.id.editTextTextMultiLine2);
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -96,12 +93,6 @@ public class popupwindowchapters extends AppCompatActivity {
                                 setResult(RESULT_OK, intent);
                                 finish();
 
-//                                Intent intent = new Intent(popupwindowchapters.this, BrowseNotes.class);
-//                                intent.putExtra(EXTRA_TEXT9, MajorN);
-//                                intent.putExtra(EXTRA_TEXT99, CourseN);
-//                                intent.putExtra(EXTRA_TEXT999, ChapterN);
-//
-//                                startActivity(intent);
                             } else {
                                 Toast.makeText(popupwindowchapters.this, "note doesn't added", Toast.LENGTH_LONG).show();
                             }
@@ -114,7 +105,6 @@ public class popupwindowchapters extends AppCompatActivity {
             }
         });
 
-// lululululululu
 
     }
 

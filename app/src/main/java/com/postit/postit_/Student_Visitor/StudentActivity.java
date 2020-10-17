@@ -142,7 +142,7 @@ public class StudentActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(StudentActivity.this);
-            builder.setMessage("Are you Sure you want to exit?");
+            builder.setMessage("Are you sure you want to logout?");
             builder.setCancelable(true);
 
             builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
