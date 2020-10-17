@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Student_Visitor.ExplorerNote"></activity>
+        <activity android:name=".Student_Visitor.ExplorerNote" />
         <activity android:name=".Student_Visitor.previewnote" />
         <activity
             android:name=".Admin.admin_browse_notes"
