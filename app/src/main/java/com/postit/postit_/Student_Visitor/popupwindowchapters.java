@@ -64,13 +64,22 @@ public class popupwindowchapters extends AppCompatActivity {
                 final note noteObj = new note();
                 if (MajorN.equals("select") || MajorN == "" || CourseN == "" || CourseN.equals("select") || ChapterN.equals("select") || ChapterN == "") {
                     Toast.makeText(popupwindowchapters.this, "can't be added , please select major, course and chapter ", Toast.LENGTH_LONG).show();
-                } else if (Title.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(popupwindowchapters.this, "Note title can not be empty!", Toast.LENGTH_LONG).show();
+                }
+                else if ((Title.getText().toString().trim().isEmpty())|| (Title.getText().toString().trim().matches("[0-9]+"))) {
+                    Toast.makeText(popupwindowchapters.this, "Note title can not be empty! and it must contains letter", Toast.LENGTH_LONG).show();
                     return;
-                } else if (caption.getText().toString().trim().isEmpty()) {
+                }
+                else if(Title.getText().toString().trim().length()>35){
+                    Toast.makeText(popupwindowchapters.this, "Note title can not be more than 35 character!", Toast.LENGTH_LONG).show();
+                    return;
+                }else if (caption.getText().toString().trim().isEmpty()) {
                     Toast.makeText(popupwindowchapters.this, "Note body can not be empty!", Toast.LENGTH_LONG).show();
                     return;
-                } else if (user != null) {
+                }else if(caption.getText().toString().trim().length()>300){
+                    Toast.makeText(popupwindowchapters.this, "Note body can not be more than 300 character!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if (user != null) {
                     String id = noteRef.push().getKey();
                     noteObj.setTitle(Title.getText().toString());
                     noteObj.setCaption(caption.getText().toString());

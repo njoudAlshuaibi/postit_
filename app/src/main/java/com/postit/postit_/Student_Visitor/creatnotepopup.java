@@ -212,11 +212,18 @@ public class creatnotepopup extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (courseMajor.equals("select") || courseMajor == "" || chapterCourse == "" || chapterCourse.equals("select") || chapterChapter.equals("select") || chapterChapter == "") {
             Toast.makeText(creatnotepopup.this, "can't be added , please select major, course and chapter ", Toast.LENGTH_LONG).show();
-        } else if (inputNoteTitle.getText().toString().trim().isEmpty()) {
-            Toast.makeText(creatnotepopup.this, "Note title can not be empty!", Toast.LENGTH_LONG).show();
+        } else if (inputNoteTitle.getText().toString().trim().isEmpty()||(inputNoteTitle.getText().toString().trim().matches("[0-9]+"))) {
+            Toast.makeText(creatnotepopup.this, "Note title can not be empty! and it must contains letter", Toast.LENGTH_LONG).show();
             return;
-        } else if (inputNoteBody.getText().toString().trim().isEmpty()) {
+        } else if(inputNoteTitle.getText().toString().trim().length()>35){
+            Toast.makeText(creatnotepopup.this, "Note title can not be more than 35 character!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        else if(inputNoteBody.getText().toString().trim().isEmpty()) {
             Toast.makeText(creatnotepopup.this, "Note body can not be empty!", Toast.LENGTH_LONG).show();
+            return;
+        } else if(inputNoteBody.getText().toString().trim().length()>300){
+            Toast.makeText(creatnotepopup.this, "Note body can not be more than 300 character!", Toast.LENGTH_LONG).show();
             return;
         } else if (currentUser != null) {
             String id = noteRef.push().getKey();
