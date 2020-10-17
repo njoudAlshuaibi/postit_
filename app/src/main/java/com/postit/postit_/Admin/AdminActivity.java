@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.*;
@@ -31,7 +33,9 @@ import com.postit.postit_.Objects.chapter;
 import com.postit.postit_.Objects.course;
 import com.postit.postit_.Objects.major;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
+import com.postit.postit_.Student_Visitor.popUpWindow;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -46,11 +50,11 @@ public class AdminActivity extends AppCompatActivity {
     private course newCourse;
     private DatabaseReference majorRef;
     private DatabaseReference courseRef;
-    private DatabaseReference chapterRef, noteRef;
+    private DatabaseReference requestsRef, chapterRef, noteRef;
+
     private Spinner majorSpinner, courseSpineer, chapterSpinner;
     public String courseMajor, chapterCourse, chapterChapter;
-
-
+private TextView textViewp;
 
 
     @Override
@@ -61,7 +65,83 @@ public class AdminActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        Intent intent = getIntent();
+        final String maj = intent.getStringExtra(requestadmin.maj);
+        final String cou = intent.getStringExtra(requestadmin.cou);
+        final String ch = intent.getStringExtra(requestadmin.ch);
 
+        requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+
+        textViewp = (TextView) findViewById(R.id.textViewp);
+        ImageButton imageButtonreq = (ImageButton) findViewById((R.id.imageButtonreq));
+        ImageButton imageButtoncancel = (ImageButton) findViewById((R.id.imageButtoncancel));
+
+        imageButtoncancel.setVisibility(View.INVISIBLE);
+        imageButtonreq.setVisibility(View.INVISIBLE);
+
+        if (maj != null)
+        {   textViewp.setText("Major: "+ maj +"  Course: " + cou + "  chapter: "+ ch);
+        imageButtonreq.setVisibility(View.VISIBLE);
+        imageButtoncancel.setVisibility(View.VISIBLE);
+            imageButtoncancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(AdminActivity.this, requestadmin.class));
+
+                }
+            });
+        imageButtonreq.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    new AlertDialog.Builder(AdminActivity.this)
+                            .setIcon(android.R.drawable.ic_input_add)
+                            .setTitle("are you done?")
+                            .setMessage("Do you add this request successfully?"+
+                                    " the request will be deleted")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    requestsRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot child : snapshot.getChildren()) {
+                                                requests findreq = child.getValue(requests.class);
+                                                String maj1 = findreq.getRequestedMajor();
+                                                String co1 = findreq.getRequestedCourse();
+                                                String ch12 = findreq.getRequestedChapter();
+
+
+                                                if (maj1.equals(maj) && co1.equals(cou) && ch12.equals(ch)) {
+                                                    String deletedreq = findreq.getId();
+                                                    deleteChapter(deletedreq);
+                                                    startActivity(new Intent(AdminActivity.this, requestadmin.class));
+
+                                                    break;
+                                                }
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+
+
+                }
+
+                public void deleteChapter(String chapterKey) {
+                    requestsRef.child(chapterKey.trim()).removeValue();
+                }
+            });
+    }
         //lujain
         MajorName = (EditText) findViewById(R.id.MajorName);
         CourseID = (EditText) findViewById(R.id.CourseID);
