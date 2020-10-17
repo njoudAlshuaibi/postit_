@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,12 +35,13 @@ import java.util.List;
 
 public class mynotes extends AppCompatActivity {
     private FloatingActionButton fab;
-    private DatabaseReference noteRef;
+    private DatabaseReference noteRef, notesRef;
     List<note> noteList = new ArrayList<>();
     BrowseNoteAdapter noteAdapter ;
     RecyclerView recyclerView;
     private FirebaseUser user;
     private String userEmail;
+    private TextView textView;
 
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
@@ -55,7 +57,7 @@ public class mynotes extends AppCompatActivity {
         setSupportActionBar(toolba);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
+        textView = (TextView) findViewById(R.id.tvnotes);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +72,7 @@ public class mynotes extends AppCompatActivity {
         } else {
             // No user is signed in
         }
-
+        notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
 
@@ -122,6 +124,29 @@ public class mynotes extends AppCompatActivity {
             }
 
 
+        });
+        notesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                for (DataSnapshot childrf : snapshotrf.getChildren()) {
+                    note findNote = childrf.getValue(note.class);
+                    String EmailN = findNote.getEmail();
+                    if (EmailN.equals(userEmail)) {
+                        textView.setText("");
+                        break;
+                    }
+
+                    else {
+                        textView.setText("no existing notes");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
 
     }
