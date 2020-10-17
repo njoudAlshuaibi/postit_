@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,16 +26,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
+import com.postit.postit_.Student_Visitor.ExplorerNote;
 
 import java.util.ArrayList;
 
 public class admin_browse_notes extends AppCompatActivity {
     private ListView noteslistview;
-    private FirebaseDatabase database;
+    private TextView textView;
     private DatabaseReference notesRef;
     private DatabaseReference ref;
-    //    private TextView MajorN;
-//    private TextView CourseN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +45,11 @@ public class admin_browse_notes extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         Intent intent = getIntent();
+        textView = (TextView) findViewById(R.id.tp);
 
-        final String MajorN = intent.getStringExtra(PopUpWindowAdmin.EXTRA_TEXT);
-        final String CourseN = intent.getStringExtra(PopUpWindowAdmin.EXTRA_TEXT2);
-        final String chapterN = intent.getStringExtra(PopUpWindowAdmin.EXTRA_TEXT3);
-
-
-//        v= (TextView) findViewById(R.id.tv);
-//        v.setText(text+t);
+        final String MajorN = intent.getStringExtra(PopUpWindowAdmin.adminMajorChoicee);
+        final String CourseN = intent.getStringExtra(PopUpWindowAdmin.adminCourceChoicee);
+        final String chapterN = intent.getStringExtra(PopUpWindowAdmin.adminChapterChoicee);
 
 
 
@@ -82,6 +81,9 @@ public class admin_browse_notes extends AppCompatActivity {
 
             }
         });
+//        if(adapter.getCount()< 0){
+//            textView.setText("No notes found");
+//        }
         noteslistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

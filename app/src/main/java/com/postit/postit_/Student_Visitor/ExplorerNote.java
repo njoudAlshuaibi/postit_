@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
+import com.postit.postit_.Admin.PopUpWindowAdmin;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
@@ -37,12 +38,12 @@ import java.util.List;
 
 public class ExplorerNote extends AppCompatActivity {
 
-    public static final String EXTRA_TEXT = "com.postit.postit_.EXTRA_TEXT";
-    public static final String EXTRA_TEXT2 = "com.postit.postit_.EXTRA_TEXT2";
-    public static final String EXTRA_TEXT3 = "com.postit.postit_.EXTRA_TEXT3";
-    public static final String EXTRA_TEXT7 = "com.postit.postit_.EXTRA_TEXT7";
-    public static final String EXTRA_TEXT8 = "com.postit.postit_.EXTRA_TEXT8";
-    public static final String EXTRA_TEXT9 = "com.postit.postit_.EXTRA_TEXT9";
+    public static final String preTitel = "com.postit.postit_.preTitel";
+    public static final String preCaption = "com.postit.postit_.preCaption";
+    public static final String preEmail = "com.postit.postit_.preEmail";
+    public static final String currentMajor = "com.postit.postit_.currentMajor";
+    public static final String currentCourse = "com.postit.postit_.currentCourse";
+    public static final String currentChapter = "com.postit.postit_.currentChapter";
 
     String m;
     String c;
@@ -99,12 +100,14 @@ public class ExplorerNote extends AppCompatActivity {
             public void OnItemClick(View v, int pos) {
 
                 note n = noteList.get(pos);
-                String s = n.getDate();
+                String s = n.getTitle();
                 String a = n.getCaption();
+                String m = n.getEmail();
 
                 Intent in = new Intent(ExplorerNote.this, previewnote.class);
-                in.putExtra(EXTRA_TEXT,""+s );
-                in.putExtra(EXTRA_TEXT2,""+a );
+                in.putExtra(preTitel,""+s );
+                in.putExtra(preCaption,""+a );
+                in.putExtra(preEmail,""+m );
                 startActivity(in);
             } // end on item click listener
         });
@@ -126,10 +129,6 @@ public class ExplorerNote extends AppCompatActivity {
 
                     for (DataSnapshot messageSnapshot: snapshot.getChildren()) {
                         note a = messageSnapshot.getValue(note.class);
-                        Log.d("=====" , a.getCaption());
-                        Log.d("=====" , a.getTitle());
-                        Log.d("=====" , a.getDate());
-
                         if (a.getChapterNum().equals(d)&&a.getCourse().equals(c))
                             noteList.add(a);
                     }
@@ -149,33 +148,12 @@ public class ExplorerNote extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        Log.d("==" , "On Pause Now");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("==" , "On Stop Now");
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("==" , "On Restart Now");
-
-    }
-
     private void openpopupwindowchapters() {
 
         Intent popupwindow5 = new Intent(ExplorerNote.this, popupwindowchapters.class);
-        popupwindow5.putExtra(EXTRA_TEXT7, m);
-        popupwindow5.putExtra(EXTRA_TEXT8, c);
-        popupwindow5.putExtra(EXTRA_TEXT9, d);
+        popupwindow5.putExtra(currentMajor, m);
+        popupwindow5.putExtra(currentCourse, c);
+        popupwindow5.putExtra(currentChapter, d);
 
 
         //  when this activity started will have the search data which will be delete when we go to different  activity
@@ -190,18 +168,6 @@ public class ExplorerNote extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("==" , "On Destoried Now");
-
-    }
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -215,7 +181,7 @@ public class ExplorerNote extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);
-            builder.setMessage("Are you Sure you want to exit?");
+            builder.setMessage("Are you sure you want to logout?");
             builder.setCancelable(true);
 
             builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
