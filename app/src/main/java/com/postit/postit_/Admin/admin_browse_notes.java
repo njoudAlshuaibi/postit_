@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class admin_browse_notes extends AppCompatActivity {
     private TextView textView;
     private DatabaseReference notesRef;
     private DatabaseReference ref;
+    private DatabaseReference  noteRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class admin_browse_notes extends AppCompatActivity {
         final String CourseN = intent.getStringExtra(PopUpWindowAdmin.adminCourceChoicee);
         final String chapterN = intent.getStringExtra(PopUpWindowAdmin.adminChapterChoicee);
 
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
 
 
 
@@ -81,9 +85,32 @@ public class admin_browse_notes extends AppCompatActivity {
 
             }
         });
-//        if(adapter.getCount()< 0){
-//            textView.setText("No notes found");
-//        }
+        notesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                for (DataSnapshot childrf : snapshotrf.getChildren()) {
+                    note findNote = childrf.getValue(note.class);
+                    String courseId = findNote.getCourse();
+                    String chapterId = findNote.getChapterNum();
+                    if (courseId.equals(CourseN) && chapterId.equals(chapterN)) {
+                        textView.setText("");
+                        break;
+                    }
+
+                    else {
+                        textView.setText("no existing notes");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         noteslistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

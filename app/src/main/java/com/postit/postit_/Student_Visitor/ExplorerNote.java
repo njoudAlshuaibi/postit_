@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,7 +46,8 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    private DatabaseReference notesRef;
+    private TextView textView;
     String m;
     String c;
     String d;
@@ -91,7 +93,8 @@ public class ExplorerNote extends AppCompatActivity {
 
             }
         });
-
+        textView = (TextView) findViewById(R.id.tv);
+        notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
 
@@ -145,6 +148,30 @@ public class ExplorerNote extends AppCompatActivity {
             }
 
 
+        });
+        notesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                for (DataSnapshot childrf : snapshotrf.getChildren()) {
+                    note findNote = childrf.getValue(note.class);
+                    String courseId = findNote.getCourse();
+                    String chapterId = findNote.getChapterNum();
+                    if (courseId.equals(c) && chapterId.equals(d)) {
+                        textView.setText("");
+                        break;
+                    }
+
+                    else {
+                        textView.setText("no existing notes");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 
