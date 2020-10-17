@@ -62,7 +62,7 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
         //   holder.notedate.setText("\n\n\n\n\n                   "+"                 "+date);
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         Log.d("===", noteList.get(position).getTitle() + " 0");
-        holder.notedate.setText("\n\n\n\n\n                   " + "                 " + noteList.get(position).getDate());
+        holder.notedate.setText(noteList.get(position).getDate());
         holder.deleten2.setVisibility(View.INVISIBLE);
 
 
