@@ -3,12 +3,14 @@ package com.postit.postit_.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,8 @@ import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import java.util.List;
+
+import static android.provider.Settings.System.getString;
 
 public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.ViewHolder> {
 
@@ -65,11 +69,31 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     public void onBindViewHolder(@NonNull BrowseNoteAdapter.ViewHolder holder, int position) {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         final String id = noteList.get(position).getId();
-        //   holder.notedate.setText("\n\n\n\n\n                   "+"                 "+date);
+        final String title = noteList.get(position).getTitle();
+        final String body = noteList.get(position).getCaption();
         holder.noteTitleD.setText(noteList.get(position).getTitle());
-        Log.d("===", noteList.get(position).getTitle() + " 0");
         holder.notedate.setText(noteList.get(position).getDate());
         holder.deleten2.setVisibility(View.INVISIBLE);
+        holder.imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                Uri uri = Uri
+                        .parse("android.resource://com.postit.postit_/drawable/logo");
+                myIntent.setType("text/plain");
+                String shareBody = " title: " + title +"\n caption: "+body+"\n Shared from POST-it.";
+                String name=title;
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                myIntent.setType("image/png");
+                myIntent.setPackage("com.twitter.android");
+                context.startActivity(Intent.createChooser(myIntent, "Share this via"));
+
+
+            }
+        });
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -133,12 +157,14 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
         TextView notedate;
         ImageButton deleten2;
         String date;
+        ImageView imageView3;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             noteTitleD = itemView.findViewById(R.id.noteTitle);
             notedate = itemView.findViewById(R.id.notedate);
             deleten2 = itemView.findViewById(R.id.deleten2);
+            imageView3 = itemView.findViewById(R.id.imageView3);
 
         }
     }
