@@ -5,10 +5,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
@@ -19,6 +29,9 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     Context context;
     private List<note> noteList;
     CustomItemClickListener listener;
+    private DatabaseReference noteRef;
+    private FirebaseUser user;
+    String userEmail;
 
 
     public BrowseNoteAdapter(Context context, List<note> noteList , CustomItemClickListener listener) {
@@ -44,26 +57,72 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull BrowseNoteAdapter.ViewHolder holder, int position) {
-
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+        final String id = noteList.get(position).getId();
         //   holder.notedate.setText("\n\n\n\n\n                   "+"                 "+date);
         holder.noteTitleD.setText(noteList.get(position).getTitle());
-        Log.d("===" , noteList.get(position).getTitle()+" 0");
-        holder.notedate.setText("\n\n\n\n\n                   "+"                 "+noteList.get(position).getDate());
+        Log.d("===", noteList.get(position).getTitle() + " 0");
+        holder.notedate.setText("\n\n\n\n\n                   " + "                 " + noteList.get(position).getDate());
+        holder.deleten2.setVisibility(View.INVISIBLE);
 
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userEmail = user.getEmail().trim();
+        } else {
+            // No user is signed in
+        }
+
+
+        if (noteList.get(position).getEmail().trim().equals(userEmail))
+     {
+            holder.deleten2.setVisibility(View.VISIBLE);
+        holder.deleten2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                noteRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                        for (DataSnapshot childnn : snapshothh.getChildren()) {
+                            note findnote = childnn.getValue(note.class);
+                            String noteid = findnote.getId();
+
+
+                            if (noteid.equals(id)) {
+                                deleteNote(noteid);
+                                break;
+                            }
+
+                        }
+                    }
+
+                    public void deleteNote(String noteKey) {
+                        noteRef.child(noteKey.trim()).removeValue();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+        });
+    }
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView noteTitleD ;
         TextView notedate;
+        ImageButton deleten2;
         String date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             noteTitleD = itemView.findViewById(R.id.noteTitle);
             notedate = itemView.findViewById(R.id.notedate);
-
+            deleten2 = itemView.findViewById(R.id.deleten2);
 
         }
     }
