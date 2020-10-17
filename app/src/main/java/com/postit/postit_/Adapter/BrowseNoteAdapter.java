@@ -1,6 +1,8 @@
 package com.postit.postit_.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +22,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
+import com.postit.postit_.Student_Visitor.ExplorerNote;
+import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import java.util.List;
@@ -85,12 +91,22 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
                     public void onDataChange(@NonNull DataSnapshot snapshothh) {
                         for (DataSnapshot childnn : snapshothh.getChildren()) {
                             note findnote = childnn.getValue(note.class);
-                            String noteid = findnote.getId();
+                            final String noteid = findnote.getId();
 
 
                             if (noteid.equals(id)) {
-                                deleteNote(noteid);
-                                break;
+                                AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                        .setTitle("are you sure?")
+                                        .setMessage("do you want to delete this note? ")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                deleteNote(noteid);
+                                                                                          }
+                                        })
+                                        .setNegativeButton("No", null)
+                                        .show();
+
                             }
 
                         }
