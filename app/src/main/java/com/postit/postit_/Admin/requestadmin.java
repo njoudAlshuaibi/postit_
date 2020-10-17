@@ -55,7 +55,7 @@ public class requestadmin extends AppCompatActivity {
                 requestsList.clear();
                 for (DataSnapshot snapshotx : snapshotr.getChildren()) {
                     requests reqObj = snapshotx.getValue(requests.class);
-                    String reqdisplay = "Major: " + reqObj.getRequestedMajor() + "\nCourse: " + reqObj.getRequestedCourse() + "\nChapter/s: " + reqObj.getRequestedChapter() + "\nID: " + reqObj.getId();
+                    String reqdisplay = "Major: " + reqObj.getRequestedMajor() + "\nCourse: " + reqObj.getRequestedCourse() + "\nChapter/s: " + reqObj.getRequestedChapter();
                     requestsList.add(reqdisplay);
                 }
                 adapter.notifyDataSetChanged();

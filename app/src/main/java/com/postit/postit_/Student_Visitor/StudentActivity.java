@@ -26,6 +26,7 @@ public class StudentActivity extends AppCompatActivity {
     Session session;
     private FirebaseAuth firebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class StudentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         session = new Session(getApplicationContext());
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         CardView cv = (CardView) findViewById(R.id.Request);
         cv.setOnClickListener(new View.OnClickListener() {
@@ -132,14 +132,18 @@ public class StudentActivity extends AppCompatActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if(user == null){
+            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
-        getMenuInflater().inflate(R.menu.student_menu, menu);
+        else{
+        getMenuInflater().inflate(R.menu.student_menu, menu);}
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.exit) {
             AlertDialog.Builder builder = new AlertDialog.Builder(StudentActivity.this);
             builder.setMessage("Are you sure you want to logout?");
