@@ -39,7 +39,7 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     Context context;
     private List<note> noteList;
     CustomItemClickListener listener;
-    private DatabaseReference noteRef;
+    private DatabaseReference noteRef, favouriteRef;
     private FirebaseUser user;
     String userEmail;
 
@@ -68,6 +68,7 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     @Override
     public void onBindViewHolder(@NonNull BrowseNoteAdapter.ViewHolder holder, int position) {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+        favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         final String id = noteList.get(position).getId();
         final String title = noteList.get(position).getTitle();
         final String body = noteList.get(position).getCaption();
@@ -149,6 +150,55 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
 
         });
     }
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+
+        holder.addFavourite.setOnClickListener(new View.OnClickListener() {
+
+            final String currentUserid = user.getUid().trim();
+            @Override
+            public void onClick(View view) {
+                noteRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                        for (DataSnapshot childnn : snapshothh.getChildren()) {
+                            final   note findnote = childnn.getValue(note.class);
+                            final String noteid = findnote.getId();
+
+
+                            if (noteid.equals(id)) {
+                                AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                        .setMessage("do you want to add this note to your favorite list?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                addToFavoriteList(findnote);
+
+                                            }
+                                        })
+                                        .setNegativeButton("No", null)
+                                        .show();
+
+                            }
+
+                        }
+                    }
+
+                    public void addToFavoriteList(note findnote) {
+                        String favNoteid=favouriteRef.push().getKey();
+                        favouriteRef.child(currentUserid).child(favNoteid).setValue(findnote);
+                        //favouriteChecker(favNoteid);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+        });
+    }
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder {
@@ -158,6 +208,7 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
         ImageButton deleten2;
         String date;
         ImageView imageView3;
+        ImageButton addFavourite;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -165,6 +216,7 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
             notedate = itemView.findViewById(R.id.notedate);
             deleten2 = itemView.findViewById(R.id.deleten2);
             imageView3 = itemView.findViewById(R.id.imageView3);
+            addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
 
         }
     }
@@ -174,4 +226,5 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     public int getItemCount() {
         return noteList.size();
     }
+
 }
