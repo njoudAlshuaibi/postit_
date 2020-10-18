@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".favoritelist"
+    tools:context=".Student_Visitor.favoritelist"
     android:orientation="vertical"
     android:background="@drawable/bg"
-    android:autoMirrored="true"
-    >
+    android:autoMirrored="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,5 +21,29 @@
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="#FFFBD4" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="17sp"
+            android:textStyle="italic" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/FavoriteListRecycleView"
+            android:layout_width="337dp"
+            android:layout_height="510dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="-999dp"
+            android:layout_marginBottom="29dp" />
+
+
+
+
     </LinearLayout>
 </LinearLayout>
