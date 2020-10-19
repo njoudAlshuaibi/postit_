@@ -60,8 +60,8 @@
                 android:id="@+id/imageButtoncancel"
                 android:layout_width="19dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="280dp"
-                android:layout_marginTop="-15dp"
+                android:layout_marginLeft="295dp"
+                android:layout_marginTop="-19dp"
                 android:hint="ADD COURSE"
                 app:srcCompat="@drawable/ic_outline_cancel_24"
                 tools:ignore="VectorDrawableCompat" />

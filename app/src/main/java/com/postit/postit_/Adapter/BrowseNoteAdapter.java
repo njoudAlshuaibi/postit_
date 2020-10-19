@@ -78,6 +78,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
         holder.deleten2.setVisibility(View.INVISIBLE);
+        holder.addFavourite.setVisibility(View.INVISIBLE);
+
         holder.imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +156,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         }
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
+            holder.addFavourite.setVisibility(View.VISIBLE);
 
             holder.addFavourite.setOnClickListener(new View.OnClickListener() {
 
