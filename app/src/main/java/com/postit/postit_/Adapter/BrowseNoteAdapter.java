@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -28,13 +29,15 @@ import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 import com.postit.postit_.Student_Visitor.ExplorerNote;
 import com.postit.postit_.Student_Visitor.StudentActivity;
+import com.postit.postit_.Student_Visitor.creatnotepopup;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
+
 import java.util.List;
 
 import static android.provider.Settings.System.getString;
 
-public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.ViewHolder> {
+public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.ViewHolder> {
 
     Context context;
     private List<note> noteList;
@@ -44,7 +47,7 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     String userEmail;
 
 
-    public BrowseNoteAdapter(Context context, List<note> noteList , CustomItemClickListener listener) {
+    public BrowseNoteAdapter(Context context, List<note> noteList, CustomItemClickListener listener) {
         this.context = context;
         this.noteList = noteList;
         this.listener = listener;
@@ -59,14 +62,14 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.OnItemClick(view , mv.getAdapterPosition());
+                listener.OnItemClick(view, mv.getAdapterPosition());
             }
         });
-        return  mv;
+        return mv;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BrowseNoteAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final BrowseNoteAdapter.ViewHolder holder, int position) {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         final String id = noteList.get(position).getId();
@@ -83,8 +86,8 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
                 Uri uri = Uri
                         .parse("android.resource://com.postit.postit_/drawable/logo");
                 myIntent.setType("text/plain");
-                String shareBody = " title: " + title +"\n caption: "+body+"\n Shared from POST-it.";
-                String name=title;
+                String shareBody = " title: " + title + "\n caption: " + body + "\n Shared from POST-it.";
+                String name = title;
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
                 myIntent.putExtra(Intent.EXTRA_STREAM, uri);
@@ -105,110 +108,152 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
         }
 
 
-        if (noteList.get(position).getEmail().trim().equals(userEmail))
-     {
+        if (noteList.get(position).getEmail().trim().equals(userEmail)) {
             holder.deleten2.setVisibility(View.VISIBLE);
-        holder.deleten2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                noteRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshothh) {
-                        for (DataSnapshot childnn : snapshothh.getChildren()) {
-                            note findnote = childnn.getValue(note.class);
-                            final String noteid = findnote.getId();
+            holder.deleten2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    noteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                            for (DataSnapshot childnn : snapshothh.getChildren()) {
+                                note findnote = childnn.getValue(note.class);
+                                final String noteid = findnote.getId();
 
 
-                            if (noteid.equals(id)) {
-                                AlertDialog alertDialog = new AlertDialog.Builder(context)
-                                        .setTitle("are you sure?")
-                                        .setMessage("do you want to delete this note? ")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                deleteNote(noteid);
-                                                                                          }
-                                        })
-                                        .setNegativeButton("No", null)
-                                        .show();
+                                if (noteid.equals(id)) {
+                                    AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                            .setTitle("are you sure?")
+                                            .setMessage("do you want to delete this note? ")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    deleteNote(noteid);
+                                                }
+                                            })
+                                            .setNegativeButton("No", null)
+                                            .show();
+
+                                }
 
                             }
+                        }
+
+                        public void deleteNote(String noteKey) {
+                            noteRef.child(noteKey.trim()).removeValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    }
+                    });
+                }
 
-                    public void deleteNote(String noteKey) {
-                        noteRef.child(noteKey.trim()).removeValue();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-        });
-    }
+            });
+        }
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
+        if (user != null) {
 
-        holder.addFavourite.setOnClickListener(new View.OnClickListener() {
+            holder.addFavourite.setOnClickListener(new View.OnClickListener() {
 
-            final String currentUserid = user.getUid().trim();
-            @Override
-            public void onClick(View view) {
-                noteRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshothh) {
-                        for (DataSnapshot childnn : snapshothh.getChildren()) {
-                            final   note findnote = childnn.getValue(note.class);
-                            final String noteid = findnote.getId();
+                final String currentUserid = user.getUid().trim();
+
+                @Override
+                public void onClick(View view) {
+                    noteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                            for (DataSnapshot childnn : snapshothh.getChildren()) {
+                                final note findnote = childnn.getValue(note.class);
+                                final String noteid = findnote.getId();
 
 
-                            if (noteid.equals(id)) {
-                                AlertDialog alertDialog = new AlertDialog.Builder(context)
-                                        .setMessage("do you want to add this note to your favorite list?")
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                if (noteid.equals(id)) {
+                                    AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                            .setMessage("do you want to add this note to your favorite list?")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    addToFavoriteList(findnote);
+
+                                                }
+                                            })
+                                            .setNegativeButton("No", null)
+                                            .show();
+
+                                }
+
+                            }
+                        }
+
+                        public void addToFavoriteList(final note findnote) {
+                            final boolean[] flag = {false};
+                            favouriteRef.child(currentUserid).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
+                                    for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
+                                        note Nobj = messageSnapshotii.getValue(note.class);
+                                        if (Nobj.getId().equals(id)) {
+                                            flag[0] = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!flag[0]) {
+                                        final String favNoteid = favouriteRef.push().getKey();
+                                        favouriteRef.child(currentUserid).child(favNoteid).setValue(findnote);
+
+                                        favouriteRef.addValueEventListener(new ValueEventListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                addToFavoriteList(findnote);
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.child(currentUserid).hasChild(favNoteid)) {
+                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_24);
+                                                } else {
+                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_not_24);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
 
                                             }
-                                        })
-                                        .setNegativeButton("No", null)
-                                        .show();
+                                        });
+                                    } else {
+                                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                                .setMessage("note already added")
+                                                .show();
+                                    }
+                                }
 
-                            }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
 
                         }
-                    }
 
-                    public void addToFavoriteList(note findnote) {
-                        String favNoteid=favouriteRef.push().getKey();
-                        favouriteRef.child(currentUserid).child(favNoteid).setValue(findnote);
-                        //favouriteChecker(favNoteid);
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
 
-                    }
-                });
-            }
+            });
+        }
 
-        });
-    }
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView noteTitleD ;
+        TextView noteTitleD;
         TextView notedate;
         ImageButton deleten2;
         String date;
         ImageView imageView3;
         ImageButton addFavourite;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -226,5 +271,4 @@ public class BrowseNoteAdapter  extends RecyclerView.Adapter <BrowseNoteAdapter.
     public int getItemCount() {
         return noteList.size();
     }
-
 }
