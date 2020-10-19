@@ -1,6 +1,9 @@
 package com.postit.postit_.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,12 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
     private List<note> noteList;
     CustomItemClickListener listener;
     private DatabaseReference favouriteRef;
+    private DatabaseReference noteRef;
+    String userEmail;
+    private FirebaseUser user;
+
+
+
 
 
     public FavoriteListAdapter(Context context, List<note> noteList , CustomItemClickListener listener) {
@@ -52,20 +61,98 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
             }
         });
         return  mv;
+
+
     }
-
-
-
     @Override
     public int getItemCount() {
         return noteList.size();
     }
     @Override
     public void onBindViewHolder(@NonNull FavoriteListAdapter.ViewHolder holder, int position) {
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
+        holder.deleten2.setVisibility(View.INVISIBLE);
+        final String id = noteList.get(position).getId();
+        final String title = noteList.get(position).getTitle();
+        final String body = noteList.get(position).getCaption();
 
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userEmail = user.getEmail().trim();
+        } else {
+            // No user is signed in
+        }
+
+        holder.imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                Uri uri = Uri
+                        .parse("android.resource://com.postit.postit_/drawable/logo");
+                myIntent.setType("text/plain");
+                String shareBody = " title: " + title +"\n caption: "+body+"\n Shared from POST-it.";
+                String name=title;
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                myIntent.setType("image/png");
+                myIntent.setPackage("com.twitter.android");
+                context.startActivity(Intent.createChooser(myIntent, "Share this via"));
+
+
+            }
+        });
+
+        if (noteList.get(position).getEmail().trim().equals(userEmail))
+        {
+            holder.deleten2.setVisibility(View.VISIBLE);
+            holder.deleten2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    noteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                            for (DataSnapshot childnn : snapshothh.getChildren()) {
+                                note findnote = childnn.getValue(note.class);
+                                final String noteid = findnote.getId();
+
+
+                                if (noteid.equals(id)) {
+                                    AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                            .setTitle("are you sure?")
+                                            .setMessage("do you want to delete this note? ")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    deleteNote(noteid);
+                                                }
+                                            })
+                                            .setNegativeButton("No", null)
+                                            .show();
+
+                                }
+
+                            }
+                        }
+
+                        public void deleteNote(String noteKey) {
+                            noteRef.child(noteKey.trim()).removeValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+            });
+        }
     }
     public  class ViewHolder extends RecyclerView.ViewHolder {
 
