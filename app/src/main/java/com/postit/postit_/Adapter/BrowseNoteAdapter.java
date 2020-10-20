@@ -88,7 +88,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                 Uri uri = Uri
                         .parse("android.resource://com.postit.postit_/drawable/logo");
                 myIntent.setType("text/plain");
-                String shareBody = " title: " + title + "\n caption: " + body + "\n Shared from POST-it.";
+                String shareBody = " Title: " + title + "\n Caption: " + body + "\n Shared from POST-it.";
                 String name = title;
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
