@@ -149,6 +149,11 @@ public class mynotes extends AppCompatActivity {
             }
         });
 
+        // juju delete mynote start
+
+
+
+
     }
 
     @Override

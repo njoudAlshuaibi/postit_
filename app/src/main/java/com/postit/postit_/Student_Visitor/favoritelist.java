@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
 import com.postit.postit_.Adapter.FavoriteListAdapter;
 import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class favoritelist extends AppCompatActivity {
-    List<note> noteList = new ArrayList<>();
+    List<favoriteList> noteList = new ArrayList<>();
     FavoriteListAdapter noteAdapter ;
     RecyclerView recyclerView;
     private DatabaseReference favouriteRef;
@@ -56,7 +57,7 @@ public class favoritelist extends AppCompatActivity {
             @Override
             public void OnItemClick(View v, int pos) {
 
-                note n = noteList.get(pos);
+                favoriteList n = noteList.get(pos);
                 String s = n.getTitle();
                 String a = n.getCaption();
                 String m = n.getEmail();
@@ -74,49 +75,26 @@ public class favoritelist extends AppCompatActivity {
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         super.onResume();
+
         favouriteRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.exists()){
-
-
-                    for (DataSnapshot messageSnapshot: snapshot.getChildren()) {
-                        String favlistid=messageSnapshot.getKey();
-                        if (favlistid.equals(user.getUid())){
-                            favouriteRef.child(favlistid.trim()).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
-                                    noteList.clear();
-                                    noteAdapter.notifyDataSetChanged();
-                                    for (DataSnapshot messageSnapshotii: snapshotiooo.getChildren()) {
-                                        note Nobj = messageSnapshotii.getValue(note.class);
-                                        noteList.add(Nobj);}
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-
-                        }
-
-                    }
-                }
-                else {
-                    Log.d("===" , "No Data Was Found");
-                }
-
+            public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
+                noteList.clear();
                 noteAdapter.notifyDataSetChanged();
+                for (DataSnapshot messageSnapshotii: snapshotiooo.getChildren()) {
+                    favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
+                    if(Nobj.getUserID().equals(user.getUid()))
+                        noteList.add(Nobj);}
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
-
         });
+
+
+        noteAdapter.notifyDataSetChanged();
 
     }
     @Override
