@@ -14,6 +14,7 @@ public class note {
     private String email;
     private String id;
     private String date;
+    private String rate;
 
 
     public note() {
@@ -26,7 +27,7 @@ public class note {
 
     }
 
-    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id) {
+    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -35,11 +36,27 @@ public class note {
         this.caption = caption;
         this.email = email;
         this.id = id;
+
         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         Date dateobj = new Date();
         date = df.format(dateobj);
     }
-//نتغلللل
+
+    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,String rate) {
+        this.college = college;
+        this.major = major;
+        this.course = course;
+        this.chapterNum = chapterNum;
+        this.title = title;
+        this.caption = caption;
+        this.email = email;
+        this.id = id;
+        this.rate = rate;
+        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+        Date dateobj = new Date();
+        date = df.format(dateobj);
+    }
+
 
     public String getDate() {
         return date;
@@ -112,6 +129,15 @@ public class note {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
 
 
 
