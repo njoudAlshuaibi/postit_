@@ -145,6 +145,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         public void deleteNote(String noteKey) {
                             noteRef.child(noteKey.trim()).removeValue();
+                            favouriteRef.child(noteKey.trim()).removeValue();
                         }
 
                         @Override
