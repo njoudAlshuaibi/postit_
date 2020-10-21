@@ -22,9 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.R;
 import com.postit.postit_.Student_Visitor.ExplorerNote;
 import com.postit.postit_.Student_Visitor.StudentActivity;
+import com.postit.postit_.Student_Visitor.favoritelist;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import java.util.List;
@@ -32,7 +34,7 @@ import java.util.List;
 
 public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdapter.ViewHolder> {
     Context context;
-    private List<note> noteList;
+    private List<favoriteList> noteList;
     CustomItemClickListener listener;
     private DatabaseReference favouriteRef;
     private DatabaseReference noteRef;
@@ -43,7 +45,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
 
 
-    public FavoriteListAdapter(Context context, List<note> noteList , CustomItemClickListener listener) {
+    public FavoriteListAdapter(Context context, List<favoriteList> noteList , CustomItemClickListener listener) {
         this.context = context;
         this.noteList = noteList;
         this.listener = listener;
@@ -173,4 +175,4 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         }
     }
 
-    }
+}

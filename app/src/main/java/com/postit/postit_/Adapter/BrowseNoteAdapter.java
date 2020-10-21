@@ -32,6 +32,7 @@ import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.Student_Visitor.creatnotepopup;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.favoriteList;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     private DatabaseReference noteRef, favouriteRef;
     private FirebaseUser user;
     String userEmail;
+    boolean flag = false;
 
 
     public BrowseNoteAdapter(Context context, List<note> noteList, CustomItemClickListener listener) {
@@ -191,40 +193,48 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                         }
 
                         public void addToFavoriteList(final note findnote) {
-                            final boolean[] flag = {false};
-                            favouriteRef.child(currentUserid).addValueEventListener(new ValueEventListener() {
+                            final favoriteList favNote= new favoriteList();
+                            favNote.setCaption(findnote.getCaption());
+                            favNote.setTitle(findnote.getTitle());
+                            favNote.setChapterNum(findnote.getChapterNum());
+                            favNote.setCollege(findnote.getCollege());
+                            favNote.setCourse(findnote.getCourse());
+                            favNote.setMajor(findnote.getMajor());
+                            favNote.setDate(findnote.getDate());
+                            favNote.setEmail(findnote.getEmail());
+                            favNote.setId(findnote.getId());
+                            favNote.setUserID(currentUserid);
+                            favouriteRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
                                     for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
-                                        note Nobj = messageSnapshotii.getValue(note.class);
+                                        favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
                                         if (Nobj.getId().equals(id)) {
-                                            flag[0] = true;
+                                            flag = true;
                                             break;
                                         }
                                     }
-                                    if (!flag[0]) {
-                                        final String favNoteid = favouriteRef.push().getKey();
-                                        favouriteRef.child(currentUserid).child(favNoteid).setValue(findnote);
+                                    if (!flag) {
+                                        final String favNoteid = findnote.getId();
+                                        favouriteRef.child(favNoteid).setValue(favNote);
 
-                                        favouriteRef.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if (snapshot.child(currentUserid).hasChild(favNoteid)) {
-                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_24);
-                                                } else {
-                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_not_24);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                            }
-                                        });
+//                                        favouriteRef.addValueEventListener(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                                if () {
+//                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_24);
+//                                                } else {
+//                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_not_24);
+//                                                }
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                            }
+//                                        });
                                     } else {
-                                        AlertDialog alertDialog = new AlertDialog.Builder(context)
-                                                .setMessage("note already added")
-                                                .show();
+
                                     }
                                 }
 
