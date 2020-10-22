@@ -15,12 +15,12 @@
         android:background="@drawable/note0"
 
         >
+
         <ImageView
+            android:id="@+id/post_image"
             android:layout_width="match_parent"
             android:layout_height="248dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/post_image"
-            />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/noteTitle"
@@ -43,23 +43,33 @@
             android:orientation="horizontal"
             android:paddingBottom="0dp">
 
+            <ImageButton
+                android:id="@+id/remove"
+                android:layout_width="27dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="-30dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_outline_cancel_24" />
 
             <ImageButton
                 android:id="@+id/fvrt_f2_item"
                 android:layout_width="27dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="6dp"
-                android:layout_marginRight="7dp"
+                android:layout_marginRight="5dp"
                 android:background="@android:color/transparent"
                 android:padding="5dp"
-                android:src="@drawable/ic_baseline_turned_in_not_24" />
+                android:src="@drawable/ic_baseline_favorite_border_24" />
+
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="30dp"
                 android:layout_height="18dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="1dp"
                 app:srcCompat="@drawable/twitter" />
 
             <ImageButton
@@ -67,7 +77,7 @@
                 android:layout_width="27dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginRight="3dp"
                 android:background="@android:color/transparent"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_delete_24" />

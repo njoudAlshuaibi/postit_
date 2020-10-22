@@ -77,17 +77,12 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
         holder.deleten2.setVisibility(View.INVISIBLE);
-        final String id = noteList.get(position).getId();
+        final String id5 = noteList.get(position).getnId();
         final String title = noteList.get(position).getTitle();
         final String body = noteList.get(position).getCaption();
+        holder.addFavourite.setVisibility(View.INVISIBLE);
 
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            userEmail = user.getEmail().trim();
-        } else {
-            // No user is signed in
-        }
 
         holder.imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +104,12 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
             }
         });
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userEmail = user.getEmail().trim();
+        } else {
+            // No user is signed in
+        }
 
         if (noteList.get(position).getEmail().trim().equals(userEmail))
         {
@@ -118,13 +119,12 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                 public void onClick(View view) {
                     noteRef.addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
-                            for (DataSnapshot childnn : snapshothh.getChildren()) {
-                                note findnote = childnn.getValue(note.class);
+                        public void onDataChange(@NonNull DataSnapshot snapshothhh) {
+                            for (DataSnapshot childnn4 : snapshothhh.getChildren()) {
+                                note findnote = childnn4.getValue(note.class);
                                 final String noteid = findnote.getId();
 
-
-                                if (noteid.equals(id)) {
+                                if (noteid.equals(id5)) {
                                     AlertDialog alertDialog = new AlertDialog.Builder(context)
                                             .setTitle("are you sure?")
                                             .setMessage("do you want to delete this note? ")
@@ -132,6 +132,30 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     deleteNote(noteid);
+                                                    favouriteRef.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshota) {
+                                                            for (DataSnapshot childnn8 : snapshota.getChildren()) {
+                                                                favoriteList findnote3 = childnn8.getValue(favoriteList.class);
+                                                                final String noteid2 = findnote3.getnId();
+                                                                final String noteid23 = findnote3.getId();
+
+
+                                                                if (noteid2.equals(id5)) {
+                                                                    deleteNote2(noteid23);
+                                                                }
+
+                                                            }
+                                                        }
+                                                        public void deleteNote2(String noteKey) {
+                                                            favouriteRef.child(noteKey.trim()).removeValue();
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
                                                 }
                                             })
                                             .setNegativeButton("No", null)
@@ -151,10 +175,73 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                         }
                     });
+
+
                 }
 
             });
         }
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user.getEmail().equals(userEmail)) {
+            holder.remove.setVisibility(View.VISIBLE);
+            holder.remove.setOnClickListener(new View.OnClickListener() {
+                final String currentUserid = user.getUid().trim();
+
+                @Override
+                public void onClick(View view) {
+                    favouriteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                            for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
+                                favoriteList Nobj = messageSnapshoti.getValue(favoriteList.class);
+                                final String Nobjid = Nobj.getId();
+                                if(Nobj.getUserID().equals(currentUserid)){
+                                    if (Nobj.getnId().equals(id5)) {
+                                        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                                .setTitle("are you sure?")
+                                                .setMessage("do you want to remove this note from favorite list? ")
+                                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        deleteNote(Nobjid);
+                                                    }
+                                                })
+                                                .setNegativeButton("No", null)
+                                                .show();
+                                    }}
+                            }
+
+
+                        }
+
+                        public void deleteNote(String noteKey) {
+                            favouriteRef.child(noteKey.trim()).removeValue();
+                        }
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+            });
+        }
+
+        favouriteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshoti) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
     public  class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -163,6 +250,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         ImageButton deleten2;
         ImageView imageView3;
         ImageButton addFavourite;
+        ImageButton remove;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -171,6 +259,8 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
             deleten2 = itemView.findViewById(R.id.deleten2);
             imageView3 = itemView.findViewById(R.id.imageView3);
             addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
+            remove = itemView.findViewById(R.id.remove);
+
 
         }
     }
