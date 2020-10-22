@@ -14,7 +14,8 @@ public class note {
     private String email;
     private String id;
     private String date;
-    private int rate;
+    private float rate;
+    private int ratingCount;
 
 
     public note() {
@@ -42,7 +43,7 @@ public class note {
         date = df.format(dateobj);
     }
 
-    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,int rate) {
+    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,float rate ,int ratingCount) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -52,6 +53,7 @@ public class note {
         this.email = email;
         this.id = id;
         this.rate = rate;
+        this.ratingCount = ratingCount;
         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         Date dateobj = new Date();
         date = df.format(dateobj);
@@ -130,14 +132,21 @@ public class note {
         this.id = id;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 
+    public float getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(float rate) {
+        this.ratingCount = ratingCount;
+    }
 
 
 

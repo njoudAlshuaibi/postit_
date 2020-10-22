@@ -33,6 +33,7 @@ import com.postit.postit_.Student_Visitor.creatnotepopup;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.favoriteList;
+import com.postit.postit_.Student_Visitor.previewnote;
 
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     private FirebaseUser user;
     String userEmail;
     boolean flag = false;
+    int rateCount = 0 ;
 
 
     public BrowseNoteAdapter(Context context, List<note> noteList, CustomItemClickListener listener) {
@@ -323,4 +325,10 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     public int getItemCount() {
         return noteList.size();
     }
+
+    public float ratingcalc() {
+        rateCount++;
+        return 1f;
+    }
+
 }
