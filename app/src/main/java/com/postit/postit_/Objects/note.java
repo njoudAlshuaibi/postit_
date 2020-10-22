@@ -14,7 +14,7 @@ public class note {
     private String email;
     private String id;
     private String date;
-    private String rate;
+    private int rate;
 
 
     public note() {
@@ -42,7 +42,7 @@ public class note {
         date = df.format(dateobj);
     }
 
-    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,String rate) {
+    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,int rate) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -130,11 +130,11 @@ public class note {
         this.id = id;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 

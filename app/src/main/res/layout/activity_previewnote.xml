@@ -50,13 +50,32 @@
         <TextView
             android:id="@+id/notepr2"
             android:layout_width="294dp"
-            android:layout_height="209dp"
+            android:layout_height="142dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/ubuntu_bold"
             android:textColor="#605F5F"
             android:textSize="15dp" />
 
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginTop="-40dp"
+            android:numStars="4"
+            android:stepSize="0.5" />
+
+        <Button
+            android:id="@+id/submitRate"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:background="#EB75B2"
+            android:text="submit"
+            android:textColor="#fff" />
 
     </LinearLayout>
 
