@@ -20,6 +20,7 @@ public class previewnote extends AppCompatActivity {
     TextView notetit;
     RatingBar ratingBar;
     Button btnSubmit;
+     float rateNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,11 @@ public class previewnote extends AppCompatActivity {
             public void onClick(View view) {
                 String s = String.valueOf(ratingBar.getRating());
                 Toast.makeText(getApplicationContext(),s+"Star",Toast.LENGTH_SHORT).show();
+
+                 rateNum =Float.parseFloat(s);
             }
         });
 
     }
+
 }
