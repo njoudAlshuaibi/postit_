@@ -9,13 +9,14 @@ public class favoriteList {
     private String caption;
     private String email;
     private String id;
+    private String nid;
     private String date;
     private String userID;
 
     public favoriteList() {
     }
 
-    public favoriteList(String college, String major, String course, String chapterNum, String title, String caption, String email, String id, String date, String userID) {
+    public favoriteList(String college, String major, String course, String chapterNum, String title, String caption, String email, String id,String nid, String date, String userID) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -24,6 +25,8 @@ public class favoriteList {
         this.caption = caption;
         this.email = email;
         this.id = id;
+        this.nid = nid;
+
         this.date = date;
         this.userID = userID;
     }
@@ -90,6 +93,14 @@ public class favoriteList {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getnId() {
+        return nid;
+    }
+
+    public void setnId(String nid) {
+        this.nid = nid;
     }
 
     public String getDate() {

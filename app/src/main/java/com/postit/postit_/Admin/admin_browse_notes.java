@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 import com.postit.postit_.Student_Visitor.ExplorerNote;
@@ -37,10 +38,14 @@ public class admin_browse_notes extends AppCompatActivity {
     private DatabaseReference notesRef;
     private DatabaseReference ref;
     private DatabaseReference  noteRef;
+    DatabaseReference favouriteRef;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_browse_notes);
         Toolbar tb = findViewById(R.id.toolbar_adminnote);
@@ -125,6 +130,31 @@ public class admin_browse_notes extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 notesRef.child(notetKey.trim()).removeValue();
+                                favouriteRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshota) {
+                                        for (DataSnapshot childnn8 : snapshota.getChildren()) {
+                                            favoriteList findnote3 = childnn8.getValue(favoriteList.class);
+                                            final String noteid2 = findnote3.getnId();
+                                            final String noteid23 = findnote3.getId();
+
+
+
+                                            if (noteid2.equals(notetKey.trim())) {
+                                                deleteNote2(noteid23);
+                                            }
+
+                                        }
+                                    }
+                                    public void deleteNote2(String noteKey) {
+                                        favouriteRef.child(noteKey.trim()).removeValue();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                                 notesList.remove(whichItem);
                                 adapter.notifyDataSetChanged();
                             }

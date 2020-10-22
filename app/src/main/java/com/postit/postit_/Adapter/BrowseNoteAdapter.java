@@ -80,27 +80,48 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
         holder.deleten2.setVisibility(View.INVISIBLE);
+        holder.remove.setVisibility(View.INVISIBLE);
         holder.addFavourite.setVisibility(View.INVISIBLE);
+
 
         holder.imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                Uri uri = Uri
-                        .parse("android.resource://com.postit.postit_/drawable/logo");
-                myIntent.setType("text/plain");
-                String shareBody = " Title: " + title + "\n Caption: " + body + "\n Shared from POST-it.";
-                String name = title;
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                myIntent.setType("image/png");
-                myIntent.setPackage("com.twitter.android");
-                context.startActivity(Intent.createChooser(myIntent, "Share this via"));
+//                Intent myIntent = new Intent(Intent.ACTION_SEND);
+//                Uri uri = Uri
+//                        .parse("android.resource://com.postit.postit_/drawable/logo");
+//                myIntent.setType("text/plain");
+//                String shareBody = " Title: " + title + "\n Caption: " + body + "\n Shared from POST-it.";
+//                String name = title;
+//                myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
+//                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+//                myIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//                myIntent.setType("image/png");
+//                myIntent.setPackage("com.twitter.android");
+//                context.startActivity(Intent.createChooser(myIntent, "Share this via"));
+                final String currentUserid = user.getUid().trim();
+                favouriteRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshoti) {
+                        for (DataSnapshot messageSnapshoti : snapshoti.getChildren()) {
+                            favoriteList Nobj = messageSnapshoti.getValue(favoriteList.class);
+                            String Nobjid = Nobj.getId();
+                            if(Nobj.getUserID().equals(currentUserid)){
+                                if (Nobj.getnId().equals(id)) {
+                                    favouriteRef.child(Nobjid.trim()).removeValue();
+                                }}
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
             }
+
+
         });
 
 
@@ -133,6 +154,30 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     deleteNote(noteid);
+                                                    favouriteRef.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshota) {
+                                                            for (DataSnapshot childnn8 : snapshota.getChildren()) {
+                                                                favoriteList findnote3 = childnn8.getValue(favoriteList.class);
+                                                                final String noteid2 = findnote3.getnId();
+                                                                final String noteid23 = findnote3.getId();
+
+
+                                                                if (noteid2.equals(id)) {
+                                                                    deleteNote2(noteid23);
+                                                                }
+
+                                                            }
+                                                        }
+                                                        public void deleteNote2(String noteKey) {
+                                                            favouriteRef.child(noteKey.trim()).removeValue();
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
                                                 }
                                             })
                                             .setNegativeButton("No", null)
@@ -145,7 +190,6 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         public void deleteNote(String noteKey) {
                             noteRef.child(noteKey.trim()).removeValue();
-                            favouriteRef.child(noteKey.trim()).removeValue();
                         }
 
                         @Override
@@ -153,6 +197,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         }
                     });
+
+
                 }
 
             });
@@ -162,7 +208,6 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
             holder.addFavourite.setVisibility(View.VISIBLE);
 
             holder.addFavourite.setOnClickListener(new View.OnClickListener() {
-
                 final String currentUserid = user.getUid().trim();
 
                 @Override
@@ -182,7 +227,6 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     addToFavoriteList(findnote);
-
                                                 }
                                             })
                                             .setNegativeButton("No", null)
@@ -195,6 +239,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         public void addToFavoriteList(final note findnote) {
                             final favoriteList favNote= new favoriteList();
+                            final String id2 = favouriteRef.push().getKey();
+
                             favNote.setCaption(findnote.getCaption());
                             favNote.setTitle(findnote.getTitle());
                             favNote.setChapterNum(findnote.getChapterNum());
@@ -203,37 +249,24 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favNote.setMajor(findnote.getMajor());
                             favNote.setDate(findnote.getDate());
                             favNote.setEmail(findnote.getEmail());
-                            favNote.setId(findnote.getId());
+                            favNote.setId(id2);
+                            favNote.setnId(findnote.getId());
                             favNote.setUserID(currentUserid);
+
+
                             favouriteRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
                                     for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
                                         favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
-                                        if (Nobj.getId().equals(id)) {
+                                        if (Nobj.getnId().equals(id)) {
+                                            if(Nobj.getUserID().equals(currentUserid)){
                                             flag = true;
                                             break;
-                                        }
+                                        }}
                                     }
                                     if (!flag) {
-                                        final String favNoteid = findnote.getId();
-                                        favouriteRef.child(favNoteid).setValue(favNote);
-
-//                                        favouriteRef.addValueEventListener(new ValueEventListener() {
-//                                            @Override
-//                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                                if () {
-//                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_24);
-//                                                } else {
-//                                                    holder.addFavourite.setImageResource(R.drawable.ic_baseline_turned_in_not_24);
-//                                                }
-//                                            }
-//
-//                                            @Override
-//                                            public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                            }
-//                                        });
+                                        favouriteRef.child(id2).setValue(favNote);
                                     } else {
 
                                     }
@@ -247,7 +280,10 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         }
 
-                        @Override
+
+
+
+                            @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
@@ -267,6 +303,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         String date;
         ImageView imageView3;
         ImageButton addFavourite;
+        ImageButton remove;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -276,6 +313,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
             deleten2 = itemView.findViewById(R.id.deleten2);
             imageView3 = itemView.findViewById(R.id.imageView3);
             addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
+            remove = itemView.findViewById(R.id.remove);
 
         }
     }
