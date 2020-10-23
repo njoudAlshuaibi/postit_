@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     boolean flag = false;
     int rateCount = 0 ;
     String m;
-
+    float rate;
 
     public BrowseNoteAdapter(Context context, List<note> noteList, CustomItemClickListener listener) {
         this.context = context;
@@ -83,6 +84,31 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         final String body = noteList.get(position).getCaption();
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
+
+        noteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
+                    note noteObj = noteSnapshot.getValue(note.class);
+                    String x = noteObj.getId();
+                    if (x.equals(id)) {
+                        rate = noteObj.getRate();
+                        holder.ratingBar.setRating(rate);
+                        break;
+
+                    }else{
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         holder.deleten2.setVisibility(View.INVISIBLE);
         holder.remove.setVisibility(View.INVISIBLE);
         holder.addFavourite.setVisibility(View.INVISIBLE);
@@ -311,6 +337,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         ImageView imageView3;
         ImageButton addFavourite;
         ImageButton remove;
+        RatingBar ratingBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -321,6 +348,9 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
             imageView3 = itemView.findViewById(R.id.imageView3);
             addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
             remove = itemView.findViewById(R.id.remove);
+            ratingBar = itemView.findViewById(R.id.rating_bar);
+
+            //ratingBar.setRating(rate);
 
         }
     }

@@ -144,7 +144,7 @@ public class note {
         return ratingCount;
     }
 
-    public void setRatingCount(int rate) {
+    public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
     }
 
