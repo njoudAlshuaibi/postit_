@@ -235,6 +235,8 @@ public class creatnotepopup extends AppCompatActivity {
             noteObj.setChapterNum(chapterChapter);
             noteObj.setId(id);
             noteObj.setEmail(userEmail);
+            noteObj.setRate(0f);
+            noteObj.setRatingCount(0);
 
             noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

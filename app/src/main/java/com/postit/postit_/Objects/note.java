@@ -28,20 +28,20 @@ public class note {
 
     }
 
-    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ) {
-        this.college = college;
-        this.major = major;
-        this.course = course;
-        this.chapterNum = chapterNum;
-        this.title = title;
-        this.caption = caption;
-        this.email = email;
-        this.id = id;
-
-        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-        Date dateobj = new Date();
-        date = df.format(dateobj);
-    }
+//    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ) {
+//        this.college = college;
+//        this.major = major;
+//        this.course = course;
+//        this.chapterNum = chapterNum;
+//        this.title = title;
+//        this.caption = caption;
+//        this.email = email;
+//        this.id = id;
+//
+//        DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+//        Date dateobj = new Date();
+//        date = df.format(dateobj);
+//    }
 
     public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,float rate ,int ratingCount) {
         this.college = college;
@@ -140,11 +140,11 @@ public class note {
         this.rate = rate;
     }
 
-    public float getRatingCount() {
+    public int getRatingCount() {
         return ratingCount;
     }
 
-    public void setRatingCount(float rate) {
+    public void setRatingCount(int rate) {
         this.ratingCount = ratingCount;
     }
 

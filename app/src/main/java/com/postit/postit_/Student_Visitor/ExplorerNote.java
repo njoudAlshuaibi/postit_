@@ -42,6 +42,7 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
+    public static final String preID = "com.postit.postit_.preID";
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
@@ -51,6 +52,8 @@ public class ExplorerNote extends AppCompatActivity {
     String m;
     String c;
     String d;
+    String r;
+    float rateNum;
 
     List<note> noteList = new ArrayList<>();
     BrowseNoteAdapter noteAdapter ;
@@ -106,17 +109,26 @@ public class ExplorerNote extends AppCompatActivity {
                 String s = n.getTitle();
                 String a = n.getCaption();
                 String m = n.getEmail();
+                String i = n.getId();
+
+
 
                 Intent in = new Intent(ExplorerNote.this, previewnote.class);
                 in.putExtra(preTitel,""+s );
                 in.putExtra(preCaption,""+a );
                 in.putExtra(preEmail,""+m );
+                in.putExtra(preID,i);
                 startActivity(in);
             } // end on item click listener
         });
         recyclerView = findViewById(R.id.ExNotemyRecycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(noteAdapter);
+
+        Intent intentRate = getIntent();
+        r = intent.getStringExtra(previewnote.EXTRA_rateNum);
+        rateNum =Float.parseFloat(r);
+
     }
 
     @Override

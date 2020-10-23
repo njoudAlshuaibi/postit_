@@ -30,6 +30,7 @@ import com.postit.postit_.R;
 import com.postit.postit_.Student_Visitor.ExplorerNote;
 import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.Student_Visitor.creatnotepopup;
+import com.postit.postit_.Student_Visitor.popUpWindow;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.favoriteList;
@@ -49,6 +50,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     String userEmail;
     boolean flag = false;
     int rateCount = 0 ;
+    String m;
 
 
     public BrowseNoteAdapter(Context context, List<note> noteList, CustomItemClickListener listener) {
@@ -86,6 +88,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         holder.addFavourite.setVisibility(View.INVISIBLE);
 
 
+
         holder.imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +113,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favoriteList Nobj = messageSnapshoti.getValue(favoriteList.class);
                             String Nobjid = Nobj.getId();
                             if(Nobj.getUserID().equals(currentUserid)){
-                                if (Nobj.getnId().equals(id)) {
+                                if (Nobj.getNid().equals(id)) {
                                     favouriteRef.child(Nobjid.trim()).removeValue();
                                 }}
                         }
@@ -161,7 +164,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                                         public void onDataChange(@NonNull DataSnapshot snapshota) {
                                                             for (DataSnapshot childnn8 : snapshota.getChildren()) {
                                                                 favoriteList findnote3 = childnn8.getValue(favoriteList.class);
-                                                                final String noteid2 = findnote3.getnId();
+                                                                final String noteid2 = findnote3.getNid();
                                                                 final String noteid23 = findnote3.getId();
 
 
@@ -252,8 +255,10 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favNote.setDate(findnote.getDate());
                             favNote.setEmail(findnote.getEmail());
                             favNote.setId(id2);
-                            favNote.setnId(findnote.getId());
+                            favNote.setNid(findnote.getId());
                             favNote.setUserID(currentUserid);
+                            favNote.setRate(findnote.getRate());
+                            favNote.setRatingCount(findnote.getRatingCount());
 
 
                             favouriteRef.addValueEventListener(new ValueEventListener() {
@@ -261,7 +266,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                 public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
                                     for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
                                         favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
-                                        if (Nobj.getnId().equals(id)) {
+                                        if (Nobj.getNid().equals(id)) {
                                             if(Nobj.getUserID().equals(currentUserid)){
                                             flag = true;
                                             break;
@@ -326,9 +331,6 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         return noteList.size();
     }
 
-    public float ratingcalc() {
-        rateCount++;
-        return 1f;
-    }
+
 
 }

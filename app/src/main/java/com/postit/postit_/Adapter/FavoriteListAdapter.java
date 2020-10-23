@@ -77,7 +77,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
         holder.deleten2.setVisibility(View.INVISIBLE);
-        final String id5 = noteList.get(position).getnId();
+        final String id5 = noteList.get(position).getNid();
         final String title = noteList.get(position).getTitle();
         final String body = noteList.get(position).getCaption();
         holder.addFavourite.setVisibility(View.INVISIBLE);
@@ -137,7 +137,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                                                         public void onDataChange(@NonNull DataSnapshot snapshota) {
                                                             for (DataSnapshot childnn8 : snapshota.getChildren()) {
                                                                 favoriteList findnote3 = childnn8.getValue(favoriteList.class);
-                                                                final String noteid2 = findnote3.getnId();
+                                                                final String noteid2 = findnote3.getNid();
                                                                 final String noteid23 = findnote3.getId();
 
 
@@ -197,7 +197,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                                 favoriteList Nobj = messageSnapshoti.getValue(favoriteList.class);
                                 final String Nobjid = Nobj.getId();
                                 if(Nobj.getUserID().equals(currentUserid)){
-                                    if (Nobj.getnId().equals(id5)) {
+                                    if (Nobj.getNid().equals(id5)) {
                                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                                 .setTitle("are you sure?")
                                                 .setMessage("do you want to remove this note from favorite list? ")
