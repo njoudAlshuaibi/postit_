@@ -52,8 +52,7 @@ public class ExplorerNote extends AppCompatActivity {
     String m;
     String c;
     String d;
-    String r;
-    float rateNum;
+
 
     List<note> noteList = new ArrayList<>();
     BrowseNoteAdapter noteAdapter ;
@@ -125,9 +124,7 @@ public class ExplorerNote extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(noteAdapter);
 
-        Intent intentRate = getIntent();
-        r = intent.getStringExtra(previewnote.EXTRA_rateNum);
-        rateNum =Float.parseFloat(r);
+
 
     }
 
