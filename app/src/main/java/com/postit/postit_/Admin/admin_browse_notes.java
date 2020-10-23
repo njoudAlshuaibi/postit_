@@ -135,7 +135,7 @@ public class admin_browse_notes extends AppCompatActivity {
                                     public void onDataChange(@NonNull DataSnapshot snapshota) {
                                         for (DataSnapshot childnn8 : snapshota.getChildren()) {
                                             favoriteList findnote3 = childnn8.getValue(favoriteList.class);
-                                            final String noteid2 = findnote3.getnId();
+                                            final String noteid2 = findnote3.getNid();
                                             final String noteid23 = findnote3.getId();
 
 
