@@ -193,7 +193,6 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                                                 final String noteid2 = findnote3.getNid();
                                                                 final String noteid23 = findnote3.getId();
 
-
                                                                 if (noteid2.equals(id)) {
                                                                     deleteNote2(noteid23);
                                                                 }
@@ -237,8 +236,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             holder.addFavourite.setVisibility(View.VISIBLE);
-
             holder.addFavourite.setOnClickListener(new View.OnClickListener() {
+
                 final String currentUserid = user.getUid().trim();
 
                 @Override
@@ -285,7 +284,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favNote.setUserID(currentUserid);
                             favNote.setRate(findnote.getRate());
                             favNote.setRatingCount(findnote.getRatingCount());
-
+                            favNote.setAllrates(findnote.getAllrates());
 
                             favouriteRef.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -325,7 +324,6 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
             });
         }
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

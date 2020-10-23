@@ -240,6 +240,7 @@ public class creatnotepopup extends AppCompatActivity {
             noteObj.setEmail(userEmail);
             noteObj.setRate(rate);
             noteObj.setRatingCount(ratec);
+            noteObj.setAllrates(0);
 
             noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
