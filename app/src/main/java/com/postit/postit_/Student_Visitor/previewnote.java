@@ -3,6 +3,7 @@ package com.postit.postit_.Student_Visitor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -30,6 +31,11 @@ public class previewnote extends AppCompatActivity {
     RatingBar ratingBar;
     Button btnSubmit;
     private DatabaseReference notesRef;
+    double rate;
+    int rateCount;
+    double currentRate;
+    int counter;
+    double newrate;
 
 
     public static final String EXTRA_rateNum = "com.postit.postit_.EXTRA_rateNum";
@@ -73,15 +79,35 @@ public class previewnote extends AppCompatActivity {
                 String s = String.valueOf(ratingBar.getRating());
                 Toast.makeText(getApplicationContext(),s+"Star",Toast.LENGTH_SHORT).show();
 
+                notesRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
+                            note noteObj = noteSnapshot.getValue(note.class);
+                            String x = noteObj.getId();
+                            if (x.equals(id)) {
+                                 rate = noteObj.getRate();
+                                 rateCount = noteObj.getRatingCount();
+                                break;
 
 
-                double rate = Double.parseDouble(findRate(id).trim());
-                int rateCount = Integer.parseInt(findRateCount(id).trim())+1;
-                double newRate = Float.parseFloat(s);
-                rate = rate + newRate;
-                rate = rate/rateCount;
-                notesRef.child(id).child("rate").setValue(rate);
-                notesRef.child(id).child("ratingCount").setValue(rateCount);
+                            }else{
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                 currentRate = Float.parseFloat(s);
+                 counter = rateCount+1;
+                 newrate =(currentRate + rate)/counter;
+                 notesRef.child(id).child("rate").setValue(newrate);
+                 notesRef.child(id).child("ratingCount").setValue(counter);
+
 
 
                 Intent intent = new Intent(previewnote.this, ExplorerNote.class);
@@ -97,61 +123,7 @@ public class previewnote extends AppCompatActivity {
 
     }
 
-    public String findRate( final String nI) {
-
-        final String[] xx = new String[1];
-
-        notesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
-                    note noteObj = noteSnapshot.getValue(note.class);
-                    String x = noteObj.getId();
-                    if (x.trim().equals(nI)) {
-                      xx[0] = ("")+noteObj.getRate();
-                            break;
 
 
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        String j = xx[0];
-        return j;
-    }
-
-    public String findRateCount( final String nI) {
-
-        final String[] xx = new String[1];
-
-        notesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
-                    note noteObj = noteSnapshot.getValue(note.class);
-                    String x = noteObj.getId();
-                    if (x.trim().equals(nI)) {
-                        xx[0] = ("")+noteObj.getRatingCount();
-                        break;
-
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        String j = xx[0];
-        return j;
-    }
 
 }
