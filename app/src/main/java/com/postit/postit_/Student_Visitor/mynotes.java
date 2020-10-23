@@ -49,6 +49,9 @@ public class mynotes extends AppCompatActivity {
     public static final String preID = "com.postit.postit_.preID";
     public static final String prerate = "com.postit.postit_.prerate";
     public static final String precrate = "com.postit.postit_.precrate";
+    public static final String precratenum = "com.postit.postit_.precratenum";
+    public static final String precc= "com.postit.postit_.precc";
+
 
 
     @Override
@@ -93,6 +96,8 @@ public class mynotes extends AppCompatActivity {
                 String ca =String.valueOf(r);
                 int ratec = n.getRatingCount();
                 String raco =String.valueOf(ratec);
+                float ra = n.getAllrates();
+                String cae =String.valueOf(ra);
 
                 Intent in = new Intent(mynotes.this, previewnote.class);
                 in.putExtra(preTitel,""+s );
@@ -101,8 +106,8 @@ public class mynotes extends AppCompatActivity {
                 in.putExtra(preID,i);
                 in.putExtra(prerate,ca);
                 in.putExtra(precrate,raco);
-
-
+                in.putExtra(precratenum,cae);
+                in.putExtra(precc,"true");
                 startActivity(in);
 
             } // end on item click listener

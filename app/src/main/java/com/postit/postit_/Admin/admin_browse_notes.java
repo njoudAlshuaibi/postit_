@@ -79,7 +79,7 @@ public class admin_browse_notes extends AppCompatActivity {
                     {
                         if(CourseN.equalsIgnoreCase(noteObj.getCourse())){
                             if(chapterN.equalsIgnoreCase(noteObj.getChapterNum())){
-                                String notedisplay = "collage: " + noteObj.getCollege() + "\nmajor: " + noteObj.getMajor() + "\ncourse: " + noteObj.getCourse() + "\nchapter: " + noteObj.getChapterNum() + "\ntitle: " + noteObj.getTitle() + "\ncaption: " + noteObj.getCaption() + "\nemail: " + noteObj.getEmail()+ "\nID: " +noteObj.getId();
+                                String notedisplay = "collage: " + noteObj.getCollege() + "\nmajor: " + noteObj.getMajor() + "\ncourse: " + noteObj.getCourse() + "\nchapter: " + noteObj.getChapterNum() + "\ntitle: " + noteObj.getTitle() + "\ncaption: " + noteObj.getCaption() + "\nemail: " + noteObj.getEmail()+"\nRate: " +noteObj.getRate() +" Out of 4"+"\nID: " +noteObj.getId();
                                 notesList.add(notedisplay);}}
                     }}
                 adapter.notifyDataSetChanged();

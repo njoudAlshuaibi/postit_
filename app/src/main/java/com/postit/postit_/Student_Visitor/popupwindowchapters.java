@@ -91,6 +91,7 @@ public class popupwindowchapters extends AppCompatActivity {
                     noteObj.setEmail(userEmail);
                     noteObj.setRatingCount(0);
                     noteObj.setRate(0f);
+                    noteObj.setAllrates(0);
 
                     noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

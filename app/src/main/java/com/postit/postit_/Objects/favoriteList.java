@@ -13,12 +13,13 @@ public class favoriteList {
     private String date;
     private String userID;
     private float rate;
+    private float allrates;
     private int ratingCount;
 
     public favoriteList() {
     }
 
-    public favoriteList(String college, String major, String course, String chapterNum, String title, String caption, String email, String id, String nid, String date, String userID, float rate, int ratingCount) {
+    public favoriteList(String college, String major, String course, String chapterNum, String title, String caption, String email, String id, String nid, String date, String userID, float rate,float allrates, int ratingCount) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -31,6 +32,7 @@ public class favoriteList {
         this.date = date;
         this.userID = userID;
         this.rate = rate;
+        this.allrates = allrates;
         this.ratingCount = ratingCount;
     }
 
@@ -128,6 +130,14 @@ public class favoriteList {
 
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public float getAllrates() {
+        return allrates;
+    }
+
+    public void setAllrates(float allrates) {
+        this.allrates = allrates;
     }
 
     public int getRatingCount() {

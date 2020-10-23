@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -40,6 +41,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
     private DatabaseReference noteRef;
     String userEmail;
     private FirebaseUser user;
+    float rate;
 
 
 
@@ -71,7 +73,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         return noteList.size();
     }
     @Override
-    public void onBindViewHolder(@NonNull FavoriteListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FavoriteListAdapter.ViewHolder holder, int position) {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         holder.noteTitleD.setText(noteList.get(position).getTitle());
@@ -82,7 +84,28 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         final String body = noteList.get(position).getCaption();
         holder.addFavourite.setVisibility(View.INVISIBLE);
 
+        favouriteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
+                    favoriteList noteObj = noteSnapshot.getValue(favoriteList.class);
+                    String x = noteObj.getNid();
+                    if (x.equals(id5)) {
+                        rate = noteObj.getRate();
+                        holder.ratingBar.setRating(rate);
+                        break;
 
+                    }else{
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         holder.imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,6 +274,8 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         ImageView imageView3;
         ImageButton addFavourite;
         ImageButton remove;
+        RatingBar ratingBar;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -260,6 +285,8 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
             imageView3 = itemView.findViewById(R.id.imageView3);
             addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
             remove = itemView.findViewById(R.id.remove);
+            ratingBar = itemView.findViewById(R.id.rating_bar);
+
 
 
         }
