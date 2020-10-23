@@ -47,16 +47,16 @@
             android:textColor="#605F5F"
             android:textSize="20dp" />
 
+
         <TextView
             android:id="@+id/notepr2"
             android:layout_width="294dp"
             android:layout_height="142dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/ubuntu_bold"
             android:textColor="#605F5F"
             android:textSize="15dp" />
-
 
         <RatingBar
             android:id="@+id/rating_bar"
@@ -68,12 +68,12 @@
 
         <Button
             android:id="@+id/submitRate"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="55dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="199dp"
+            android:layout_marginTop="-38dp"
             android:layout_marginRight="4dp"
-            android:background="#EB75B2"
+            android:background="#F8EC8ABC"
             android:text="submit"
             android:textColor="#fff" />
 

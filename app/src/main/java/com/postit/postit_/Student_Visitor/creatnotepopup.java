@@ -52,6 +52,9 @@ public class creatnotepopup extends AppCompatActivity {
     private String userEmail;
     final note noteObj = new note();
     private FirebaseAuth mAuth;
+    float rate =0;
+    int ratec =0;
+
 
 
     @Override
@@ -235,8 +238,8 @@ public class creatnotepopup extends AppCompatActivity {
             noteObj.setChapterNum(chapterChapter);
             noteObj.setId(id);
             noteObj.setEmail(userEmail);
-            noteObj.setRate(0f);
-            noteObj.setRatingCount(0);
+            noteObj.setRate(rate);
+            noteObj.setRatingCount(ratec);
 
             noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
