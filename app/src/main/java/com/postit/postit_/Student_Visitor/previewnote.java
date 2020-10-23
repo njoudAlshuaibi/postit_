@@ -25,18 +25,17 @@ import com.postit.postit_.R;
 
 public class previewnote extends AppCompatActivity {
     TextView notepre;
-
     TextView notepr2;
     TextView notetit;
     RatingBar ratingBar;
     Button btnSubmit;
     private DatabaseReference notesRef;
-    double rate;
+    float rate;
     int rateCount;
-    double currentRate;
+    float currentRate;
     int counter;
-    double newrate;
-
+    float newrate;
+    String s;
 
 
     @Override
@@ -63,11 +62,15 @@ public class previewnote extends AppCompatActivity {
         final String caption = intent.getStringExtra(mynotes.preCaption);
         final String email = intent.getStringExtra(mynotes.preEmail);
         final String id = intent.getStringExtra(mynotes.preID);
+        final String r = intent.getStringExtra(mynotes.prerate);
+        final float rate = Float.parseFloat(r);
+        final String ratec = intent.getStringExtra(mynotes.precrate);
+        final int rateCount = Integer.parseInt(ratec);
 
 
         notetit.setText(title);
         notepre.setText("\n\n\n caption :\n\n"+caption);
-        notepr2.setText( "\n\n\n\n\n\n\n\n\n\n written by : "+ email);
+        notepr2.setText( "\n\n\n\nwritten by : "+ email);
 
         ratingBar = findViewById(R.id.rating_bar);
         btnSubmit = findViewById(R.id.submitRate);
@@ -75,7 +78,8 @@ public class previewnote extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String s = String.valueOf(ratingBar.getRating());
+
+                s = String.valueOf(ratingBar.getRating());
                 Toast.makeText(getApplicationContext(),s+"Star",Toast.LENGTH_SHORT).show();
 
                 notesRef.addValueEventListener(new ValueEventListener() {
@@ -85,14 +89,12 @@ public class previewnote extends AppCompatActivity {
                             note noteObj = noteSnapshot.getValue(note.class);
                             String x = noteObj.getId();
                             if (x.equals(id)) {
-                                 rate = noteObj.getRate();
-                                 rateCount = noteObj.getRatingCount();
                                 break;
-
                             }else{
 
                             }
                         }
+
                     }
 
                     @Override
@@ -100,19 +102,19 @@ public class previewnote extends AppCompatActivity {
 
                     }
                 });
-                 currentRate = Float.parseFloat(s);
-                 counter = rateCount+1;
-                 newrate =(currentRate + rate)/counter;
-                 notesRef.child(id).child("rate").setValue(newrate);
-                 notesRef.child(id).child("ratingCount").setValue(counter);
+                currentRate = Float.parseFloat(s);
+                counter = rateCount+1;
 
-
+                newrate =(float) ((currentRate + rate)/counter);
+                notesRef.child(id).child("rate").setValue(newrate);
+                notesRef.child(id).child("ratingCount").setValue(counter);
 
 
 
 
             }
         });
+
 
 
 

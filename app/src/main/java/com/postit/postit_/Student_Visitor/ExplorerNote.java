@@ -43,6 +43,8 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
     public static final String preID = "com.postit.postit_.preID";
+    public static final String prerate = "com.postit.postit_.prerate";
+    public static final String precrate = "com.postit.postit_.precrate";
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
@@ -109,6 +111,10 @@ public class ExplorerNote extends AppCompatActivity {
                 String a = n.getCaption();
                 String m = n.getEmail();
                 String i = n.getId();
+                float r = n.getRate();
+                String ca =String.valueOf(r);
+                int ratec = n.getRatingCount();
+                String raco =String.valueOf(ratec);
 
 
 
@@ -117,6 +123,8 @@ public class ExplorerNote extends AppCompatActivity {
                 in.putExtra(preCaption,""+a );
                 in.putExtra(preEmail,""+m );
                 in.putExtra(preID,i);
+                in.putExtra(prerate,ca);
+                in.putExtra(precrate,raco);
                 startActivity(in);
             } // end on item click listener
         });
