@@ -33,7 +33,7 @@ public class previewnote extends AppCompatActivity {
     float rate;
     int rateCount;
     float currentRate;
-    int counter;
+    float counter;
     float newrate;
     String s;
 
@@ -103,9 +103,10 @@ public class previewnote extends AppCompatActivity {
                     }
                 });
                 currentRate = Float.parseFloat(s);
-                counter = rateCount+1;
+                float c = currentRate + rate;
+                counter = (float)rateCount+1;
 
-                newrate =(float) ((currentRate + rate)/counter);
+                newrate = (c/counter);
                 notesRef.child(id).child("rate").setValue(newrate);
                 notesRef.child(id).child("ratingCount").setValue(counter);
 

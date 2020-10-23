@@ -73,7 +73,7 @@
             android:layout_marginLeft="199dp"
             android:layout_marginTop="-38dp"
             android:layout_marginRight="4dp"
-            android:background="#F8EC8ABC"
+            android:background="#EC7BB5"
             android:text="submit"
             android:textColor="#fff" />
 
