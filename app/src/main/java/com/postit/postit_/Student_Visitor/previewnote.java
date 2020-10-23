@@ -38,7 +38,6 @@ public class previewnote extends AppCompatActivity {
     double newrate;
 
 
-    public static final String EXTRA_rateNum = "com.postit.postit_.EXTRA_rateNum";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,6 @@ public class previewnote extends AppCompatActivity {
                                  rateCount = noteObj.getRatingCount();
                                 break;
 
-
                             }else{
 
                             }
@@ -109,9 +107,6 @@ public class previewnote extends AppCompatActivity {
                  notesRef.child(id).child("ratingCount").setValue(counter);
 
 
-
-                Intent intent = new Intent(previewnote.this, ExplorerNote.class);
-                intent.putExtra(EXTRA_rateNum, s);
 
 
 
