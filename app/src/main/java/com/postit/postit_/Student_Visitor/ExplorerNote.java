@@ -45,12 +45,11 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String preID = "com.postit.postit_.preID";
     public static final String prerate = "com.postit.postit_.prerate";
     public static final String precrate = "com.postit.postit_.precrate";
+    public static final String precc = "com.postit.postit_.precc";
     public static final String precratenum = "com.postit.postit_.precratenum";
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
-    public static final String precc= "com.postit.postit_.precc";
-
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference notesRef;
     private TextView textView;

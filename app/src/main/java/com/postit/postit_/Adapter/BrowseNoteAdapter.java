@@ -282,9 +282,9 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favNote.setId(id2);
                             favNote.setNid(findnote.getId());
                             favNote.setUserID(currentUserid);
-                            favNote.setRate(findnote.getRate());
-                            favNote.setRatingCount(findnote.getRatingCount());
-                            favNote.setAllrates(findnote.getAllrates());
+                            favNote.setRate(0);
+                            favNote.setRatingCount(0);
+                            favNote.setAllrates(0);
 
                             favouriteRef.addValueEventListener(new ValueEventListener() {
                                 @Override
