@@ -29,6 +29,17 @@
             android:layout_height="675dp"
             android:layout_marginTop="30dp"></ListView>
 
+        <TextView
+            android:id="@+id/noReq"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-400dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="italic" />
 
     </LinearLayout>
 </LinearLayout>

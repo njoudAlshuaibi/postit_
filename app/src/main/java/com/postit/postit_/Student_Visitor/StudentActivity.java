@@ -2,6 +2,7 @@ package com.postit.postit_.Student_Visitor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +35,9 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
         Toolbar toolbar = findViewById(R.id.toolbar_Student);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("HOME");
+        toolbar.setTitleTextColor(0xFFB8B8B8);
 
         session = new Session(getApplicationContext());
 

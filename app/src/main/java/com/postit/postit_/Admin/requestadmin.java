@@ -47,6 +47,7 @@ public class requestadmin extends AppCompatActivity {
     public static final String maj = "com.postit.postit_.maj";
     public static final String cou = "com.postit.postit_.cou";
     public static final String ch = "com.postit.postit_.ch";
+    private TextView noReq;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +55,14 @@ public class requestadmin extends AppCompatActivity {
 
         Toolbar tb = findViewById(R.id.toolbar_request);
         setSupportActionBar(tb);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Requests");
+        tb.setTitleTextColor(0xFFB8B8B8);
 
 //        requestbutton = findViewById(R.id.requestbutton);
         final ArrayList<requests> requestsList = new ArrayList<>();
         final MyCustomAdapter myadpter = new MyCustomAdapter(requestsList);
+        noReq= (TextView) findViewById(R.id.noReq);
 
         requestsListView = findViewById(R.id.viewReq);
         requestsListView.setAdapter(myadpter);
@@ -67,6 +71,9 @@ public class requestadmin extends AppCompatActivity {
         requestsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshotr) {
+                if(!snapshotr.exists()){
+                    noReq.setText("There is no request");
+                }
                 requestsList.clear();
                 for (DataSnapshot snapshotx : snapshotr.getChildren()) {
                     requests reqObj = snapshotx.getValue(requests.class);

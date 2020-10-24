@@ -22,32 +22,44 @@
             android:layout_height="42dp"
             android:background="#FFFBD4" />
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/currentCandCh"
             android:layout_width="363dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="100dp"
             android:layout_marginLeft="30dp"
             android:textAlignment="center"
             android:textIsSelectable="false"
-            android:textSize="17sp"
-            android:textStyle="italic" />
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ExNotemyRecycleView"
             android:layout_width="337dp"
-            android:layout_height="510dp"
+            android:layout_height="520dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="-999dp"
             android:layout_marginBottom="29dp" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-300dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="italic" />
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/ExNotefab2"
             android:layout_width="185dp"
             android:layout_height="-3343dp"
             android:layout_marginLeft="310dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="270dp"
             android:layout_marginBottom="14dp"
             android:background="#FBE0EA"
             app:backgroundTint="#FBE0EA"

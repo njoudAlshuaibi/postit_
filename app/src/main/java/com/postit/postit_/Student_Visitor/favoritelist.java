@@ -57,7 +57,11 @@ public class favoritelist extends AppCompatActivity {
         setContentView(R.layout.activity_favoritelist);
         Toolbar toolb = findViewById(R.id.toolbar_favoritelist);
         setSupportActionBar(toolb);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Bookmarks");
+        toolb.setTitleTextColor(0xFFB8B8B8);
+
+
         favouriteRef= FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         favouriteRef.keepSynced(true);
 
@@ -131,7 +135,7 @@ public class favoritelist extends AppCompatActivity {
                     }
 
                     else {
-                        textView.setText("no note");
+                        textView.setText("Bookmarks empty");
 
                     }
                 }
