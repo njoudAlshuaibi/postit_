@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class admin_browse_notes extends AppCompatActivity {
     private ListView noteslistview;
-    private TextView textView;
+    private TextView textView, textview10, currentCandChAdmin;
     private DatabaseReference notesRef;
     private DatabaseReference ref;
     private DatabaseReference  noteRef;
@@ -50,10 +50,14 @@ public class admin_browse_notes extends AppCompatActivity {
         setContentView(R.layout.activity_admin_browse_notes);
         Toolbar tb = findViewById(R.id.toolbar_adminnote);
         setSupportActionBar(tb);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Browse Notes");
+        tb.setTitleTextColor(0xFFB8B8B8);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         Intent intent = getIntent();
         textView = (TextView) findViewById(R.id.tp);
+        textview10 = (TextView) findViewById(R.id.textview10);
+        currentCandChAdmin = (TextView) findViewById(R.id.currentCandChAdmin);
 
         final String MajorN = intent.getStringExtra(PopUpWindowAdmin.adminMajorChoicee);
         final String CourseN = intent.getStringExtra(PopUpWindowAdmin.adminCourceChoicee);
@@ -99,11 +103,14 @@ public class admin_browse_notes extends AppCompatActivity {
                     String chapterId = findNote.getChapterNum();
                     if (courseId.equals(CourseN) && chapterId.equals(chapterN)) {
                         textView.setText("");
+                        currentCandChAdmin.setText(CourseN+" - "+chapterN);
                         break;
                     }
 
                     else {
                         textView.setText("no existing notes");
+                        textview10.setText("");
+
 
                     }
                 }

@@ -63,7 +63,9 @@ private TextView textViewp;
         setContentView(R.layout.activity_admin);
         Toolbar toolbar = findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Manage");
+        toolbar.setTitleTextColor(0xFFB8B8B8);
 
         Intent intent = getIntent();
         final String maj = intent.getStringExtra(requestadmin.maj);

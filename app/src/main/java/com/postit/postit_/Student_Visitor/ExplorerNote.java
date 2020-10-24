@@ -52,7 +52,7 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String currentChapter = "com.postit.postit_.currentChapter";
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference notesRef;
-    private TextView textView;
+    private TextView textView, currentCandCh;
     String m;
     String c;
     String d;
@@ -73,7 +73,9 @@ public class ExplorerNote extends AppCompatActivity {
         setContentView(R.layout.activity_explorer_note);
         Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
         setSupportActionBar(tool);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Browse Notes");
+        tool.setTitleTextColor(0xFFB8B8B8);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -83,7 +85,8 @@ public class ExplorerNote extends AppCompatActivity {
         m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
         c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
         d = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
-
+        currentCandCh = (TextView) findViewById(R.id.currentCandCh) ;
+        currentCandCh.setText(c+" - "+d);
         button = findViewById(R.id.ExNotefab2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

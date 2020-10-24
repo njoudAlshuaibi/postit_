@@ -26,7 +26,9 @@ public class mainAdmin extends AppCompatActivity {
 
         Toolbar toolb = findViewById(R.id.toolbar_Admin2);
         setSupportActionBar(toolb);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("HOME");
+        toolb.setTitleTextColor(0xFFB8B8B8);
 
 
 

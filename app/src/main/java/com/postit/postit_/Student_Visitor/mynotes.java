@@ -62,7 +62,9 @@ public class mynotes extends AppCompatActivity {
 
         Toolbar toolba = findViewById(R.id.toolbar_mynotes);
         setSupportActionBar(toolba);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("My Notes");
+        toolba.setTitleTextColor(0xFFB8B8B8);
 
         textView = (TextView) findViewById(R.id.tvnotes);
         fab = (FloatingActionButton) findViewById(R.id.fab);
