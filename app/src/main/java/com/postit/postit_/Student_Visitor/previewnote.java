@@ -132,25 +132,6 @@ else{
             }
 
         });
-        favouriteRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshoti) {
-                for (DataSnapshot messageSnapshoti : snapshoti.getChildren()) {
-                    favoriteList Nobj = messageSnapshoti.getValue(favoriteList.class);
-                    if(Nobj.getNid().equals(id)){
-                        Nobjid = Nobj.getId();
-                        f = true;
-                        break;
-                    }
-                }
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,11 +150,6 @@ else{
                         notesRef.child(id).child("rate").setValue(newrate);
                         notesRef.child(id).child("ratingCount").setValue(counter);
 
-                        if(f==true) {
-                            favouriteRef.child(Nobjid).child("allrates").setValue(ratenum);
-                            favouriteRef.child(Nobjid).child("rate").setValue(newrate);
-                            favouriteRef.child(Nobjid).child("ratingCount").setValue(counter);
-                        }
 
                     }
 

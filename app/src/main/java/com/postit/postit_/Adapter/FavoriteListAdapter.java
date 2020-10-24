@@ -84,6 +84,27 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
         final String body = noteList.get(position).getCaption();
         holder.addFavourite.setVisibility(View.INVISIBLE);
 
+        noteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
+                    note noteObj = noteSnapshot.getValue(note.class);
+                    String x = noteObj.getId();
+                    if (x.equals(id5)) {
+                        rate = noteObj.getRate();
+                        break;
+                    }else{
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         favouriteRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -91,10 +112,9 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                     favoriteList noteObj = noteSnapshot.getValue(favoriteList.class);
                     String x = noteObj.getNid();
                     if (x.equals(id5)) {
-                        rate = noteObj.getRate();
                         holder.ratingBar.setRating(rate);
-                        break;
 
+                        break;
                     }else{
 
                     }
