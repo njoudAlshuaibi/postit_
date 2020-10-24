@@ -46,6 +46,7 @@ public class creatnotepopup extends AppCompatActivity {
     private DatabaseReference chapterRef;
     private DatabaseReference noteRef;
     private Button add;
+    private Button cancel;
     private Spinner chapterSpinner;
     public String chapterCourse, chapterChapter;
     private EditText inputNoteTitle, inputNoteBody;
@@ -76,6 +77,15 @@ public class creatnotepopup extends AppCompatActivity {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         majorSpinner = findViewById(R.id.spinnerA);
 
+        cancel = (Button) findViewById(R.id.cancel2);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(creatnotepopup.this, mynotes.class));
+            }
+        });
+
+
         final ArrayList<String> majorList = new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
         majorSpinner.setAdapter(adapter);
@@ -84,7 +94,7 @@ public class creatnotepopup extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 majorList.clear();
 
-                majorList.add("Select");
+                majorList.add("Choose major");
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     major majorObj = postSnapshot.getValue(major.class);
                     majorList.add(majorObj.getMajorName());
@@ -111,7 +121,7 @@ public class creatnotepopup extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot2) {
                         coourseList.clear();
-                        coourseList.add("Select");
+                        coourseList.add("Choose course");
 
                         for (DataSnapshot courseSnapshot : dataSnapshot2.getChildren()) {
                             course courseObj = courseSnapshot.getValue(course.class);
@@ -152,7 +162,7 @@ public class creatnotepopup extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot3) {
                         chapterList.clear();
-                        chapterList.add("select");
+                        chapterList.add("Choose chapter");
 
                         for (DataSnapshot postSnapshot : dataSnapshot3.getChildren()) {
                             chapter chapterObj = postSnapshot.getValue(chapter.class);

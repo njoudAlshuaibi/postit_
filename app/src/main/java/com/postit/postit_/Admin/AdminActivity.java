@@ -441,7 +441,7 @@ private TextView textViewp;
             if (v.equalsIgnoreCase(" ") || v.isEmpty()) {
                 CourseID.setError("Please enter valid course code,\ne.g. SWE434 ");
                 CourseID.requestFocus();
-            } else if ((!(courseN.matches("^(?=.[A-Z])(?=.[0-9])[A-Z0-9]+$"))) || (courseN.length() > 8)) {
+            } else if (!(v.matches(".*([a-zA-Z].*[0-9]|[0-9].*[a-zA-Z]).*")) || (v.length() > 8)) {
                 CourseID.setError("Please enter valid course code,\ne.g. SWE434");
                 CourseID.requestFocus();
             } else {

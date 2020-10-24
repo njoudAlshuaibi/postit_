@@ -14,12 +14,14 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
 
 public class Pop extends Activity {
     private EditText requestedMajor, requestedCourse, requestedChapter;
     private Button request;
+    private Button cancel;
     private FirebaseDatabase database;
     private DatabaseReference requestsRef, notetsRef;
     private requests newRequest;
@@ -41,6 +43,14 @@ public class Pop extends Activity {
         requestedCourse = (EditText) findViewById(R.id.CourseCode);
         requestedChapter = (EditText) findViewById(R.id.chapterCode);
         request = (Button) findViewById(R.id.reqBtn);
+        cancel = (Button) findViewById(R.id.cancel133);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Pop.this, StudentActivity.class));
+            }
+        });
+
         database = FirebaseDatabase.getInstance();
         requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
 
