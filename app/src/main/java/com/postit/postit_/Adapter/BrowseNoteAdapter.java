@@ -119,37 +119,18 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
             @Override
             public void onClick(View view) {
 
-//                Intent myIntent = new Intent(Intent.ACTION_SEND);
-//                Uri uri = Uri
-//                        .parse("android.resource://com.postit.postit_/drawable/logo");
-//                myIntent.setType("text/plain");
-//                String shareBody = " Title: " + title + "\n Caption: " + body + "\n Shared from POST-it.";
-//                String name = title;
-//                myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
-//                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-//                myIntent.putExtra(Intent.EXTRA_STREAM, uri);
-//                myIntent.setType("image/png");
-//                myIntent.setPackage("com.twitter.android");
-//                context.startActivity(Intent.createChooser(myIntent, "Share this via"));
-                final String currentUserid = user.getUid().trim();
-                favouriteRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshoti) {
-                        for (DataSnapshot messageSnapshoti : snapshoti.getChildren()) {
-                            favoriteList Nobj = messageSnapshoti.getValue(favoriteList.class);
-                            String Nobjid = Nobj.getId();
-                            if(Nobj.getUserID().equals(currentUserid)){
-                                if (Nobj.getNid().equals(id)) {
-                                    favouriteRef.child(Nobjid.trim()).removeValue();
-                                }}
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                Uri uri = Uri
+                        .parse("android.resource://com.postit.postit_/drawable/logo");
+                myIntent.setType("text/plain");
+                String shareBody = " Title: " + title + "\n Caption: " + body + "\n Shared from POST-it.";
+                String name = title;
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, name);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                myIntent.setType("image/png");
+                myIntent.setPackage("com.twitter.android");
+                context.startActivity(Intent.createChooser(myIntent, "Share this via"));
             }
 
 
@@ -251,7 +232,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
 
                                 if (noteid.equals(id)) {
-                                    AlertDialog alertDialog = new AlertDialog.Builder(context)
+                                 new AlertDialog.Builder(context)
                                             .setMessage("do you want to add this note to your favorite list?")
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                 @Override

@@ -148,9 +148,7 @@ public class StudentActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(StudentActivity.this);
             builder.setMessage("Are you sure you want to logout?");
             builder.setCancelable(true);
-
             builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-
                 // signOut
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
