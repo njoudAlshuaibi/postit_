@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +48,7 @@ public class favoritelist extends AppCompatActivity {
     public static final String precrate = "com.postit.postit_.precrate";
     public static final String precratenum = "com.postit.postit_.precratenum";
     public static final String precc = "com.postit.postit_.precc";
+    private TextView textView;
 
 
     @Override
@@ -58,6 +60,8 @@ public class favoritelist extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         favouriteRef= FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         favouriteRef.keepSynced(true);
+
+        textView = (TextView) findViewById(R.id.tv23);
 
         noteAdapter = new FavoriteListAdapter(this, noteList, new CustomItemClickListener() {
             @Override
@@ -114,6 +118,31 @@ public class favoritelist extends AppCompatActivity {
 
 
         noteAdapter.notifyDataSetChanged();
+
+        favouriteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                for (DataSnapshot childrf6 : snapshotrf.getChildren()) {
+                    favoriteList findNote = childrf6.getValue(favoriteList.class);
+                    String noteOwner =findNote.getUserID();
+                    if (noteOwner.equals(user.getUid())) {
+                        textView.setText("");
+                        break;
+                    }
+
+                    else {
+                        textView.setText("no note");
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
     @Override

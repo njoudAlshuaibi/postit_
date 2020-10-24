@@ -22,7 +22,7 @@
             android:layout_height="42dp"
             android:background="#FFFBD4" />
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/tv23"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"

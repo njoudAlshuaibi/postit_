@@ -24,7 +24,7 @@ public class popupwindowchapters extends AppCompatActivity {
     private Button Post;
     private EditText Title;
     private EditText caption;
-
+    private Button cancel;
     private DatabaseReference noteRef;
     private FirebaseUser user;
     private String userEmail;
@@ -43,6 +43,19 @@ public class popupwindowchapters extends AppCompatActivity {
         int width = ja.widthPixels;
         int height = ja.heightPixels;
         getWindow().setLayout((int) (width * .8), (int) (height * .6));
+
+        cancel = (Button) findViewById(R.id.cancel1);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intenut = new Intent();
+                setResult(RESULT_OK, intenut);
+                finish();
+            }
+        });
+
+
+
 
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         Intent intent = getIntent();

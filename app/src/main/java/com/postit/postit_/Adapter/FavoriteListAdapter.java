@@ -94,7 +94,28 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                     note noteObj = noteSnapshot.getValue(note.class);
                     String x = noteObj.getId();
                     if (x.equals(id5)) {
-                        rate = noteObj.getRate();
+                        noteRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
+                                    note noteObjreal = noteSnapshot.getValue(note.class);
+                                    String x = noteObjreal.getId();
+                                    if (x.equals(id5)) {
+                                        rate = noteObjreal.getRate();
+                                        holder.ratingBar.setRating(rate);
+                                        break;
+
+                                    }else{
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         break;
                     }else{
 
