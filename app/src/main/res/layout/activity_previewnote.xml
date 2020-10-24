@@ -68,7 +68,7 @@
 
         <Button
             android:id="@+id/submitRate"
-            android:layout_width="55dp"
+            android:layout_width="60dp"
             android:layout_height="33dp"
             android:layout_marginLeft="199dp"
             android:layout_marginTop="-38dp"

@@ -67,7 +67,7 @@ public class creatnotepopup extends AppCompatActivity {
 
         int width = ja.widthPixels;
         int height = ja.heightPixels;
-        getWindow().setLayout((int) (width * .9), (int) (height * .9));
+        getWindow().setLayout((int) (width * .9), (int) (height * .8));
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
