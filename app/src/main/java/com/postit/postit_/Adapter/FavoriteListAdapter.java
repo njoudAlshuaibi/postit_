@@ -3,6 +3,9 @@ package com.postit.postit_.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -306,7 +309,6 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
             addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
             remove = itemView.findViewById(R.id.remove);
             ratingBar = itemView.findViewById(R.id.rating_bar);
-
 
 
         }

@@ -3,6 +3,9 @@ package com.postit.postit_.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -333,7 +336,10 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
             addFavourite = itemView.findViewById(R.id.fvrt_f2_item);
             remove = itemView.findViewById(R.id.remove);
             ratingBar = itemView.findViewById(R.id.rating_bar);
-
+//
+//            Drawable drawableReview = ratingBar.getProgressDrawable();
+//            drawableReview.setColorFilter(Color.parseColor("#ffff8800"),
+//                    PorterDuff.Mode.SRC_ATOP);
             //ratingBar.setRating(rate);
 
         }
