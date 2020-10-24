@@ -53,6 +53,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     int rateCount = 0 ;
     String m;
     float rate;
+    note s;
 
     public BrowseNoteAdapter(Context context, List<note> noteList, CustomItemClickListener listener) {
         this.context = context;
@@ -232,66 +233,12 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
 
                                 if (noteid.equals(id)) {
-                                 new AlertDialog.Builder(context)
-                                            .setMessage("do you want to add this note to your favorite list?")
-                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    addToFavoriteList(findnote);
-                                                }
-                                            })
-                                            .setNegativeButton("No", null)
-                                            .show();
-
-                                }
+                                s = findnote;
+}
 
                             }
                         }
 
-                        public void addToFavoriteList(final note findnote) {
-                            final favoriteList favNote= new favoriteList();
-                            final String id2 = favouriteRef.push().getKey();
-
-                            favNote.setCaption(findnote.getCaption());
-                            favNote.setTitle(findnote.getTitle());
-                            favNote.setChapterNum(findnote.getChapterNum());
-                            favNote.setCollege(findnote.getCollege());
-                            favNote.setCourse(findnote.getCourse());
-                            favNote.setMajor(findnote.getMajor());
-                            favNote.setDate(findnote.getDate());
-                            favNote.setEmail(findnote.getEmail());
-                            favNote.setId(id2);
-                            favNote.setNid(findnote.getId());
-                            favNote.setUserID(currentUserid);
-                            favNote.setRate(0);
-                            favNote.setRatingCount(0);
-                            favNote.setAllrates(0);
-
-                            favouriteRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
-                                    for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
-                                        favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
-                                        if (Nobj.getNid().equals(id)) {
-                                            if(Nobj.getUserID().equals(currentUserid)){
-                                            flag = true;
-                                            break;
-                                        }}
-                                    }
-                                    if (!flag) {
-                                        favouriteRef.child(id2).setValue(favNote);
-                                    } else {
-
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-
-                        }
 
 
 
@@ -301,6 +248,64 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         }
                     });
+
+                    new AlertDialog.Builder(context)
+                            .setMessage("do you want to add this note to your favorite list?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    addToFavoriteList(s);
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+
+
+                }
+
+                public void addToFavoriteList(final note findnote) {
+                    final favoriteList favNote= new favoriteList();
+                    final String id2 = favouriteRef.push().getKey();
+
+                    favNote.setCaption(findnote.getCaption());
+                    favNote.setTitle(findnote.getTitle());
+                    favNote.setChapterNum(findnote.getChapterNum());
+                    favNote.setCollege(findnote.getCollege());
+                    favNote.setCourse(findnote.getCourse());
+                    favNote.setMajor(findnote.getMajor());
+                    favNote.setDate(findnote.getDate());
+                    favNote.setEmail(findnote.getEmail());
+                    favNote.setId(id2);
+                    favNote.setNid(findnote.getId());
+                    favNote.setUserID(currentUserid);
+                    favNote.setRate(0);
+                    favNote.setRatingCount(0);
+                    favNote.setAllrates(0);
+
+                    favouriteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
+                            for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
+                                favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
+                                if (Nobj.getNid().equals(id)) {
+                                    if(Nobj.getUserID().equals(currentUserid)){
+                                        flag = true;
+                                        break;
+                                    }}
+                            }
+                            if (!flag) {
+                                favouriteRef.child(id2).setValue(favNote);
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
 
             });
