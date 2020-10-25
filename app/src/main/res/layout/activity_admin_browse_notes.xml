@@ -20,6 +20,18 @@
            android:layout_width="match_parent"
            android:layout_height="42dp"
            android:background="#FFFBD4"/>
+        <TextView
+            android:id="@+id/currentCandChAdmin"
+            android:layout_width="363dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
         <TextView android:id="@+id/textview10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,13 +39,27 @@
             android:textSize="16dp"
             android:text="press and hold to delete note"/>
 
+
         <ListView
             android:id="@+id/listviewadmin"
             android:layout_width="match_parent"
-            android:layout_height="675dp"
-            android:layout_marginTop="30dp"></ListView>
+            android:layout_height="600dp"
+            android:layout_marginTop="20dp">
 
-       
+        </ListView>
+
+        <TextView
+            android:id="@+id/tp"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-400dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
 </LinearLayout>

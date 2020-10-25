@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Student_Visitor.ExplorerNote"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+    android:autoMirrored="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#A6FFFFFF"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_Browsenotes"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="#FFFBD4" />
+        <TextView
+            android:id="@+id/currentCandCh"
+            android:layout_width="363dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ExNotemyRecycleView"
+            android:layout_width="337dp"
+            android:layout_height="520dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="-999dp"
+            android:layout_marginBottom="29dp" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-300dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="italic" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/ExNotefab2"
+            android:layout_width="185dp"
+            android:layout_height="-3343dp"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="270dp"
+            android:layout_marginBottom="14dp"
+            android:background="#FBE0EA"
+            app:backgroundTint="#009688"
+            app:srcCompat="@drawable/add" />
+
+
+    </LinearLayout>
+</LinearLayout>

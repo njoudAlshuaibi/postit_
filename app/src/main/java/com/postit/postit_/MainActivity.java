@@ -18,8 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.regex.Pattern;
+import com.postit.postit_.Admin.mainAdmin;
+import com.postit.postit_.Student_Visitor.CreateAccountActivity;
+import com.postit.postit_.Student_Visitor.StudentActivity;
+import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Visitors_activity.class));
+                startActivity(new Intent(MainActivity.this, StudentActivity.class));
             }//End onClick()
         });
         // juju start
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-        // juju start
+    // juju start
     private void login(){
         final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     if(mAuth.getCurrentUser().getEmail().equalsIgnoreCase("swe444@gmail.com"))
-                    startActivity(new Intent(MainActivity.this, mainAdmin.class));
+                        startActivity(new Intent(MainActivity.this, mainAdmin.class));
                     else {
                         startActivity(new Intent(MainActivity.this, StudentActivity.class));
                     }
@@ -135,25 +137,3 @@ public class MainActivity extends AppCompatActivity {
     ///////juju end j
 //vv
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

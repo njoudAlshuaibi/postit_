@@ -3,53 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFBD4"
     android:orientation="vertical"
-    tools:context=".popupwindowchapters">
+    tools:context=".popupwindowchapters"
 
+    >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/border2"
+        android:orientation="vertical"
+
+        >
 
 
         <EditText
             android:id="@+id/editTextTextMultiLine2"
-            android:layout_width="wrap_content"
+            android:layout_width="282dp"
             android:layout_height="153dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="14dp"
             android:layout_marginTop="170dp"
+            android:background="@drawable/border"
             android:ems="10"
             android:hint="Note Body"
-            android:inputType="textMultiLine"
-            android:background="@drawable/border"/>
+            android:inputType="textMultiLine" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="15dp">
+
+    <Button
+        android:id="@+id/cancel1"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="44dp"
+        android:background="#EB75B2"
+        android:text="Cancel"
+        android:textColor="#fff" />
 
         <Button
             android:id="@+id/post2"
-            android:layout_width="129dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="44dp"
             android:background="#EB75B2"
             android:text="Post"
             android:textColor="#fff" />
 
+</LinearLayout>
+
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Write and post your note"
+        android:textSize="20dp"
+        android:textColor="#70706F"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="30dp"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="372dp"
+        android:layout_height="101dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp">
 
         <EditText
             android:id="@+id/Title"
-            android:layout_width="211dp"
+            android:layout_width="245dp"
             android:layout_height="49dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="28dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="10dp"

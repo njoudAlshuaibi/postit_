@@ -30,32 +30,72 @@
         <LinearLayout
 
             android:layout_width="344dp"
-            android:layout_height="641dp"
+            android:layout_height="704dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="73dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/border"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/textViewp"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="-2dp"
+                android:textAlignment="center"
+                android:textSize="16dp"
+                android:textColor="#9F0B3E"
+                android:textStyle="bold"/>
 
+            <ImageButton
+                android:id="@+id/imageButtonreq"
+                android:layout_width="15dp"
+                android:layout_height="14dp"
+                android:layout_marginLeft="255dp"
+                android:layout_marginTop="-25dp"
+                android:hint="ADD COURSE"
+                app:srcCompat="@drawable/ic_baseline_check_24"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/imageButtoncancel"
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="295dp"
+                android:layout_marginTop="-19dp"
+                android:hint="ADD COURSE"
+                app:srcCompat="@drawable/ic_outline_cancel_24"
+                tools:ignore="VectorDrawableCompat" />
+
+            <LinearLayout
+                android:layout_width="361dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line">
+
+            </LinearLayout>
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
                 android:layout_marginLeft="22dp"
+                android:layout_marginTop="-11dp"
+
                 android:text="MAJOR"
                 android:textAlignment="center"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+
+
+
 
             <Spinner
                 android:id="@+id/spinnerMajor"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="-11dp"
                 android:layout_marginRight="3dp"
                 android:hint="Major" />
-
-
 
             <LinearLayout
                 android:layout_width="326dp"
@@ -86,6 +126,22 @@
                     app:srcCompat="@drawable/ic_baseline_add_box_24"
                     tools:ignore="VectorDrawableCompat" />
 
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="14dp"
+                    android:text="e.g.software engineering."
+                    android:textColor="#737070"
+                    android:textStyle="italic"
+                    android:textSize="@dimen/_10sdp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="361dp"
+                android:layout_height="44dp"
+                android:background="@drawable/line">
 
             </LinearLayout>
 
@@ -94,7 +150,7 @@
                 android:layout_width="344dp"
                 android:layout_height="196dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="-11dp"
                 android:layout_marginRight="50dp"
 
                 android:orientation="vertical">
@@ -105,21 +161,22 @@
                     android:layout_height="31dp"
                     android:text="COURSE"
                     android:textAlignment="center"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
 
                 <Spinner
                     android:id="@+id/spinnerCourse"
                     android:layout_width="300dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="-11dp"
                     android:layout_marginRight="3dp"
                     android:hint="Major" />
 
 
                 <LinearLayout
                     android:layout_width="326dp"
-                    android:layout_height="86dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <EditText
@@ -127,7 +184,7 @@
                         android:layout_width="155dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="50dp"
                         android:layout_marginRight="40dp"
                         android:layout_marginBottom="10dp"
                         android:ems="10"
@@ -141,13 +198,31 @@
                         android:layout_width="25dp"
                         android:layout_height="28dp"
                         android:layout_marginLeft="-30dp"
-                        android:layout_marginTop="29dp"
+                        android:layout_marginTop="59dp"
                         android:hint="ADD COURSE"
                         app:srcCompat="@drawable/ic_baseline_add_box_24"
                         tools:ignore="VectorDrawableCompat" />
 
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="50dp"
+                        android:text="e.g.SWE333."
+                        android:textColor="#737070"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="italic" />
+
 
                 </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="361dp"
+                android:layout_height="44dp"
+                android:background="@drawable/line">
 
             </LinearLayout>
 
@@ -157,7 +232,7 @@
                 android:layout_width="344dp"
                 android:layout_height="162dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="-11dp"
                 android:layout_marginRight="50dp"
 
                 android:orientation="vertical">
@@ -168,7 +243,8 @@
                     android:layout_height="31dp"
                     android:text="CHAPTER"
                     android:textAlignment="center"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
 
                 <Spinner
                     android:id="@+id/spinnerChapter"
@@ -217,6 +293,16 @@
                         android:hint="DELETE CHAPTER"
                         app:srcCompat="@drawable/ic_baseline_delete_24"
                         tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="19dp"
+                        android:text="e.g.Chapter6"
+                        android:textColor="#737070"
+                        android:textStyle="italic"
+                        android:textSize="@dimen/_10sdp"/>
 
                 </LinearLayout>
 

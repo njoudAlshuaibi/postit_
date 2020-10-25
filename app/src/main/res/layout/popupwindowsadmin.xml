@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PopUpWindowAdmin"
+    tools:context=".Admin.PopUpWindowAdmin"
     android:background="#FFFBD4">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/border2">
 
         <TextView
             android:layout_width="261dp"
