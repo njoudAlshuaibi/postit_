@@ -62,7 +62,7 @@
             android:layout_marginTop="270dp"
             android:layout_marginBottom="14dp"
             android:background="#FBE0EA"
-            app:backgroundTint="#FBE0EA"
+            app:backgroundTint="#009688"
             app:srcCompat="@drawable/add" />
 
 
