@@ -48,9 +48,9 @@
             android:layout_height="-3343dp"
             android:layout_marginLeft="310dp"
             android:layout_marginTop="270dp"
-            android:background="#EF7BA4"
-            app:backgroundTint="#FBE0EA"
             android:layout_marginBottom="11dp"
+            android:background="#009688"
+            app:backgroundTint="#6B009688"
             app:srcCompat="@drawable/add" />
 
     </LinearLayout>
