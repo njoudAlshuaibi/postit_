@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     //juju end
-
+//n
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
