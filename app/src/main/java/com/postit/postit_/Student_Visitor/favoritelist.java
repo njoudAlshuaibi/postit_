@@ -136,7 +136,6 @@ public class favoritelist extends AppCompatActivity {
 
                     else {
                         textView.setText("Bookmarks empty");
-
                     }
                 }
             }

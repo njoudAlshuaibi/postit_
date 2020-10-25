@@ -254,7 +254,6 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
             holder.remove.setVisibility(View.VISIBLE);
             holder.remove.setOnClickListener(new View.OnClickListener() {
                 final String currentUserid = user.getUid().trim();
-
                 @Override
                 public void onClick(View view) {
                     favouriteRef.addValueEventListener(new ValueEventListener() {
@@ -278,14 +277,11 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                                                 .show();
                                     }}
                             }
-
-
                         }
 
                         public void deleteNote(String noteKey) {
                             favouriteRef.child(noteKey.trim()).removeValue();
                         }
-
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
