@@ -222,35 +222,49 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         if (user != null) {
             holder.addFavourite.setVisibility(View.VISIBLE);
             holder.addFavourite.setOnClickListener(new View.OnClickListener() {
-
                 final String currentUserid = user.getUid().trim();
-
                 @Override
                 public void onClick(View view) {
+                    flag=false;
                     noteRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshothh) {
                             for (DataSnapshot childnn : snapshothh.getChildren()) {
                                 final note findnote = childnn.getValue(note.class);
                                 final String noteid = findnote.getId();
-
-
                                 if (noteid.equals(id)) {
                                     s = findnote;
-                                    new AlertDialog.Builder(context)
-                                            .setMessage("do you want to add this note to your bookmarks?")
-                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    addToFavoriteList(findnote);
-                                                }
-                                            })
-                                            .setNegativeButton("No", null)
-                                            .show();
-
                                 }
-
                             }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                    favouriteRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
+                            for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
+                                favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
+                                if ((Nobj.getNid().equals(id))&&(Nobj.getUserID().equals(currentUserid))) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+
+                            if (flag==false) {
+                                new AlertDialog.Builder(context)
+                                        .setMessage("do you want to add this note to your bookmarks?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                addToFavoriteList(s);
+                                            }
+                                        })
+                                        .setNegativeButton("No", null)
+                                        .show();
+                            }
+
                         }
                         public void addToFavoriteList(final note findnote) {
                             final favoriteList favNote = new favoriteList();
@@ -270,41 +284,14 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favNote.setRate(0);
                             favNote.setRatingCount(0);
                             favNote.setAllrates(0);
-
-                            favouriteRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
-                                    for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
-                                        favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
-                                        if (Nobj.getNid().equals(id)) {
-                                            if (Nobj.getUserID().equals(currentUserid)) {
-                                                flag = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (!flag) {
-                                        favouriteRef.child(id2).setValue(favNote);
-                                    } else {
-
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-
+                            favouriteRef.child(id2).setValue(favNote);
                         }
-
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
-
 
 
                 }
