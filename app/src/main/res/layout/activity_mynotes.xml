@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mynotes"
+    tools:context=".Student_Visitor.mynotes"
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:autoMirrored="true"
->
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,24 +21,36 @@
             android:layout_height="42dp"
             android:background="#FFFBD4"/>
 
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/myRecycleViewee"
+            android:id="@+id/MynoteRV"
             android:layout_width="337dp"
-            android:layout_height="627dp"
+            android:layout_height="520dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="60dp"
             android:layout_marginRight="-999dp"
             android:layout_marginBottom="29dp" />
+        <TextView
+            android:id="@+id/tvnotes"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-300dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginLeft="30dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="italic" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="185dp"
             android:layout_height="-3343dp"
             android:layout_marginLeft="310dp"
-            android:layout_marginTop="4dp"
-            android:background="#EF7BA4"
-            app:backgroundTint="#75BBA2"
+            android:layout_marginTop="270dp"
             android:layout_marginBottom="11dp"
+            android:background="#FBE0EA"
+            app:backgroundTint="#009688"
             app:srcCompat="@drawable/add" />
 
     </LinearLayout>

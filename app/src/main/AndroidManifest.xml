@@ -9,49 +9,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".browse_note_visitor"></activity>
-        <activity android:name=".previewnote" />
+        <activity android:name=".Student_Visitor.ExplorerNote" />
+        <activity android:name=".Student_Visitor.previewnote" />
         <activity
-            android:name=".admin_browse_notes"
-            android:parentActivityName=".PopUpWindowAdmin" />
-        <activity android:name=".BrowseNotes" />
-        <activity android:name=".requestadmin" />
-        <activity android:name=".chapters" />
-        <activity android:name=".splashActivity" />
-        <activity android:name=".favoritelist" />
+            android:name=".Admin.admin_browse_notes"
+            android:parentActivityName=".Admin.PopUpWindowAdmin" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".mynotes" />
-        <activity android:name=".mainAdmin" />
-        <activity android:name=".Visitors_activity" />
-        <activity android:name=".Activity_home_bage" />
-        <activity android:name=".forgetPasswordActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".StudentActivity">
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".Student_Visitor.favoritelist" />
+        <activity android:name=".Student_Visitor.StudentActivity" />
+        <activity android:name=".Admin.requestadmin" />
+        <activity android:name=".Admin.mainAdmin" />
+        <activity android:name=".Student_Visitor.forgetPasswordActivity" />
+        <activity android:name=".Student_Visitor.CreateAccountActivity" />
+        <activity android:name=".Student_Visitor.mynotes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminActivity" />
+        <activity android:name=".Admin.AdminActivity" />
         <activity
-            android:name=".Pop"
+            android:name=".Student_Visitor.Pop"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
-            android:name=".popUpWindow"
+            android:name=".Student_Visitor.popUpWindow"
             android:theme="@style/AppTheme.pop" />
         <activity
-            android:name=".PopUpWindowAdmin"
+            android:name=".Admin.PopUpWindowAdmin"
             android:theme="@style/AppTheme.pop2" />
         <activity
-            android:name=".creatnotepopup"
+            android:name=".Student_Visitor.creatnotepopup"
             android:theme="@style/AppTheme.pop4" />
         <activity
-            android:name=".popupwindowchapters"
+            android:name=".Student_Visitor.popupwindowchapters"
             android:theme="@style/AppTheme.pop5" />
-        <activity
-            android:name=".popupwindowvisitors"
-            android:theme="@style/AppTheme.pop6" />
     </application>
 
 </manifest>
