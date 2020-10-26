@@ -29,6 +29,7 @@ import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
+import com.postit.postit_.profile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -224,6 +225,7 @@ public class mynotes extends AppCompatActivity {
         } else if (id == R.id.home) {
             startActivity(new Intent(mynotes.this, StudentActivity.class));
         }
+
         return true;
     }
 
