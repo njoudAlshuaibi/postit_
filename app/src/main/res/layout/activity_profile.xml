@@ -34,10 +34,16 @@
             android:paddingBottom="24dp">
 
             <ImageView
-                android:layout_marginTop="20dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="75dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="-80dp"
                 android:src="@drawable/ic_baseline_account_circle_24" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="268dp"
@@ -55,9 +61,25 @@
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:hint="user name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/editusername"
+        android:layout_width="39dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/ic_baseline_edit_24" />
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,6 +104,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                <ImageView
+                    android:id="@+id/editemail"
+                    android:layout_width="39dp"
+                    android:layout_height="51dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="33dp"
+                    android:src="@drawable/ic_baseline_edit_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="268dp"
@@ -98,12 +135,30 @@
                     android:ems="10"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:hint="password"
-                    android:inputType="textPassword"
+                    android:hint="Major"
+                    android:inputType="text"
                     android:text="" />
             </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/editmajor"
+                    android:layout_width="39dp"
+                    android:layout_height="51dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/ic_baseline_edit_24" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinnereditmajor"
+                android:layout_width="220dp"
+                android:layout_height="41dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginTop="40dp"
+
+                android:hint="Major"
 
 
+                />
         </LinearLayout>
 
 
