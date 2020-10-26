@@ -31,6 +31,7 @@ import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
+import com.postit.postit_.profile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -189,6 +190,7 @@ public class favoritelist extends AppCompatActivity {
         else if (id==R.id.home){
             startActivity(new Intent(favoritelist.this, StudentActivity.class));
         }
+
         return true;
     }
 

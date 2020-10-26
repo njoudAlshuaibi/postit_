@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.Session;
+import com.postit.postit_.profile;
 
 
 public class StudentActivity extends AppCompatActivity {
@@ -172,9 +173,10 @@ public class StudentActivity extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-        }else if (id==R.id.home){
-            startActivity(new Intent(StudentActivity.this,StudentActivity.class));
+        }else if (id==R.id.home) {
+            startActivity(new Intent(StudentActivity.this, StudentActivity.class));
         }
+
         return true;
 
     }
