@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,19 +23,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.postit.postit_.Adapter.BrowseCommentAdapter;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
+import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.course;
 import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
+import com.postit.postit_.helper.CustomItemClickListener;
+
+import java.util.ArrayList;
 
 public class previewnote extends AppCompatActivity {
     TextView notepre;
     TextView notepr2;
     TextView notetit;
     RatingBar ratingBar;
-    Button btnSubmit;
-    private DatabaseReference notesRef,favouriteRef;
+    Button btnSubmit, submitComment;
+    private DatabaseReference notesRef, favouriteRef, commentsRef;
     float rate;
     int rateCount;
     float currentRate;
@@ -42,20 +50,26 @@ public class previewnote extends AppCompatActivity {
     float ratenum;
     boolean flag;
     boolean f;
-String userEmail;
+    String userEmail;
     String Nobjid;
+    private ListView comments;
+    BrowseCommentAdapter commentAdapter;
+    EditText newComment;
+    String scomment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previewnote);
-        notepre= findViewById(R.id.notepre);
-        notepr2= findViewById(R.id.notepr2);
-        notetit= findViewById(R.id.notetit);
-
+        notepre = findViewById(R.id.notepre);
+        notepr2 = findViewById(R.id.notepr2);
+        notetit = findViewById(R.id.notetit);
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
+        newComment = (EditText) findViewById(R.id.newcomment);
+        submitComment= (Button) findViewById(R.id.submitComment);
 
+        commentsRef= FirebaseDatabase.getInstance().getReference().child("Comments");
 
         DisplayMetrics aa = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(aa);
@@ -83,8 +97,8 @@ String userEmail;
 
 
         notetit.setText(title);
-        notepre.setText("\n\n\n caption :\n\n"+caption);
-        notepr2.setText( "\n\n\n\nwritten by : "+ email);
+        notepre.setText("caption :\n\n" + caption);
+        notepr2.setText("written by : " + email);
 
         ratingBar = findViewById(R.id.rating_bar);
         btnSubmit = findViewById(R.id.submitRate);
@@ -95,19 +109,22 @@ String userEmail;
             // No user is signed in
         }
 
-        if(pre.equals("false")){
+        if (pre.equals("false")) {
             btnSubmit.setVisibility(View.INVISIBLE);
-            ratingBar.setVisibility(View.INVISIBLE);}
-else{
+            ratingBar.setVisibility(View.INVISIBLE);
+        } else {
             btnSubmit.setVisibility(View.VISIBLE);
-            ratingBar.setVisibility(View.VISIBLE);}
+            ratingBar.setVisibility(View.VISIBLE);
+        }
 
-        if(email.equals(userEmail)){
+        if (email.equals(userEmail)) {
             btnSubmit.setVisibility(View.INVISIBLE);
-            ratingBar.setVisibility(View.INVISIBLE);}
-        if(user==null){
+            ratingBar.setVisibility(View.INVISIBLE);
+        }
+        if (user == null) {
             btnSubmit.setVisibility(View.INVISIBLE);
-            ratingBar.setVisibility(View.INVISIBLE);}
+            ratingBar.setVisibility(View.INVISIBLE);
+        }
 
 
         notesRef.addValueEventListener(new ValueEventListener() {
@@ -119,7 +136,7 @@ else{
                     if (x.equals(id)) {
                         flag = true;
                         break;
-                    }else{
+                    } else {
                     }
                 }
 
@@ -133,38 +150,35 @@ else{
 
         });
 
-            btnSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    s = String.valueOf(ratingBar.getRating());
-                    Toast.makeText(getApplicationContext(), s + "Star", Toast.LENGTH_SHORT).show();
+                s = String.valueOf(ratingBar.getRating());
+                Toast.makeText(getApplicationContext(), s + "Star", Toast.LENGTH_SHORT).show();
 
-                    if(flag==true) {
-                        currentRate = Float.parseFloat(s);
+                if (flag == true) {
+                    currentRate = Float.parseFloat(s);
 //                float c = currentRate + rate;
-                        ratenum = ratenum + currentRate;
-                        counter = (float) rateCount + 1;
-                        newrate = (ratenum / counter);
-                        notesRef.child(id).child("allrates").setValue(ratenum);
-                        notesRef.child(id).child("rate").setValue(newrate);
-                        notesRef.child(id).child("ratingCount").setValue(counter);
-
-
-                    }
-
+                    ratenum = ratenum + currentRate;
+                    counter = (float) rateCount + 1;
+                    newrate = (ratenum / counter);
+                    notesRef.child(id).child("allrates").setValue(ratenum);
+                    notesRef.child(id).child("rate").setValue(newrate);
+                    notesRef.child(id).child("ratingCount").setValue(counter);
 
 
                 }
 
 
-            });
+            }
+
+
+        });
 
 
 
     }
-
-
 
 
 }
