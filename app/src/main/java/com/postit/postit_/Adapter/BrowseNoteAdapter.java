@@ -136,11 +136,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                 myIntent.setPackage("com.twitter.android");
                 context.startActivity(Intent.createChooser(myIntent, "Share this via"));
             }
-
-
         });
-
-
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userEmail = user.getEmail().trim();

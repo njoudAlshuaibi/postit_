@@ -175,9 +175,44 @@ public class previewnote extends AppCompatActivity {
 
 
         });
+        comments = (ListView) findViewById(R.id.commentstt);
+        final ArrayList<comment> commentsList = new ArrayList<>();
+        commentAdapter = new BrowseNoteAdapter(this,R.id.listitem, commentsList);
+        comments.setAdapter(commentAdapter);
+        commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
+        commentsRef.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotq) {
+                commentsList.clear();
+                for (DataSnapshot snapshotc : snapshotq.getChildren()) {
+                    comment commentObj = snapshotc.getValue(comment.class);
+                    commentsList.add(commentObj);
+
+                }//
+                commentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        submitComment.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                scomment = newComment.getText().toString().trim();
+                String commID= commentsRef.push().getKey();
+                comment c= new comment(commID,id,scomment);
+                addNewComment(id,c);
+            }
+        });
 
 
 
+    }
+    public void addNewComment(String noteID, comment c){
+        commentsRef.child(c.getCommID().trim()).setValue(c);
     }
 
 
