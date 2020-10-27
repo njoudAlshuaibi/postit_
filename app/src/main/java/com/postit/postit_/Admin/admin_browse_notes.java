@@ -37,14 +37,13 @@ public class admin_browse_notes extends AppCompatActivity {
     private TextView textView, textview10, currentCandChAdmin;
     private DatabaseReference notesRef;
     private DatabaseReference ref;
-    private DatabaseReference  noteRef;
+    private DatabaseReference noteRef;
     DatabaseReference favouriteRef;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
+        favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_browse_notes);
@@ -66,7 +65,6 @@ public class admin_browse_notes extends AppCompatActivity {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
 
 
-
         noteslistview = findViewById(R.id.listviewadmin);
         final ArrayList<String> notesList = new ArrayList<>();
         final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, notesList);
@@ -79,13 +77,15 @@ public class admin_browse_notes extends AppCompatActivity {
                 notesList.clear();
                 for (DataSnapshot snapshotc : snapshotq.getChildren()) {
                     note noteObj = snapshotc.getValue(note.class);
-                    if(MajorN.equalsIgnoreCase(noteObj.getMajor()))
-                    {
-                        if(CourseN.equalsIgnoreCase(noteObj.getCourse())){
-                            if(chapterN.equalsIgnoreCase(noteObj.getChapterNum())){
-                                String notedisplay = "collage: " + noteObj.getCollege() + "\nmajor: " + noteObj.getMajor() + "\ncourse: " + noteObj.getCourse() + "\nchapter: " + noteObj.getChapterNum() + "\ntitle: " + noteObj.getTitle() + "\ncaption: " + noteObj.getCaption() + "\nemail: " + noteObj.getEmail()+"\nRate: " +noteObj.getRate() +" Out of 4"+"\nID: " +noteObj.getId();
-                                notesList.add(notedisplay);}}
-                    }}
+                    if (MajorN.equalsIgnoreCase(noteObj.getMajor())) {
+                        if (CourseN.equalsIgnoreCase(noteObj.getCourse())) {
+                            if (chapterN.equalsIgnoreCase(noteObj.getChapterNum())) {
+                                String notedisplay = "collage: " + noteObj.getCollege() + "\nmajor: " + noteObj.getMajor() + "\ncourse: " + noteObj.getCourse() + "\nchapter: " + noteObj.getChapterNum() + "\ntitle: " + noteObj.getTitle() + "\ncaption: " + noteObj.getCaption() + "\nemail: " + noteObj.getEmail() + "\nRate: " + noteObj.getRate() + " Out of 4" + "\nID: " + noteObj.getId();
+                                notesList.add(notedisplay);
+                            }
+                        }
+                    }
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -103,11 +103,9 @@ public class admin_browse_notes extends AppCompatActivity {
                     String chapterId = findNote.getChapterNum();
                     if (courseId.equals(CourseN) && chapterId.equals(chapterN)) {
                         textView.setText("");
-                        currentCandChAdmin.setText(CourseN+" - "+chapterN);
+                        currentCandChAdmin.setText(CourseN + " - " + chapterN);
                         break;
-                    }
-
-                    else {
+                    } else {
                         textView.setText("no existing notes");
                         textview10.setText("");
 
@@ -146,13 +144,13 @@ public class admin_browse_notes extends AppCompatActivity {
                                             final String noteid23 = findnote3.getId();
 
 
-
                                             if (noteid2.equals(notetKey.trim())) {
                                                 deleteNote2(noteid23);
                                             }
 
                                         }
                                     }
+
                                     public void deleteNote2(String noteKey) {
                                         favouriteRef.child(noteKey.trim()).removeValue();
                                     }
@@ -176,9 +174,6 @@ public class admin_browse_notes extends AppCompatActivity {
 
 
     }
-
-
-
 
 
     @Override
@@ -218,8 +213,7 @@ public class admin_browse_notes extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-        }
-        else if (id==R.id.home){
+        } else if (id == R.id.home) {
             startActivity(new Intent(admin_browse_notes.this, mainAdmin.class));
         }
         return true;
