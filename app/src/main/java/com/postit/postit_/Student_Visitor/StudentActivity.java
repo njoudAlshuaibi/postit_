@@ -2,7 +2,6 @@ package com.postit.postit_.Student_Visitor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.Session;
-import com.postit.postit_.profile;
 
 
 public class StudentActivity extends AppCompatActivity {
@@ -139,7 +137,7 @@ public class StudentActivity extends AppCompatActivity {
         if(user == null){
             getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
-        else{
+       else{
         getMenuInflater().inflate(R.menu.student_menu, menu);}
         return true;
     }
