@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,14 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.postit.postit_.Adapter.BrowseNoteAdapter;
 import com.postit.postit_.Adapter.FavoriteListAdapter;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.favoriteList;
-import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
-import com.postit.postit_.profile;
 
 import java.util.ArrayList;
 import java.util.List;
