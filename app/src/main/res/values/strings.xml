@@ -14,5 +14,7 @@
 
     </string-array>
     <string name="title_activity_mynote2">Mynote2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">C navigation drawer</string>
 
 </resources>
