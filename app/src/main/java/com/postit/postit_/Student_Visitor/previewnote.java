@@ -177,7 +177,7 @@ public class previewnote extends AppCompatActivity {
         });
         comments = (ListView) findViewById(R.id.commentstt);
         final ArrayList<comment> commentsList = new ArrayList<>();
-        commentAdapter = new BrowseNoteAdapter(this,R.id.listitem, commentsList);
+        commentAdapter = new BrowseCommentAdapter(this,R.layout.listitem, commentsList);
         comments.setAdapter(commentAdapter);
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
         commentsRef.child(id).addValueEventListener(new ValueEventListener() {
