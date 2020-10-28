@@ -8,15 +8,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +37,10 @@ import com.postit.postit_.helper.CustomItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class mynotes extends AppCompatActivity {
+public class mynotes extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout3;
+    NavigationView navigationView3;
+    Toolbar toolbar3;
     private FloatingActionButton fab;
     private DatabaseReference noteRef, notesRef;
     List<note> noteList = new ArrayList<>();
@@ -58,13 +65,20 @@ public class mynotes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mynotes);
-
-
-        Toolbar toolba = findViewById(R.id.toolbar_mynotes);
-        setSupportActionBar(toolba);
+        drawerLayout3=findViewById(R.id.drawer_layout3);
+        navigationView3=findViewById(R.id.nav_view3);
+        toolbar3=findViewById(R.id.toolbar_mynotes);
+        setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("My Notes");
-        toolba.setTitleTextColor(0xFFB8B8B8);
+        getSupportActionBar().setTitle("My notes");
+        toolbar3.setTitleTextColor(0xFFB8B8B8);
+        navigationView3.bringToFront();
+
+        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout3,toolbar3,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout3.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView3.setNavigationItemSelectedListener(this);
 
         textView = (TextView) findViewById(R.id.tvnotes);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -183,54 +197,71 @@ public class mynotes extends AppCompatActivity {
 
     }
 
-
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.mynotes, menu);
-        return true;
-    }
+    public void onBackPressed(){
+        if(drawerLayout3.isDrawerOpen(GravityCompat.START)){
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mynotes.this);
-            builder.setMessage("Are you sure you want to logout?");
-            builder.setCancelable(true);
-
-            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-
-                // signOut
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(mynotes.this, MainActivity.class));
-
-                }
-            });
-
-
-            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-
-        } else if (id == R.id.home) {
-            startActivity(new Intent(mynotes.this, StudentActivity.class));
+            drawerLayout3.closeDrawer(GravityCompat.START);
         }
-
-        return true;
+        else{
+            super.onBackPressed();
+        }
     }
+
+
+
+
 
     private void opencreatnotepopup() {
         Intent popupwindow4 = new Intent(mynotes.this, creatnotepopup.class);
         startActivity(popupwindow4);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                Intent intent1= new Intent(mynotes.this,StudentActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.nav_profile:
+                Intent intent2= new Intent(mynotes.this,Profile.class);
+                startActivity(intent2);
+                break;
+            case R.id.nav_chat:
+                break;
+            case R.id.nav_notification:
+                break;
+            case R.id.nav_logout:
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mynotes.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
+
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+
+                    // signOut
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(mynotes.this, MainActivity.class));
+
+                    }
+                });
+
+
+                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+
+        }
+        return true;}
 
 }

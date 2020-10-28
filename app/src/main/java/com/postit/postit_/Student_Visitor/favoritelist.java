@@ -1,9 +1,12 @@
 package com.postit.postit_.Student_Visitor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +35,10 @@ import com.postit.postit_.helper.CustomItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class favoritelist extends AppCompatActivity {
+public class favoritelist extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout2;
+    NavigationView navigationView2;
+    Toolbar toolbar2;
     List<favoriteList> noteList = new ArrayList<>();
     FavoriteListAdapter noteAdapter ;
     RecyclerView recyclerView;
@@ -51,12 +58,19 @@ public class favoritelist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favoritelist);
-        Toolbar toolb = findViewById(R.id.toolbar_favoritelist);
-        setSupportActionBar(toolb);
+        drawerLayout2=findViewById(R.id.drawer_layout2);
+        navigationView2=findViewById(R.id.nav_view2);
+        toolbar2=findViewById(R.id.toolbar_favoritelist);
+        setSupportActionBar(toolbar2);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Bookmarks");
-        toolb.setTitleTextColor(0xFFB8B8B8);
+        getSupportActionBar().setTitle("Bookmark");
+        toolbar2.setTitleTextColor(0xFFB8B8B8);
+        navigationView2.bringToFront();
+        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout2,toolbar2,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout2.addDrawerListener(toggle);
+        toggle.syncState();
 
+        navigationView2.setNavigationItemSelectedListener(this);
 
         favouriteRef= FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         favouriteRef.keepSynced(true);
@@ -145,48 +159,63 @@ public class favoritelist extends AppCompatActivity {
 
     }
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onBackPressed(){
+        if(drawerLayout2.isDrawerOpen(GravityCompat.START)){
 
-        getMenuInflater().inflate(R.menu.favoritelist, menu);
-        return true;
+            drawerLayout2.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
     }
+
+
+
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(favoritelist.this);
-            builder.setMessage("Are you sure you want to logout?");
-            builder.setCancelable(true);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                Intent intent1= new Intent(favoritelist.this,StudentActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.nav_profile:
+                Intent intent2= new Intent(favoritelist.this,Profile.class);
+                startActivity(intent2);
+                break;
+            case R.id.nav_chat:
+                break;
+            case R.id.nav_notification:
+                break;
+            case R.id.nav_logout:
 
-            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(favoritelist.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
 
-                // signOut
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(favoritelist.this, MainActivity.class));
-//                    finish();
-                }
-            });
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+
+                    // signOut
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(favoritelist.this, MainActivity.class));
+
+                    }
+                });
 
 
-            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
 
         }
-        else if (id==R.id.home){
-            startActivity(new Intent(favoritelist.this, StudentActivity.class));
-        }
-
-        return true;
-    }
-
+        return true;}
 }
