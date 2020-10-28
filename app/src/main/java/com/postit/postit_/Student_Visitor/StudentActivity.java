@@ -176,9 +176,13 @@ public void onBackPressed(){
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item ) {
         switch (item.getItemId()) {
+            case R.id.nav_home:
+                Intent intent1= new Intent(StudentActivity.this,StudentActivity.class);
+                startActivity(intent1);
+                break;
             case R.id.nav_profile:
-                Intent intent= new Intent(StudentActivity.this,Profile.class);
-                startActivity(intent);
+                Intent intent2= new Intent(StudentActivity.this,Profile.class);
+                startActivity(intent2);
                 break;
             case R.id.nav_chat:
                 break;

@@ -2,9 +2,12 @@ package com.postit.postit_.Student_Visitor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,8 +41,10 @@ import com.postit.postit_.Objects.note;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExplorerNote extends AppCompatActivity {
-
+public class ExplorerNote extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout4;
+    NavigationView navigationView4;
+    Toolbar toolbar4;
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -71,12 +77,19 @@ public class ExplorerNote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorer_note);
-        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
-        setSupportActionBar(tool);
+        drawerLayout4=findViewById(R.id.drawer_layout4);
+        navigationView4=findViewById(R.id.nav_view4);
+        toolbar4=findViewById(R.id.toolbar_Browsenotes);
+        setSupportActionBar(toolbar4);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Browse Notes");
-        tool.setTitleTextColor(0xFFB8B8B8);
+        getSupportActionBar().setTitle("Browe notes");
+        toolbar4.setTitleTextColor(0xFFB8B8B8);
+        navigationView4.bringToFront();
+        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout4,toolbar4,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout4.addDrawerListener(toggle);
+        toggle.syncState();
 
+        navigationView4.setNavigationItemSelectedListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         session = new Session(getApplicationContext());
@@ -202,7 +215,16 @@ public class ExplorerNote extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout4.isDrawerOpen(GravityCompat.START)){
 
+            drawerLayout4.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
     private void openpopupwindowchapters() {
 
         Intent popupwindow5 = new Intent(ExplorerNote.this, popupwindowchapters.class);
@@ -228,47 +250,55 @@ public class ExplorerNote extends AppCompatActivity {
         if(user == null){
             getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
-        else{
-            getMenuInflater().inflate(R.menu.student_menu, menu);}
         return true;
     }
+
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        int id = item.getItemId();
-        if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);
-            builder.setMessage("Are you sure you want to logout?");
-            builder.setCancelable(true);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                Intent intent1= new Intent(ExplorerNote.this,StudentActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.nav_profile:
+                Intent intent2= new Intent(ExplorerNote.this,Profile.class);
+                startActivity(intent2);
+                break;
+            case R.id.nav_chat:
+                break;
+            case R.id.nav_notification:
+                break;
+            case R.id.nav_logout:
 
-            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
 
-                // signOut
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(ExplorerNote.this, MainActivity.class));
-                    finish();
-                }
-            });
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+
+                    // signOut
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(ExplorerNote.this, MainActivity.class));
+
+                    }
+                });
 
 
-            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
 
         }
-        else if (id==R.id.home){
-                startActivity(new Intent(ExplorerNote.this, StudentActivity.class));
+        return true;}
 
-        }
-        return true;
-    }
 }
