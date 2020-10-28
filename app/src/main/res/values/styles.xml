@@ -68,4 +68,7 @@
 
 
     </style>
+    <style name="act" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal"> @color/colorWhite</item>
+    </style>
 </resources>
