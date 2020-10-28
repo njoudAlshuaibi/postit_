@@ -70,18 +70,29 @@ import java.util.List;
 
 public class BrowseCommentAdapter extends ArrayAdapter<comment> {
     Context mcontext;
-
+    int mResource;
     public BrowseCommentAdapter(Context context, int resource, ArrayList<comment> obj) {
         super(context, resource, obj);
         mcontext=context;
+        mResource=resource;
 
     }
 
-//    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        return super.getView(position, convertView, parent);
-//    }
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+       String comm = getItem(position).getComm();
+        String commID = getItem(position).getCommID();
+        String notID = getItem(position).getNoteID();
+
+        comment comment = new comment(commID,notID,comm);
+        LayoutInflater inflater = LayoutInflater.from(mcontext);
+        convertView = inflater.inflate(mResource, parent, false);
+
+        TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
+        tvcomm.setText(comm);
+        return convertView;
+    }
 
 
 }

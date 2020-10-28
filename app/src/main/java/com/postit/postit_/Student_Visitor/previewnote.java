@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseCommentAdapter;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
+import com.postit.postit_.Admin.AdminActivity;
 import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.course;
 import com.postit.postit_.Objects.favoriteList;
@@ -177,16 +180,18 @@ public class previewnote extends AppCompatActivity {
         });
         comments = (ListView) findViewById(R.id.commentstt);
         final ArrayList<comment> commentsList = new ArrayList<>();
-        commentAdapter = new BrowseCommentAdapter(this,R.layout.listitem, commentsList);
+        commentAdapter = new BrowseCommentAdapter(this,R.layout.adapter_view_layout, commentsList);
         comments.setAdapter(commentAdapter);
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
-        commentsRef.child(id).addValueEventListener(new ValueEventListener() {
+        commentsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshotq) {
                 commentsList.clear();
                 for (DataSnapshot snapshotc : snapshotq.getChildren()) {
                     comment commentObj = snapshotc.getValue(comment.class);
+                    if(commentObj.getNoteID().equals(id)){
                     commentsList.add(commentObj);
+                    }
 
                 }//
                 commentAdapter.notifyDataSetChanged();
@@ -212,7 +217,15 @@ public class previewnote extends AppCompatActivity {
 
     }
     public void addNewComment(String noteID, comment c){
-        commentsRef.child(c.getCommID().trim()).setValue(c);
+        commentsRef.child(c.getCommID().trim()).setValue(c).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+               if(task.isSuccessful()){
+                   Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
+                   newComment.setText("");
+               }
+            }
+        });
     }
 
 
