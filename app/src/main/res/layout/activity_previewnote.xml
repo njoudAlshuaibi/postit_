@@ -63,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_marginTop="-70dp"
+            android:layout_marginLeft="10dp"
             android:numStars="4"
             android:stepSize="0.5"
             android:progressTint="#F5F3DB07"
@@ -72,7 +73,7 @@
             android:id="@+id/submitRate"
             android:layout_width="60dp"
             android:layout_height="33dp"
-            android:layout_marginLeft="199dp"
+            android:layout_marginLeft="250dp"
             android:layout_marginTop="-38dp"
             android:layout_marginRight="4dp"
             android:background="#EC7BB5"
@@ -81,29 +82,30 @@
 
         <ListView
             android:id="@+id/commentstt"
-            android:layout_width="300dp"
+            android:layout_width="350dp"
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="20dp"
+            android:background="#F6EA7F">
         </ListView>
 
         <EditText
             android:id="@+id/newcomment"
-            android:layout_width="327dp"
+            android:layout_width="250dp"
             android:layout_height="32dp"
             android:hint="Write your comment"
             android:textSize="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="0dp"
             />
         <Button
             android:id="@+id/submitComment"
             android:layout_width="60dp"
             android:layout_height="33dp"
-            android:layout_marginLeft="199dp"
+            android:layout_marginLeft="250dp"
             android:layout_marginTop="-38dp"
             android:layout_marginRight="4dp"
             android:background="#EC7BB5"
-            android:text="submit"
+            android:text="POST"
             android:textColor="#fff" />
     </LinearLayout>
 
