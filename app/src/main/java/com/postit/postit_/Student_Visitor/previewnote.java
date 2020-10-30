@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class previewnote extends AppCompatActivity {
     EditText newComment;
     String scomment;
     final rate rateObj = new rate();
+    ImageView startChat;
 
 
 
@@ -74,10 +76,15 @@ public class previewnote extends AppCompatActivity {
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         rateRef = FirebaseDatabase.getInstance().getReference().child("Rates");
-
+        startChat = (ImageView) findViewById(R.id.startChat);
         newComment = (EditText) findViewById(R.id.newcomment);
         submitComment= (Button) findViewById(R.id.submitComment);
-
+        startChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(previewnote.this, chatActivity.class));
+            }
+        });
         commentsRef= FirebaseDatabase.getInstance().getReference().child("Comments");
 
         DisplayMetrics aa = new DisplayMetrics();
@@ -246,7 +253,7 @@ public class previewnote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scomment = newComment.getText().toString().trim();
-               String ucid = user.getUid().trim();
+               String ucid = user.getEmail().trim();
                 String commID= commentsRef.push().getKey();
                 comment c= new comment(commID,id,scomment,ucid);
                 addNewComment(id,c);
