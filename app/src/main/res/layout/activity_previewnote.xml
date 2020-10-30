@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/notepre"
             android:layout_width="298dp"
-            android:layout_height="200dp"
+            android:layout_height="210dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/ubuntu_bold"
@@ -62,7 +62,7 @@
             android:id="@+id/rating_bar"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
-            android:layout_marginTop="-70dp"
+            android:layout_marginTop="-60dp"
             android:layout_marginLeft="10dp"
             android:numStars="4"
             android:stepSize="0.5"
