@@ -246,8 +246,9 @@ public class previewnote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scomment = newComment.getText().toString().trim();
+               String ucid = user.getUid().trim();
                 String commID= commentsRef.push().getKey();
-                comment c= new comment(commID,id,scomment);
+                comment c= new comment(commID,id,scomment,ucid);
                 addNewComment(id,c);
             }
         });

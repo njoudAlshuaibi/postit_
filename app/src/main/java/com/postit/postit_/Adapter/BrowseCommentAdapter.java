@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
 
@@ -71,10 +72,17 @@ import java.util.List;
 public class BrowseCommentAdapter extends ArrayAdapter<comment> {
     Context mcontext;
     int mResource;
+    private FirebaseUser user;
+     String currentUserid;
     public BrowseCommentAdapter(Context context, int resource, ArrayList<comment> obj) {
         super(context, resource, obj);
         mcontext=context;
         mResource=resource;
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user!= null){
+            currentUserid = user.getUid().trim();}
 
     }
 
@@ -84,13 +92,24 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
        String comm = getItem(position).getComm();
         String commID = getItem(position).getCommID();
         String notID = getItem(position).getNoteID();
+        String comR = getItem(position).getComR();
+//        ImageButton deletenc = (ImageButton) convertView.findViewById(R.id.deletenc9);
+//        deletenc.setVisibility(View.INVISIBLE);
 
-        comment comment = new comment(commID,notID,comm);
+        comment comment = new comment(commID,notID,comm,comR);
         LayoutInflater inflater = LayoutInflater.from(mcontext);
         convertView = inflater.inflate(mResource, parent, false);
 
+
+//        if(currentUserid.equals(comR))
+//        {deletenc.setVisibility(View.VISIBLE);}
+
+
         TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
-        tvcomm.setText(comm);
+        tvcomm.setText(comm+comR);
+
+
+
         return convertView;
     }
 
