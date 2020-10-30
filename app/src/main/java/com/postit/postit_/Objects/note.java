@@ -61,17 +61,9 @@ public class note {
         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         Date dateobj = new Date();
         date = df.format(dateobj);
-        this.color = color;
 
     }
 
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-    }
 
     public String getDate() {
         return date;

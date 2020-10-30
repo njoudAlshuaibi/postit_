@@ -281,7 +281,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                         public void deleteNote(String noteKey) {
                             favouriteRef.child(noteKey.trim()).removeValue();
-                            noteRef.child(id5).child("color").setValue(0);
+//                            noteRef.child(id5).child("color").setValue(0);
                         }
 
                         @Override

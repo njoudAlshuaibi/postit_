@@ -15,7 +15,6 @@ public class favoriteList {
     private float rate;
     private float allrates;
     private int ratingCount;
-    private int color;
 
     public favoriteList() {
     }

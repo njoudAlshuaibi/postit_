@@ -92,16 +92,19 @@ public class favoritelist extends AppCompatActivity implements NavigationView.On
                 String raco =String.valueOf(ratec);
                 float ra = n.getAllrates();
                 String cae =String.valueOf(ra);
+                String nid = n.getNid();
+                int color = n.getColor();
 
                 Intent in = new Intent(favoritelist.this, previewnote.class);
                 in.putExtra(preTitel,""+s );
                 in.putExtra(preCaption,""+a );
                 in.putExtra(preEmail,""+m );
-                in.putExtra(preID,i);
+                in.putExtra(preID,nid);
                 in.putExtra(prerate,ca);
                 in.putExtra(precrate,raco);
                 in.putExtra(precratenum,cae);
                 in.putExtra(precc,"false");
+
 
                 startActivity(in);
             } // end on item click listener
