@@ -4,14 +4,26 @@ public class comment {
     private String commID;
     private String noteID;
     private String comm;
+    private String comR;
 
-    public comment(String commID, String noteID, String comm) {
+
+    public comment(String commID, String noteID, String comm,String comR) {
         this.commID = commID;
         this.noteID = noteID;
         this.comm = comm;
+        this.comR = comR;
     }
 
     public comment() {
+    }
+
+
+    public String getComR() {
+        return comR;
+    }
+
+    public void setComR(String comR) {
+        this.comR = comR;
     }
 
     public String getCommID() {

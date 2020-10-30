@@ -93,7 +93,6 @@ public class favoritelist extends AppCompatActivity implements NavigationView.On
                 float ra = n.getAllrates();
                 String cae =String.valueOf(ra);
                 String nid = n.getNid();
-                int color = n.getColor();
 
                 Intent in = new Intent(favoritelist.this, previewnote.class);
                 in.putExtra(preTitel,""+s );

@@ -347,20 +347,15 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                 favNote.setRate(0);
                                 favNote.setRatingCount(0);
                                 favNote.setAllrates(0);
-                                favNote.setColor(1);
 //                            noteRef.child(findnote.getId()).child("color").setValue(1);
                                 favouriteRef.child(id2).setValue(favNote);
                             }
-
-
                         });//de
                     }
-
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
 
