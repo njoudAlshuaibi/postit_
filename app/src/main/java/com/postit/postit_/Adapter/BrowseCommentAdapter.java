@@ -82,7 +82,7 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user!= null){
-            currentUserid = user.getUid().trim();}
+            currentUserid = user.getEmail().trim();}
 
     }
 
@@ -93,20 +93,21 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
         String commID = getItem(position).getCommID();
         String notID = getItem(position).getNoteID();
         String comR = getItem(position).getComR();
-//        ImageButton deletenc = (ImageButton) convertView.findViewById(R.id.deletenc9);
-//        deletenc.setVisibility(View.INVISIBLE);
 
         comment comment = new comment(commID,notID,comm,comR);
         LayoutInflater inflater = LayoutInflater.from(mcontext);
         convertView = inflater.inflate(mResource, parent, false);
 
-
-//        if(currentUserid.equals(comR))
-//        {deletenc.setVisibility(View.VISIBLE);}
+        ImageButton deletenc = (ImageButton) convertView.findViewById(R.id.deletenc9);
+        deletenc.setVisibility(View.INVISIBLE);
+        if(currentUserid.equals(comR))
+        {deletenc.setVisibility(View.VISIBLE);}
 
 
         TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
-        tvcomm.setText(comm+comR);
+        tvcomm.setText(comm);
+        TextView comr = (TextView) convertView.findViewById(R.id.commentr);
+        comr.setText("By: "+comR);
 
 
 
