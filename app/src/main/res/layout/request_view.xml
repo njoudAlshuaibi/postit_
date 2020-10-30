@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textAlignment="center"
+android:textAlignment="viewStart"
             android:textSize="16dp"
             android:id="@+id/txt_name" />
 

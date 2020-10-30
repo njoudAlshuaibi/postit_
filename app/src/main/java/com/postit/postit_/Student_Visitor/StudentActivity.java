@@ -1,6 +1,7 @@
 package com.postit.postit_.Student_Visitor;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -164,8 +165,8 @@ public void onBackPressed(){
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(user == null){
-            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
+//        if(user == null){
+//            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
      // else{
       // getMenuInflater().inflate(R.menu.menudrawer, menu);}
@@ -175,6 +176,11 @@ public void onBackPressed(){
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item ) {
+        if(user==null){
+            MenuItem nav_notification;
+            nav_notification = findViewById(R.id.nav_notification);
+            nav_notification.setVisible(false);
+        } else{
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1= new Intent(StudentActivity.this,StudentActivity.class);
@@ -219,6 +225,6 @@ public void onBackPressed(){
                 alertDialog.show();
 
 
-         }
+         }}
         return true;}
 }

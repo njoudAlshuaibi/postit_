@@ -23,6 +23,7 @@
         <activity android:name=".Student_Visitor.favoritelist" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".Admin.requestadmin" />
+
         <activity android:name=".Admin.mainAdmin" />
         <activity android:name=".Student_Visitor.forgetPasswordActivity" />
         <activity android:name=".Student_Visitor.CreateAccountActivity" />
@@ -33,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Admin.AdminActivity" />
         <activity
             android:name=".Student_Visitor.Pop"

@@ -266,7 +266,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                                     if (Nobj.getNid().equals(id5)) {
                                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                                 .setTitle("are you sure?")
-                                                .setMessage("do you want to remove this note from favorite list? ")
+                                                .setMessage("do you want to remove this note from your Bookmarks? ")
                                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
@@ -281,6 +281,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                         public void deleteNote(String noteKey) {
                             favouriteRef.child(noteKey.trim()).removeValue();
+                            noteRef.child(id5).child("color").setValue(0);
                         }
 
                         @Override

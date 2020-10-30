@@ -87,6 +87,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         final String id = noteList.get(position).getId();
         final String title = noteList.get(position).getTitle();
         final String body = noteList.get(position).getCaption();
+        final int color = noteList.get(position).getColor();
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
 
@@ -101,7 +102,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                         holder.ratingBar.setRating(rate);
                         break;
 
-                    } else {
+                    }
+                    else {
 
                     }
                 }
@@ -216,12 +218,20 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         }
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            holder.addFavourite.setVisibility(View.VISIBLE);
+            if (color==1) {
+                holder.remove.setVisibility(View.VISIBLE);
+//                holder.addFavourite.setVisibility(View.INVISIBLE);
+
+            } else if (color==0)
+            {
+//                holder.remove.setVisibility(View.INVISIBLE);
+                holder.addFavourite.setVisibility(View.VISIBLE);
             holder.addFavourite.setOnClickListener(new View.OnClickListener() {
                 final String currentUserid = user.getUid().trim();
+
                 @Override
                 public void onClick(View view) {
-                    flag=false;
+                    flag = false;
                     noteRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshothh) {
@@ -233,6 +243,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                 }
                             }
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
@@ -242,13 +253,13 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                         public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
                             for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
                                 favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
-                                if ((Nobj.getNid().equals(id))&&(Nobj.getUserID().equals(currentUserid))) {
+                                if ((Nobj.getNid().equals(id)) && (Nobj.getUserID().equals(currentUserid))) {
                                     flag = true;
                                     break;
                                 }
                             }
 
-                            if (flag==false) {
+                            if (flag == false) {
                                 new AlertDialog.Builder(context)
                                         .setMessage("do you want to add this note to your bookmarks?")
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -262,6 +273,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             }
 
                         }
+
                         public void addToFavoriteList(final note findnote) {
                             final favoriteList favNote = new favoriteList();
                             final String id2 = favouriteRef.push().getKey();
@@ -280,6 +292,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                             favNote.setRate(0);
                             favNote.setRatingCount(0);
                             favNote.setAllrates(0);
+                            noteRef.child(findnote.getId()).child("color").setValue(1);
                             favouriteRef.child(id2).setValue(favNote);
                         }
 
@@ -293,9 +306,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                 }
 
 
-
-
             });//de
+        }
         }
     }
 

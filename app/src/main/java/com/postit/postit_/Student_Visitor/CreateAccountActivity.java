@@ -27,8 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.major;
-import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
+import  com.postit.postit_.Objects.user;
 
 public class CreateAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 

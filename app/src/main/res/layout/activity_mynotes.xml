@@ -36,7 +36,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MynoteRV"
             android:layout_width="337dp"
-            android:layout_height="520dp"
+            android:layout_height="580dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="60dp"
             android:layout_marginRight="-999dp"
@@ -58,7 +58,7 @@
             android:layout_width="185dp"
             android:layout_height="-3343dp"
             android:layout_marginLeft="310dp"
-            android:layout_marginTop="270dp"
+            android:layout_marginTop="255dp"
             android:layout_marginBottom="11dp"
             android:background="#FBE0EA"
             app:backgroundTint="#009688"

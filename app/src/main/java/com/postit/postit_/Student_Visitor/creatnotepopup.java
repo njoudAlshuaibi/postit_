@@ -251,6 +251,7 @@ public class creatnotepopup extends AppCompatActivity {
             noteObj.setRate(rate);
             noteObj.setRatingCount(ratec);
             noteObj.setAllrates(0);
+            noteObj.setColor(0);
 
             noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

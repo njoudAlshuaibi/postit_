@@ -32,6 +32,7 @@ import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.course;
 import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
 
@@ -43,8 +44,8 @@ public class previewnote extends AppCompatActivity {
     TextView notetit;
     RatingBar ratingBar;
     Button btnSubmit, submitComment;
-    private DatabaseReference notesRef, favouriteRef, commentsRef;
-    float rate;
+    private DatabaseReference notesRef, favouriteRef, commentsRef,rateRef;
+    String rateN;
     int rateCount;
     float currentRate;
     float counter;
@@ -59,6 +60,9 @@ public class previewnote extends AppCompatActivity {
     BrowseCommentAdapter commentAdapter;
     EditText newComment;
     String scomment;
+    final rate rateObj = new rate();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,8 @@ public class previewnote extends AppCompatActivity {
         notetit = findViewById(R.id.notetit);
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
+        rateRef = FirebaseDatabase.getInstance().getReference().child("Rates");
+
         newComment = (EditText) findViewById(R.id.newcomment);
         submitComment= (Button) findViewById(R.id.submitComment);
 
@@ -105,9 +111,10 @@ public class previewnote extends AppCompatActivity {
 
         ratingBar = findViewById(R.id.rating_bar);
         btnSubmit = findViewById(R.id.submitRate);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userEmail = user.getEmail().trim();
+
         } else {
             // No user is signed in
         }
@@ -128,7 +135,6 @@ public class previewnote extends AppCompatActivity {
             btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
         }
-
 
         notesRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,15 +159,43 @@ public class previewnote extends AppCompatActivity {
 
         });
 
+        rateRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotq) {
+                for (DataSnapshot snapshotc : snapshotq.getChildren()) {
+                    rate rateo = snapshotc.getValue(rate.class);
+                    if(snapshotc.exists()) {
+                        if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
+                            btnSubmit.setVisibility(View.INVISIBLE);
+                            rateN = rateo.getRate1();
+                            final float raten = Float.parseFloat(rateN);
+                            ratingBar.setRating(raten);
+                            notepr2.setText("written by : " + email+ "\n\nyour Submitted rate");
+
+                        }
+//                        else {
+//                            btnSubmit.setVisibility(View.VISIBLE);
+//                        }
+
+                    } }//
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 s = String.valueOf(ratingBar.getRating());
-                Toast.makeText(getApplicationContext(), s + "Star", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "note rated successfully", Toast.LENGTH_SHORT).show();
 
                 if (flag == true) {
                     currentRate = Float.parseFloat(s);
+                    String cn = String.valueOf(currentRate);
 //                float c = currentRate + rate;
                     ratenum = ratenum + currentRate;
                     counter = (float) rateCount + 1;
@@ -170,7 +204,12 @@ public class previewnote extends AppCompatActivity {
                     notesRef.child(id).child("rate").setValue(newrate);
                     notesRef.child(id).child("ratingCount").setValue(counter);
 
-
+                    String id4 = rateRef.push().getKey();
+                    rateObj.setId(id4);
+                    rateObj.setNoteid(id);
+                    rateObj.setUserid(user.getUid());
+                    rateObj.setRate1(cn);
+                    rateRef.child(id4).setValue(rateObj);
                 }
 
 
@@ -212,6 +251,7 @@ public class previewnote extends AppCompatActivity {
                 addNewComment(id,c);
             }
         });
+
 
 
 
