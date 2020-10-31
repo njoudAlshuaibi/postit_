@@ -71,8 +71,6 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     private FloatingActionButton button;
     Session session;
     private FirebaseAuth mAuth;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +167,6 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -250,7 +247,6 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
         startActivityForResult(popupwindow5 , RESULT_OK);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -260,8 +256,6 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -306,5 +300,4 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 startActivity(intent4);
         }
         return true;}
-
 }
