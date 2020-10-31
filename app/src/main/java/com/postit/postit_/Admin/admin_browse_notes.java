@@ -1,9 +1,12 @@
 package com.postit.postit_.Admin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,10 +33,14 @@ import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 import com.postit.postit_.Student_Visitor.ExplorerNote;
+import com.postit.postit_.Student_Visitor.Profile;
+import com.postit.postit_.Student_Visitor.StudentActivity;
+import com.postit.postit_.Student_Visitor.chatActivity;
 
 import java.util.ArrayList;
 
 public class admin_browse_notes extends AppCompatActivity {
+
     private ListView noteslistview;
     private TextView textView, textview10, currentCandChAdmin;
     private DatabaseReference notesRef;
@@ -47,11 +55,11 @@ public class admin_browse_notes extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_browse_notes);
-        Toolbar tb = findViewById(R.id.toolbar_adminnote);
-        setSupportActionBar(tb);
+        Toolbar toolbar = findViewById(R.id.toolbar_adminnote);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Browse Notes");
-        tb.setTitleTextColor(0xFFB8B8B8);
+        getSupportActionBar().setTitle("Browse notes");
+        toolbar.setTitleTextColor(0xFFB8B8B8);
 
         Intent intent = getIntent();
         textView = (TextView) findViewById(R.id.tp);
@@ -174,8 +182,6 @@ public class admin_browse_notes extends AppCompatActivity {
 
 
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -198,7 +204,7 @@ public class admin_browse_notes extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(admin_browse_notes.this, MainActivity.class));
-//                    finish();
+
                 }
             });
 
@@ -217,8 +223,7 @@ public class admin_browse_notes extends AppCompatActivity {
             startActivity(new Intent(admin_browse_notes.this, mainAdmin.class));
         }
         return true;
+    }
 
 
     }
-
-}

@@ -7,7 +7,10 @@
     tools:context=".admin_browse_notes"
     android:orientation="vertical"
     android:background="@drawable/bg"
-    android:autoMirrored="true">
+    android:autoMirrored="true"
+    >
+
+
 
     <LinearLayout
         android:orientation="vertical"
