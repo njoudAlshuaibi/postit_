@@ -71,6 +71,9 @@ public class favoritelist extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView2.setNavigationItemSelectedListener(this);
+        Menu menu= navigationView2.getMenu();
+
+            menu.findItem(R.id.nav_login).setVisible(false);
 
         favouriteRef= FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         favouriteRef.keepSynced(true);

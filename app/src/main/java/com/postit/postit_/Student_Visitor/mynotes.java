@@ -39,7 +39,7 @@ import java.util.List;
 
 public class mynotes extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout3;
-    NavigationView navigationView3;
+    NavigationView navigationView6;
     Toolbar toolbar3;
     private FloatingActionButton fab;
     private DatabaseReference noteRef, notesRef;
@@ -66,20 +66,22 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mynotes);
         drawerLayout3=findViewById(R.id.drawer_layout3);
-        navigationView3=findViewById(R.id.nav_view3);
+        navigationView6=findViewById(R.id.nav_view3);
         toolbar3=findViewById(R.id.toolbar_mynotes);
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("My notes");
         toolbar3.setTitleTextColor(0xFFB8B8B8);
-        navigationView3.bringToFront();
+        navigationView6.bringToFront();
 
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout3,toolbar3,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout3.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView3.setNavigationItemSelectedListener(this);
+        navigationView6.setNavigationItemSelectedListener(this);
+        Menu menu= navigationView6.getMenu();
 
+        menu.findItem(R.id.nav_login).setVisible(false);
         textView = (TextView) findViewById(R.id.tvnotes);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +202,6 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     public void onBackPressed(){
         if(drawerLayout3.isDrawerOpen(GravityCompat.START)){
-
             drawerLayout3.closeDrawer(GravityCompat.START);
         }
         else{
@@ -229,6 +230,8 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
+                Intent intent3= new Intent(mynotes.this,chatActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.nav_notification:
                 break;
@@ -259,7 +262,10 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
+                break;
+            case R.id.nav_login:
+                Intent intent4= new Intent(mynotes.this,MainActivity.class);
+                startActivity(intent4);
 
         }
         return true;}

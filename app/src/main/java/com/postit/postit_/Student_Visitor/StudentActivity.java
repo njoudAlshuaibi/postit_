@@ -60,7 +60,17 @@ Toolbar toolbar;
 
         navigationView.setNavigationItemSelectedListener(this);
         session = new Session(getApplicationContext());
-
+        Menu menu= navigationView.getMenu();
+        if(user==null){
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_chat).setVisible(false);
+            menu.findItem(R.id.nav_notification).setVisible(false);
+            menu.findItem(R.id.nav_login).setVisible(true);
+        }
+        else{
+            menu.findItem(R.id.nav_login).setVisible(false);
+        }
         CardView cv = (CardView) findViewById(R.id.Request);
         cv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +175,7 @@ public void onBackPressed(){
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
 //        if(user == null){
 //            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
@@ -176,11 +187,6 @@ public void onBackPressed(){
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item ) {
-        if(user==null){
-            MenuItem nav_notification;
-            nav_notification = findViewById(R.id.nav_notification);
-            nav_notification.setVisible(false);
-        } else{
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1= new Intent(StudentActivity.this,StudentActivity.class);
@@ -197,7 +203,6 @@ public void onBackPressed(){
             case R.id.nav_notification:
                 break;
             case R.id.nav_logout:
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(StudentActivity.this);
                 builder.setMessage("Are you sure you want to logout?");
                 builder.setCancelable(true);
@@ -223,8 +228,11 @@ public void onBackPressed(){
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+                break;
+            case R.id.nav_login:
+                Intent intent4= new Intent(StudentActivity.this,MainActivity.class);
+                startActivity(intent4);
 
-
-         }}
+         }
         return true;}
 }
