@@ -45,7 +45,7 @@ public class previewnote extends AppCompatActivity {
     TextView notetit;
     RatingBar ratingBar;
     Button btnSubmit, submitComment;
-    private DatabaseReference notesRef, favouriteRef, commentsRef,rateRef;
+    private DatabaseReference notesRef, favouriteRef, commentsRef, rateRef;
     String rateN;
     int rateCount;
     float currentRate;
@@ -63,7 +63,7 @@ public class previewnote extends AppCompatActivity {
     String scomment;
     final rate rateObj = new rate();
     ImageView startChat;
-
+    public static final String noteWriterIDtoChatActivity= "com.postit.postit_.noteWriterIDtoChatActivity";
 
 
     @Override
@@ -78,14 +78,9 @@ public class previewnote extends AppCompatActivity {
         rateRef = FirebaseDatabase.getInstance().getReference().child("Rates");
         startChat = (ImageView) findViewById(R.id.startChat);
         newComment = (EditText) findViewById(R.id.newcomment);
-        submitComment= (Button) findViewById(R.id.submitComment);
-        startChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(previewnote.this, chatActivity.class));
-            }
-        });
-        commentsRef= FirebaseDatabase.getInstance().getReference().child("Comments");
+        submitComment = (Button) findViewById(R.id.submitComment);
+
+        commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
 
         DisplayMetrics aa = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(aa);
@@ -100,6 +95,7 @@ public class previewnote extends AppCompatActivity {
         final String title = intent.getStringExtra(mynotes.preTitel);
         final String caption = intent.getStringExtra(mynotes.preCaption);
         final String email = intent.getStringExtra(mynotes.preEmail);
+        final String noteWriterID = intent.getStringExtra(mynotes.noteWriterID);
         final String id = intent.getStringExtra(mynotes.preID);
         final String r = intent.getStringExtra(mynotes.prerate);
         final float rate = Float.parseFloat(r);
@@ -107,7 +103,14 @@ public class previewnote extends AppCompatActivity {
         final int rateCount = Integer.parseInt(ratec);
         final String ra = intent.getStringExtra(mynotes.precratenum);
         ratenum = Float.parseFloat(ra);
-
+        startChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(previewnote.this, chatActivity.class);
+                in.putExtra(noteWriterIDtoChatActivity,noteWriterID);
+                startActivity(new Intent(previewnote.this, chatActivity.class));
+            }
+        });
         Intent intenta = getIntent();
         final String pre = intenta.getStringExtra(favoritelist.precc);
 
@@ -171,20 +174,21 @@ public class previewnote extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshotq) {
                 for (DataSnapshot snapshotc : snapshotq.getChildren()) {
                     rate rateo = snapshotc.getValue(rate.class);
-                    if(snapshotc.exists()) {
+                    if (snapshotc.exists()) {
                         if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
                             btnSubmit.setVisibility(View.INVISIBLE);
                             rateN = rateo.getRate1();
                             final float raten = Float.parseFloat(rateN);
                             ratingBar.setRating(raten);
-                            notepr2.setText("written by : " + email+ "\n\nyour Submitted rate");
+                            notepr2.setText("written by : " + email + "\n\nyour Submitted rate");
 
                         }
 //                        else {
 //                            btnSubmit.setVisibility(View.VISIBLE);
 //                        }
 
-                    } }//
+                    }
+                }//
             }
 
             @Override
@@ -226,7 +230,7 @@ public class previewnote extends AppCompatActivity {
         });
         comments = (ListView) findViewById(R.id.commentstt);
         final ArrayList<comment> commentsList = new ArrayList<>();
-        commentAdapter = new BrowseCommentAdapter(this,R.layout.adapter_view_layout, commentsList);
+        commentAdapter = new BrowseCommentAdapter(this, R.layout.adapter_view_layout, commentsList);
         comments.setAdapter(commentAdapter);
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
         commentsRef.addValueEventListener(new ValueEventListener() {
@@ -235,7 +239,7 @@ public class previewnote extends AppCompatActivity {
                 commentsList.clear();
                 for (DataSnapshot snapshotc : snapshotq.getChildren()) {
                     comment commentObj = snapshotc.getValue(comment.class);
-                    if(commentObj.getNoteID().equals(id)){
+                    if (commentObj.getNoteID().equals(id)) {
                         commentsList.add(commentObj);
                     }
 
@@ -254,21 +258,20 @@ public class previewnote extends AppCompatActivity {
             public void onClick(View v) {
                 scomment = newComment.getText().toString().trim();
                 String ucid = user.getEmail().trim();
-                String commID= commentsRef.push().getKey();
-                comment c= new comment(commID,id,scomment,ucid);
-                addNewComment(id,c);
+                String commID = commentsRef.push().getKey();
+                comment c = new comment(commID, id, scomment, ucid);
+                addNewComment(id, c);
             }
         });
 
 
-
-
     }
-    public void addNewComment(String noteID, comment c){
+
+    public void addNewComment(String noteID, comment c) {
         commentsRef.child(c.getCommID().trim()).setValue(c).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
                     newComment.setText("");
                 }

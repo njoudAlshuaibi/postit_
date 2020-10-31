@@ -58,6 +58,8 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     public static final String precrate = "com.postit.postit_.precrate";
     public static final String precratenum = "com.postit.postit_.precratenum";
     public static final String precc= "com.postit.postit_.precc";
+    public static final String noteWriterID= "com.postit.postit_.noteWriterID";
+
 
 
 
