@@ -1,6 +1,8 @@
 package com.postit.postit_.Student_Visitor;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +37,7 @@ public class chatActivity extends AppCompatActivity {
     private BrowseChatAdapter adapter;
     private EditText edtPost;
     private ImageView imgSend;
+    private String receiverUserId;
 
     private static final String TAG = chatActivity.class.getSimpleName();
 
@@ -43,6 +46,9 @@ public class chatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        Intent intent = getIntent();
+        receiverUserId= intent.getStringExtra(previewnote.noteWriterIDtoChatActivity);
+
     }
     private void init() {
         massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
@@ -66,7 +72,7 @@ public class chatActivity extends AppCompatActivity {
 
                     String key = massagesRef.push().getKey();
                     Date date = new Date();
-                    massagesRef.child(key).setValue(new chat(key, edtPost.getText().toString(), FirebaseAuth.getInstance().getUid(), sharedPreference.getString(getApplicationContext(), Constants.keys.CLICKED_PARENT,"error"), date.getTime()));
+                    massagesRef.child(key).setValue(new chat(key, edtPost.getText().toString(), FirebaseAuth.getInstance().getUid(), receiverUserId, date.getTime()));
                     // Log.d("CHATACT", "after creating messege" );
                     edtPost.setText("");
 
@@ -88,10 +94,10 @@ public class chatActivity extends AppCompatActivity {
 
                 chat chat = dataSnapshot.getValue(chat.class);
 
-                if(chat.getReceiverId().equals( sharedPreference.getString(getApplicationContext(), Constants.keys.CLICKED_PARENT,"error"))
+                if(chat.getReceiverId().equals( receiverUserId)
                         && chat.getSenderId().equals(FirebaseAuth.getInstance().getUid()))
                     chatList.add(chat);
-                else if(chat.getSenderId().equals(sharedPreference.getString(getApplicationContext(), Constants.keys.CLICKED_PARENT,"error"))
+                else if(chat.getSenderId().equals(receiverUserId)
                         && chat.getReceiverId().equals(FirebaseAuth.getInstance().getUid()))
                     chatList.add(chat);
 

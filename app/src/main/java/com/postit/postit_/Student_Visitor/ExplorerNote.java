@@ -33,10 +33,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
 import com.postit.postit_.Admin.PopUpWindowAdmin;
 import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.helper.Session;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout4;
     NavigationView navigationView4;
     Toolbar toolbar4;
+    String noteWriterUserID;
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -56,8 +59,10 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
+    public static final String noteWriterID= "com.postit.postit_.noteWriterID";
+
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private DatabaseReference notesRef;
+    private DatabaseReference notesRef, usersRef;
     private TextView textView, currentCandCh;
     String m;
     String c;
@@ -126,6 +131,8 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         textView = (TextView) findViewById(R.id.tv);
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
+        usersRef = FirebaseDatabase.getInstance().getReference().child("users");
+
         noteRef.keepSynced(true);
 
         noteAdapter = new BrowseNoteAdapter(this, noteList, new CustomItemClickListener() {
@@ -135,7 +142,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 note n = noteList.get(pos);
                 String s = n.getTitle();
                 String a = n.getCaption();
-                String m = n.getEmail();
+                final String m = n.getEmail();
                 String i = n.getId();
                 float r = n.getRate();
                 String ca =String.valueOf(r);
@@ -143,6 +150,24 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 String raco =String.valueOf(ratec);
                 float ra = n.getAllrates();
                 String cae =String.valueOf(ra);
+                String noteWriterUserId;
+                usersRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot jj:snapshot.getChildren()){
+                            user u =jj.getValue(user.class);
+                            if(u.getEmail().equals(m)) {
+                                 noteWriterUserID=jj.getKey();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
 
@@ -155,6 +180,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 in.putExtra(precrate,raco);
                 in.putExtra(precratenum,cae);
                 in.putExtra(precc,"true");
+                in.putExtra(noteWriterID,noteWriterUserID);
 
 
                 startActivity(in);
