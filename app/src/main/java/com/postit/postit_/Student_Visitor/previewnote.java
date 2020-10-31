@@ -107,7 +107,7 @@ public class previewnote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(previewnote.this, chatActivity.class);
-                in.putExtra(noteWriterIDtoChatActivity,noteWriterID);
+                in.putExtra(noteWriterIDtoChatActivity,""+noteWriterID);
                 startActivity(new Intent(previewnote.this, chatActivity.class));
             }
         });
