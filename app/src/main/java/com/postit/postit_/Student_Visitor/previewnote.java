@@ -236,7 +236,7 @@ public class previewnote extends AppCompatActivity {
                 for (DataSnapshot snapshotc : snapshotq.getChildren()) {
                     comment commentObj = snapshotc.getValue(comment.class);
                     if(commentObj.getNoteID().equals(id)){
-                    commentsList.add(commentObj);
+                        commentsList.add(commentObj);
                     }
 
                 }//
@@ -253,7 +253,7 @@ public class previewnote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scomment = newComment.getText().toString().trim();
-               String ucid = user.getEmail().trim();
+                String ucid = user.getEmail().trim();
                 String commID= commentsRef.push().getKey();
                 comment c= new comment(commID,id,scomment,ucid);
                 addNewComment(id,c);
@@ -268,10 +268,10 @@ public class previewnote extends AppCompatActivity {
         commentsRef.child(c.getCommID().trim()).setValue(c).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-               if(task.isSuccessful()){
-                   Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
-                   newComment.setText("");
-               }
+                if(task.isSuccessful()){
+                    Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
+                    newComment.setText("");
+                }
             }
         });
     }
