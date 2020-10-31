@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:background="@drawable/corner_shape"
             android:gravity="start"
-            android:hint="Type your message"
+            android:hint="Type a message ..."
             android:maxHeight="100dp"
             android:minHeight="42dp"
             android:overScrollMode="always"
