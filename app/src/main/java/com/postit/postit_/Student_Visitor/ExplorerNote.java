@@ -93,7 +93,17 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         session = new Session(getApplicationContext());
-
+        Menu menu= navigationView4.getMenu();
+        if(user==null){
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_chat).setVisible(false);
+            menu.findItem(R.id.nav_notification).setVisible(false);
+            menu.findItem(R.id.nav_login).setVisible(true);
+        }
+        else {
+            menu.findItem(R.id.nav_login).setVisible(false);
+        }
         Intent intent = getIntent();
         m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
         c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
@@ -247,8 +257,6 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(user == null){
-            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
         return true;
     }
@@ -266,6 +274,8 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
+                Intent intent3= new Intent(ExplorerNote.this,chatActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.nav_notification:
                 break;
@@ -274,30 +284,26 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);
                 builder.setMessage("Are you sure you want to logout?");
                 builder.setCancelable(true);
-
                 builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-
                     // signOut
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(ExplorerNote.this, MainActivity.class));
-
                     }
                 });
-
-
                 builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
-
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
-
+                break;
+            case R.id.nav_login:
+                Intent intent4= new Intent(ExplorerNote.this,MainActivity.class);
+                startActivity(intent4);
         }
         return true;}
 
