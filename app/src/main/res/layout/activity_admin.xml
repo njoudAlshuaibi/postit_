@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity"
+    tools:context=".Admin.AdminActivity"
     android:orientation="vertical"
     android:background="@drawable/bg"
     android:autoMirrored="true">
@@ -14,11 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:background="#FFFBD4"/>
-///lulu
-
-
-
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -308,10 +303,8 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
-
-    </LinearLayout>
+        </LinearLayout>
 </LinearLayout>
 
 

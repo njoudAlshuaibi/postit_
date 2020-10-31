@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,11 +10,11 @@
     app:cardCornerRadius="12dp"
     android:elevation="90dp"
     >
-
     <ScrollView
         android:id="@+id/ScrollView01"
         android:layout_width="410dp"
-        android:layout_height="731dp">
+        android:layout_height="650dp">
+
         //////////////
 
         <LinearLayout

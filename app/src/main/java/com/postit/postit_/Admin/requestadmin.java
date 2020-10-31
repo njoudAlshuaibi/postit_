@@ -1,9 +1,12 @@
 package com.postit.postit_.Admin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,11 +38,13 @@ import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
 import com.postit.postit_.Student_Visitor.ExplorerNote;
+import com.postit.postit_.Student_Visitor.Profile;
+import com.postit.postit_.Student_Visitor.chatActivity;
 import com.postit.postit_.Student_Visitor.popUpWindow;
 
 import java.util.ArrayList;
 
-public class requestadmin extends AppCompatActivity {
+public class requestadmin extends AppCompatActivity  {
     private ListView requestsListView;
     private FirebaseDatabase database;
     private DatabaseReference requestsRef;
@@ -52,12 +58,11 @@ public class requestadmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requestadmin);
-
-        Toolbar tb = findViewById(R.id.toolbar_request);
-        setSupportActionBar(tb);
+        Toolbar toolbar = findViewById(R.id.toolbar_request);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Requests");
-        tb.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFFB8B8B8);
 
 //        requestbutton = findViewById(R.id.requestbutton);
         final ArrayList<requests> requestsList = new ArrayList<>();
@@ -100,7 +105,6 @@ public class requestadmin extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -116,7 +120,7 @@ public class requestadmin extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(requestadmin.this, MainActivity.class));
-//                    finish();
+
                 }
             });
 
