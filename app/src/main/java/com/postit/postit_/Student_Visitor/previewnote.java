@@ -63,7 +63,7 @@ public class previewnote extends AppCompatActivity {
     String scomment;
     final rate rateObj = new rate();
     ImageView startChat;
-    public static final String noteWriterIDtoChatActivity= "com.postit.postit_.noteWriterIDtoChatActivity";
+    public static final String writerEmail= "com.postit.postit_.writerEmail";
 
 
     @Override
@@ -95,7 +95,6 @@ public class previewnote extends AppCompatActivity {
         final String title = intent.getStringExtra(mynotes.preTitel);
         final String caption = intent.getStringExtra(mynotes.preCaption);
         final String email = intent.getStringExtra(mynotes.preEmail);
-        final String noteWriterID = intent.getStringExtra(mynotes.noteWriterID);
         final String id = intent.getStringExtra(mynotes.preID);
         final String r = intent.getStringExtra(mynotes.prerate);
         final float rate = Float.parseFloat(r);
@@ -107,8 +106,9 @@ public class previewnote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(previewnote.this, chatActivity.class);
-                in.putExtra(noteWriterIDtoChatActivity,""+noteWriterID);
-                startActivity(new Intent(previewnote.this, chatActivity.class));
+                in.putExtra(writerEmail,""+email);
+                startActivity(in);
+              //  startActivity(new Intent(previewnote.this, chatActivity.class));
             }
         });
         Intent intenta = getIntent();

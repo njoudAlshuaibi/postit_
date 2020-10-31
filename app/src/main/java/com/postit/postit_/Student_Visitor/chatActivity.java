@@ -27,21 +27,24 @@ import java.util.List;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseChatAdapter;
 import com.postit.postit_.Objects.chat;
 
+import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 
 public class chatActivity extends AppCompatActivity {
 
-    private DatabaseReference massagesRef;
+    private DatabaseReference massagesRef, usersRef;
     private List<chat> chatList = new ArrayList();
     private RecyclerView recyclerView;
     private BrowseChatAdapter adapter;
     private EditText edtPost;
     private ImageView imgSend;
     private FirebaseUser fuser;
-    private String receiverUserId;
+    private String receiverUserId, receiverEmail;
+    Intent intent;
 
     private static final String TAG = chatActivity.class.getSimpleName();
 
@@ -53,13 +56,32 @@ public class chatActivity extends AppCompatActivity {
 
         // massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
         setListener();
+        usersRef = FirebaseDatabase.getInstance().getReference().child("users");
 
-        Intent intent = getIntent();
-        receiverUserId= intent.getStringExtra(previewnote.noteWriterIDtoChatActivity);
+        Intent intent1 = getIntent();
+        receiverEmail= intent1.getStringExtra(previewnote.writerEmail);
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot jj:snapshot.getChildren()){
+                    user u =jj.getValue(user.class);
+                    if(u.getEmail().equals(receiverEmail)) {
+                        receiverUserId=jj.getKey();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BrowseChatAdapter(this, chatList);
         recyclerView.setAdapter(adapter);
+
 
 
         edtPost = findViewById(R.id.edtPost);
@@ -75,6 +97,7 @@ public class chatActivity extends AppCompatActivity {
 
                 String msg = edtPost.getText().toString();
                 if(!msg.equals("")){
+
                     sendMessage(fuser.getUid() , receiverUserId , msg);
                 }else {
                     Toast.makeText(chatActivity.this , "You can't send empty message ", Toast.LENGTH_SHORT).show();
