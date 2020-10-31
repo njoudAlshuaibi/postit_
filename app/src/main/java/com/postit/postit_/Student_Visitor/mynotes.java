@@ -31,8 +31,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
+import com.postit.postit_.Objects.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +44,14 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     NavigationView navigationView6;
     Toolbar toolbar3;
     private FloatingActionButton fab;
-    private DatabaseReference noteRef, notesRef;
+    private DatabaseReference noteRef, notesRef, usersRef;
     List<note> noteList = new ArrayList<>();
     BrowseNoteAdapter noteAdapter ;
     RecyclerView recyclerView;
     private FirebaseUser user;
     private String userEmail;
     private TextView textView;
-
+    String noteWriterUserID;
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -102,6 +104,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
+        usersRef = FirebaseDatabase.getInstance().getReference().child("users");
 
         noteAdapter = new BrowseNoteAdapter(this, noteList, new CustomItemClickListener() {
             @Override
@@ -110,7 +113,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 note n = noteList.get(pos);
                 String s = n.getTitle();
                 String a = n.getCaption();
-                String m = n.getEmail();
+                final String m = n.getEmail();
                 String i = n.getId();
                 float r = n.getRate();
                 String ca =String.valueOf(r);
@@ -118,6 +121,24 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 String raco =String.valueOf(ratec);
                 float ra = n.getAllrates();
                 String cae =String.valueOf(ra);
+                usersRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot jj:snapshot.getChildren()){
+                            user u =jj.getValue(user.class);
+                            if(u.getEmail().equals(m)) {
+                                noteWriterUserID=jj.getKey();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
                 Intent in = new Intent(mynotes.this, previewnote.class);
                 in.putExtra(preTitel,""+s );
@@ -128,6 +149,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 in.putExtra(precrate,raco);
                 in.putExtra(precratenum,cae);
                 in.putExtra(precc,"true");
+                in.putExtra(noteWriterID,""+noteWriterUserID);
                 startActivity(in);
 
             } // end on item click listener
