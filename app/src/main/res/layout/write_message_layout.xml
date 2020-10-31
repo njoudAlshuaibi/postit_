@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/corner_shape"
-            android:hint="Type a msg"
+            android:hint="Type your message"
             android:maxHeight="100dp"
             android:minHeight="42dp"
             android:overScrollMode="always"
