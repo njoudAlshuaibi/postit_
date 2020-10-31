@@ -41,7 +41,7 @@ public class chatActivity extends AppCompatActivity {
     private EditText edtPost;
     private ImageView imgSend;
     private FirebaseUser fuser;
-    Intent intent ;
+    private String receiverUserId;
 
     private static final String TAG = chatActivity.class.getSimpleName();
 
@@ -54,7 +54,8 @@ public class chatActivity extends AppCompatActivity {
         // massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
         setListener();
 
-
+        Intent intent = getIntent();
+        receiverUserId= intent.getStringExtra(previewnote.noteWriterIDtoChatActivity);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BrowseChatAdapter(this, chatList);
@@ -74,7 +75,7 @@ public class chatActivity extends AppCompatActivity {
 
                 String msg = edtPost.getText().toString();
                 if(!msg.equals("")){
-                    sendMessage(fuser.getUid() , userid , msg);
+                    sendMessage(fuser.getUid() , receiverUserId , msg);
                 }else {
                     Toast.makeText(chatActivity.this , "You can't send empty message ", Toast.LENGTH_SHORT).show();
                 }
