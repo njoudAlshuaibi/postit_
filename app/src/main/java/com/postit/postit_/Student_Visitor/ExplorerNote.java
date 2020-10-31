@@ -47,7 +47,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout4;
     NavigationView navigationView4;
     Toolbar toolbar4;
-    String noteWriterUserID;
+    String noteWriterUserID="jj99";
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -150,24 +150,6 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 String raco =String.valueOf(ratec);
                 float ra = n.getAllrates();
                 String cae =String.valueOf(ra);
-                String noteWriterUserId;
-                usersRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot jj:snapshot.getChildren()){
-                            user u =jj.getValue(user.class);
-                            if(u.getEmail().equals(m)) {
-                                 noteWriterUserID=jj.getKey();
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
 
 
@@ -180,7 +162,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 in.putExtra(precrate,raco);
                 in.putExtra(precratenum,cae);
                 in.putExtra(precc,"true");
-                in.putExtra(noteWriterID,noteWriterUserID);
+
 
 
                 startActivity(in);

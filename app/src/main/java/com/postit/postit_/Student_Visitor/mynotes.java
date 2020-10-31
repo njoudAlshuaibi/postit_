@@ -51,7 +51,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     private FirebaseUser user;
     private String userEmail;
     private TextView textView;
-    String noteWriterUserID;
+    String noteWriterUserID="hh99";
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -121,23 +121,6 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 String raco =String.valueOf(ratec);
                 float ra = n.getAllrates();
                 String cae =String.valueOf(ra);
-                usersRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot jj:snapshot.getChildren()){
-                            user u =jj.getValue(user.class);
-                            if(u.getEmail().equals(m)) {
-                                noteWriterUserID=jj.getKey();
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
 
                 Intent in = new Intent(mynotes.this, previewnote.class);
@@ -149,7 +132,6 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 in.putExtra(precrate,raco);
                 in.putExtra(precratenum,cae);
                 in.putExtra(precc,"true");
-                in.putExtra(noteWriterID,""+noteWriterUserID);
                 startActivity(in);
 
             } // end on item click listener
