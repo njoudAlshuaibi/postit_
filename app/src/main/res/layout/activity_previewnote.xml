@@ -78,7 +78,7 @@
             <Button
                 android:id="@+id/submitRate"
                 android:layout_width="60dp"
-                android:layout_height="33dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="250dp"
                 android:layout_marginTop="-38dp"
                 android:layout_marginRight="4dp"
@@ -101,18 +101,22 @@
                 android:layout_width="60dp"
                 android:layout_height="33dp"
                 android:layout_marginLeft="250dp"
-                android:layout_marginTop="-38dp"
+                android:layout_marginTop="-42dp"
                 android:layout_marginRight="4dp"
                 android:background="#EC7BB5"
                 android:text="POST"
                 android:textColor="#fff" />
-            <ImageView
+
+            <Button
                 android:id="@+id/startChat"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="-60dp"
-                android:src="@drawable/ic_baseline_chat_24"
-                android:layout_marginLeft="320dp" />
+                android:layout_width="60dp"
+                android:layout_height="34dp"
+                android:layout_marginLeft="330dp"
+                android:layout_marginTop="-35dp"
+                android:layout_marginRight="4dp"
+                android:background="#EC7BB5"
+                android:text=" chat"
+                android:textColor="#fff" />
             <LinearLayout
                 android:layout_width="410dp"
                 android:layout_height="319dp"

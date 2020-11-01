@@ -62,7 +62,7 @@ public class previewnote extends AppCompatActivity {
     EditText newComment;
     String scomment;
     final rate rateObj = new rate();
-    ImageView startChat;
+    Button startChat;
     public static final String writerEmail= "com.postit.postit_.writerEmail";
 
 
@@ -76,7 +76,7 @@ public class previewnote extends AppCompatActivity {
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         rateRef = FirebaseDatabase.getInstance().getReference().child("Rates");
-        startChat = (ImageView) findViewById(R.id.startChat);
+        startChat = (Button) findViewById(R.id.startChat);
         newComment = (EditText) findViewById(R.id.newcomment);
         submitComment = (Button) findViewById(R.id.submitComment);
 
