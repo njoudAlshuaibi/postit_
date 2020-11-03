@@ -1,5 +1,5 @@
 package com.postit.postit_.Notifications;
-
+//njoud
 public class Data {
     private  String user;
     private  String body ;
