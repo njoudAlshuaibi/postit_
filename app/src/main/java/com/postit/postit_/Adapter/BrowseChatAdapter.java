@@ -58,6 +58,10 @@ import com.postit.postit_.R;
 
         @Override
         public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
+            chat cht = chatList.get(position);
+            holder.txtMsg.setText(cht.getMsg());
+            holder.txttime.setText(cht.getMsgTime()+"");
+
 
 
         }//onBindViewHolder
