@@ -215,7 +215,7 @@ public class chatActivity extends AppCompatActivity {
 
         massagesRef.child("Massages").push().setValue(hashMap);
 
-
+//test
     }
 
 }
