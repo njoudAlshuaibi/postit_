@@ -34,6 +34,7 @@ import com.postit.postit_.helper.CustomItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,9 +50,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -67,44 +70,46 @@ import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.Student_Visitor.favoritelist;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
+
 import java.util.List;
 
 public class BrowseCommentAdapter extends ArrayAdapter<comment> {
     Context mcontext;
     int mResource;
     private FirebaseUser user;
-     String currentUserid;
+    String currentUserid;
     private DatabaseReference commentsRef;
 
     public BrowseCommentAdapter(Context context, int resource, ArrayList<comment> obj) {
         super(context, resource, obj);
-        mcontext=context;
-        mResource=resource;
+        mcontext = context;
+        mResource = resource;
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user!= null){
-            currentUserid = user.getEmail().trim();}
+        if (user != null) {
+            currentUserid = user.getEmail().trim();
+        }
 
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-       String comm = getItem(position).getComm();
+        String comm = getItem(position).getComm();
         final String commID = getItem(position).getCommID();
         final String notID = getItem(position).getNoteID();
         String comR = getItem(position).getComR();
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
 
-        comment comment = new comment(commID,notID,comm,comR);
+        comment comment = new comment(commID, notID, comm, comR);
         LayoutInflater inflater = LayoutInflater.from(mcontext);
         convertView = inflater.inflate(mResource, parent, false);
 
         ImageButton deletenc = (ImageButton) convertView.findViewById(R.id.deletenc9);
         deletenc.setVisibility(View.INVISIBLE);
-        if(currentUserid.equals(comR))
-        {deletenc.setVisibility(View.VISIBLE);
+        if (currentUserid.equals(comR)) {
+            deletenc.setVisibility(View.VISIBLE);
             deletenc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -114,7 +119,7 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
                             for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
                                 comment cobj = messageSnapshoti.getValue(comment.class);
                                 final String cobjId = cobj.getCommID();
-                                if(cobj.getComR().equals(currentUserid)){
+                                if (cobj.getComR().equals(currentUserid)) {
                                     if (cobj.getCommID().equals(commID)) {
                                         AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
                                                 .setTitle("are you sure?")
@@ -127,7 +132,8 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
                                                 })
                                                 .setNegativeButton("No", null)
                                                 .show();
-                                    }}
+                                    }
+                                }
                             }
                         }
 
@@ -149,8 +155,7 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
         TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
         tvcomm.setText(comm);
         TextView comr = (TextView) convertView.findViewById(R.id.commentr);
-        comr.setText("By: "+comR);
-
+        comr.setText("By: " + comR);
 
 
         return convertView;
