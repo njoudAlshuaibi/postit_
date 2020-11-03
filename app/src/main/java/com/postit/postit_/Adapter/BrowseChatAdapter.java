@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 import java.util.List;
+
+import com.google.firebase.auth.FirebaseUser;
 import com.postit.postit_.Objects.chat;
 import com.postit.postit_.R;
 
@@ -24,10 +26,13 @@ import com.postit.postit_.R;
 
     public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.ChatViewHolder> {
 
+        public static final int MSG_TYPE_LEFT = 0;
+        public static final int MSG_TYPE_RIGHT = 1;
+
         private List<chat> chatList;
         private Context context;
 
-
+        FirebaseUser fuser;
 
         public BrowseChatAdapter(Context context, List<chat> chatList) {
             this.chatList = chatList;
@@ -36,46 +41,23 @@ import com.postit.postit_.R;
 
         @NonNull
         @Override
-        public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup student, int viewType) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflater.inflate(R.layout.message_item_layout, student, false);
+        public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-            return new ChatViewHolder(v);
+         if(viewType == MSG_TYPE_RIGHT) {
+             View view = LayoutInflater.from(context).inflate(R.layout.item_message_sent , parent , false);
+             return new BrowseChatAdapter.ChatViewHolder(view);
+
+         } else{
+             View view = LayoutInflater.from(context).inflate(R.layout.item_message_reseived , parent , false);
+             return new BrowseChatAdapter.ChatViewHolder(view);
+         }
+
+
 
         }//end onCreateViewHolder
 
         @Override
         public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-
-            holder.txttime.setText("");
-            holder.txtMsg.setText("");
-
-
-            if(chatList.get(position).getSenderId().equals(FirebaseAuth.getInstance().getUid()))
-            {
-               // holder.llMsg.setBackgroundResource(R.drawable.chat_msg_sender_shape);
-                holder.txtMsg.setGravity(Gravity.END);;
-                holder.llMsg.setGravity(Gravity.END);
-                holder.stupid.setVisibility(View.VISIBLE);
-
-            }
-            else {
-              //  holder.llMsg.setBackgroundResource(R.drawable.chat_msg_shape);
-                holder.txtMsg.setGravity(Gravity.START);
-                holder.llMsg.setGravity(Gravity.START);
-                holder.stupid.setVisibility(View.GONE);
-
-            }//end else
-
-
-            if(chatList.get(position).getMsg()!=null) {
-                holder.txtMsg.setText(chatList.get(position).getMsg());
-                Date d = new Date(chatList.get(position).getMsgTime());
-                holder.txttime.setText(d.getHours() + ":" + d.getMinutes() + "");
-            }
-
-
-
 
 
         }//onBindViewHolder
@@ -106,7 +88,14 @@ import com.postit.postit_.R;
 
         }//end ChatHolder
 
-
-
+        @Override
+        public int getItemViewType(int position) {
+            fuser = FirebaseAuth.getInstance().getCurrentUser();
+            if(chatList.get(position).getSenderId().equals(fuser.getUid())){
+                return MSG_TYPE_RIGHT;
+            }else {
+                return MSG_TYPE_LEFT;
+            }
+        }
     }//end class
 
