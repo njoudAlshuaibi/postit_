@@ -1,7 +1,10 @@
 package com.postit.postit_.Student_Visitor;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -10,8 +13,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.postit.postit_.MainActivity;
@@ -101,7 +110,7 @@ public class Pop extends Activity {
 
 
                 requestsRef.child(requestID).setValue(newRequest);
-
+                notification();
                 Toast.makeText(Pop.this, "Request send successfully", Toast.LENGTH_LONG).show();
 
                 startActivity(new Intent(Pop.this, StudentActivity.class));
@@ -109,5 +118,21 @@ public class Pop extends Activity {
             }
         });
 
+    }
+
+    private void notification(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("n","n", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder= new NotificationCompat.Builder(this,"n")
+                .setContentText("Code Sphere")
+                .setSmallIcon(R.drawable.ic_baseline_edit_24)
+                .setAutoCancel(true)
+                .setContentText("there is new request");
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(999, builder.build());
     }
 }
