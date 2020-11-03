@@ -46,6 +46,7 @@ public class chatActivity extends AppCompatActivity {
     private String receiverUserId, receiverEmail;
     Intent intent;
 
+
     private static final String TAG = chatActivity.class.getSimpleName();
 
 
@@ -77,7 +78,9 @@ public class chatActivity extends AppCompatActivity {
 
             }
         });
+
         recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true); // tutorial
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BrowseChatAdapter(this, chatList);
         recyclerView.setAdapter(adapter);
@@ -107,7 +110,7 @@ public class chatActivity extends AppCompatActivity {
 
             }//onClick
         });
-
+      readMessages(fuser.getUid() , receiverUserId);
 
     }
     private void init() {
@@ -143,6 +146,37 @@ public class chatActivity extends AppCompatActivity {
         massagesRef.child("Massages").push().setValue(hashMap);
 
 //test
+    }
+
+    private void readMessages(final String myid , final String receiverUserId){
+
+        chatList = new ArrayList<>();
+
+        massagesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatList.clear();
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+
+                        chat cht = snapshot1.getValue(chat.class);
+                        if(cht.getReceiverId().equals(myid) && cht.getSenderId().equals(receiverUserId) ||
+                                cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)){
+
+                            chatList.add(cht);
+
+                        }
+                    adapter = new BrowseChatAdapter(chatActivity.this ,chatList);
+                    recyclerView.setAdapter(adapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }
