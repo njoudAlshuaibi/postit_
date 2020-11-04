@@ -79,10 +79,10 @@ public class chatActivity extends AppCompatActivity {
         });
         massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
+        adapter = new BrowseChatAdapter(this, chatList);
         readMessages(fuser.getUid(), receiverUserId);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BrowseChatAdapter(this, chatList);
         recyclerView.setAdapter(adapter);
 
 
@@ -116,14 +116,14 @@ public class chatActivity extends AppCompatActivity {
     private void sendMessage(String sender, String receiver, String message) {
         HashMap<String, Object> hashMap = new HashMap<>();
         String id = massagesRef.push().getKey();
-        // Date date = new Date();
+        Date date = new Date();
         hashMap.put("senderId", sender);
         hashMap.put("receiverId", receiver);
         hashMap.put("msg", message);
-        //  hashMap.put("id", message);
-        // hashMap.put("msgTime", date.getTime());
-        chat f=new chat(message,sender,receiver);
-        massagesRef.child(id).setValue(f);
+        // hashMap.put("id", message);
+        //hashMap.put("msgTime", date.getTime());
+        chat f = new chat(message, sender, receiver);
+        massagesRef.child(id).setValue(hashMap);
 //test
     }
 
@@ -132,23 +132,18 @@ public class chatActivity extends AppCompatActivity {
         massagesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    chatList.clear();
-                    adapter.notifyDataSetChanged();
-                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                chatList.clear();
+                adapter.notifyDataSetChanged();
+                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
 
-                        chat cht = snapshot1.getValue(chat.class);
-                        if (cht.getReceiverId().equals(myid) && cht.getSenderId().equals(receiverUserId) ||
-                                cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)) {
-
-                            chatList.add(cht);
-
-                        }
-
+                    chat cht = snapshot1.getValue(chat.class);
+                    if (cht.getReceiverId().equals(myid) && cht.getSenderId().equals(receiverUserId) ||
+                            cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)) {
+                        chatList.add(cht);
                     }
-                } else {
-                    Log.d("===", "No Data Was Found");
+
                 }
+
                 adapter.notifyDataSetChanged();
 
             }

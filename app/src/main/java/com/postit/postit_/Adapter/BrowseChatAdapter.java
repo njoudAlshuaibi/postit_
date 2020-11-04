@@ -1,9 +1,6 @@
 package com.postit.postit_.Adapter;
 
-
-
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,83 +20,79 @@ import com.postit.postit_.Objects.chat;
 import com.postit.postit_.R;
 
 
+public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.ChatViewHolder> {
 
-    public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.ChatViewHolder> {
+    public static final int MSG_TYPE_LEFT = 0;
+    public static final int MSG_TYPE_RIGHT = 1;
 
-        public static final int MSG_TYPE_LEFT = 0;
-        public static final int MSG_TYPE_RIGHT = 1;
+    private List<chat> chatList;
+    private Context context;
 
-        private List<chat> chatList;
-        private Context context;
+    FirebaseUser fuser;
 
-        FirebaseUser fuser;
+    public BrowseChatAdapter(Context context, List<chat> chatList) {
+        this.chatList = chatList;
+        this.context = context;
+    }//end BrowseChatAdapter
 
-        public BrowseChatAdapter(Context context, List<chat> chatList) {
-            this.chatList = chatList;
-            this.context = context;
-        }//end BrowseChatAdapter
+    @NonNull
+    @Override
+    public BrowseChatAdapter.ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        @NonNull
-        @Override
-        public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == MSG_TYPE_RIGHT) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_message_sent, parent, false);
+            return new BrowseChatAdapter.ChatViewHolder(view);
 
-         if(viewType == MSG_TYPE_RIGHT) {
-             View view = LayoutInflater.from(context).inflate(R.layout.item_message_sent , parent , false);
-             return new BrowseChatAdapter.ChatViewHolder(view);
-
-         } else{
-             View view = LayoutInflater.from(context).inflate(R.layout.item_message_reseived , parent , false);
-             return new BrowseChatAdapter.ChatViewHolder(view);
-         }
-
-
-
-        }//end onCreateViewHolder
-
-        @Override
-        public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-            chat cht = chatList.get(position);
-            holder.txtMsg.setText(cht.getMsg());
-           // holder.txttime.setText(cht.getMsgTime()+"");
-
-
-
-        }//onBindViewHolder
-
-        @Override
-        public int getItemCount() {
-            return chatList.size();
+        } else {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_message_reseived, parent, false);
+            return new BrowseChatAdapter.ChatViewHolder(view);
         }
 
 
-        class ChatViewHolder extends RecyclerView.ViewHolder {
+    }//end onCreateViewHolder
 
-            TextView txttime,txtMsg;
-            LinearLayout llMsg, stupid;
-
-            public ChatViewHolder(@NonNull View itemView) {
-                super(itemView);
-
-                txtMsg=itemView.findViewById(R.id.txtBody);
-                llMsg=itemView.findViewById(R.id.llMsg);
-               // txttime=itemView.findViewById(R.id.txttime);
-                stupid=itemView.findViewById(R.id.stupidmsg);
+    @Override
+    public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
+        chat cht = chatList.get(position);
+        holder.txtMsg.setText(cht.getMsg());
+        // holder.txttime.setText(cht.getMsgTime()+"");
 
 
+    }//onBindViewHolder
 
-            }
+    @Override
+    public int getItemCount() {
+        return chatList.size();
+    }
 
 
-        }//end ChatHolder
+    class ChatViewHolder extends RecyclerView.ViewHolder {
 
-        @Override
-        public int getItemViewType(int position) {
-            fuser = FirebaseAuth.getInstance().getCurrentUser();
-            if(chatList.get(position).getSenderId().equals(fuser.getUid())){
-                return MSG_TYPE_RIGHT;
-            }else {
-                return MSG_TYPE_LEFT;
-            }
+        TextView txttime, txtMsg;
+       LinearLayout llMsg, stupid;
+
+        public ChatViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            txtMsg = itemView.findViewById(R.id.text_message_body);
+            llMsg = itemView.findViewById(R.id.llMsg);
+            // txttime=itemView.findViewById(R.id.txttime);
+           stupid = itemView.findViewById(R.id.stupidmsg);
+
+
         }
-    }//end class
+
+
+    }//end ChatHolder
+
+    @Override
+    public int getItemViewType(int position) {
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        if (chatList.get(position).getSenderId().equals(fuser.getUid())) {
+            return MSG_TYPE_RIGHT;
+        } else {
+            return MSG_TYPE_LEFT;
+        }
+    }
+}//end class
 
