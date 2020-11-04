@@ -60,7 +60,7 @@ import com.postit.postit_.R;
         public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
             chat cht = chatList.get(position);
             holder.txtMsg.setText(cht.getMsg());
-            holder.txttime.setText(cht.getMsgTime()+"");
+           // holder.txttime.setText(cht.getMsgTime()+"");
 
 
 
@@ -82,7 +82,7 @@ import com.postit.postit_.R;
 
                 txtMsg=itemView.findViewById(R.id.txtBody);
                 llMsg=itemView.findViewById(R.id.llMsg);
-                txttime=itemView.findViewById(R.id.txttime);
+               // txttime=itemView.findViewById(R.id.txttime);
                 stupid=itemView.findViewById(R.id.stupidmsg);
 
 
