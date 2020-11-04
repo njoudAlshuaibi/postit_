@@ -1,30 +1,30 @@
 package com.postit.postit_.Objects;
 
 public class chat {
-    private  String id;
+  //  private  String id;
     private String msg;
     private String senderId;
     private String receiverId;
-    private long msgTime;
+   // private long msgTime;
 
     public chat() {
     }
 
-    public chat(String id, String msg, String senderId, String receiverId, long msgTime) {
-        this.id = id;
+    public chat(String msg, String senderId, String receiverId) {
+      //  this.id = id;
         this.msg = msg;
         this.senderId = senderId;
         this.receiverId = receiverId;
-        this.msgTime = msgTime;
+      //  this.msgTime = msgTime;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getMsg() {
         return msg;
@@ -50,11 +50,11 @@ public class chat {
         this.receiverId = receiverId;
     }
 
-    public long getMsgTime() {
-        return msgTime;
-    }
-
-    public void setMsgTime(long msgTime) {
-        this.msgTime = msgTime;
-    }
+//    public long getMsgTime() {
+//        return msgTime;
+//    }
+//
+//    public void setMsgTime(long msgTime) {
+//        this.msgTime = msgTime;
+//    }
 }

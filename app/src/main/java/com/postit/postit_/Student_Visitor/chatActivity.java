@@ -51,18 +51,13 @@ public class chatActivity extends AppCompatActivity {
     Intent intent;
 
 
-    private static final String TAG = chatActivity.class.getSimpleName();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
 
-        setListener();
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
-
         Intent intent1 = getIntent();
         receiverEmail = intent1.getStringExtra(previewnote.writerEmail);
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -82,9 +77,10 @@ public class chatActivity extends AppCompatActivity {
 
             }
         });
-
+        massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        readMessages(fuser.getUid(), receiverUserId);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true); // tutorial
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BrowseChatAdapter(this, chatList);
         recyclerView.setAdapter(adapter);
@@ -93,8 +89,8 @@ public class chatActivity extends AppCompatActivity {
         edtPost = findViewById(R.id.edtPost);
         imgSend = findViewById(R.id.imgSend);
 
-        intent = getIntent();
-        final String userid = intent.getStringExtra("userid");
+//        intent = getIntent();
+//        final String userid = intent.getStringExtra("userid");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         imgSend.setOnClickListener(new View.OnClickListener() {
@@ -113,64 +109,47 @@ public class chatActivity extends AppCompatActivity {
 
             }//onClick
         });
-        readMessages(fuser.getUid(), receiverUserId);
-
-    }
-
-    private void init() {
 
 
-    }//end init
-
-
-    private void setListener() {
-
-
-    }//end setListener
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 
     private void sendMessage(String sender, String receiver, String message) {
-        massagesRef = FirebaseDatabase.getInstance().getReference();
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("sender", sender);
-        hashMap.put("receiver", receiver);
-        hashMap.put("message", message);
-
-        massagesRef.child("Massages").push().setValue(hashMap);
-
+        String id = massagesRef.push().getKey();
+        // Date date = new Date();
+        hashMap.put("senderId", sender);
+        hashMap.put("receiverId", receiver);
+        hashMap.put("msg", message);
+        //  hashMap.put("id", message);
+        // hashMap.put("msgTime", date.getTime());
+        chat f=new chat(message,sender,receiver);
+        massagesRef.child(id).setValue(f);
 //test
     }
 
     private void readMessages(final String myid, final String receiverUserId) {
 
-        chatList = new ArrayList<>();
-
         massagesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                chatList.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                if (snapshot.exists()) {
+                    chatList.clear();
+                    adapter.notifyDataSetChanged();
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
 
-                    chat cht = snapshot1.getValue(chat.class);
-                    if (cht.getReceiverId().equals(myid) && cht.getSenderId().equals(receiverUserId) ||
-                            cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)) {
+                        chat cht = snapshot1.getValue(chat.class);
+                        if (cht.getReceiverId().equals(myid) && cht.getSenderId().equals(receiverUserId) ||
+                                cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)) {
 
-                        chatList.add(cht);
+                            chatList.add(cht);
+
+                        }
 
                     }
-                    adapter = new BrowseChatAdapter(chatActivity.this, chatList);
-                    recyclerView.setAdapter(adapter);
+                } else {
+                    Log.d("===", "No Data Was Found");
                 }
+                adapter.notifyDataSetChanged();
 
             }
 
