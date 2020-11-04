@@ -41,7 +41,7 @@ import com.postit.postit_.R;
 public class chatActivity extends AppCompatActivity {
 
     private DatabaseReference massagesRef, usersRef;
-    private List<chat> chatList = new ArrayList();
+    private List<chat> chatList ;
     private RecyclerView recyclerView;
     private BrowseChatAdapter adapter;
     private EditText edtPost;
@@ -55,6 +55,12 @@ public class chatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
@@ -70,6 +76,7 @@ public class chatActivity extends AppCompatActivity {
                     }
 
                 }
+
             }
 
             @Override
@@ -79,11 +86,24 @@ public class chatActivity extends AppCompatActivity {
         });
         massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
-        adapter = new BrowseChatAdapter(this, chatList);
-        readMessages(fuser.getUid(), receiverUserId);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        String fuserid = fuser.getUid();
+        massagesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                readMessages(fuserid, receiverUserId);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+       // adapter = new BrowseChatAdapter(this, chatList);
+
+
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // recyclerView.setAdapter(adapter);
 
 
         edtPost = findViewById(R.id.edtPost);
@@ -120,20 +140,19 @@ public class chatActivity extends AppCompatActivity {
         hashMap.put("senderId", sender);
         hashMap.put("receiverId", receiver);
         hashMap.put("msg", message);
-        // hashMap.put("id", message);
-        //hashMap.put("msgTime", date.getTime());
         chat f = new chat(message, sender, receiver);
         massagesRef.child(id).setValue(hashMap);
-//test
+
     }
 
     private void readMessages(final String myid, final String receiverUserId) {
 
+        chatList = new ArrayList();
         massagesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 chatList.clear();
-                adapter.notifyDataSetChanged();
+             //   adapter.notifyDataSetChanged();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
 
                     chat cht = snapshot1.getValue(chat.class);
@@ -141,10 +160,11 @@ public class chatActivity extends AppCompatActivity {
                             cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)) {
                         chatList.add(cht);
                     }
-
+                    adapter = new BrowseChatAdapter(chatActivity.this , chatList );
+                    recyclerView.setAdapter(adapter);
                 }
 
-                adapter.notifyDataSetChanged();
+              //  adapter.notifyDataSetChanged();
 
             }
 
