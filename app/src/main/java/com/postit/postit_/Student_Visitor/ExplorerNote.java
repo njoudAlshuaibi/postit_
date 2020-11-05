@@ -47,7 +47,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout4;
     NavigationView navigationView4;
     Toolbar toolbar4;
-    String noteWriterUserID="jj99";
+    String noteWriterUserID = "jj99";
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -59,7 +59,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
-    public static final String noteWriterID= "com.postit.postit_.noteWriterID";
+    public static final String noteWriterID = "com.postit.postit_.noteWriterID";
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference notesRef, usersRef;
@@ -70,25 +70,26 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
 
     List<note> noteList = new ArrayList<>();
-    BrowseNoteAdapter noteAdapter ;
+    BrowseNoteAdapter noteAdapter;
     RecyclerView recyclerView;
     private DatabaseReference noteRef;
     private FloatingActionButton button;
     Session session;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorer_note);
-        drawerLayout4=findViewById(R.id.drawer_layout4);
-        navigationView4=findViewById(R.id.nav_view4);
-        toolbar4=findViewById(R.id.toolbar_Browsenotes);
+        drawerLayout4 = findViewById(R.id.drawer_layout4);
+        navigationView4 = findViewById(R.id.nav_view4);
+        toolbar4 = findViewById(R.id.toolbar_Browsenotes);
         setSupportActionBar(toolbar4);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Browe notes");
         toolbar4.setTitleTextColor(0xFFB8B8B8);
         navigationView4.bringToFront();
-        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout4,toolbar4,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout4, toolbar4, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout4.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -96,33 +97,29 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         session = new Session(getApplicationContext());
-        Menu menu= navigationView4.getMenu();
-        if(user==null){
+        Menu menu = navigationView4.getMenu();
+        if (user == null) {
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_chat).setVisible(false);
             menu.findItem(R.id.nav_notification).setVisible(false);
             menu.findItem(R.id.nav_login).setVisible(true);
-        }
-        else {
+        } else {
             menu.findItem(R.id.nav_login).setVisible(false);
         }
         Intent intent = getIntent();
         m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
         c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
         d = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
-        currentCandCh = (TextView) findViewById(R.id.currentCandCh) ;
-        currentCandCh.setText(c+" - "+d);
+        currentCandCh = (TextView) findViewById(R.id.currentCandCh);
+        currentCandCh.setText(c + " - " + d);
         button = findViewById(R.id.ExNotefab2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( user == null )
-                {
-                    Toast.makeText(getApplicationContext() , "You Have To Log In" , Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                if (user == null) {
+                    Toast.makeText(getApplicationContext(), "You Have To Log In", Toast.LENGTH_SHORT).show();
+                } else {
                     openpopupwindowchapters();
                 }
 
@@ -130,7 +127,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         });
         textView = (TextView) findViewById(R.id.tv);
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
-        noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
 
         noteRef.keepSynced(true);
@@ -145,24 +142,22 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 final String m = n.getEmail();
                 String i = n.getId();
                 float r = n.getRate();
-                String ca =String.valueOf(r);
+                String ca = String.valueOf(r);
                 int ratec = n.getRatingCount();
-                String raco =String.valueOf(ratec);
+                String raco = String.valueOf(ratec);
                 float ra = n.getAllrates();
-                String cae =String.valueOf(ra);
-
+                String cae = String.valueOf(ra);
 
 
                 Intent in = new Intent(ExplorerNote.this, previewnote.class);
-                in.putExtra(preTitel,""+s );
-                in.putExtra(preCaption,""+a );
-                in.putExtra(preEmail,""+m );
-                in.putExtra(preID,i);
-                in.putExtra(prerate,ca);
-                in.putExtra(precrate,raco);
-                in.putExtra(precratenum,cae);
-                in.putExtra(precc,"true");
-
+                in.putExtra(preTitel, "" + s);
+                in.putExtra(preCaption, "" + a);
+                in.putExtra(preEmail, "" + m);
+                in.putExtra(preID, i);
+                in.putExtra(prerate, ca);
+                in.putExtra(precrate, raco);
+                in.putExtra(precratenum, cae);
+                in.putExtra(precc, "true");
 
 
                 startActivity(in);
@@ -173,8 +168,8 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         recyclerView.setAdapter(noteAdapter);
 
 
-
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -182,22 +177,22 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     noteList.clear();
                     noteAdapter.notifyDataSetChanged();
 
-                    for (DataSnapshot messageSnapshot: snapshot.getChildren()) {
+                    for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
                         note a = messageSnapshot.getValue(note.class);
-                        if (a.getChapterNum().equals(d)&&a.getCourse().equals(c))
+                        if (a.getChapterNum().equals(d) && a.getCourse().equals(c))
                             noteList.add(a);
                     }
-                }
-                else {
-                    Log.d("===" , "No Data Was Found");
+                } else {
+                    Log.d("===", "No Data Was Found");
                 }
 
                 noteAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -215,9 +210,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                     if (courseId.equals(c) && chapterId.equals(d)) {
                         textView.setText("");
                         break;
-                    }
-
-                    else {
+                    } else {
                         textView.setText("no existing notes");
 
                     }
@@ -230,16 +223,17 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
     @Override
-    public void onBackPressed(){
-        if(drawerLayout4.isDrawerOpen(GravityCompat.START)){
+    public void onBackPressed() {
+        if (drawerLayout4.isDrawerOpen(GravityCompat.START)) {
 
             drawerLayout4.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
+
     private void openpopupwindowchapters() {
 
         Intent popupwindow5 = new Intent(ExplorerNote.this, popupwindowchapters.class);
@@ -253,30 +247,33 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         // start activity for result will save the current activity data
 
 
-        startActivityForResult(popupwindow5 , RESULT_OK);
+        startActivityForResult(popupwindow5, RESULT_OK);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         return true;
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                Intent intent1= new Intent(ExplorerNote.this,StudentActivity.class);
+                Intent intent1 = new Intent(ExplorerNote.this, StudentActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.nav_profile:
-                Intent intent2= new Intent(ExplorerNote.this,Profile.class);
+                Intent intent2 = new Intent(ExplorerNote.this, Profile.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
-                Intent intent3= new Intent(ExplorerNote.this,chatActivity.class);
+                Intent intent3 = new Intent(ExplorerNote.this, chatActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_notification:
@@ -304,8 +301,9 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 alertDialog.show();
                 break;
             case R.id.nav_login:
-                Intent intent4= new Intent(ExplorerNote.this,MainActivity.class);
+                Intent intent4 = new Intent(ExplorerNote.this, MainActivity.class);
                 startActivity(intent4);
         }
-        return true;}
+        return true;
+    }
 }

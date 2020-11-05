@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Student_Visitor.chatActivity"></activity>
+        <activity android:name=".usersChats"></activity>
+        <activity android:name=".Student_Visitor.chatActivity" />
         <activity android:name=".Student_Visitor.Profile" />
         <activity android:name=".profile" />
         <activity android:name=".navheader" />
@@ -23,7 +24,6 @@
         <activity android:name=".Student_Visitor.favoritelist" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".Admin.requestadmin" />
-
         <activity android:name=".Admin.mainAdmin" />
         <activity android:name=".Student_Visitor.forgetPasswordActivity" />
         <activity android:name=".Student_Visitor.CreateAccountActivity" />
@@ -34,7 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Admin.AdminActivity" />
         <activity
             android:name=".Student_Visitor.Pop"
