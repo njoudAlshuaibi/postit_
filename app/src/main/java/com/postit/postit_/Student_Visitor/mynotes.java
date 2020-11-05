@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -46,12 +47,12 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     private FloatingActionButton fab;
     private DatabaseReference noteRef, notesRef, usersRef;
     List<note> noteList = new ArrayList<>();
-    BrowseNoteAdapter noteAdapter ;
+    BrowseNoteAdapter noteAdapter;
     RecyclerView recyclerView;
     private FirebaseUser user;
     private String userEmail;
     private TextView textView;
-    String noteWriterUserID="hh99";
+    String noteWriterUserID = "hh99";
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -59,31 +60,29 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     public static final String prerate = "com.postit.postit_.prerate";
     public static final String precrate = "com.postit.postit_.precrate";
     public static final String precratenum = "com.postit.postit_.precratenum";
-    public static final String precc= "com.postit.postit_.precc";
-    public static final String noteWriterID= "com.postit.postit_.noteWriterID";
-
-
+    public static final String precc = "com.postit.postit_.precc";
+    public static final String noteWriterID = "com.postit.postit_.noteWriterID";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mynotes);
-        drawerLayout3=findViewById(R.id.drawer_layout3);
-        navigationView6=findViewById(R.id.nav_view3);
-        toolbar3=findViewById(R.id.toolbar_mynotes);
+        drawerLayout3 = findViewById(R.id.drawer_layout3);
+        navigationView6 = findViewById(R.id.nav_view3);
+        toolbar3 = findViewById(R.id.toolbar_mynotes);
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("My notes");
         toolbar3.setTitleTextColor(0xFFB8B8B8);
         navigationView6.bringToFront();
 
-        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout3,toolbar3,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout3, toolbar3, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout3.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView6.setNavigationItemSelectedListener(this);
-        Menu menu= navigationView6.getMenu();
+        Menu menu = navigationView6.getMenu();
 
         menu.findItem(R.id.nav_login).setVisible(false);
         textView = (TextView) findViewById(R.id.tvnotes);
@@ -102,7 +101,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
             // No user is signed in
         }
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
-        noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         noteRef.keepSynced(true);
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
 
@@ -116,22 +115,22 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 final String m = n.getEmail();
                 String i = n.getId();
                 float r = n.getRate();
-                String ca =String.valueOf(r);
+                String ca = String.valueOf(r);
                 int ratec = n.getRatingCount();
-                String raco =String.valueOf(ratec);
+                String raco = String.valueOf(ratec);
                 float ra = n.getAllrates();
-                String cae =String.valueOf(ra);
+                String cae = String.valueOf(ra);
 
 
                 Intent in = new Intent(mynotes.this, previewnote.class);
-                in.putExtra(preTitel,""+s );
-                in.putExtra(preCaption,""+a );
-                in.putExtra(preEmail,""+m );
-                in.putExtra(preID,i);
-                in.putExtra(prerate,ca);
-                in.putExtra(precrate,raco);
-                in.putExtra(precratenum,cae);
-                in.putExtra(precc,"true");
+                in.putExtra(preTitel, "" + s);
+                in.putExtra(preCaption, "" + a);
+                in.putExtra(preEmail, "" + m);
+                in.putExtra(preID, i);
+                in.putExtra(prerate, ca);
+                in.putExtra(precrate, raco);
+                in.putExtra(precratenum, cae);
+                in.putExtra(precc, "true");
                 startActivity(in);
 
             } // end on item click listener
@@ -144,23 +143,23 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     noteList.clear();
                     noteAdapter.notifyDataSetChanged();
 
-                    for (DataSnapshot messageSnapshot: snapshot.getChildren()) {
+                    for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
                         note a = messageSnapshot.getValue(note.class);
 
                         if (a.getEmail().trim().equals(userEmail))
                             noteList.add(a);
                     }
-                }
-                else {
-                    Log.d("===" , "No Data Was Found");
+                } else {
+                    Log.d("===", "No Data Was Found");
                 }
 
                 noteAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -177,9 +176,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                     if (EmailN.equals(userEmail)) {
                         textView.setText("");
                         break;
-                    }
-
-                    else {
+                    } else {
                         textView.setText("no existing notes");
 
                     }
@@ -195,8 +192,6 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
         // juju delete mynote start
 
 
-
-
     }
 
     @Override
@@ -206,17 +201,13 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void onBackPressed(){
-        if(drawerLayout3.isDrawerOpen(GravityCompat.START)){
+    public void onBackPressed() {
+        if (drawerLayout3.isDrawerOpen(GravityCompat.START)) {
             drawerLayout3.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
-
-
-
 
 
     private void opencreatnotepopup() {
@@ -228,15 +219,15 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                Intent intent1= new Intent(mynotes.this,StudentActivity.class);
+                Intent intent1 = new Intent(mynotes.this, StudentActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.nav_profile:
-                Intent intent2= new Intent(mynotes.this,Profile.class);
+                Intent intent2 = new Intent(mynotes.this, Profile.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
-                Intent intent3= new Intent(mynotes.this,chatActivity.class);
+                Intent intent3 = new Intent(mynotes.this, chatActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_notification:
@@ -270,10 +261,11 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 alertDialog.show();
                 break;
             case R.id.nav_login:
-                Intent intent4= new Intent(mynotes.this,MainActivity.class);
+                Intent intent4 = new Intent(mynotes.this, MainActivity.class);
                 startActivity(intent4);
 
         }
-        return true;}
+        return true;
+    }
 
 }
