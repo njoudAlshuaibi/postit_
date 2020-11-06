@@ -197,7 +197,7 @@ public void onBackPressed(){
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
-                Intent intent3= new Intent(StudentActivity.this,chatActivity.class);
+                Intent intent3= new Intent(StudentActivity.this,usersChats.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_notification:
