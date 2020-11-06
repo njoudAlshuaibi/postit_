@@ -43,6 +43,9 @@ public class usersChats extends AppCompatActivity {
         recyclerView = findViewById(R.id.usersChatsRV);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        mUser = new ArrayList<>();
+        adapter = new BrowseUserAdapter(getApplicationContext(), mUser);
+        recyclerView.setAdapter(adapter);
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         String fuserID=fuser.getUid();
         userList = new ArrayList<>();
@@ -52,7 +55,7 @@ public class usersChats extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    chat cht = snapshot.getValue(chat.class);
+                    chat cht = dataSnapshot.getValue(chat.class);
                     if (cht.getSenderId().equals(fuserID)) {
                         userList.add(cht.getReceiverId());
                     }
@@ -74,7 +77,7 @@ public class usersChats extends AppCompatActivity {
     }//
 
     private void readChats() {
-        mUser = new ArrayList<>();
+
         Ref = FirebaseDatabase.getInstance().getReference("users");
         Ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,8 +99,7 @@ public class usersChats extends AppCompatActivity {
                         }
                     }
                 }//
-                adapter = new BrowseUserAdapter(getApplicationContext(), mUser);
-                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
