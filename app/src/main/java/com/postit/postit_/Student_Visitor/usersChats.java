@@ -2,6 +2,7 @@ package com.postit.postit_.Student_Visitor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,6 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import com.postit.postit_.Adapter.BrowseUserAdapter;
 import com.postit.postit_.R;
@@ -30,8 +30,9 @@ public class usersChats extends AppCompatActivity {
     private BrowseUserAdapter adapter;
     private List<user> mUser;
     FirebaseUser fuser;
-    DatabaseReference Ref;
+    DatabaseReference Ref,usersRef;
     private List<String> userList;
+    Toolbar toolbar;
 
 
     @Override
@@ -39,16 +40,21 @@ public class usersChats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_chats);
 
+        toolbar=findViewById(R.id.toolbar99);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Direct");
+        toolbar.setTitleTextColor(0xFFB8B8B8);
 
         recyclerView = findViewById(R.id.usersChatsRV);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mUser = new ArrayList<>();
+        mUser = new ArrayList();
         adapter = new BrowseUserAdapter(getApplicationContext(), mUser);
         recyclerView.setAdapter(adapter);
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         String fuserID=fuser.getUid();
-        userList = new ArrayList<>();
+        userList = new ArrayList();
         Ref = FirebaseDatabase.getInstance().getReference("Massages");
         Ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,7 +69,36 @@ public class usersChats extends AppCompatActivity {
                         userList.add(cht.getSenderId());
                     }
                 }
-                readChats();
+              //  readChats();
+                usersRef = FirebaseDatabase.getInstance().getReference("users");
+                usersRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot09) {
+                        mUser.clear();
+                        for (DataSnapshot dataSnapshot9 : snapshot09.getChildren()) {
+                            user user1 = dataSnapshot9.getValue(user.class);
+                            for (String id : userList) {
+                                if (dataSnapshot9.getKey().equals(id)) {
+                                    if (mUser.size() != 0) {
+                                        for (user user11 : mUser) {
+                                            if (!dataSnapshot9.getKey().equals(user11.getId())) {
+                                                mUser.add(user1);
+                                            }
+                                        }
+                                    } else {
+                                        mUser.add(user1);
+                                    }
+                                }
+                            }
+                        }//
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
 
@@ -78,35 +113,7 @@ public class usersChats extends AppCompatActivity {
 
     private void readChats() {
 
-        Ref = FirebaseDatabase.getInstance().getReference("users");
-        Ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot09) {
-                mUser.clear();
-                for (DataSnapshot dataSnapshot9 : snapshot09.getChildren()) {
-                    user user1 = dataSnapshot9.getValue(user.class);
-                    for (String id : userList) {
-                        if (user1.getId().equals(id)) {
-                            if (mUser.size() != 0) {
-                                for (user user11 : mUser) {
-                                    if (!user1.getId().equals(user11.getId())) {
-                                        mUser.add(user1);
-                                    }
-                                }
-                            } else {
-                                mUser.add(user1);
-                            }
-                        }
-                    }
-                }//
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
     }
 

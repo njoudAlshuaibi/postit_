@@ -5,9 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar99"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="@color/noteColor1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersChatsRV"
+        android:paddingTop="80dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
