@@ -43,7 +43,7 @@ public class chatActivity extends AppCompatActivity {
     private EditText edtPost;
     private ImageView imgSend;
     private FirebaseUser fuser;
-    private String receiverUserId, receiverEmail;
+    private String receiverUserId,rname, receiverEmail;
     Intent intent;
     Toolbar toolbar;
 
@@ -56,7 +56,6 @@ public class chatActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar9988);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("CHAT");
         toolbar.setTitleTextColor(0xFFB8B8B8);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -76,6 +75,7 @@ public class chatActivity extends AppCompatActivity {
                     user u = jj.getValue(user.class);
                     if (u.getEmail().equals(receiverEmail)) {
                         receiverUserId = jj.getKey();
+
                     }
 
                 }
@@ -90,9 +90,40 @@ public class chatActivity extends AppCompatActivity {
         if(receiverUserId==null) {
             Intent intent = getIntent();
             receiverUserId = intent.getStringExtra(usersChats.receiver);
+
 //        Intent intent2 = getIntent();
+
 //        receiverUserId = intent2.getStringExtra(previewnote.receiver);
         }
+
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot jj : dataSnapshot.getChildren()) {
+                    user u = jj.getValue(user.class);
+                    if (receiverUserId.equals(jj.getKey())) {
+                        rname = u.getUsername();
+                        getSupportActionBar().setTitle(rname);
+
+                    }
+
+                }
+
+
+
+
+
+
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         String fuserid = fuser.getUid();
