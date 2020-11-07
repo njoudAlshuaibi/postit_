@@ -189,6 +189,8 @@ public class favoritelist extends AppCompatActivity implements NavigationView.On
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
+                Intent intent3= new Intent(favoritelist.this,usersChats.class);
+                startActivity(intent3);
                 break;
             case R.id.nav_notification:
                 break;
