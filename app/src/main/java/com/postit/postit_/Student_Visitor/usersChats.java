@@ -62,7 +62,7 @@ public class usersChats extends AppCompatActivity {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         fuserID = fuser.getUid();
 
-
+        // redirect to messages activity "ChatActivity"
         adapter = new BrowseUserAdapter(this, userList, new CustomItemClickListener() {
             @Override
             public void OnItemClick(View v, int pos) {
@@ -83,7 +83,7 @@ public class usersChats extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapter);
 
-
+        // find users who start chat
         Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
@@ -93,6 +93,7 @@ public class usersChats extends AppCompatActivity {
                     chat chatObj = messageSnapshotii.getValue(chat.class);
                     if (chatObj.getReceiverId().equals(fuserID)) {
                         recevierEQLcurrent = chatObj.getSenderId();
+                        //find user object to add it to the list while knowing its ID
                         usersRef = FirebaseDatabase.getInstance().getReference("users");
                         usersRef.addValueEventListener(new ValueEventListener() {
                             @Override
