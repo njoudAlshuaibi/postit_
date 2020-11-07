@@ -36,7 +36,7 @@ public class usersChats extends AppCompatActivity {
     private List<user> userList = new ArrayList<>();
     Toolbar toolbar;
     String fuserID;
-    String recevierEQLcurrent;
+    String recevierEQLcurrent="";
     public static final String sender = "com.postit.postit_.sender";
     public static final String receiver = "com.postit.postit_.receiver";
 

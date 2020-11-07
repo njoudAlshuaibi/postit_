@@ -253,7 +253,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
-                Intent intent3 = new Intent(mynotes.this, chatActivity.class);
+                Intent intent3 = new Intent(mynotes.this, usersChats.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_notification:

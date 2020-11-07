@@ -14,11 +14,12 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.onesignal.NotificationOpened.DEFAULT"
             android:value="DISABLE" />
 
-        <activity android:name=".Student_Visitor.usersChats"></activity>
+        <activity android:name=".Student_Visitor.usersChats" />
         <activity android:name=".Student_Visitor.chatActivity" />
         <activity android:name=".Student_Visitor.Profile" />
         <activity android:name=".profile" />

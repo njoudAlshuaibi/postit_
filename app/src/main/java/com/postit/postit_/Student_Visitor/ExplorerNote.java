@@ -294,7 +294,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 startActivity(intent2);
                 break;
             case R.id.nav_chat:
-                Intent intent3 = new Intent(ExplorerNote.this, chatActivity.class);
+                Intent intent3 = new Intent(ExplorerNote.this, usersChats.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_notification:
