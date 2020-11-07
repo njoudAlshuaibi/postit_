@@ -39,6 +39,7 @@ public class usersChats extends AppCompatActivity {
     String recevierEQLcurrent="";
     public static final String sender = "com.postit.postit_.sender";
     public static final String receiver = "com.postit.postit_.receiver";
+    boolean f = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,58 +74,84 @@ public class usersChats extends AppCompatActivity {
                     chat chatObj = messageSnapshotii.getValue(chat.class);
                     if (chatObj.getReceiverId().equals(fuserID)) {
                         recevierEQLcurrent = chatObj.getSenderId();
+
+                    }
+
+                }
 //find user object to add it to the list while knowing its ID
-                        usersRef = FirebaseDatabase.getInstance().getReference("users");
-                        usersRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                boolean f = false;
-                                for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
-                                    user user1 = dataSnapshotp.getValue(user.class);
-                                    if (recevierEQLcurrent.equals(user1.getId())) {
+                usersRef = FirebaseDatabase.getInstance().getReference("users");
+                usersRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
+                            user user1 = dataSnapshotp.getValue(user.class);
+                            if (recevierEQLcurrent.equals(user1.getId())) {
+
+
+                            }
+                            Ref.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for (DataSnapshot messageSnapshotiit : snapshot.getChildren()) {
+                                        chat chatObj1 = messageSnapshotiit.getValue(chat.class);
                                         for (int i = 0; i < userList.size(); i++) {
                                             if (userList.get(i).getId().equals(user1.getId())) {
                                                 f = true;
                                                 break;
                                             }
                                         }
-                                        if (f == false)
-                                            userList.add(user1);
+                                        if ((chatObj1.getSenderId().equals(user1.getId()))&&(chatObj1.getReceiverId().equals(fuser.getUid()))) {
+//                                            if (f == false)
+                                                userList.add(user1);
+                                        }
+//                                                || (chatObj1.getSenderId().equals(user1.getId())))
+//                                            if( if(chatObj1.getReceiverId().equals(fuser.getUid()))|| (chatObj1.getSenderId().equals(fuser.getUid())))
+//                                            if (f == false)
+
+
+//                                                if( (chatObj1.getReceiverId().equals(fuser.getUid()))|| (chatObj1.getSenderId().equals(fuser.getUid())))
+//                                                    if( (user1.getId().equals(fuser.getUid())|| (user1.getId().equals(fuser.getUid()))))
+
                                     }
+
                                 }
 
-                                // redirect to messages activity "ChatActivity"
-                                adapter = new BrowseUserAdapter(usersChats.this, userList, new CustomItemClickListener() {
-                                    @Override
-                                    public void OnItemClick(View v, int pos) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                        user n = userList.get(pos);
-                                        String s = n.getId();
-                                        String o = fuserID;
+                                }
+                            });
 
+                        }
 
-                                        Intent in = new Intent(usersChats.this, chatActivity.class);
-                                        in.putExtra(sender, "" + s);
-                                        in.putExtra(receiver,s);
-
-                                        startActivity(in);
-                                    } // end on item click listener
-                                });
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                                recyclerView.setAdapter(adapter);
-
-                            }
-
+                        // redirect to messages activity "ChatActivity"
+                        adapter = new BrowseUserAdapter(usersChats.this, userList, new CustomItemClickListener() {
                             @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                            public void OnItemClick(View v, int pos) {
 
-                            }
+                                user n = userList.get(pos);
+                                String s = n.getId();
+                                String o = fuserID;
+
+
+                                Intent in = new Intent(usersChats.this, chatActivity.class);
+                                in.putExtra(sender, "" + s);
+                                in.putExtra(receiver,s);
+
+                                startActivity(in);
+                            } // end on item click listener
                         });
-//                        adapter.notifyDataSetChanged();
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(adapter);
+
                     }
 
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
+//                        adapter.notifyDataSetChanged();
             }
 
             @Override
