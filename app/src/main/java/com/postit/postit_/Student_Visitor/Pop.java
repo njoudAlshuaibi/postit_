@@ -122,7 +122,7 @@ public class Pop extends Activity {
         });
 
     }
-
+// notification
     private void sendNotification()
     {
         AsyncTask.execute(new Runnable() {
