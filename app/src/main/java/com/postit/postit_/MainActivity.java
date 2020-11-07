@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -19,14 +20,57 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OSNotificationAction;
+import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
 import com.postit.postit_.Admin.mainAdmin;
+import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.Student_Visitor.CreateAccountActivity;
+import com.postit.postit_.Student_Visitor.Pop;
 import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
 
-public class MainActivity extends AppCompatActivity {
+import org.json.JSONObject;
 
+public class MainActivity extends AppCompatActivity {
+    class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+        // This fires when a notification is opened by tapping on it.
+        @Override
+        public void notificationOpened(OSNotificationOpenResult result) {
+            OSNotificationAction.ActionType actionType = result.action.type;
+            JSONObject data = result.notification.payload.additionalData;
+            String customKey;
+
+            Log.i("OSNotificationPayload", "result.notification.payload.toJSONObject().toString(): " + result.notification.payload.toJSONObject().toString());
+
+
+            if (data != null) {
+                customKey = data.optString("customkey", null);
+                if (customKey != null)
+                    Log.i("OneSignalExample", "customkey set with value: " + customKey);
+            }
+
+            if (actionType == OSNotificationAction.ActionType.ActionTaken)
+                Log.i("OneSignalExample", "Button pressed with id: " + result.action.actionID);
+
+            // The following can be used to open an Activity of your choice.
+            // Replace - getApplicationContext() - with any Android Context.
+
+      Intent intent = new Intent(getApplicationContext(), requestadmin.class);
+
+ intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+ startActivity(intent);
+
+            // Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
+            //   if you are calling startActivity above.
+     /*
+        <application ...>
+          <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+        </application>
+     */
+        }
+    }
     public static String LoggedIn_User_Email;
     private TextView createAccount;//test
     private TextView forgetPassword;
@@ -51,9 +95,11 @@ public class MainActivity extends AppCompatActivity {
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
         // OneSignal Initialization
         OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+
 
         //juju start
         mAuth = FirebaseAuth.getInstance();

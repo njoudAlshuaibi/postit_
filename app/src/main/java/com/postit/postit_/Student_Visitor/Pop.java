@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,10 +33,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OSNotificationAction;
+import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
+import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
+
+import org.json.JSONObject;
 
 public class Pop extends Activity {
     private EditText requestedMajor, requestedCourse, requestedChapter;
@@ -136,9 +142,6 @@ public class Pop extends Activity {
 
     private void sendNotification()
     {
-
-        Toast.makeText(this, "Current Recipients is : user1@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -150,11 +153,8 @@ public class Pop extends Activity {
                     String send_email;
 
                     //This is a Simple Logic to Send Notification different Device Programmatically....
-                    if (MainActivity.LoggedIn_User_Email.equals("reyakh.h@gmail.com")) {
                         send_email = "swe444@gmail.com";
-                    } else {
-                        send_email = "swe444@gmail.com";
-                    }
+
 
                     try {
                         String jsonResponse;
@@ -175,7 +175,8 @@ public class Pop extends Activity {
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
 
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"English Message\"}"
+                                + "\"contents\": {\"en\": \"there is new request\"}"
+
                                 + "}";
 
 
@@ -201,7 +202,6 @@ public class Pop extends Activity {
                             scanner.close();
                         }
                         System.out.println("jsonResponse:\n" + jsonResponse);
-
                     } catch (Throwable t) {
                         t.printStackTrace();
                     }
