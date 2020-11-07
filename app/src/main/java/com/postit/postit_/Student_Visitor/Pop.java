@@ -1,47 +1,30 @@
 package com.postit.postit_.Student_Visitor;
 
 import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.postit.postit_.Objects.requests;
+import com.postit.postit_.R;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.onesignal.OSNotificationAction;
-import com.onesignal.OSNotificationOpenResult;
-import com.onesignal.OneSignal;
-import com.postit.postit_.Admin.requestadmin;
-import com.postit.postit_.MainActivity;
-import com.postit.postit_.Objects.requests;
-import com.postit.postit_.R;
-
-import org.json.JSONObject;
 
 public class Pop extends Activity {
     private EditText requestedMajor, requestedCourse, requestedChapter;
@@ -175,7 +158,8 @@ public class Pop extends Activity {
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
 
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"there is new request\"}"
+                                + "\"contents\": {\"en\": \"There is a new request\"}"
+                                + "\"headings\": {\"en\": \"POST-it\"}"
 
                                 + "}";
 
@@ -185,21 +169,21 @@ public class Pop extends Activity {
                         byte[] sendBytes = strJsonBody.getBytes("UTF-8");
                         con.setFixedLengthStreamingMode(sendBytes.length);
 
-                        OutputStream outputStream = con.getOutputStream();
-                        outputStream.write(sendBytes);
+                        OutputStream outputStream1 = con.getOutputStream();
+                        outputStream1.write(sendBytes);
 
                         int httpResponse = con.getResponseCode();
                         System.out.println("httpResponse: " + httpResponse);
 
                         if (httpResponse >= HttpURLConnection.HTTP_OK
                                 && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
-                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                            scanner.close();
+                            Scanner scanner1 = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner1.useDelimiter("\\A").hasNext() ? scanner1.next() : "";
+                            scanner1.close();
                         } else {
-                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
-                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                            scanner.close();
+                            Scanner scanner1 = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner1.useDelimiter("\\A").hasNext() ? scanner1.next() : "";
+                            scanner1.close();
                         }
                         System.out.println("jsonResponse:\n" + jsonResponse);
                     } catch (Throwable t) {
