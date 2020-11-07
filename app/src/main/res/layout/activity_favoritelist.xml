@@ -36,9 +36,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/FavoriteListRecycleView"
             android:layout_width="337dp"
-            android:layout_height="520dp"
+            android:layout_height="590dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="-999dp"
             android:layout_marginBottom="29dp" />
 
@@ -46,7 +46,7 @@
             android:id="@+id/tv23"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-300dp"
+            android:layout_marginTop="-350dp"
             android:layout_marginRight="100dp"
             android:layout_marginLeft="30dp"
             android:textAlignment="center"

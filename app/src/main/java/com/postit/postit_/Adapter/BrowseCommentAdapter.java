@@ -13,8 +13,11 @@ import androidx.annotation.Nullable;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Objects.comment;
 import com.postit.postit_.R;
 
@@ -26,6 +29,8 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
     private FirebaseUser user;
     String currentUserid;
     private DatabaseReference commentsRef;
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
+    String username;
 
     public BrowseCommentAdapter(Context context, int resource, ArrayList<comment> obj) {
         super(context, resource, obj);
@@ -102,7 +107,27 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
         TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
         tvcomm.setText(comm);
         TextView comr = (TextView) convertView.findViewById(R.id.commentr);
-        comr.setText("By: " + comR);
+
+        g.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    com.postit.postit_.Objects.user usa = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                    if(usa.getEmail().equals(comR)){
+                        username = usa.getUsername();
+                        comr.setText("By: " + username);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
 
 
         return convertView;
