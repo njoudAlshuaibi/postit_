@@ -202,7 +202,7 @@ public void onBackPressed(){
 
             });}
         else{
-            welcome.setText("     "+"Welcome");
+            welcome.setText("Welcome");
         }
 //        if(user == null){
 //            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
