@@ -1,34 +1,21 @@
 package com.postit.postit_.Admin;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.onesignal.OSNotificationAction;
-import com.onesignal.OSNotificationOpenResult;
-import com.onesignal.OneSignal;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.Profile;
-import com.postit.postit_.Student_Visitor.StudentActivity;
-import com.postit.postit_.Student_Visitor.chatActivity;
-
-import org.json.JSONObject;
 
 
 public class mainAdmin extends AppCompatActivity {

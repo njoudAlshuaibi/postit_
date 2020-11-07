@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.firebase.auth.FirebaseUser;

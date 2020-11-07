@@ -1,12 +1,9 @@
 package com.postit.postit_.Admin;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,12 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,10 +26,6 @@ import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.ExplorerNote;
-import com.postit.postit_.Student_Visitor.Profile;
-import com.postit.postit_.Student_Visitor.StudentActivity;
-import com.postit.postit_.Student_Visitor.chatActivity;
 
 import java.util.ArrayList;
 

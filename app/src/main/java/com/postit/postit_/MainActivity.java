@@ -26,7 +26,6 @@ import com.onesignal.OneSignal;
 import com.postit.postit_.Admin.mainAdmin;
 import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.Student_Visitor.CreateAccountActivity;
-import com.postit.postit_.Student_Visitor.Pop;
 import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
 

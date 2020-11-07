@@ -31,14 +31,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
-import com.postit.postit_.Admin.PopUpWindowAdmin;
 import com.postit.postit_.MainActivity;
-import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.helper.Session;
 import com.postit.postit_.Objects.note;
-import com.postit.postit_.Objects.user;
 
 import java.util.ArrayList;
 import java.util.List;
