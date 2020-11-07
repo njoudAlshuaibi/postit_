@@ -256,8 +256,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
                 Intent intent3 = new Intent(mynotes.this, usersChats.class);
                 startActivity(intent3);
                 break;
-            case R.id.nav_notification:
-                break;
+
             case R.id.nav_logout:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(mynotes.this);

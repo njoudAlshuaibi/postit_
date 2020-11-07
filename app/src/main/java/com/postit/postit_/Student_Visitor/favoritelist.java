@@ -220,8 +220,7 @@ public class favoritelist extends AppCompatActivity implements NavigationView.On
                 Intent intent3= new Intent(favoritelist.this,usersChats.class);
                 startActivity(intent3);
                 break;
-            case R.id.nav_notification:
-                break;
+
             case R.id.nav_logout:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(favoritelist.this);

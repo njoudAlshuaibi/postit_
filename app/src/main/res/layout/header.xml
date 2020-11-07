@@ -16,7 +16,7 @@
         android:id="@+id/welcome1"
         android:layout_width="253dp"
         android:layout_height="54dp"
-        android:layout_marginLeft="0dp"
+        android:layout_marginLeft="-10dp"
         android:layout_marginTop="4dp"
         android:textAlignment="center"
         android:fontFamily="sans-serif-light"
