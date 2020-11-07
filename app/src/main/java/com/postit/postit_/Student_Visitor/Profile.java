@@ -126,13 +126,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         welcome= (TextView) findViewById(R.id.welcome1);
-        if(user!=null){
+        if(Cuser!=null){
             g.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         com.postit.postit_.Objects.user us = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
-                        if(us.getEmail().equals(user.getEmail())){
+                        if(us.getEmail().equals(Cuser.getEmail())){
                             welcome.setText("Welcome"+" "+us.getUsername());
 
                         }

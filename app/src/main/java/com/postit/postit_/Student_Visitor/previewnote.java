@@ -60,6 +60,8 @@ public class previewnote extends AppCompatActivity {
     Button startChat;
     public static final String writerEmail = "com.postit.postit_.writerEmail";
     private FirebaseUser user;
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
+String username;
 
 
     @Override
@@ -91,6 +93,7 @@ public class previewnote extends AppCompatActivity {
         final String title = intent.getStringExtra(mynotes.preTitel);
         final String caption = intent.getStringExtra(mynotes.preCaption);
         final String email = intent.getStringExtra(mynotes.preEmail);
+
         final String id = intent.getStringExtra(mynotes.preID);
         final String r = intent.getStringExtra(mynotes.prerate);
         final float rate = Float.parseFloat(r);
@@ -119,7 +122,26 @@ public class previewnote extends AppCompatActivity {
 
         notetit.setText(title);
         notepre.setText("caption :\n\n" + caption);
-        notepr2.setText("written by : " + email);
+        g.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    com.postit.postit_.Objects.user usa = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                    if(usa.getEmail().equals(email)){
+                        username = usa.getUsername();
+                        notepr2.setText("written by : " + username);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
 
         ratingBar = findViewById(R.id.rating_bar);
         btnSubmit = findViewById(R.id.submitRate);
@@ -183,7 +205,7 @@ public class previewnote extends AppCompatActivity {
                                 rateN = rateo.getRate1();
                                 final float raten = Float.parseFloat(rateN);
                                 ratingBar.setRating(raten);
-                                notepr2.setText("written by : " + email + "\n\nyour Submitted rate");
+                                notepr2.setText("written by : " + username + "\n\nyour Submitted rate");
 
                             }
 //                        else {

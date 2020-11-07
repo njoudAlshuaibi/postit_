@@ -33,7 +33,6 @@ import com.postit.postit_.helper.Session;
 
 
 public class StudentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    //m
 DrawerLayout drawerLayout;
 NavigationView navigationView;
 Toolbar toolbar;
@@ -196,7 +195,6 @@ public void onBackPressed(){
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
 
             });}
