@@ -51,12 +51,10 @@ public class usersChats extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar99);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Direct");
+        getSupportActionBar().setTitle("DIRECT MESSAGES");
         toolbar.setTitleTextColor(0xFFB8B8B8);
         recyclerView = findViewById(R.id.usersChatsRV);
 
-
-//////////////////////////////////////
         Ref = FirebaseDatabase.getInstance().getReference("Massages");
         Ref.keepSynced(true);
 
