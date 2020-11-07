@@ -68,15 +68,15 @@ public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.Ch
     class ChatViewHolder extends RecyclerView.ViewHolder {
 
         TextView txttime, txtMsg;
-       LinearLayout llMsg, stupid;
+        LinearLayout llMsg, stupid;
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtMsg = itemView.findViewById(R.id.text_message_body);
-          //  llMsg = itemView.findViewById(R.id.llMsg);
+            //  llMsg = itemView.findViewById(R.id.llMsg);
             // txttime=itemView.findViewById(R.id.txttime);
-         //  stupid = itemView.findViewById(R.id.stupidmsg);
+            //  stupid = itemView.findViewById(R.id.stupidmsg);
 
 
         }
@@ -94,4 +94,3 @@ public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.Ch
         }
     }
 }//end class
-
