@@ -71,7 +71,6 @@ Toolbar toolbar;
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_chat).setVisible(false);
-            menu.findItem(R.id.nav_notification).setVisible(false);
             menu.findItem(R.id.nav_login).setVisible(true);
         }
         else{
@@ -228,8 +227,6 @@ public void onBackPressed(){
             case R.id.nav_chat:
                 Intent intent3= new Intent(StudentActivity.this,usersChats.class);
                 startActivity(intent3);
-                break;
-            case R.id.nav_notification:
                 break;
             case R.id.nav_logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(StudentActivity.this);

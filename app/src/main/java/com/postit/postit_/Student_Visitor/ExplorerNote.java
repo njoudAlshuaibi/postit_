@@ -101,7 +101,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_chat).setVisible(false);
-            menu.findItem(R.id.nav_notification).setVisible(false);
+
             menu.findItem(R.id.nav_login).setVisible(true);
         } else {
             menu.findItem(R.id.nav_login).setVisible(false);
@@ -277,7 +277,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
             });}
         else{
-            welcome.setText("     "+"Welcome");
+            welcome.setText("Welcome");
         }
         return true;
     }
@@ -297,8 +297,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
                 Intent intent3 = new Intent(ExplorerNote.this, usersChats.class);
                 startActivity(intent3);
                 break;
-            case R.id.nav_notification:
-                break;
+
             case R.id.nav_logout:
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);

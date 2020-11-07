@@ -36,6 +36,7 @@ public class Pop extends Activity {
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
 
@@ -159,7 +160,7 @@ public class Pop extends Activity {
 
                                 + "\"data\": {\"foo\": \"bar\"},"
                                 + "\"contents\": {\"en\": \"There is a new request\"}"
-                                + "\"headings\": {\"en\": \"POST-it\"}"
+
 
                                 + "}";
 
