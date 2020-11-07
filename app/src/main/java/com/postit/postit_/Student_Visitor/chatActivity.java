@@ -90,7 +90,8 @@ public class chatActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         receiverUserId = intent.getStringExtra(usersChats.receiver);
-
+//        Intent intent2 = getIntent();
+//        receiverUserId = intent2.getStringExtra(previewnote.receiver);
 
         massagesRef = FirebaseDatabase.getInstance().getReference().child("Massages");
         fuser = FirebaseAuth.getInstance().getCurrentUser();

@@ -73,49 +73,58 @@ public class usersChats extends AppCompatActivity {
                     chat chatObj = messageSnapshotii.getValue(chat.class);
                     if (chatObj.getReceiverId().equals(fuserID)) {
                         recevierEQLcurrent = chatObj.getSenderId();
-
-                    }
-                }
-                //find user object to add it to the list while knowing its ID
-                usersRef = FirebaseDatabase.getInstance().getReference("users");
-                usersRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
-                            user user1 = dataSnapshotp.getValue(user.class);
-                            if (recevierEQLcurrent.equals(user1.getId()))
-                                userList.add(user1);
-
-                        }
-
-                        // redirect to messages activity "ChatActivity"
-                        adapter = new BrowseUserAdapter(usersChats.this, userList, new CustomItemClickListener() {
+//find user object to add it to the list while knowing its ID
+                        usersRef = FirebaseDatabase.getInstance().getReference("users");
+                        usersRef.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void OnItemClick(View v, int pos) {
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                boolean f = false;
+                                for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
+                                    user user1 = dataSnapshotp.getValue(user.class);
+                                    if (recevierEQLcurrent.equals(user1.getId())) {
+                                        for (int i = 0; i < userList.size(); i++) {
+                                            if (userList.get(i).getId().equals(user1.getId())) {
+                                                f = true;
+                                                break;
+                                            }
+                                        }
+                                        if (f == false)
+                                            userList.add(user1);
+                                    }
+                                }
 
-                                user n = userList.get(pos);
-                                String s = n.getId();
-                                String o = fuserID;
+                                // redirect to messages activity "ChatActivity"
+                                adapter = new BrowseUserAdapter(usersChats.this, userList, new CustomItemClickListener() {
+                                    @Override
+                                    public void OnItemClick(View v, int pos) {
+
+                                        user n = userList.get(pos);
+                                        String s = n.getId();
+                                        String o = fuserID;
 
 
-                                Intent in = new Intent(usersChats.this, chatActivity.class);
-                                in.putExtra(sender, "" + s);
-                                in.putExtra(receiver,o);
+                                        Intent in = new Intent(usersChats.this, chatActivity.class);
+                                        in.putExtra(sender, "" + s);
+                                        in.putExtra(receiver,s);
 
-                                startActivity(in);
-                            } // end on item click listener
+                                        startActivity(in);
+                                    } // end on item click listener
+                                });
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                recyclerView.setAdapter(adapter);
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
                         });
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        recyclerView.setAdapter(adapter);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 //                        adapter.notifyDataSetChanged();
+                    }
+
+                }
+
             }
 
             @Override
