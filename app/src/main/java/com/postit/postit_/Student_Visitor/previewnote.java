@@ -1,5 +1,6 @@
 package com.postit.postit_.Student_Visitor;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseCommentAdapter;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
 import com.postit.postit_.Admin.AdminActivity;
+import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.course;
 import com.postit.postit_.Objects.favoriteList;
@@ -63,7 +66,8 @@ public class previewnote extends AppCompatActivity {
     String scomment;
     final rate rateObj = new rate();
     Button startChat;
-    public static final String writerEmail= "com.postit.postit_.writerEmail";
+    public static final String writerEmail = "com.postit.postit_.writerEmail";
+    private FirebaseUser user;
 
 
     @Override
@@ -102,13 +106,19 @@ public class previewnote extends AppCompatActivity {
         final int rateCount = Integer.parseInt(ratec);
         final String ra = intent.getStringExtra(mynotes.precratenum);
         ratenum = Float.parseFloat(ra);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && !(user.getEmail().equals(email))) {
+            startChat.setVisibility(View.VISIBLE);
+        } else {
+            startChat.setVisibility(View.INVISIBLE);
+        }
         startChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(previewnote.this, chatActivity.class);
-                in.putExtra(writerEmail,""+email);
+                in.putExtra(writerEmail, "" + email);
                 startActivity(in);
-              //  startActivity(new Intent(previewnote.this, chatActivity.class));
+                //  startActivity(new Intent(previewnote.this, chatActivity.class));
             }
         });
         Intent intenta = getIntent();
@@ -168,34 +178,36 @@ public class previewnote extends AppCompatActivity {
             }
 
         });
+        if (user != null) {
 
-        rateRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshotq) {
-                for (DataSnapshot snapshotc : snapshotq.getChildren()) {
-                    rate rateo = snapshotc.getValue(rate.class);
-                    if (snapshotc.exists()) {
-                        if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
-                            btnSubmit.setVisibility(View.INVISIBLE);
-                            rateN = rateo.getRate1();
-                            final float raten = Float.parseFloat(rateN);
-                            ratingBar.setRating(raten);
-                            notepr2.setText("written by : " + email + "\n\nyour Submitted rate");
+            rateRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshotq) {
+                    for (DataSnapshot snapshotc : snapshotq.getChildren()) {
+                        rate rateo = snapshotc.getValue(rate.class);
+                        if (snapshotc.exists()) {
+                            if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
+                                btnSubmit.setVisibility(View.INVISIBLE);
+                                rateN = rateo.getRate1();
+                                final float raten = Float.parseFloat(rateN);
+                                ratingBar.setRating(raten);
+                                notepr2.setText("written by : " + email + "\n\nyour Submitted rate");
 
-                        }
+                            }
 //                        else {
 //                            btnSubmit.setVisibility(View.VISIBLE);
 //                        }
 
-                    }
-                }//
-            }
+                        }
+                    }//
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,15 +264,32 @@ public class previewnote extends AppCompatActivity {
 
             }
         });
+
+
         submitComment.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                scomment = newComment.getText().toString().trim();
-                String ucid = user.getEmail().trim();
-                String commID = commentsRef.push().getKey();
-                comment c = new comment(commID, id, scomment, ucid);
-                addNewComment(id, c);
+                if (user != null) {
+                    scomment = newComment.getText().toString().trim();
+                    String ucid = user.getEmail().trim();
+                    String commID = commentsRef.push().getKey();
+                    comment c = new comment(commID, id, scomment, ucid);
+                    addNewComment(id, c);
+                } else {
+
+                    new AlertDialog.Builder(previewnote.this)
+                            .setTitle("you need to login first")
+                            .setMessage("Do you want to login ")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(previewnote.this, MainActivity.class));
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                }
             }
         });
 
