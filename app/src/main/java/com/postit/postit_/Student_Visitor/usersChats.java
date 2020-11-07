@@ -94,14 +94,15 @@ public class usersChats extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     for (DataSnapshot messageSnapshotiit : snapshot.getChildren()) {
                                         chat chatObj1 = messageSnapshotiit.getValue(chat.class);
-                                        for (int i = 0; i < userList.size(); i++) {
-                                            if (userList.get(i).getId().equals(user1.getId())) {
+
+                                        if ((chatObj1.getSenderId().equals(user1.getId()))&&(chatObj1.getReceiverId().equals(fuser.getUid()))) {
+                                            for (int i = 0; i < userList.size(); i++) {
+                                            if (userList.get(i).getId().equals(chatObj1.getSenderId())) {
                                                 f = true;
                                                 break;
                                             }
                                         }
-                                        if ((chatObj1.getSenderId().equals(user1.getId()))&&(chatObj1.getReceiverId().equals(fuser.getUid()))) {
-//                                            if (f == false)
+                                        if (f == false)
                                                 userList.add(user1);
                                         }
 //                                                || (chatObj1.getSenderId().equals(user1.getId())))
