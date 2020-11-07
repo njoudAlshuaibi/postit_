@@ -73,49 +73,49 @@ public class usersChats extends AppCompatActivity {
                     chat chatObj = messageSnapshotii.getValue(chat.class);
                     if (chatObj.getReceiverId().equals(fuserID)) {
                         recevierEQLcurrent = chatObj.getSenderId();
-                        //find user object to add it to the list while knowing its ID
-                        usersRef = FirebaseDatabase.getInstance().getReference("users");
-                        usersRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
-                                    user user1 = dataSnapshotp.getValue(user.class);
-                                    if (recevierEQLcurrent.equals(user1.getId()))
-                                        userList.add(user1);
-
-                                }
-
-                                // redirect to messages activity "ChatActivity"
-                                adapter = new BrowseUserAdapter(usersChats.this, userList, new CustomItemClickListener() {
-                                    @Override
-                                    public void OnItemClick(View v, int pos) {
-
-                                        user n = userList.get(pos);
-                                        String s = n.getId();
-                                        String o = fuserID;
-
-
-                                        Intent in = new Intent(usersChats.this, chatActivity.class);
-                                        in.putExtra(sender, "" + s);
-                                        in.putExtra(receiver,o);
-
-                                        startActivity(in);
-                                    } // end on item click listener
-                                });
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                                recyclerView.setAdapter(adapter);
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-//                        adapter.notifyDataSetChanged();
 
                     }
                 }
+                //find user object to add it to the list while knowing its ID
+                usersRef = FirebaseDatabase.getInstance().getReference("users");
+                usersRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
+                            user user1 = dataSnapshotp.getValue(user.class);
+                            if (recevierEQLcurrent.equals(user1.getId()))
+                                userList.add(user1);
+
+                        }
+
+                        // redirect to messages activity "ChatActivity"
+                        adapter = new BrowseUserAdapter(usersChats.this, userList, new CustomItemClickListener() {
+                            @Override
+                            public void OnItemClick(View v, int pos) {
+
+                                user n = userList.get(pos);
+                                String s = n.getId();
+                                String o = fuserID;
+
+
+                                Intent in = new Intent(usersChats.this, chatActivity.class);
+                                in.putExtra(sender, "" + s);
+                                in.putExtra(receiver,o);
+
+                                startActivity(in);
+                            } // end on item click listener
+                        });
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        recyclerView.setAdapter(adapter);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+//                        adapter.notifyDataSetChanged();
             }
 
             @Override
