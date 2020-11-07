@@ -20,7 +20,8 @@
         android:id="@+id/nav_view"
         app:headerLayout="@layout/header"
         app:menu="@menu/menudrawer"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start"
+        />
 
         <LinearLayout
             android:layout_width="match_parent"

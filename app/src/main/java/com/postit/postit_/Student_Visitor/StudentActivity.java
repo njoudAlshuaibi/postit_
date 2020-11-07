@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,7 +21,13 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.Session;
 
@@ -34,6 +41,8 @@ Toolbar toolbar;
     private FirebaseAuth firebaseAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+   private TextView welcome;
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,7 @@ Toolbar toolbar;
         setContentView(R.layout.activity_student);
         //
 
-       drawerLayout=findViewById(R.id.drawer_layout);
+        drawerLayout=findViewById(R.id.drawer_layout);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.toolbar);
 //
@@ -172,7 +181,29 @@ public void onBackPressed(){
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        welcome= (TextView) findViewById(R.id.welcome1);
+        if(user!=null){
+            g.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        com.postit.postit_.Objects.user us = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                        if(us.getEmail().equals(user.getEmail())){
+                            welcome.setText("Welcome"+" "+us.getUsername());
 
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });}
+        else{
+            welcome.setText("     "+"Welcome");
+        }
 //        if(user == null){
 //            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
 
@@ -184,6 +215,7 @@ public void onBackPressed(){
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item ) {
+
         switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1= new Intent(StudentActivity.this,StudentActivity.class);
