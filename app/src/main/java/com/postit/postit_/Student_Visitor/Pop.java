@@ -169,21 +169,21 @@ public class Pop extends Activity {
                         byte[] sendBytes = strJsonBody.getBytes("UTF-8");
                         con.setFixedLengthStreamingMode(sendBytes.length);
 
-                        OutputStream outputStream1 = con.getOutputStream();
-                        outputStream1.write(sendBytes);
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
 
                         int httpResponse = con.getResponseCode();
                         System.out.println("httpResponse: " + httpResponse);
 
                         if (httpResponse >= HttpURLConnection.HTTP_OK
                                 && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-                            Scanner scanner1 = new Scanner(con.getInputStream(), "UTF-8");
-                            jsonResponse = scanner1.useDelimiter("\\A").hasNext() ? scanner1.next() : "";
-                            scanner1.close();
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
                         } else {
-                            Scanner scanner1 = new Scanner(con.getErrorStream(), "UTF-8");
-                            jsonResponse = scanner1.useDelimiter("\\A").hasNext() ? scanner1.next() : "";
-                            scanner1.close();
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
                         }
                         System.out.println("jsonResponse:\n" + jsonResponse);
                     } catch (Throwable t) {
