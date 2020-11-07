@@ -35,7 +35,6 @@ import com.postit.postit_.Objects.major;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.popUpWindow;
 
 import java.util.*;
 import java.util.regex.Pattern;

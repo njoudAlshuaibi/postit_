@@ -3,20 +3,14 @@ package com.postit.postit_.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -29,23 +23,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.ExplorerNote;
-import com.postit.postit_.Student_Visitor.StudentActivity;
-import com.postit.postit_.Student_Visitor.creatnotepopup;
-import com.postit.postit_.Student_Visitor.popUpWindow;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.favoriteList;
-import com.postit.postit_.Objects.rate;
-import com.postit.postit_.Student_Visitor.previewnote;
 
 import java.util.List;
-
-import static android.provider.Settings.System.getString;
 
 public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.ViewHolder> {
 

@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Objects.chapter;
 import com.postit.postit_.Objects.course;
 import com.postit.postit_.Objects.major;
-import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 
 import java.util.ArrayList;

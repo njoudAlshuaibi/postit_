@@ -1,11 +1,8 @@
 package com.postit.postit_.Student_Visitor;
 
-import android.app.Activity;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +20,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.onesignal.OneSignal;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.Session;

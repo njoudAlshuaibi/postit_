@@ -32,10 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.note;
-import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
-import com.postit.postit_.Objects.user;
 
 import java.util.ArrayList;
 import java.util.List;
