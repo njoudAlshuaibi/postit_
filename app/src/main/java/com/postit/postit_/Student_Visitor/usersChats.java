@@ -37,7 +37,7 @@ public class usersChats extends AppCompatActivity {
     String fuserID;
     String recevierEQLcurrent = "";
     boolean f = false;
-    boolean ifAdded = false;
+    boolean ifAdded;
     private RecyclerView recyclerView;
     private BrowseUserAdapter adapter;
     private List<user> userList = new ArrayList<>();
@@ -71,13 +71,11 @@ public class usersChats extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
                 userList.clear();
                 chatUsers.clear();
-//                adapter.notifyDataSetChanged();
                 for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
-                    ifAdded=false;
+                    ifAdded = false;
                     chat chatObj = messageSnapshotii.getValue(chat.class);
                     if (chatObj.getReceiverId().equals(fuserID)) {
 
-//                        recevierEQLcurrent = chatObj.getSenderId();
                         for (int i = 0; i < chatUsers.size(); i++) {
                             if (chatUsers.get(i).equals(chatObj.getSenderId())) {
                                 ifAdded = true;
@@ -90,7 +88,6 @@ public class usersChats extends AppCompatActivity {
 
                     }
                     if (chatObj.getSenderId().equals(fuserID)) {
-                       // recevierEQLcurrent = chatObj.getReceiverId();
 
                         for (int i = 0; i < chatUsers.size(); i++) {
                             if (chatUsers.get(i).equals(chatObj.getReceiverId())) {
@@ -119,46 +116,13 @@ public class usersChats extends AppCompatActivity {
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userList.clear();
+//                userList.clear();
                 for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
                     user user1 = dataSnapshotp.getValue(user.class);
                     for (int i = 0; i < chatUsers.size(); i++) {
                         if (chatUsers.get(i).equals(user1.getId())) {
                             userList.add(user1);
 
-//                            Ref.addValueEventListener(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                    for (DataSnapshot messageSnapshotiit : snapshot.getChildren()) {
-//                                        chat chatObj1 = messageSnapshotiit.getValue(chat.class);
-//
-//                                        if ((chatObj1.getSenderId().equals(user1.getId())) && (chatObj1.getReceiverId().equals(fuser.getUid()))) {
-//                                            for (int i = 0; i < userList.size(); i++) {
-//                                                if (userList.get(i).getId().equals(chatObj1.getSenderId())) {
-//                                                    f = true;
-//                                                    break;
-//                                                }
-//                                            }
-//                                            if (f == false)
-//                                                userList.add(user1);
-//                                        }
-////                                                || (chatObj1.getSenderId().equals(user1.getId())))
-////                                            if( if(chatObj1.getReceiverId().equals(fuser.getUid()))|| (chatObj1.getSenderId().equals(fuser.getUid())))
-////                                            if (f == false)
-//
-//
-////                                                if( (chatObj1.getReceiverId().equals(fuser.getUid()))|| (chatObj1.getSenderId().equals(fuser.getUid())))
-////                                                    if( (user1.getId().equals(fuser.getUid())|| (user1.getId().equals(fuser.getUid()))))
-//
-//                                    }
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                }
-//                            });
                         }
                     }
 
