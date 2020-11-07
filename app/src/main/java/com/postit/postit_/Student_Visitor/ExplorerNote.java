@@ -57,6 +57,8 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
     public static final String noteWriterID = "com.postit.postit_.noteWriterID";
+    private TextView welcome;
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
 
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private DatabaseReference notesRef, usersRef;
@@ -254,7 +256,29 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        welcome= (TextView) findViewById(R.id.welcome1);
+        if(user!=null){
+            g.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        com.postit.postit_.Objects.user us = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                        if(us.getEmail().equals(user.getEmail())){
+                            welcome.setText("Welcome"+" "+us.getUsername());
 
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });}
+        else{
+            welcome.setText("     "+"Welcome");
+        }
         return true;
     }
 

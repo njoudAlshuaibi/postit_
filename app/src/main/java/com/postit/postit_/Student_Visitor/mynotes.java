@@ -61,7 +61,8 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
     public static final String precc = "com.postit.postit_.precc";
     public static final String noteWriterID = "com.postit.postit_.noteWriterID";
 
-
+    private TextView welcome;
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,6 +214,33 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
         startActivity(popupwindow4);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        welcome= (TextView) findViewById(R.id.welcome1);
+        if(user!=null){
+            g.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        com.postit.postit_.Objects.user us = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                        if(us.getEmail().equals(user.getEmail())){
+                            welcome.setText("Welcome"+" "+us.getUsername());
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });}
+        else{
+            welcome.setText("     "+"Welcome");
+        }
+        return true;
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
