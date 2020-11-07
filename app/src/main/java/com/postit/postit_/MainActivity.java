@@ -16,8 +16,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OneSignal;
 import com.postit.postit_.Admin.mainAdmin;
 import com.postit.postit_.Student_Visitor.CreateAccountActivity;
 import com.postit.postit_.Student_Visitor.StudentActivity;
@@ -25,6 +27,7 @@ import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String LoggedIn_User_Email;
     private TextView createAccount;//test
     private TextView forgetPassword;
     private TextView visitor;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     //juju end
 //n
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("");
+
+// Logging set to help debug issues, remove before releasing your app.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         //juju start
         mAuth = FirebaseAuth.getInstance();
@@ -93,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
     // juju start
     private void login(){
         final String email = editTextEmail.getText().toString().trim();
+        LoggedIn_User_Email = email;
+        OneSignal.sendTag("User_ID",LoggedIn_User_Email);
         String password = editTextPassword.getText().toString().trim();
 
         if(email.isEmpty()){
