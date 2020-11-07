@@ -69,6 +69,10 @@ public class chatActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        Intent intent = getIntent();
+        receiverUserId = intent.getStringExtra(usersChats.receiver);
+
+
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
         Intent intent1 = getIntent();

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
+import com.postit.postit_.helper.CustomItemClickListener;
 
 import java.util.List;
 
@@ -18,18 +19,30 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BrowseUserAdapter extends RecyclerView.Adapter<BrowseUserAdapter.ViewHolder> {
     private Context context;
     private List<user> userList;
+    CustomItemClickListener listener;
 
 
-    public BrowseUserAdapter(Context context, List<user> userList){
+
+    public BrowseUserAdapter(Context context, List<user> userList, CustomItemClickListener listener){
         this.userList=userList;
         this.context=context;
+        this.listener=listener;
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.user_item,parent,false);
-        return new BrowseUserAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent, false);
+        final BrowseUserAdapter.ViewHolder mv = new BrowseUserAdapter.ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.OnItemClick(view , mv.getAdapterPosition());
+            }
+        });
+        return  mv;
+
     }
 
     @Override

@@ -13,93 +13,108 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.postit.postit_.Adapter.FavoriteListAdapter;
+import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.user;
 import com.postit.postit_.Objects.chat;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.postit.postit_.Adapter.BrowseUserAdapter;
 import com.postit.postit_.R;
+import com.postit.postit_.helper.CustomItemClickListener;
 
 public class usersChats extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private BrowseUserAdapter adapter;
-    private List<user> mUser;
     FirebaseUser fuser;
-    DatabaseReference Ref,usersRef;
-    private List<String> userList;
+    DatabaseReference Ref, usersRef;
+    private List<user> userList = new ArrayList<>();
     Toolbar toolbar;
-
+    String fuserID;
+    String recevierEQLcurrent;
+    public static final String sender = "com.postit.postit_.sender";
+    public static final String receiver = "com.postit.postit_.receiver";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_chats);
 
-        toolbar=findViewById(R.id.toolbar99);
+        toolbar = findViewById(R.id.toolbar99);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Direct");
         toolbar.setTitleTextColor(0xFFB8B8B8);
 
-        recyclerView = findViewById(R.id.usersChatsRV);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mUser = new ArrayList();
-        adapter = new BrowseUserAdapter(getApplicationContext(), mUser);
-        recyclerView.setAdapter(adapter);
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
-        String fuserID=fuser.getUid();
-        userList = new ArrayList();
+
+//////////////////////////////////////
         Ref = FirebaseDatabase.getInstance().getReference("Massages");
+        Ref.keepSynced(true);
+
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        fuserID = fuser.getUid();
+
+
+        adapter = new BrowseUserAdapter(this, userList, new CustomItemClickListener() {
+            @Override
+            public void OnItemClick(View v, int pos) {
+
+                user n = userList.get(pos);
+                String s = n.getId();
+                String o = fuserID;
+
+
+                Intent in = new Intent(usersChats.this, chatActivity.class);
+                in.putExtra(sender, "" + s);
+                in.putExtra(receiver,o);
+
+                startActivity(in);
+            } // end on item click listener
+        });
+        recyclerView = findViewById(R.id.usersChatsRV);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(adapter);
+
+
         Ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
                 userList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    chat cht = dataSnapshot.getValue(chat.class);
-                    if (cht.getSenderId().equals(fuserID)) {
-                        userList.add(cht.getReceiverId());
-                    }
-                    if (cht.getReceiverId().equals(fuser.getUid())) {
-                        userList.add(cht.getSenderId());
+                adapter.notifyDataSetChanged();
+                for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
+                    chat chatObj = messageSnapshotii.getValue(chat.class);
+                    if (chatObj.getReceiverId().equals(fuserID)) {
+                        recevierEQLcurrent = chatObj.getSenderId();
+                        usersRef = FirebaseDatabase.getInstance().getReference("users");
+                        usersRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshotp : snapshot.getChildren()) {
+                                    user user1 = dataSnapshotp.getValue(user.class);
+                                    if (recevierEQLcurrent.equals(user1.getId()))
+                                        userList.add(user1);
+
+                                }
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
                     }
                 }
-              //  readChats();
-                usersRef = FirebaseDatabase.getInstance().getReference("users");
-                usersRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot09) {
-                        mUser.clear();
-                        for (DataSnapshot dataSnapshot9 : snapshot09.getChildren()) {
-                            user user1 = dataSnapshot9.getValue(user.class);
-                            for (String id : userList) {
-                                if (dataSnapshot9.getKey().equals(id)) {
-                                    if (mUser.size() != 0) {
-                                        for (user user11 : mUser) {
-                                            if (!dataSnapshot9.getKey().equals(user11.getId())) {
-                                                mUser.add(user1);
-                                            }
-                                        }
-                                    } else {
-                                        mUser.add(user1);
-                                    }
-                                }
-                            }
-                        }//
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
             }
 
             @Override
@@ -109,10 +124,7 @@ public class usersChats extends AppCompatActivity {
         });
 
 
-    }//
-
-    private void readChats() {
-
+        adapter.notifyDataSetChanged();
 
 
     }
