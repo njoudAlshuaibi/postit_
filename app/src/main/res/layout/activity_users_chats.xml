@@ -36,8 +36,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersChatsRV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="0dp" />
+        android:layout_height="700dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="29dp"/>
 
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
