@@ -67,6 +67,8 @@ public class chatActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        /////
+
 
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
@@ -230,6 +232,7 @@ public class chatActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.Back) {
             startActivity(new Intent(chatActivity.this, usersChats.class));
+
         }
         return true;
     }
