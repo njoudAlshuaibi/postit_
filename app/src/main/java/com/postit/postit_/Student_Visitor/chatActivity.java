@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +31,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseChatAdapter;
+import com.postit.postit_.Admin.AdminActivity;
+import com.postit.postit_.Admin.mainAdmin;
 import com.postit.postit_.Objects.chat;
 
 import com.postit.postit_.Objects.user;
@@ -214,6 +218,20 @@ public class chatActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.chat_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.Back) {
+            startActivity(new Intent(chatActivity.this, usersChats.class));
+        }
+        return true;
     }
 
 }
