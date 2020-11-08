@@ -1,11 +1,16 @@
 package com.postit.postit_.Student_Visitor;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -13,27 +18,32 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.user;
 import com.postit.postit_.Objects.chat;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.postit.postit_.Adapter.BrowseUserAdapter;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
 
-public class usersChats extends AppCompatActivity {
-
+public class usersChats extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout66;
+    NavigationView navigationView66;
+    Toolbar toolbar66;
     public static final String sender = "com.postit.postit_.sender";
     public static final String receiver = "com.postit.postit_.receiver";
     FirebaseUser fuser;
     DatabaseReference Ref, usersRef;
-    Toolbar toolbar;
     String fuserID;
     String recevierEQLcurrent = "";
     boolean f = false;
@@ -47,12 +57,24 @@ public class usersChats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_chats);
-
-        toolbar = findViewById(R.id.toolbar99);
-        setSupportActionBar(toolbar);
+        drawerLayout66 = findViewById(R.id.drawer_layout66);
+        navigationView66 = findViewById(R.id.nav_view66);
+        toolbar66 = findViewById(R.id.toolbar66);
+        setSupportActionBar(toolbar66);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("DIRECT MESSAGES");
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar66.setTitleTextColor(0xFFB8B8B8);
+        navigationView66.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout66, toolbar66, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout66.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView66.setNavigationItemSelectedListener(this);
+
+        navigationView66.setNavigationItemSelectedListener(this);
+        Menu menu= navigationView66.getMenu();
+
+        menu.findItem(R.id.nav_login).setVisible(false);
+
         recyclerView = findViewById(R.id.usersChatsRV);
 
         Ref = FirebaseDatabase.getInstance().getReference("Massages");
@@ -156,6 +178,60 @@ public class usersChats extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed(){
+        if(drawerLayout66.isDrawerOpen(GravityCompat.START)){
 
+            drawerLayout66.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                Intent intent1 = new Intent(usersChats.this, StudentActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.nav_profile:
+                Intent intent2 = new Intent(usersChats.this, Profile.class);
+                startActivity(intent2);
+                break;
+            case R.id.nav_chat:
+                Intent intent3 = new Intent(usersChats.this, usersChats.class);
+                startActivity(intent3);
+                break;
+
+            case R.id.nav_logout:
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(usersChats.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    // signOut
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(usersChats.this, MainActivity.class));
+                    }
+                });
+                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                break;
+            case R.id.nav_login:
+                Intent intent4 = new Intent(usersChats.this, MainActivity.class);
+                startActivity(intent4);
+        }
+        return true;
+    }
 
 }
