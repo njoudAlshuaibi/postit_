@@ -2,15 +2,17 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="395dp"
     android:layout_height="wrap_content"
     android:padding="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="7dp"
     android:background="@drawable/border">
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_baseline_person_pin_24"
+        android:background="@drawable/ic_baseline_account_circle_24"
         android:id="@+id/profilICON">
 
     </ImageView>
