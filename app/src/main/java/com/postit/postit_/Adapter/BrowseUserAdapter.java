@@ -49,7 +49,7 @@ public class BrowseUserAdapter extends RecyclerView.Adapter<BrowseUserAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         user user = userList.get(position);
         holder.userName.setText(user.getUsername());
-        holder.profile.setImageResource(R.drawable.ic_baseline_person_pin_24);
+        holder.profile.setImageResource(R.drawable.ic_baseline_account_circle_23);
 
 
     }

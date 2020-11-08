@@ -12,7 +12,6 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_baseline_account_circle_24"
         android:id="@+id/profilICON">
 
     </ImageView>

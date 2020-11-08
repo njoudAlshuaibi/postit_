@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.postit.postit_.Adapter.BrowseUserAdapter;
 import com.postit.postit_.R;
@@ -52,6 +53,10 @@ public class usersChats extends AppCompatActivity implements NavigationView.OnNa
     private BrowseUserAdapter adapter;
     private List<user> userList = new ArrayList<>();
     private List<String> chatUsers = new ArrayList<>();
+    private TextView welcome;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +192,37 @@ public class usersChats extends AppCompatActivity implements NavigationView.OnNa
         else{
             super.onBackPressed();
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        welcome= (TextView) findViewById(R.id.welcome1);
+        if(user!=null){
+            g.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        com.postit.postit_.Objects.user us = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                        if(us.getEmail().equals(user.getEmail())){
+                            welcome.setText("Welcome"+" "+us.getUsername());
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+
+            });}
+        else{
+            welcome.setText("Welcome");
+        }
+//        if(user == null){
+//            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
+
+        // else{
+        // getMenuInflater().inflate(R.menu.menudrawer, menu);}
+        return true;
     }
 
     @Override
