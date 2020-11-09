@@ -136,7 +136,7 @@ public class usersChats extends AppCompatActivity implements NavigationView.OnNa
 
             }
         });
-        //find user object to add it to the list while knowing its ID
+        //find user object to add it to the list while knowing its ID...
         usersRef = FirebaseDatabase.getInstance().getReference("users");
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
