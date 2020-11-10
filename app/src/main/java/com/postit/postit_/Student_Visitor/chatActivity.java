@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -122,6 +123,7 @@ public class chatActivity extends AppCompatActivity {
                     user u = jj.getValue(user.class);
                     if (receiverUserId.equals(jj.getKey())) {
                         rname = u.getUsername();
+                        receiverEmail = u.getEmail();
                         getSupportActionBar().setTitle(rname);
 
                     }
@@ -217,6 +219,9 @@ public class chatActivity extends AppCompatActivity {
         chat f = new chat(message, sender, receiver);
         massagesRef.child(id).setValue(hashMap);
 
+        sendNotification("You Have Received A Message" , receiverEmail);
+
+
     }
 
     private void readMessages(final String myid, final String receiverUserId) {
@@ -272,21 +277,10 @@ public class chatActivity extends AppCompatActivity {
             public void run() {
                 int SDK_INT = android.os.Build.VERSION.SDK_INT;
                 if (SDK_INT > 8) {
-                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                            .permitAll().build();
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
-                    String send_email;
 
-                    //This is a Simple Logic to Send Notification different Device Programmatically....
-                    String LoggedIn_User_Email =FirebaseAuth.getInstance().getCurrentUser().getEmail();
                     OneSignal.sendTag("User_ID",FirebaseAuth.getInstance().getCurrentUser().getEmail());//sender email
-                    send_email=senderMail;//reciever email
-                    /*
-                    if (MainActivity.LoggedIn_User_Email.equals("user1@gmail.com")) {
-                        send_email = "user2@gmail.com";
-                    } else {
-                        send_email = "user1@gmail.com";
-                    }*/
 
                     try {
                         String jsonResponse;
@@ -298,14 +292,13 @@ public class chatActivity extends AppCompatActivity {
                         con.setDoInput(true);
 
                         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                        con.setRequestProperty("Authorization", "Basic NTVjOWIxNmYtYjI0YS00NjU0LWE1YmEtYjM5YTM2OWQxZjIx");
+                        con.setRequestProperty("Authorization", "Basic NWYxMWRhMjMtNmQyYy00ZWQyLWI0ODQtYjk3Mjg5ODYzYjNl");
                         con.setRequestMethod("POST");
 
                         String strJsonBody = "{"
-                                + "\"app_id\": \"c12cdbbf-7bd8-4c4f-b5ba-df37e6cc2d36\","
+                                + "\"app_id\": \"23583377-2cda-44fa-ae0d-604256300b33\","
 
-                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
-
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + senderMail + "\"}],"
                                 + "\"data\": {\"foo\": \"bar\"},"
                                 + "\"contents\": {\"en\": \""+message+"\"}"
                                 + "}";
@@ -341,4 +334,13 @@ public class chatActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NotificationManagerCompat.from(getApplicationContext()).cancelAll();
+
+    }
+
 }

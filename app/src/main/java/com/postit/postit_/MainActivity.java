@@ -27,7 +27,9 @@ import com.postit.postit_.Admin.mainAdmin;
 import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.Student_Visitor.CreateAccountActivity;
 import com.postit.postit_.Student_Visitor.StudentActivity;
+import com.postit.postit_.Student_Visitor.chatActivity;
 import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
+import com.postit.postit_.Student_Visitor.usersChats;
 
 import org.json.JSONObject;
 
@@ -52,14 +54,44 @@ public class MainActivity extends AppCompatActivity {
             if (actionType == OSNotificationAction.ActionType.ActionTaken)
                 Log.i("OneSignalExample", "Button pressed with id: " + result.action.actionID);
 
+            String desc=result.notification.payload.body;
+            Log.d("123456" , "Body ");
+
+            if (desc.equals("There is a new request"))
+            {
+
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+
+                Intent intent = new Intent(getApplicationContext(), requestadmin.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
+
+            }
+
+            if (desc.equals("You Have Received A Message"))
+            {
+
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+
+                Intent intent = new Intent(getApplicationContext(), usersChats.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+
+
             // The following can be used to open an Activity of your choice.
             // Replace - getApplicationContext() - with any Android Context.
 
-      Intent intent = new Intent(getApplicationContext(), requestadmin.class);
-
- intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-
- startActivity(intent);
+//      Intent intent = new Intent(getApplicationContext(), requestadmin.class);
+//
+// intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+// startActivity(intent);
 
             // Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
             //   if you are calling startActivity above.
