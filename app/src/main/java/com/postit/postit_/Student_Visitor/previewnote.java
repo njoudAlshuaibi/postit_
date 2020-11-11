@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class previewnote extends AppCompatActivity {
     EditText newComment;
     String scomment;
     final rate rateObj = new rate();
-    Button startChat;
+    ImageView startChat;
     public static final String writerEmail = "com.postit.postit_.writerEmail";
     private FirebaseUser user;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
@@ -74,7 +75,7 @@ String username;
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
         rateRef = FirebaseDatabase.getInstance().getReference().child("Rates");
-        startChat = (Button) findViewById(R.id.startChat);
+        startChat = (ImageView) findViewById(R.id.startChat);
         newComment = (EditText) findViewById(R.id.newcomment);
         submitComment = (Button) findViewById(R.id.submitComment);
 
