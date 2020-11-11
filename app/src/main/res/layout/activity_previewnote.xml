@@ -25,16 +25,18 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:paddingTop="50dp">
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/border2">
 
 
                 <TextView
                     android:id="@+id/notetit"
                     android:layout_width="298dp"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="0dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/ubuntu_bold"
                     android:textColor="#605F5F"
@@ -42,9 +44,9 @@
 
                 <TextView
                     android:id="@+id/notepre"
-                    android:layout_width="298dp"
+                    android:layout_width="325dp"
                     android:layout_height="210dp"
-                    android:layout_marginLeft="-250dp"
+                    android:layout_marginLeft="-295dp"
                     android:layout_marginTop="70dp"
                     android:fontFamily="@font/ubuntu_bold"
                     android:textColor="#605F5F"
@@ -65,7 +67,7 @@
                     android:id="@+id/notepr2"
                     android:layout_width="368dp"
                     android:layout_height="110dp"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="0dp"
                     android:fontFamily="@font/ubuntu_bold"
                     android:textColor="#605F5F"
@@ -85,7 +87,7 @@
                     android:id="@+id/startChat"
                     android:layout_width="45dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="-20dp"
+                    android:layout_marginLeft="85dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/ic_baseline_chat_24" />
 
@@ -94,7 +96,7 @@
                     android:id="@+id/submitRate"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="-15dp"
+                    android:layout_marginLeft="-50dp"
                     android:layout_marginTop="100dp"
                     android:layout_marginRight="4dp"
                     android:background="#EC7BB5"
@@ -116,8 +118,8 @@
                 <ListView
                     android:id="@+id/commentstt"
                     android:layout_width="400dp"
-                    android:layout_height="230dp"
-                    android:layout_marginLeft="0dp"
+                    android:layout_height="250dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/comment"></ListView>
 
