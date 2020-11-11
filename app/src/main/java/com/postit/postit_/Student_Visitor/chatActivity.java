@@ -191,7 +191,7 @@ public class chatActivity extends AppCompatActivity {
         });
 
 
-//Notification
+//Notification juju & njoud
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
         // OneSignal Initialization
