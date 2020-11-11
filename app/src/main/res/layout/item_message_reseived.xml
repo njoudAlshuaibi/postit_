@@ -17,11 +17,10 @@
         android:background="#F3A1CB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="240dp"
         android:padding="8dp"
         android:textColor="#ffffff"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="330dp"
+        android:layout_marginLeft="300dp"
         />
 
 
