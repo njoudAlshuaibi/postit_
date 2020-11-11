@@ -290,6 +290,13 @@ String username;
                     String ucid = user.getEmail().trim();
                     String commID = commentsRef.push().getKey();
                     comment c = new comment(commID, id, scomment, ucid);
+                        if(newComment.getText().toString().trim().isEmpty()) {
+                        Toast.makeText(previewnote.this, "Comment can not be empty!", Toast.LENGTH_LONG).show();
+                        return;
+                    } else if(newComment.getText().toString().trim().length()>100){
+                        Toast.makeText(previewnote.this, "Comment can not be more than 100 character!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     addNewComment(id, c);
                 } else {
 
