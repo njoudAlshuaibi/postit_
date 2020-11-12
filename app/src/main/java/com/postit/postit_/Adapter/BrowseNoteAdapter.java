@@ -108,8 +108,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
 
         holder.deleten2.setVisibility(View.INVISIBLE);
-//        holder.remove.setVisibility(View.INVISIBLE);
-//        holder.addFavourite.setVisibility(View.INVISIBLE);
+       holder.remove.setVisibility(View.INVISIBLE);
+        holder.addFavourite.setVisibility(View.INVISIBLE);
 
 
         holder.imageView3.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +134,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         if (user != null) {
             userEmail = user.getEmail().trim();
         } else {
+
             // No user is signed in
         }
 
