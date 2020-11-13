@@ -39,7 +39,7 @@ public class previewnote extends AppCompatActivity {
     TextView notepre;
     TextView notepr2;
     TextView notetit;
-    RatingBar ratingBar;
+    RatingBar ratingBar,rating_bar2;
     Button btnSubmit, submitComment;
     private DatabaseReference notesRef, favouriteRef, commentsRef, rateRef;
     String rateN;
@@ -59,6 +59,8 @@ public class previewnote extends AppCompatActivity {
     String scomment;
     final rate rateObj = new rate();
     ImageView startChat;
+    boolean flagw=false;
+
     public static final String writerEmail = "com.postit.postit_.writerEmail";
     private FirebaseUser user;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
@@ -101,6 +103,7 @@ String username;
         final String ratec = intent.getStringExtra(mynotes.precrate);
         final int rateCount = Integer.parseInt(ratec);
         final String ra = intent.getStringExtra(mynotes.precratenum);
+
         ratenum = Float.parseFloat(ra);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null && !(user.getEmail().equals(email))) {
@@ -143,9 +146,11 @@ String username;
 
         });
 
-
+        rating_bar2 = findViewById(R.id.rating_bar2);
         ratingBar = findViewById(R.id.rating_bar);
         btnSubmit = findViewById(R.id.submitRate);
+        btnSubmit.setVisibility(View.INVISIBLE);
+
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userEmail = user.getEmail().trim();
@@ -153,22 +158,26 @@ String username;
         } else {
             // No user is signed in
         }
+        rating_bar2.setVisibility(View.INVISIBLE);
 
         if (pre.equals("false")) {
             btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
+
         } else {
-            btnSubmit.setVisibility(View.VISIBLE);
             ratingBar.setVisibility(View.VISIBLE);
+
         }
 
         if (email.equals(userEmail)) {
             btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
+
         }
         if (user == null) {
             btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
+
         }
 
         notesRef.addValueEventListener(new ValueEventListener() {
@@ -194,7 +203,6 @@ String username;
 
         });
         if (user != null) {
-
             rateRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshotq) {
@@ -202,59 +210,84 @@ String username;
                         rate rateo = snapshotc.getValue(rate.class);
                         if (snapshotc.exists()) {
                             if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
-                                btnSubmit.setVisibility(View.INVISIBLE);
-                                rateN = rateo.getRate1();
-                                final float raten = Float.parseFloat(rateN);
-                                ratingBar.setRating(raten);
-                                notepr2.setText("written by : " + username + "\n\nyour Submitted rate");
-
+                            ratingBar.setVisibility(View.INVISIBLE);
+                            flagw=true;
                             }
-//                        else {
-//                            btnSubmit.setVisibility(View.VISIBLE);
-//                        }
-
                         }
                     }//
+
+                    ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                        @Override
+                        public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                            s = String.valueOf(ratingBar.getRating());
+                            Toast.makeText(getApplicationContext(), "note rated successfully", Toast.LENGTH_SHORT).show();
+
+                            if (flag == true) {
+                                currentRate = Float.parseFloat(s);
+                                String cn = String.valueOf(currentRate);
+//                float c = currentRate + rate;
+                                ratenum = ratenum + currentRate;
+                                counter = (float) rateCount + 1;
+                                newrate = (ratenum / counter);
+                                notesRef.child(id).child("allrates").setValue(ratenum);
+                                notesRef.child(id).child("rate").setValue(newrate);
+                                notesRef.child(id).child("ratingCount").setValue(counter);
+
+                                String id4 = rateRef.push().getKey();
+                                rateObj.setId(id4);
+                                rateObj.setNoteid(id);
+                                rateObj.setUserid(user.getUid());
+                                rateObj.setRate1(cn);
+                                rateRef.child(id4).setValue(rateObj);
+                            }
+
+                        }
+                    });
+
                 }
+
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
+
             });
-        }
+            rateRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshotq) {
+                    for (DataSnapshot snapshotc : snapshotq.getChildren()) {
+                        rate rateo = snapshotc.getValue(rate.class);
+                        if (snapshotc.exists()) {
+                            if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
+                                ratingBar.setVisibility(View.INVISIBLE);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                s = String.valueOf(ratingBar.getRating());
-                Toast.makeText(getApplicationContext(), "note rated successfully", Toast.LENGTH_SHORT).show();
-
-                if (flag == true) {
-                    currentRate = Float.parseFloat(s);
-                    String cn = String.valueOf(currentRate);
-//                float c = currentRate + rate;
-                    ratenum = ratenum + currentRate;
-                    counter = (float) rateCount + 1;
-                    newrate = (ratenum / counter);
-                    notesRef.child(id).child("allrates").setValue(ratenum);
-                    notesRef.child(id).child("rate").setValue(newrate);
-                    notesRef.child(id).child("ratingCount").setValue(counter);
-
-                    String id4 = rateRef.push().getKey();
-                    rateObj.setId(id4);
-                    rateObj.setNoteid(id);
-                    rateObj.setUserid(user.getUid());
-                    rateObj.setRate1(cn);
-                    rateRef.child(id4).setValue(rateObj);
+                                rating_bar2.setVisibility(View.VISIBLE);
+                                rateN = rateo.getRate1();
+                                final float raten = Float.parseFloat(rateN);
+                                rating_bar2.setRating(raten);
+                                notepr2.setText("written by : " + username + "\n\nyour Submitted rate");
+                                flagw = true;
+                            }
+                        }
+                    }//
                 }
 
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });
 
 
-        });
+        }
+
+
+
+
+
         comments = (ListView) findViewById(R.id.commentstt);
         final ArrayList<comment> commentsList = new ArrayList<>();
         commentAdapter = new BrowseCommentAdapter(this, R.layout.adapter_view_layout, commentsList);

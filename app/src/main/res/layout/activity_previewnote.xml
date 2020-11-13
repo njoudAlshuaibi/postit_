@@ -83,6 +83,16 @@
                     android:progressTint="#F5F3DB07"
                     android:stepSize="0.5" />
 
+                <RatingBar
+                    android:id="@+id/rating_bar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="66dp"
+                    android:layout_marginLeft="-199dp"
+                    android:layout_marginTop="88dp"
+                    android:numStars="4"
+                    android:progressTint="#F5F3DB07"
+                    android:stepSize="0.5" />
+
                 <ImageView
                     android:id="@+id/startChat"
                     android:layout_width="45dp"
