@@ -102,17 +102,6 @@
                     android:background="@drawable/ic_baseline_chat_24" />
 
 
-                <Button
-                    android:id="@+id/submitRate"
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="-50dp"
-                    android:layout_marginTop="100dp"
-                    android:layout_marginRight="4dp"
-                    android:background="#EC7BB5"
-                    android:text="submit"
-                    android:textColor="#fff" />
-
 
             </LinearLayout>
 

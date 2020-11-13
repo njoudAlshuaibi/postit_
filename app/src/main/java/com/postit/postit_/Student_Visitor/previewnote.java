@@ -148,8 +148,6 @@ String username;
 
         rating_bar2 = findViewById(R.id.rating_bar2);
         ratingBar = findViewById(R.id.rating_bar);
-        btnSubmit = findViewById(R.id.submitRate);
-        btnSubmit.setVisibility(View.INVISIBLE);
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -161,7 +159,6 @@ String username;
         rating_bar2.setVisibility(View.INVISIBLE);
 
         if (pre.equals("false")) {
-            btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
 
         } else {
@@ -170,12 +167,10 @@ String username;
         }
 
         if (email.equals(userEmail)) {
-            btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
 
         }
         if (user == null) {
-            btnSubmit.setVisibility(View.INVISIBLE);
             ratingBar.setVisibility(View.INVISIBLE);
 
         }
