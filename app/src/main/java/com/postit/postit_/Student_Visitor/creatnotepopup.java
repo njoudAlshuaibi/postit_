@@ -239,34 +239,40 @@ public class creatnotepopup extends AppCompatActivity {
             Toast.makeText(creatnotepopup.this, "Note body can not be more than 300 character!", Toast.LENGTH_LONG).show();
             return;
         } else if (currentUser != null) {
-            String id = noteRef.push().getKey();
-            noteObj.setTitle(inputNoteTitle.getText().toString());
-            noteObj.setCaption(inputNoteBody.getText().toString());
-            noteObj.setCollege("CCIS");
-            noteObj.setMajor(courseMajor);
-            noteObj.setCourse(chapterCourse);
-            noteObj.setChapterNum(chapterChapter);
-            noteObj.setId(id);
-            noteObj.setEmail(userEmail);
-            noteObj.setRate(rate);
-            noteObj.setRatingCount(ratec);
-            noteObj.setAllrates(0);
+            if(courseMajor.equals("Choose major")||(chapterCourse.equals("Choose course"))||(chapterChapter.equals("Choose chapter")))
+            {
+                Toast.makeText(creatnotepopup.this, "please select valid input", Toast.LENGTH_LONG).show();
+            }
+            else{
+                String id = noteRef.push().getKey();
+                noteObj.setTitle(inputNoteTitle.getText().toString());
+                noteObj.setCaption(inputNoteBody.getText().toString());
+                noteObj.setCollege("CCIS");
+                noteObj.setMajor(courseMajor);
+                noteObj.setCourse(chapterCourse);
+                noteObj.setChapterNum(chapterChapter);
+                noteObj.setId(id);
+                noteObj.setEmail(userEmail);
+                noteObj.setRate(rate);
+                noteObj.setRatingCount(ratec);
+                noteObj.setAllrates(0);
 
-            noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
-                        //             startActivity(new Intent(creatnotepopup.this, ExplorerNote.class));
-                        Intent intent = new Intent();
-                        setResult(RESULT_OK, intent);
-                        finish();
-                    } else {
-                        Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
+                noteRef.child(id).setValue(noteObj).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(creatnotepopup.this, "note added successfully", Toast.LENGTH_LONG).show();
+                            //             startActivity(new Intent(creatnotepopup.this, ExplorerNote.class));
+                            Intent intent = new Intent();
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            Toast.makeText(creatnotepopup.this, "note doesn't added", Toast.LENGTH_LONG).show();
+                        }
+
                     }
-
-                }
-            });
+                });
+            }
         } else {
             Toast.makeText(creatnotepopup.this, "you need to login first", Toast.LENGTH_LONG).show();
         }

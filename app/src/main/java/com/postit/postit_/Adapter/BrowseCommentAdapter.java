@@ -1,6 +1,8 @@
 package com.postit.postit_.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,48 +62,48 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
 
         ImageButton deletenc = (ImageButton) convertView.findViewById(R.id.deletenc9);
         deletenc.setVisibility(View.INVISIBLE);
-//        if (currentUserid.equals(comR)) {
-//            deletenc.setVisibility(View.VISIBLE);
-//            deletenc.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    commentsRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
-//                            for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
-//                                comment cobj = messageSnapshoti.getValue(comment.class);
-//                                final String cobjId = cobj.getCommID();
-//                                if (cobj.getComR().equals(currentUserid)) {
-//                                    if (cobj.getCommID().equals(commID)) {
-//                                        AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
-//                                                .setTitle("are you sure?")
-//                                                .setMessage("do you want to delete this comment? ")
-//                                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                                                    @Override
-//                                                    public void onClick(DialogInterface dialog, int which) {
-//                                                        deleteNote(cobjId);
-//                                                    }
-//                                                })
-//                                                .setNegativeButton("No", null)
-//                                                .show();
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                        public void deleteNote(String noteKey) {
-//                            commentsRef.child(noteKey.trim()).removeValue();
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                }
-//
-//            });
-//        }
+        if (currentUserid.equals(comR)) {
+            deletenc.setVisibility(View.VISIBLE);
+            deletenc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    commentsRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                            for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
+                                comment cobj = messageSnapshoti.getValue(comment.class);
+                                final String cobjId = cobj.getCommID();
+                                if (cobj.getComR().equals(currentUserid)) {
+                                    if (cobj.getCommID().equals(commID)) {
+                                        AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
+                                                .setTitle("are you sure?")
+                                                .setMessage("do you want to delete this comment? ")
+                                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        deleteNote(cobjId);
+                                                    }
+                                                })
+                                                .setNegativeButton("No", null)
+                                                .show();
+                                    }
+                                }
+                            }
+                        }
+
+                        public void deleteNote(String noteKey) {
+                            commentsRef.child(noteKey.trim()).removeValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+            });
+        }
 
 
         TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
