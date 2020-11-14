@@ -2,7 +2,9 @@ package com.postit.postit_.Student_Visitor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +35,11 @@ import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class previewnote extends AppCompatActivity {
     TextView notepre;
@@ -60,7 +66,7 @@ public class previewnote extends AppCompatActivity {
     final rate rateObj = new rate();
     ImageView startChat;
     boolean flagw=false;
-
+    String email;
     public static final String writerEmail = "com.postit.postit_.writerEmail";
     private FirebaseUser user;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
@@ -95,7 +101,7 @@ String username;
 
         final String title = intent.getStringExtra(mynotes.preTitel);
         final String caption = intent.getStringExtra(mynotes.preCaption);
-        final String email = intent.getStringExtra(mynotes.preEmail);
+        email = intent.getStringExtra(mynotes.preEmail);
 
         final String id = intent.getStringExtra(mynotes.preID);
         final String r = intent.getStringExtra(mynotes.prerate);
@@ -351,9 +357,83 @@ String username;
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    sendNotification("you have a new comment",email);
                     Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
                     newComment.setText("");
                 }
+            }
+        });
+    }
+
+    private void sendNotification(String a,String writer) {
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    String send_email;
+
+                    //This is a Simple Logic to Send Notification different Device Programmatically....
+                    send_email = writer;
+
+
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic NWYxMWRhMjMtNmQyYy00ZWQyLWI0ODQtYjk3Mjg5ODYzYjNl");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"23583377-2cda-44fa-ae0d-604256300b33\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"You have a new comment\"}"
+
+
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+
+
             }
         });
     }
