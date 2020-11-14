@@ -35,12 +35,18 @@ import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class previewnote extends AppCompatActivity {
     TextView notepre;
@@ -349,6 +355,15 @@ String username;
                 }
             }
         });
+//// Logging set to help debug issues, remove before releasing your app.
+//        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+//        // OneSignal Initialization
+//        OneSignal.startInit(this)
+//                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+//                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+//                .unsubscribeWhenNotificationsAreDisabled(true)
+//                .init();
+        ///////////////////////////////------------------///////////////////////////
 
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
