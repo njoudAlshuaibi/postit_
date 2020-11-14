@@ -212,7 +212,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     private boolean isMajorChanged() {
-        return false;
+        return true;
     }
 
     private boolean isEmailChanged() {
