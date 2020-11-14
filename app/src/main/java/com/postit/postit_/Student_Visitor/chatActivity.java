@@ -53,24 +53,22 @@ import android.os.StrictMode;
 
 public class chatActivity extends AppCompatActivity {
 
+    Intent intent;
+    Toolbar toolbar;
     private DatabaseReference massagesRef, usersRef;
-    private List<chat> chatList ;
+    private List<chat> chatList;
     private RecyclerView recyclerView;
     private BrowseChatAdapter adapter;
     private EditText edtPost;
     private ImageView imgSend;
     private FirebaseUser fuser;
-    private String receiverUserId,rname, receiverEmail;
-    Intent intent;
-    Toolbar toolbar;
-
-
+    private String receiverUserId, rname, receiverEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        toolbar=findViewById(R.id.toolbar9988);
+        toolbar = findViewById(R.id.toolbar9988);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setTitleTextColor(0xFFB8B8B8);
@@ -81,7 +79,6 @@ public class chatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         /////
-
 
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
@@ -106,7 +103,7 @@ public class chatActivity extends AppCompatActivity {
 
             }
         });
-        if(receiverUserId==null) {
+        if (receiverUserId == null) {
             Intent intent = getIntent();
             receiverUserId = intent.getStringExtra(usersChats.receiver);
 
@@ -131,12 +128,7 @@ public class chatActivity extends AppCompatActivity {
                 }
 
 
-
-
-
-
             }
-
 
 
             @Override
@@ -159,7 +151,7 @@ public class chatActivity extends AppCompatActivity {
             }
 
         });
-       // adapter = new BrowseChatAdapter(this, chatList);
+        // adapter = new BrowseChatAdapter(this, chatList);
 
 
         //recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -200,11 +192,9 @@ public class chatActivity extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
 
-        String LoggedIn_User_Email =FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        OneSignal.sendTag("User_ID",LoggedIn_User_Email);
+        String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        OneSignal.sendTag("User_ID", LoggedIn_User_Email);
         //End notify
-
-
 
 
     }
@@ -219,7 +209,7 @@ public class chatActivity extends AppCompatActivity {
         chat f = new chat(message, sender, receiver);
         massagesRef.child(id).setValue(hashMap);
 
-        sendNotification("You Have Received A Message" , receiverEmail);
+        sendNotification("You Have Received A Message", receiverEmail);
 
 
     }
@@ -231,7 +221,7 @@ public class chatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 chatList.clear();
-             //   adapter.notifyDataSetChanged();
+                //   adapter.notifyDataSetChanged();
                 for (DataSnapshot snapshot1 : snapshot.getChildren()) {
 
                     chat cht = snapshot1.getValue(chat.class);
@@ -239,11 +229,11 @@ public class chatActivity extends AppCompatActivity {
                             cht.getReceiverId().equals(receiverUserId) && cht.getSenderId().equals(myid)) {
                         chatList.add(cht);
                     }
-                    adapter = new BrowseChatAdapter(chatActivity.this , chatList );
+                    adapter = new BrowseChatAdapter(chatActivity.this, chatList);
                     recyclerView.setAdapter(adapter);
                 }
 
-              //  adapter.notifyDataSetChanged();
+                //  adapter.notifyDataSetChanged();
 
             }
 
@@ -254,12 +244,14 @@ public class chatActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.chat_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -270,8 +262,7 @@ public class chatActivity extends AppCompatActivity {
         return true;
     }
 
-    private void sendNotification(final String message, final String senderMail)
-    {
+    private void sendNotification(final String message, final String senderMail) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -280,7 +271,7 @@ public class chatActivity extends AppCompatActivity {
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
 
-                    OneSignal.sendTag("User_ID",FirebaseAuth.getInstance().getCurrentUser().getEmail());//sender email
+                    OneSignal.sendTag("User_ID", FirebaseAuth.getInstance().getCurrentUser().getEmail());//sender email
 
                     try {
                         String jsonResponse;
@@ -300,7 +291,7 @@ public class chatActivity extends AppCompatActivity {
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + senderMail + "\"}],"
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \""+message+"\"}"
+                                + "\"contents\": {\"en\": \"" + message + "\"}"
                                 + "}";
 
 

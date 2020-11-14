@@ -357,7 +357,7 @@ String username;
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    sendNotification("you have a new comment",email);
+                    sendNotification("You have a new comment",email);
                     Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
                     newComment.setText("");
                 }

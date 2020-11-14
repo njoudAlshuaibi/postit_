@@ -29,6 +29,7 @@ import com.postit.postit_.Student_Visitor.CreateAccountActivity;
 import com.postit.postit_.Student_Visitor.StudentActivity;
 import com.postit.postit_.Student_Visitor.chatActivity;
 import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
+import com.postit.postit_.Student_Visitor.mynotes;
 import com.postit.postit_.Student_Visitor.usersChats;
 
 import org.json.JSONObject;
@@ -82,6 +83,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+            if (desc.equals("You have a new comment"))
+            {
+
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+
+                Intent intent = new Intent(getApplicationContext(), mynotes.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+
 
 
             // The following can be used to open an Activity of your choice.
