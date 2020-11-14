@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 import com.postit.postit_.Adapter.BrowseCommentAdapter;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.comment;
@@ -349,7 +350,17 @@ String username;
             }
         });
 
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        OneSignal.sendTag("User_ID", LoggedIn_User_Email);
+        //End notify
     }
 
     public void addNewComment(String noteID, comment c) {
