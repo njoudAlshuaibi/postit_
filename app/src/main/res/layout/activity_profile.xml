@@ -174,7 +174,7 @@
                 />
 
             <Button
-                android:id="@+id/signupBtn2"
+                android:id="@+id/saveChangesBtn"
                 android:layout_width="158dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"

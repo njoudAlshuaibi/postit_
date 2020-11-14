@@ -14,8 +14,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -41,6 +43,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private String major;
     private String username;
     private Spinner spinnereditmajor;
+    private Button saveChangesBtn;
     private TextView welcome;
     private FirebaseUser user;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
@@ -54,6 +57,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         drawerLayout9 = findViewById(R.id.drawer_layout9);
         navigationView9 = findViewById(R.id.nav_view22);
         toolbar3 = findViewById(R.id.toolbar_profile);
+        saveChangesBtn = findViewById(R.id.saveChangesBtn);
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("PROFILE");
@@ -198,4 +202,27 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             }
             return true;}
+
+            public void updateProfile(View view){
+
+                if(isNameChanged() ||isPasswordChanged() || isEmailChanged() || isMajorChanged()){
+
+                    Toast.makeText(this , "Data has been updated" , Toast.LENGTH_LONG).show();
+            }
     }
+
+    private boolean isMajorChanged() {
+        return false;
+    }
+
+    private boolean isEmailChanged() {
+        return false;
+    }
+
+    private boolean isNameChanged() {
+        return false;
+    }
+    private boolean isPasswordChanged() {
+       return false;
+    }
+}
