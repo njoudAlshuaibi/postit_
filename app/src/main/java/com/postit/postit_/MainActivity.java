@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-
             if (desc.equals("You Have Received A Message"))
             {
 
@@ -85,15 +84,12 @@ public class MainActivity extends AppCompatActivity {
             }
             if (desc.equals("You have a new comment"))
             {
-
                 // The following can be used to open an Activity of your choice.
                 // Replace - getApplicationContext() - with any Android Context.
 
-                Intent intent3 = new Intent(getApplicationContext(), mynotes.class);
-
-                intent3.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                startActivity(intent3);
+                Intent intent = new Intent(getApplicationContext(), mynotes.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
             }
 
@@ -223,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     ///////juju end j
 //vv
 }

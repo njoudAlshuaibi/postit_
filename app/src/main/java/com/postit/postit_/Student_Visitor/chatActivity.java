@@ -194,7 +194,7 @@ public class chatActivity extends AppCompatActivity {
 
         String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         OneSignal.sendTag("User_ID", LoggedIn_User_Email);
-        //End notify
+//        //End notify
 
 
     }

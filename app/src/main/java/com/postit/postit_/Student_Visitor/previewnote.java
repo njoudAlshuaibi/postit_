@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,13 +30,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OSNotificationAction;
+import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
 import com.postit.postit_.Adapter.BrowseCommentAdapter;
+import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.comment;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
+
+import org.json.JSONObject;
+
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -376,6 +384,7 @@ String username;
         String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         OneSignal.sendTag("User_ID", LoggedIn_User_Email);
         //End notify
+
     }
 
     public void addNewComment(String noteID, comment c) {
@@ -391,7 +400,7 @@ String username;
         });
     }
 
-    private void sendNotification(String a,String writer) {
+    private void sendNotification(final String a,String writer) {
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -419,16 +428,11 @@ String username;
                         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                         con.setRequestProperty("Authorization", "Basic NWYxMWRhMjMtNmQyYy00ZWQyLWI0ODQtYjk3Mjg5ODYzYjNl");
                         con.setRequestMethod("POST");
-
                         String strJsonBody = "{"
                                 + "\"app_id\": \"23583377-2cda-44fa-ae0d-604256300b33\","
-
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
-
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"You have a new comment\"}"
-
-
+                                + "\"contents\": {\"en\": \"" + a + "\"}"
                                 + "}";
 
 
@@ -462,6 +466,12 @@ String username;
 
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NotificationManagerCompat.from(getApplicationContext()).cancelAll();
+
     }
 
 
