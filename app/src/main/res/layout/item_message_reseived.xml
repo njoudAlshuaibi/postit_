@@ -9,19 +9,16 @@
     >
 
 
-
-
     <TextView
         android:id="@+id/text_message_body"
-        android:text="hi , how are you?"
-        android:background="#F3A1CB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:textColor="#ffffff"
-        android:layout_marginTop="4dp"
+        android:layout_width="136dp"
+        android:layout_height="56dp"
         android:layout_marginLeft="300dp"
-        />
+        android:layout_marginTop="4dp"
+        android:background="#F3A1CB"
+        android:padding="8dp"
+        android:text="hi , how are you?"
+        android:textColor="#ffffff" />
 
 
 
