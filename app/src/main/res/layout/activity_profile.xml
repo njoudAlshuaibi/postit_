@@ -53,12 +53,13 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:orientation="horizontal">
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="69dp"
+                    android:layout_height="63dp"
 
                     >
 
@@ -87,25 +88,24 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="268dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:layout_gravity="center"
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/profile_email"
-                        android:layout_width="268dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:clickable="false"
-                        android:cursorVisible="false"
+                    >
+
+                    <EditText
+                        android:id="@+id/profil_Email"
+                        android:layout_width="274dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
                         android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
-                        android:text="" />
-
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -115,27 +115,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
-
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="268dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
+                    android:layout_gravity="center"
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    >
+
+                    <EditText
                         android:id="@+id/profile_major"
-                        android:layout_width="268dp"
+                        android:layout_width="274dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:clickable="false"
-                        android:cursorVisible="false"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="10dp"
                         android:ems="10"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="Major"
-                        android:inputType="text"
-                        android:text="" />
+                        android:inputType="textEmailAddress"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
@@ -144,7 +144,7 @@
                 android:layout_width="220dp"
                 android:layout_height="43dp"
                 android:layout_marginLeft="-5dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
 
                 android:hint="Major"
 
