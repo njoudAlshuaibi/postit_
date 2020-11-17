@@ -40,7 +40,8 @@
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
             android:text=""
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:inputType="textMultiLine"/>
 
 
         <ImageView

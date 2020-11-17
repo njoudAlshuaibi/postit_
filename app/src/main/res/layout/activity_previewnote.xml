@@ -127,11 +127,12 @@
                 <EditText
                     android:id="@+id/newcomment"
                     android:layout_width="250dp"
-                    android:layout_height="32dp"
+                    android:layout_height="60dp"
                     android:layout_marginLeft="45dp"
                     android:layout_marginTop="45dp"
                     android:hint="Write your comment"
-                    android:textSize="10dp" />
+                    android:textSize="10dp"
+                    android:inputType="textMultiLine"/>
 
                 <Button
                     android:id="@+id/submitComment"
@@ -148,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="-30dp"
+                    android:layout_marginTop="-33dp"
                     android:background="@drawable/ic_baseline_account_circle_23" />
 
 
