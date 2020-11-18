@@ -297,7 +297,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         user User = new user(username , email , password , college , major , userId);
         userRef.setValue(User);
-        Toast.makeText(this , "fuck u" , Toast.LENGTH_LONG).show();
+        Toast.makeText(this , "Information has been updated successfully" , Toast.LENGTH_LONG).show();
 
 
     }
