@@ -1,5 +1,18 @@
 package com.postit.postit_.Student_Visitor;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -8,19 +21,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,17 +40,22 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     DrawerLayout drawerLayout9;
     NavigationView navigationView9;
     Toolbar toolbar3;
-    TextInputEditText profile_email, profile_name,profile_major;
+    EditText profile_email, profile_name,profile_major;
     private FirebaseUser Cuser;
     private user usera;
     private String userEmail;
     private String major;
     private String username;
+    private String userId;
+    private String password;
+    private String college;
     private Spinner spinnereditmajor;
     private Button saveChangesBtn;
     private TextView welcome;
     private FirebaseUser user;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -94,7 +103,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             userEmail = us.getEmail();
                             username = us.getUsername();
                             major = us.getMajor();
-
+                            userId = us.getId();
+                            college = us.getCollege();
+                            password = us.getPassword();
                             profile_name.setText(username);
                             profile_email.setText(userEmail);
                             profile_major.setText(major);
@@ -113,8 +124,24 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         }
 
+        saveChangesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateInfo();
+            }
+        });
+
+
     }
 
+//    public void onClick(View v){
+//        switch (v.getId()){
+//            case R.id.saveChangesBtn:
+//                updateInfo();
+//                break;
+//
+//        }
+//    }
 
     @Override
     public void onBackPressed(){
@@ -203,26 +230,78 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
             return true;}
 
-            public void updateProfile(View view){
+//            public void updateProfile(View view){
+//
+//                if(isNameChanged() ||isPasswordChanged() || isEmailChanged() || isMajorChanged()){
+//
+//                    Toast.makeText(this , "Data has been updated" , Toast.LENGTH_LONG).show();
+//            } else
+//                    Toast.makeText(this , "Data is the same and can not be updated" , Toast.LENGTH_LONG).show();
+//    }
+//
+//    private boolean isMajorChanged() {
+//
+//        if(!major.equals(profile_major.getText().toString())){
+//            g.child(username).child("major").setValue(profile_major.getText().toString());
+//
+//            return true;
+//
+//        }else
+//            return false;
+//    }
+//
+//    private boolean isEmailChanged() {
+//        return false;
+//    }
+//
+//    private boolean isNameChanged() {
+//
+//        if(!username.equals(profile_name.getText().toString())){
+//            g.child(username).child("username").setValue(profile_name.getText().toString());
+//
+//            return true;
+//
+//        }else
+//        return false;
+//    }
+//
+//    private boolean isPasswordChanged() {
+//       return false;
+//    }
+//
+    private void updateInfo() {
 
-                if(isNameChanged() ||isPasswordChanged() || isEmailChanged() || isMajorChanged()){
+       // Cuser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference userRef =  FirebaseDatabase.getInstance().getReference("users").child(userId);
 
-                    Toast.makeText(this , "Data has been updated" , Toast.LENGTH_LONG).show();
-            }
+        final String username= profile_name.getText().toString().trim();
+        final String email= profile_email.getText().toString().trim();
+        final String major = profile_major.getText().toString().trim();
+
+        if(username.isEmpty()){
+            profile_name.setError("User name is required");
+            profile_name.requestFocus();
+
+            return;
+        }
+        if(email.isEmpty()){
+            profile_email.setError("Email is required");
+            profile_email.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            profile_email.setError("Please provide valid email");
+            profile_email.requestFocus();
+            return;
+        }
+
+        user User = new user(username , email , password , college , major , userId);
+        userRef.setValue(User);
+        Toast.makeText(this , "fuck u" , Toast.LENGTH_LONG).show();
+
+
     }
 
-    private boolean isMajorChanged() {
-        return true;
-    }
 
-    private boolean isEmailChanged() {
-        return false;
-    }
 
-    private boolean isNameChanged() {
-        return false;
-    }
-    private boolean isPasswordChanged() {
-       return false;
-    }
 }

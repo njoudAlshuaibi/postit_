@@ -95,7 +95,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/profil_Email"
+                        android:id="@+id/profile_email"
                         android:layout_width="274dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
