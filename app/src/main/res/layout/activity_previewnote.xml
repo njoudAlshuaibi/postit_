@@ -1,115 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="772dp"
-    android:layout_margin="0dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:elevation="90dp"
-    app:cardCornerRadius="12dp"
     tools:context=".Student_Visitor.previewnote">
 
     <ScrollView
         android:id="@+id/ScrollView01"
-        android:layout_width="410dp"
-        android:layout_height="768dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/prof4"
+            android:background="@drawable/back2"
             android:orientation="vertical">
 
 
             <LinearLayout
-                android:layout_width="390dp"
+                android:layout_width="370dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/border2">
+                android:background="@drawable/prevew">
 
 
                 <TextView
                     android:id="@+id/notetit"
-                    android:layout_width="298dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                 android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:textColor="#605F5F"
+                    android:textColor="#000000"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/notepre"
-                    android:layout_width="325dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-295dp"
-                    android:layout_marginTop="70dp"
                     android:fontFamily="@font/ubuntu_bold"
-                    android:textColor="#605F5F"
+                    android:textColor="#000000"
                     android:textSize="20dp" />
 
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="280dp"
+                    android:layout_height="221dp"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/notepr2"
+                        android:layout_width="368dp"
+                        android:layout_height="110dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="66dp"
+                        android:layout_marginLeft="-350dp"
+                        android:layout_marginTop="90dp"
+                        android:numStars="4"
+                        android:progressTint="#F5F3DB07"
+                        android:stepSize="0.5" />
+
+                    <RatingBar
+                        android:id="@+id/rating_bar2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="66dp"
+                        android:layout_marginLeft="-199dp"
+                        android:layout_marginTop="88dp"
+                        android:numStars="4"
+                        android:progressTint="#F5F3DB07"
+                        android:stepSize="0.5" />
+
+                    <ImageView
+                        android:id="@+id/startChat"
+                        android:layout_width="45dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="85dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_baseline_chat_24" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="750dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/notepr2"
-                    android:layout_width="368dp"
-                    android:layout_height="110dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="0dp"
-                    android:fontFamily="@font/ubuntu_bold"
-                    android:textColor="#605F5F"
-                    android:textSize="15dp" />
-
-                <RatingBar
-                    android:id="@+id/rating_bar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="66dp"
-                    android:layout_marginLeft="-350dp"
-                    android:layout_marginTop="90dp"
-                    android:numStars="4"
-                    android:progressTint="#F5F3DB07"
-                    android:stepSize="0.5" />
-
-                <RatingBar
-                    android:id="@+id/rating_bar2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="66dp"
-                    android:layout_marginLeft="-199dp"
-                    android:layout_marginTop="88dp"
-                    android:numStars="4"
-                    android:progressTint="#F5F3DB07"
-                    android:stepSize="0.5" />
-
-                <ImageView
-                    android:id="@+id/startChat"
-                    android:layout_width="45dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="85dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_baseline_chat_24" />
-
-
+                </LinearLayout>
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="700dp"
-                android:layout_marginLeft="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:paddingBottom="50dp"
                 android:orientation="vertical">
@@ -117,11 +107,12 @@
 
                 <ListView
                     android:id="@+id/commentstt"
-                    android:layout_width="400dp"
-                    android:layout_height="350dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="0dp"
-                    android:background="@drawable/comment"></ListView>
+                    android:layout_width="wrap_content"
+                    android:layout_height="400dp"
+                    android:layout_gravity="center_horizontal"
+                    >
+
+                </ListView>
 
 
                 <EditText
@@ -129,7 +120,6 @@
                     android:layout_width="250dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="45dp"
-                    android:layout_marginTop="45dp"
                     android:hint="Write your comment"
                     android:textSize="10dp"
                     android:inputType="textMultiLine"/>
@@ -141,7 +131,7 @@
                     android:layout_marginLeft="320dp"
                     android:layout_marginTop="-35dp"
                     android:layout_marginRight="4dp"
-                    android:background="#EC7BB5"
+                    android:background="#FF7058"
                     android:text="POST"
                     android:textColor="#fff" />
 

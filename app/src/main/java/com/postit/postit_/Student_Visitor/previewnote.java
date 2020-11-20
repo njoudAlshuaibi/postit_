@@ -146,7 +146,7 @@ String username;
 
 
         notetit.setText(title);
-        notepre.setText("caption :\n\n" + caption);
+        notepre.setText(caption);
         g.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
