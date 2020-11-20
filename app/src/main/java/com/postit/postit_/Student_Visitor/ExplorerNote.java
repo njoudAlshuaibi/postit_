@@ -94,8 +94,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
 
         navigationView4.setNavigationItemSelectedListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
-        session = new Session(getApplicationContext());
+
         Menu menu = navigationView4.getMenu();
         if (user == null) {
             menu.findItem(R.id.nav_logout).setVisible(false);
@@ -104,6 +103,9 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
             menu.findItem(R.id.nav_login).setVisible(true);
         } else {
             menu.findItem(R.id.nav_login).setVisible(false);
+
+            mAuth = FirebaseAuth.getInstance();
+            session = new Session(getApplicationContext());
         }
         Intent intent = getIntent();
         m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
