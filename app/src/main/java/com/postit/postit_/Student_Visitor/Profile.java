@@ -70,7 +70,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("PROFILE");
-        toolbar3.setTitleTextColor(0xFFB8B8B8);
+        toolbar3.setTitleTextColor(0xFF000000);
         navigationView9.bringToFront();
         navigationView9.bringToFront();
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout9,toolbar3,R.string.navigation_drawer_open,R.string.navigation_drawer_close);

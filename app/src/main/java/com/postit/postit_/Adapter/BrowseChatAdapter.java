@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -54,6 +55,8 @@ public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.Ch
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         chat cht = chatList.get(position);
         holder.txtMsg.setText(cht.getMsg());
+        Date d = new Date(chatList.get(position).getMsgTime());
+        holder.txttime.setText(d.getHours() + ":" + d.getMinutes() + "");
         // holder.txttime.setText(cht.getMsgTime()+"");
 
 
@@ -75,7 +78,7 @@ public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.Ch
 
             txtMsg = itemView.findViewById(R.id.text_message_body);
             //  llMsg = itemView.findViewById(R.id.llMsg);
-            // txttime=itemView.findViewById(R.id.txttime);
+             txttime=itemView.findViewById(R.id.text_message_time);
             //  stupid = itemView.findViewById(R.id.stupidmsg);
 
 

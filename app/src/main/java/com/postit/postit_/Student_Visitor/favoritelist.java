@@ -66,7 +66,7 @@ public class favoritelist extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar2);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Bookmark");
-        toolbar2.setTitleTextColor(0xFFB8B8B8);
+        toolbar2.setTitleTextColor(0xFF000000);
         navigationView2.bringToFront();
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout2,toolbar2,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout2.addDrawerListener(toggle);

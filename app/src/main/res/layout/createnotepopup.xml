@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#FFFBD4"
+    android:background="@drawable/prof4"
     android:orientation="vertical"
-    tools:context=".creatnotepopup">
+    tools:context=".Student_Visitor.creatnotepopup">
 
 
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="4dp"
-                android:background="#EB75B2"
+                android:background="#ff7058"
                 android:text="Cancel"
                 android:textColor="#fff" />
 
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
-                android:background="#EB75B2"
+                android:background="#ff7058"
                 android:text="Post"
                 android:textColor="#fff" />
         </LinearLayout>

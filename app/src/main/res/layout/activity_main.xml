@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:background="#EB75B2"
+                android:background="#ff7058"
                 android:text="Login"
                 android:textColor="#fff" />
 

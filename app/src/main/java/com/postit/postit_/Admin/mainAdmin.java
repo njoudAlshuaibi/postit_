@@ -28,7 +28,7 @@ public class mainAdmin extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("HOME");
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
 
 
 

@@ -7,7 +7,7 @@
     android:id="@+id/drawer_layout2"
     tools:context=".Student_Visitor.favoritelist"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:autoMirrored="true"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -30,7 +30,7 @@
             android:id="@+id/toolbar_favoritelist"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="#FFFBD4" />
+            android:background="#E7E7E7" />
 
 
         <androidx.recyclerview.widget.RecyclerView

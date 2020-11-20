@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFBD4"
+    android:background="@drawable/prof4"
     android:orientation="vertical">
 
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="0dp"
-                android:background="#EB75B2"
+                android:background="#ff7058"
                 android:text="Cancel"
                 android:textColor="#fff" />
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="0dp"
-                android:background="#EB75B2"
+                android:background="#ff7058"
                 android:text="Send Request"
                 android:textColor="#fff" />
 

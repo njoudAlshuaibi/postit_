@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin_browse_notes"
+    tools:context=".Admin.admin_browse_notes"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:autoMirrored="true"
     >
 
@@ -22,7 +22,7 @@
            android:id="@+id/toolbar_adminnote"
            android:layout_width="match_parent"
            android:layout_height="42dp"
-           android:background="#FFFBD4"/>
+           />
         <TextView
             android:id="@+id/currentCandChAdmin"
             android:layout_width="363dp"
@@ -40,14 +40,15 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="16dp"
-            android:text="press and hold to delete note"/>
+           />
 
 
         <ListView
             android:id="@+id/listviewadmin"
-            android:layout_width="match_parent"
+            android:layout_width="373dp"
             android:layout_height="600dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
 
         </ListView>
 

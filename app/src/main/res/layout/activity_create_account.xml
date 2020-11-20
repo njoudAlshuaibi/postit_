@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:orientation="vertical"
-    tools:context=".CreateAccountActivity">
+    tools:context=".Student_Visitor.CreateAccountActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,9 +41,12 @@
                 android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:hint="Enter Your Username"
+                android:textColorHint="#000000"
+                android:textColorHighlight="#000000"
                 android:inputType="textPersonName"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:textColor="#000000"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +67,8 @@
                 android:hint="Enter Email Address"
                 android:inputType="textEmailAddress"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -113,7 +117,8 @@
         <LinearLayout
             android:layout_width="474dp"
             android:layout_height="131dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <LinearLayout
                 android:layout_width="187dp"
@@ -184,7 +189,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="40dp"
-            android:background="#EB75B2"
+            android:background="#c83772"
             android:text="Create Account"
             android:textColor="#fff" />
 

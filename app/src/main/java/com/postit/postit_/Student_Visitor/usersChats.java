@@ -68,7 +68,7 @@ public class usersChats extends AppCompatActivity implements NavigationView.OnNa
         setSupportActionBar(toolbar66);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("DIRECT MESSAGES");
-        toolbar66.setTitleTextColor(0xFFB8B8B8);
+        toolbar66.setTitleTextColor(0xFF000000);
         navigationView66.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout66, toolbar66, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout66.addDrawerListener(toggle);

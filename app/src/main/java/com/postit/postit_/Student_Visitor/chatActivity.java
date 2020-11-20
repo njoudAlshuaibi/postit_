@@ -71,7 +71,7 @@ public class chatActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar9988);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -206,7 +206,8 @@ public class chatActivity extends AppCompatActivity {
         hashMap.put("senderId", sender);
         hashMap.put("receiverId", receiver);
         hashMap.put("msg", message);
-        chat f = new chat(message, sender, receiver);
+        hashMap.put("msgtime", date.getTime());
+        chat f = new chat(message, sender, receiver,date.getTime());
         massagesRef.child(id).setValue(hashMap);
 
         sendNotification("You Have Received A Message", receiverEmail);

@@ -3,13 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#E3CBD3"
+    android:background="#2da79b"
     android:gravity="bottom"
     android:padding="20dp">
     <ImageView
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginLeft="80dp"
+
         android:src="@drawable/ic_baseline_account_circle_24"/>
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_marginTop="4dp"
         android:textAlignment="center"
         android:fontFamily="sans-serif-light"
-        android:textSize="24dp" />
+        android:textSize="24dp"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>

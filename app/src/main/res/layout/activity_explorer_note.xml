@@ -2,22 +2,23 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout4"
-    tools:context=".Student_Visitor.ExplorerNote"
-    android:orientation="vertical"
-    android:background="@drawable/bg"
     android:autoMirrored="true"
+    android:background="@drawable/back2"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".Student_Visitor.ExplorerNote"
     tools:openDrawer="start">
+
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/nav_view4"
+        android:layout_gravity="start"
         app:headerLayout="@layout/header"
-        app:menu="@menu/menudrawer"
-        android:layout_gravity="start"/>
+        app:menu="@menu/menudrawer" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,38 +31,44 @@
             android:id="@+id/toolbar_Browsenotes"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="#FFFBD4" />
+            android:background="#EDEDED" />
+
         <TextView
             android:id="@+id/currentCandCh"
             android:layout_width="363dp"
             android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="100dp"
-            android:layout_marginLeft="30dp"
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ExNotemyRecycleView"
-            android:layout_width="337dp"
+            android:layout_width="355dp"
             android:layout_height="580dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="0dp"
             android:layout_marginRight="-999dp"
             android:layout_marginBottom="29dp" />
+
         <TextView
             android:id="@+id/tv"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="-300dp"
             android:layout_marginRight="100dp"
-            android:layout_marginLeft="30dp"
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:textColor="#000000"
+            />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -72,8 +79,8 @@
             android:layout_marginTop="255dp"
             android:layout_marginBottom="14dp"
             android:background="#FBE0EA"
-            app:backgroundTint="#009688"
-            app:srcCompat="@drawable/add" />
+            app:backgroundTint="#2da79b"
+            app:srcCompat="@drawable/image" />
 
 
     </LinearLayout>

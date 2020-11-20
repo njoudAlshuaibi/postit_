@@ -147,7 +147,7 @@ Toolbar toolbar;
          setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("HOME");
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
         ///
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);

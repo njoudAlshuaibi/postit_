@@ -49,7 +49,7 @@ public class requestadmin extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Requests");
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
 
 //        requestbutton = findViewById(R.id.requestbutton);
         final ArrayList<requests> requestsList = new ArrayList<>();

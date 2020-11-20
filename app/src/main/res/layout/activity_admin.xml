@@ -6,31 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".Admin.AdminActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:autoMirrored="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_admin"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:background="#FFFBD4"/>
+        />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="350dp"
+        android:layout_height="710dp"
         android:background="#A6FFFFFF"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
 
 
         <LinearLayout
 
             android:layout_width="344dp"
             android:layout_height="704dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="50dp"
             android:background="@drawable/border"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="3dp">
             <TextView
                 android:id="@+id/textViewp"
                 android:layout_width="250dp"
@@ -38,7 +39,7 @@
                 android:layout_marginLeft="-18dp"
                 android:textAlignment="center"
                 android:textSize="16dp"
-                android:textColor="#9F0B3E"
+                android:textColor="#c83772"
                 android:textStyle="bold"/>
 
             <Button
@@ -47,7 +48,7 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="230dp"
                 android:layout_marginTop="-48dp"
-                android:background="#B8B8B8"
+                android:background="@color/colorPrimaryDark"
                 android:text="DONE"
                 android:textColor="#fff" />
 
@@ -57,7 +58,7 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="230dp"
                 android:layout_marginTop="9dp"
-                android:background="#B8B8B8"
+                android:background="@color/colorPrimaryDark"
                 android:text="Cancel"
                 android:textColor="#fff" />
 
@@ -78,7 +79,8 @@
                 android:text="MAJOR"
                 android:textAlignment="center"
                 android:textSize="18dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#000000"/>
 
 
 
@@ -90,7 +92,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="-10dp"
                 android:layout_marginRight="3dp"
-                android:hint="Major" />
+                android:hint="Major"
+                android:textColor="#000000"/>
 
             <LinearLayout
                 android:layout_width="326dp"
@@ -127,9 +130,9 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="14dp"
                     android:text="e.g.software engineering."
-                    android:textColor="#737070"
                     android:textStyle="italic"
-                    android:textSize="@dimen/_10sdp"/>
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#000000"/>
 
             </LinearLayout>
 
@@ -157,7 +160,8 @@
                     android:text="COURSE"
                     android:textAlignment="center"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="#000000"/>
 
                 <Spinner
                     android:id="@+id/spinnerCourse"
@@ -204,9 +208,9 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="59dp"
                         android:text="e.g.SWE333."
-                        android:textColor="#737070"
                         android:textSize="@dimen/_10sdp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:textColor="#000000"/>
 
 
                 </LinearLayout>
@@ -239,7 +243,7 @@
                     android:layout_height="31dp"
                     android:text="CHAPTER"
                     android:textAlignment="center"
-
+                    android:textColor="#000000"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
 
@@ -297,9 +301,9 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginTop="23dp"
                         android:text="e.g.Chapter6"
-                        android:textColor="#737070"
                         android:textStyle="italic"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="#000000"/>
 
                 </LinearLayout>
 

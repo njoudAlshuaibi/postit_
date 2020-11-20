@@ -8,11 +8,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
+import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
 
 import java.util.ArrayList;
@@ -49,7 +55,7 @@ public class admin_browse_notes extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Browse notes");
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
 
         Intent intent = getIntent();
         textView = (TextView) findViewById(R.id.tp);
@@ -64,9 +70,9 @@ public class admin_browse_notes extends AppCompatActivity {
 
 
         noteslistview = findViewById(R.id.listviewadmin);
-        final ArrayList<String> notesList = new ArrayList<>();
-        final ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.listitem, notesList);
-        noteslistview.setAdapter(adapter);
+        final ArrayList<note> notesList = new ArrayList<>();
+        final admin_browse_notes.MyCustomAdapter myadpter = new admin_browse_notes.MyCustomAdapter(notesList);
+        noteslistview.setAdapter(myadpter);
         ref = FirebaseDatabase.getInstance().getReference();
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         notesRef.addValueEventListener(new ValueEventListener() {
@@ -79,12 +85,12 @@ public class admin_browse_notes extends AppCompatActivity {
                         if (CourseN.equalsIgnoreCase(noteObj.getCourse())) {
                             if (chapterN.equalsIgnoreCase(noteObj.getChapterNum())) {
                                 String notedisplay = "collage: " + noteObj.getCollege() + "\nmajor: " + noteObj.getMajor() + "\ncourse: " + noteObj.getCourse() + "\nchapter: " + noteObj.getChapterNum() + "\ntitle: " + noteObj.getTitle() + "\ncaption: " + noteObj.getCaption() + "\nemail: " + noteObj.getEmail() + "\nRate: " + noteObj.getRate() + " Out of 4" + "\nID: " + noteObj.getId();
-                                notesList.add(notedisplay);
+                                notesList.add(noteObj);
                             }
                         }
                     }
                 }
-                adapter.notifyDataSetChanged();
+                myadpter.notifyDataSetChanged();
             }
 
             @Override
@@ -118,57 +124,56 @@ public class admin_browse_notes extends AppCompatActivity {
             }
         });
 
-
-        noteslistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final int whichItem = position;
-                String hh = parent.getItemAtPosition(position).toString();
-                final String notetKey = hh.substring(hh.indexOf("ID:") + 3, hh.length());
-                new AlertDialog.Builder(admin_browse_notes.this)
-                        .setIcon(android.R.drawable.ic_delete)
-                        .setTitle("Are you sure?")
-                        .setMessage("Do you want to delete this note")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                notesRef.child(notetKey.trim()).removeValue();
-                                favouriteRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshota) {
-                                        for (DataSnapshot childnn8 : snapshota.getChildren()) {
-                                            favoriteList findnote3 = childnn8.getValue(favoriteList.class);
-                                            final String noteid2 = findnote3.getNid();
-                                            final String noteid23 = findnote3.getId();
-
-
-                                            if (noteid2.equals(notetKey.trim())) {
-                                                deleteNote2(noteid23);
-                                            }
-
-                                        }
-                                    }
-
-                                    public void deleteNote2(String noteKey) {
-                                        favouriteRef.child(noteKey.trim()).removeValue();
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
-                                notesList.remove(whichItem);
-                                adapter.notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-
-
-                return true;
-            }
-        });
+//        noteslistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                final int whichItem = position;
+//                String hh = parent.getItemAtPosition(position).toString();
+//                final String notetKey = hh.substring(hh.indexOf("ID:") + 3, hh.length());
+//                new AlertDialog.Builder(admin_browse_notes.this)
+//                        .setIcon(android.R.drawable.ic_delete)
+//                        .setTitle("Are you sure?")
+//                        .setMessage("Do you want to delete this note")
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                notesRef.child(notetKey.trim()).removeValue();
+//                                favouriteRef.addValueEventListener(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot snapshota) {
+//                                        for (DataSnapshot childnn8 : snapshota.getChildren()) {
+//                                            favoriteList findnote3 = childnn8.getValue(favoriteList.class);
+//                                            final String noteid2 = findnote3.getNid();
+//                                            final String noteid23 = findnote3.getId();
+//
+//
+//                                            if (noteid2.equals(notetKey.trim())) {
+//                                                deleteNote2(noteid23);
+//                                            }
+//
+//                                        }
+//                                    }
+//
+//                                    public void deleteNote2(String noteKey) {
+//                                        favouriteRef.child(noteKey.trim()).removeValue();
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                    }
+//                                });
+//                                notesList.remove(whichItem);
+//                                adapter.notifyDataSetChanged();
+//                            }
+//                        })
+//                        .setNegativeButton("No", null)
+//                        .show();
+//
+//
+//                return true;
+//            }
+//        });
 
 
     }
@@ -214,6 +219,92 @@ public class admin_browse_notes extends AppCompatActivity {
         }
         return true;
     }
+    class MyCustomAdapter extends BaseAdapter {
+        ArrayList<note> Items = new ArrayList<note>();
+
+        MyCustomAdapter(ArrayList<note> Items) {
+            this.Items = Items;
+
+        }
 
 
+        @Override
+        public int getCount() {
+            return Items.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return Items.get(position).getId();
+
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int i, View view, ViewGroup viewGroup) {
+            LayoutInflater linflater = getLayoutInflater();
+            View view1 = linflater.inflate(R.layout.note_item, null);
+
+            TextView txtname = (TextView) view1.findViewById(R.id.noteAdmin);
+            txtname.setText("Major: " + Items.get(i).getMajor() + "\nCourse: " + Items.get(i).getCourse() + "\nChapter: " + Items.get(i).getChapterNum()+ "\nNote title: " + Items.get(i).getTitle()+ "\nNote: " + Items.get(i).getCaption()+ "\nRate: " + Items.get(i).getRate());
+            ImageView deleteNote = (ImageView) view1.findViewById(R.id.deleteNote);
+            deleteNote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String m = Items.get(i).getId();
+
+
+
+                    new AlertDialog.Builder(admin_browse_notes.this)
+                            .setIcon(android.R.drawable.ic_delete)
+                            .setTitle("Are you sure?")
+                            .setMessage("Do you want to delete this note")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    notesRef.child(m.trim()).removeValue();
+                                    favouriteRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshota) {
+                                            for (DataSnapshot childnn8 : snapshota.getChildren()) {
+                                                favoriteList findnote3 = childnn8.getValue(favoriteList.class);
+                                                final String noteid2 = findnote3.getNid();
+                                                final String noteid23 = findnote3.getId();
+
+
+                                                if (noteid2.equals(m.trim())) {
+                                                    deleteNote2(noteid23);
+                                                }
+
+                                            }
+                                        }
+
+                                        public void deleteNote2(String noteKey) {
+                                            favouriteRef.child(noteKey.trim()).removeValue();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                }
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+
+
+
+                }
+
+            });
+            return view1;
+
+        }
+    }
     }

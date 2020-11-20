@@ -25,7 +25,8 @@
         android:layout_toEndOf="@+id/profilICON"
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:textColor="#FF000000"/>
 
 
 </RelativeLayout>

@@ -78,7 +78,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("My notes");
-        toolbar3.setTitleTextColor(0xFFB8B8B8);
+        toolbar3.setTitleTextColor(0xFF000000);
         navigationView6.bringToFront();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout3, toolbar3, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

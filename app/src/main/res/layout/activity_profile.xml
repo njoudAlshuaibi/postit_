@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Student_Visitor.Profile"
     android:id="@+id/drawer_layout9"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:autoMirrored="true"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -29,7 +29,7 @@
             android:id="@+id/toolbar_profile"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="#FFFBD4" />
+            />
 
         <LinearLayout
             android:id="@+id/profile_layout"
@@ -38,7 +38,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/profileshape"
+            android:background="@drawable/prof4"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="24dp">
@@ -156,9 +156,9 @@
                 android:layout_width="158dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="40dp"
-                android:background="#EB75B2"
+                android:background="#2da79b"
                 android:text="Save changes"
                 android:textColor="#fff" />
 

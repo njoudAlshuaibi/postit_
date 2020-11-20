@@ -86,7 +86,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar4);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("BROWSE NOTES");
-        toolbar4.setTitleTextColor(0xFFB8B8B8);
+        toolbar4.setTitleTextColor(0xFF000000);
         navigationView4.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout4, toolbar4, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout4.addDrawerListener(toggle);

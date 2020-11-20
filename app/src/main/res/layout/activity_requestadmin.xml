@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".requestadmin"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:autoMirrored="true"
     >
 
@@ -22,13 +22,16 @@
             android:id="@+id/toolbar_request"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="#FFFBD4" />
+             />
 
         <ListView
             android:id="@+id/viewReq"
             android:layout_width="match_parent"
             android:layout_height="675dp"
-            android:layout_marginTop="30dp"></ListView>
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="7dp">
+
+        </ListView>
 
         <TextView
             android:id="@+id/noReq"
@@ -40,7 +43,8 @@
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:textColor="#000000"/>
 
     </LinearLayout>
 </LinearLayout>
