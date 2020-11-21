@@ -58,7 +58,7 @@ import java.util.Scanner;
 
 public class previewnote extends AppCompatActivity {
     TextView notepre;
-    TextView notepr2;
+    TextView notepr2,notepr3;
     TextView notetit;
     RatingBar ratingBar,rating_bar2;
     Button btnSubmit, submitComment;
@@ -94,6 +94,7 @@ String username;
         setContentView(R.layout.activity_previewnote);
         notepre = findViewById(R.id.notepre);
         notepr2 = findViewById(R.id.notepr2);
+        notepr3 = findViewById(R.id.notepr3);
         notetit = findViewById(R.id.notetit);
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
@@ -282,7 +283,7 @@ String username;
                                 rateN = rateo.getRate1();
                                 final float raten = Float.parseFloat(rateN);
                                 rating_bar2.setRating(raten);
-                                notepr2.setText("written by : " + username + "\n\nyour Submitted rate");
+                                notepr3.setText("your Submitted rate:");
                                 flagw = true;
                             }
                         }
@@ -380,11 +381,11 @@ String username;
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
-
-        String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        OneSignal.sendTag("User_ID", LoggedIn_User_Email);
-        //End notify
-
+if(FirebaseAuth.getInstance().getCurrentUser() != null) {
+    String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    OneSignal.sendTag("User_ID", LoggedIn_User_Email);
+    //End notify
+}
     }
 
     public void addNewComment(String noteID, comment c) {
