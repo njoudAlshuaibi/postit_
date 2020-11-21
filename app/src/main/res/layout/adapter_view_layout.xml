@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="370dp"
     android:layout_height="match_parent"
-    android:weightSum="100"
     android:orientation="horizontal"
-    android:background="@drawable/border2">
+    android:weightSum="100"
+    android:background="#A6FFFFFF">
 
 
     <TextView
+        android:id="@+id/commentET"
         android:layout_width="282dp"
         android:layout_height="70dp"
-        android:textSize="16dp"
-        android:textStyle="bold"
         android:layout_weight="0.5"
-        android:id="@+id/commentET">
+        android:textSize="16dp"
+        android:paddingTop="8dp"
+        android:paddingLeft="9dp"
+        android:textStyle="bold"
+
+        android:textColor="#2da79b">
+
     </TextView>
+
     <TextView
+        android:id="@+id/commentr"
         android:layout_width="@dimen/_216sdp"
         android:layout_height="30dp"
-        android:textSize="14dp"
-        android:layout_marginLeft="-283dp"
+        android:layout_marginLeft="-273dp"
         android:layout_marginTop="70dp"
-android:textStyle="normal"
         android:layout_weight="0.5"
-        android:textColor="#604620"
+        android:textColor="#4ec1ea"
+        android:textSize="14dp"
 
-        android:id="@+id/commentr">
+        android:textStyle="normal">
+
     </TextView>
 
     <ImageButton
@@ -38,10 +45,6 @@ android:textStyle="normal"
         android:background="@android:color/transparent"
         android:padding="5dp"
         android:src="@drawable/ic_baseline_delete_24" />
-
-
-
-
 
 
 </LinearLayout>

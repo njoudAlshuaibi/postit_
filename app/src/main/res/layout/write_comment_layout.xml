@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="10dp"
+
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+
+        <EditText
+            android:id="@+id/newcomment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/corner_shape"
+            android:gravity="start"
+            android:hint="Type a comment ..."
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            android:minHeight="42dp"
+            android:overScrollMode="always"
+            android:padding="10dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:text=""
+            android:textAlignment="viewStart" />
+
+        <Button
+            android:id="@+id/submitComment"
+            android:layout_width="65dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="-5dp"
+            android:background="#FF7058"
+            android:layout_marginLeft="5dp"
+            android:text="POST"
+            android:textColor="#fff"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
