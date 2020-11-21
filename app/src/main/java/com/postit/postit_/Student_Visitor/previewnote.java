@@ -283,7 +283,7 @@ String username;
                                 rateN = rateo.getRate1();
                                 final float raten = Float.parseFloat(rateN);
                                 rating_bar2.setRating(raten);
-                                notepr3.setText("your Submitted rate:");
+                                notepr3.setText("your submitted rate:");
                                 flagw = true;
                             }
                         }

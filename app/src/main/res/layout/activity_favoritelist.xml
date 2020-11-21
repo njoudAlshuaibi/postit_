@@ -30,7 +30,7 @@
             android:id="@+id/toolbar_favoritelist"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="#E7E7E7" />
+            />
 
 
         <androidx.recyclerview.widget.RecyclerView

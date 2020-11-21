@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:weightSum="100"
-    android:background="#A6FFFFFF">
+    >
 
 
     <TextView
@@ -16,6 +16,7 @@
         android:paddingTop="8dp"
         android:paddingLeft="9dp"
         android:textStyle="bold"
+        android:fontFamily="@font/ubuntu_bold"
 
         android:textColor="#2da79b">
 
@@ -30,7 +31,7 @@
         android:layout_weight="0.5"
         android:textColor="#4ec1ea"
         android:textSize="14dp"
-
+        android:fontFamily="@font/ubuntu_bold"
         android:textStyle="normal">
 
     </TextView>
