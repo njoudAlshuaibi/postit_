@@ -7,6 +7,8 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,14 +35,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.major;
 import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
+
+import java.util.ArrayList;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout9;
     NavigationView navigationView9;
     Toolbar toolbar3;
-    EditText profile_email, profile_name,profile_major;
+    EditText  profile_name,profile_email;
     private FirebaseUser Cuser;
     private user usera;
     private String userEmail;
@@ -48,13 +53,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     private String username;
     private String userId;
     private String password;
-    private String college;
+    private String college, major3;
     private Spinner spinnereditmajor;
-    private Button saveChangesBtn;
-    private TextView welcome;
+    private Button saveChangesBtn, editPRO, cancel14;
+    private TextView welcome, namefromDB, emailfromDB,profile_major;
     private FirebaseUser user;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
-
+    private DatabaseReference majorRef;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -66,7 +71,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         drawerLayout9 = findViewById(R.id.drawer_layout9);
         navigationView9 = findViewById(R.id.nav_view22);
         toolbar3 = findViewById(R.id.toolbar_profile);
-        saveChangesBtn = findViewById(R.id.saveChangesBtn);
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("PROFILE");
@@ -78,16 +82,31 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
 
         navigationView9.setNavigationItemSelectedListener(this);
-
-
         navigationView9.setNavigationItemSelectedListener(this);
         Menu menu= navigationView9.getMenu();
-
         menu.findItem(R.id.nav_login).setVisible(false);
 
+
+        editPRO= findViewById(R.id.editPRO);
+        cancel14 = findViewById(R.id.cancel14);
+        saveChangesBtn = findViewById(R.id.saveChangesBtn);
+        cancel14.setVisibility(View.INVISIBLE);
+        saveChangesBtn.setVisibility(View.INVISIBLE);
+
+
+
         profile_email = findViewById(R.id.profile_email);
+        profile_email.setVisibility(View.INVISIBLE);
+        emailfromDB=findViewById(R.id.emailfromDB);
+
+        namefromDB = findViewById(R.id.namefromDB);
         profile_name = findViewById(R.id.profile_name);
-        profile_major=findViewById(R.id.profile_major);
+        profile_name.setVisibility(View.INVISIBLE);
+
+
+
+        majorRef = FirebaseDatabase.getInstance().getReference().child("Majors");
+        profile_major = findViewById(R.id.profile_major);
         spinnereditmajor = findViewById(R.id.spinnereditmajor);
         spinnereditmajor.setVisibility(View.INVISIBLE);
 
@@ -106,8 +125,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             userId = us.getId();
                             college = us.getCollege();
                             password = us.getPassword();
-                            profile_name.setText(username);
-                            profile_email.setText(userEmail);
+                            namefromDB.setText(username);
+                            emailfromDB.setText(userEmail);
                             profile_major.setText(major);
                         }
                     }
@@ -124,10 +143,108 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         }
 
+
+
+        final ArrayList<String> majorList = new ArrayList<>();
+        final ArrayAdapter adapter1 = new ArrayAdapter<String>(this, R.layout.listitem, majorList);
+        spinnereditmajor.setAdapter(adapter1);
+        majorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                majorList.clear();
+                majorList.add(major);
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    com.postit.postit_.Objects.major majorObj = postSnapshot.getValue(com.postit.postit_.Objects.major.class);
+                    majorList.add(majorObj.getMajorName());
+                }
+                adapter1.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+
+
+        spinnereditmajor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                major3 = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+        editPRO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel14.setVisibility(View.VISIBLE);
+                saveChangesBtn.setVisibility(View.VISIBLE);
+
+                profile_name.setVisibility(View.VISIBLE);
+                profile_name.setText(username);
+                namefromDB.setVisibility(View.INVISIBLE);
+
+                profile_email.setVisibility(View.VISIBLE);
+                profile_email.setText(userEmail);
+                emailfromDB.setVisibility(View.INVISIBLE);
+
+
+                profile_major.setVisibility(View.INVISIBLE);
+
+                spinnereditmajor.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+        cancel14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel14.setVisibility(View.INVISIBLE);
+                saveChangesBtn.setVisibility(View.INVISIBLE);
+
+                profile_name.setVisibility(View.INVISIBLE);
+                namefromDB.setVisibility(View.VISIBLE);
+
+                profile_email.setVisibility(View.INVISIBLE);
+                emailfromDB.setVisibility(View.VISIBLE);
+
+
+                profile_major.setVisibility(View.VISIBLE);
+                spinnereditmajor.setVisibility(View.INVISIBLE);
+
+
+            }
+        });
+
+
+
+
+
         saveChangesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateInfo();
+                cancel14.setVisibility(View.INVISIBLE);
+                saveChangesBtn.setVisibility(View.INVISIBLE);
+
+                profile_name.setVisibility(View.INVISIBLE);
+                namefromDB.setVisibility(View.VISIBLE);
+
+                profile_email.setVisibility(View.INVISIBLE);
+                emailfromDB.setVisibility(View.VISIBLE);
+
+
+                profile_major.setVisibility(View.VISIBLE);
+                spinnereditmajor.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -276,7 +393,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         final String username= profile_name.getText().toString().trim();
         final String email= profile_email.getText().toString().trim();
-        final String major = profile_major.getText().toString().trim();
+
 
         if(username.isEmpty()){
             profile_name.setError("User name is required");
@@ -295,7 +412,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             return;
         }
 
-        user User = new user(username , email , password , college , major , userId);
+        user User = new user(username , email , password , college , major3 , userId);
         userRef.setValue(User);
         Toast.makeText(this , "Information has been updated successfully" , Toast.LENGTH_LONG).show();
 
