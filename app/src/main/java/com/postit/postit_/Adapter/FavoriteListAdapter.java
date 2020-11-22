@@ -149,7 +149,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 Uri uri = Uri
-                        .parse("android.resource://com.postit.postit_/drawable/logo");
+                        .parse("android.resource://com.postit.postit_/drawable/rerebg");
                 myIntent.setType("text/plain");
                 String shareBody = " title: " + title +"\n caption: "+body+"\n Shared from POST-it.";
                 String name=title;

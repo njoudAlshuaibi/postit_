@@ -148,20 +148,19 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
                                 for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
                                     comment cobj = messageSnapshoti.getValue(comment.class);
                                     final String cobjId = cobj.getCommID();
-                                    if (cobj.getComR().equals(currentUserid)) {
-                                        if (cobj.getCommID().equals(commID)) {
-                                            AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
-                                                    .setTitle("are you sure?")
-                                                    .setMessage("do you want to delete this comment? ")
-                                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            deleteNote(cobjId);
-                                                        }
-                                                    })
-                                                    .setNegativeButton("No", null)
-                                                    .show();
-                                        }
+                                    if (cobj.getCommID().equals(commID)) {
+                                        AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
+                                                .setTitle("are you sure?")
+                                                .setMessage("do you want to delete this comment? ")
+                                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        deleteNote(cobjId);
+                                                    }
+                                                })
+                                                .setNegativeButton("No", null)
+                                                .show();
+
                                     }
                                 }
                             }
@@ -209,4 +208,3 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
 
 
 }
-

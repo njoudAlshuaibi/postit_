@@ -155,7 +155,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 majorList.add(major);
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     com.postit.postit_.Objects.major majorObj = postSnapshot.getValue(com.postit.postit_.Objects.major.class);
-                    majorList.add(majorObj.getMajorName());
+                    if(!major.equals(majorObj.getMajorName()))
+                         majorList.add(majorObj.getMajorName());
                 }
                 adapter1.notifyDataSetChanged();
             }
