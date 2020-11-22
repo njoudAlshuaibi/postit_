@@ -144,27 +144,29 @@
                 android:scrollbarStyle="insideInset">
 
             </ListView>
+            <include
+                android:id="@+id/llComment"
+                layout="@layout/write_comment_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"/>
 
             <TextView
-                android:layout_width="280dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="-90dp"
+                android:layout_marginTop="-150dp"
                 android:fontFamily="@font/ubuntu_bold"
                 android:id="@+id/NoCommentsYET"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:text="No comments yet!!"/>
+                android:text="No comments yet!!"
+                android:layout_gravity="center_horizontal"
+              />
 
 
 
-        <include
-            android:id="@+id/llComment"
-            layout="@layout/write_comment_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"/>
+
 
     </LinearLayout>
 
