@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Objects.comment;
+import com.postit.postit_.Objects.note;
 import com.postit.postit_.R;
 
 import java.util.ArrayList;
@@ -30,9 +31,9 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
     int mResource;
     private FirebaseUser user;
     String currentUserid;
-    private DatabaseReference commentsRef;
+    private DatabaseReference noteRef,commentsRef;
     private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
-    String username;
+    String username, h;
 
     public BrowseCommentAdapter(Context context, int resource, ArrayList<comment> obj) {
         super(context, resource, obj);
@@ -55,6 +56,27 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
         final String notID = getItem(position).getNoteID();
         String comR = getItem(position).getComR();
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+
+        noteRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot noteSnapshot : snapshot.getChildren()) {
+                    note noteObj = noteSnapshot.getValue(note.class);
+                    String x = noteObj.getId();
+                    if (x.equals(notID)) {
+                        h = noteObj.getEmail();
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         comment comment = new comment(commID, notID, comm, comR);
         LayoutInflater inflater = LayoutInflater.from(mcontext);
@@ -105,11 +127,60 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
 
                 });
             }///
-
         }
+
+
+
         TextView tvcomm = (TextView) convertView.findViewById(R.id.commentET);
         tvcomm.setText(comm);
         TextView comr = (TextView) convertView.findViewById(R.id.commentr);
+
+        if((h!=null&&user != null)){
+            if(currentUserid.equals(h))
+            {
+                deletenc.setVisibility(View.VISIBLE);
+                deletenc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        commentsRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                                for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
+                                    comment cobj = messageSnapshoti.getValue(comment.class);
+                                    final String cobjId = cobj.getCommID();
+                                    if (cobj.getComR().equals(currentUserid)) {
+                                        if (cobj.getCommID().equals(commID)) {
+                                            AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
+                                                    .setTitle("are you sure?")
+                                                    .setMessage("do you want to delete this comment? ")
+                                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            deleteNote(cobjId);
+                                                        }
+                                                    })
+                                                    .setNegativeButton("No", null)
+                                                    .show();
+                                        }
+                                    }
+                                }
+                            }
+
+                            public void deleteNote(String noteKey) {
+                                commentsRef.child(noteKey.trim()).removeValue();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                });
+            }///
+
+        }
 
         g.addValueEventListener(new ValueEventListener() {
             @Override
