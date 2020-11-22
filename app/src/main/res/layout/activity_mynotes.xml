@@ -61,8 +61,8 @@
             android:layout_marginTop="255dp"
             android:layout_marginBottom="11dp"
             android:background="#FBE0EA"
-            app:backgroundTint="#009688"
-            app:srcCompat="@drawable/add" />
+            app:backgroundTint="#2da79b"
+            app:srcCompat="@drawable/image" />
 
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

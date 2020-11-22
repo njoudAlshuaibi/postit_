@@ -1,6 +1,7 @@
 package com.postit.postit_.Adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,16 +9,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.postit.postit_.Objects.chat;
 import com.postit.postit_.R;
+import java.text.SimpleDateFormat;
 
 
 public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.ChatViewHolder> {
@@ -51,12 +55,12 @@ public class BrowseChatAdapter extends RecyclerView.Adapter<BrowseChatAdapter.Ch
 
     }//end onCreateViewHolder
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         chat cht = chatList.get(position);
         holder.txtMsg.setText(cht.getMsg());
-        Date d = new Date(chatList.get(position).getMsgTime());
-        holder.txttime.setText(d.getHours() + ":" + d.getMinutes() + "");
+        holder.txttime.setText(cht.getMsgTime());
         // holder.txttime.setText(cht.getMsgTime()+"");
 
 
