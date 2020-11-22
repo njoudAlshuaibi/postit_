@@ -40,7 +40,8 @@
                 android:textAlignment="center"
                 android:textSize="16dp"
                 android:textColor="#c83772"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:fontFamily="@font/dsds"/>
 
             <Button
                 android:id="@+id/imageButtonreq"
@@ -50,7 +51,8 @@
                 android:layout_marginTop="-48dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="DONE"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
 
             <Button
                 android:id="@+id/imageButtoncancel"
@@ -60,7 +62,8 @@
                 android:layout_marginTop="9dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="Cancel"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
 
             <LinearLayout
                 android:layout_width="361dp"
@@ -80,6 +83,7 @@
                 android:textAlignment="center"
                 android:textSize="18dp"
                 android:textStyle="bold"
+                android:fontFamily="@font/dsds"
                 android:textColor="#000000"/>
 
 
@@ -112,7 +116,8 @@
                     android:hint="Enter Major"
                     android:inputType="textPersonName"
                     android:textSize="15dp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:fontFamily="@font/dsds"/>
 
                 <ImageButton
                     android:id="@+id/imageButton7"
@@ -132,7 +137,8 @@
                     android:text="e.g.software engineering."
                     android:textStyle="italic"
                     android:textSize="@dimen/_10sdp"
-                    android:textColor="#000000"/>
+                    android:textColor="#000000"
+                    android:fontFamily="@font/dsds"/>
 
             </LinearLayout>
 
@@ -161,7 +167,8 @@
                     android:textAlignment="center"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="#000000"/>
+                    android:textColor="#000000"
+                    android:fontFamily="@font/dsds"/>
 
                 <Spinner
                     android:id="@+id/spinnerCourse"
@@ -190,7 +197,8 @@
                         android:hint="Enter Course Code"
                         android:inputType="textPersonName"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
 
                     <ImageButton
                         android:id="@+id/imageButton3"
@@ -210,7 +218,8 @@
                         android:text="e.g.SWE333."
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="italic"
-                        android:textColor="#000000"/>
+                        android:textColor="#000000"
+                        android:fontFamily="@font/dsds"/>
 
 
                 </LinearLayout>
@@ -245,7 +254,8 @@
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dsds"/>
 
                 <Spinner
                     android:id="@+id/spinnerChapter"
@@ -273,7 +283,8 @@
                         android:hint="Enter Chapter"
                         android:inputType="textPersonName"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
 
                     <ImageButton
                         android:id="@+id/imageButton5"
@@ -304,7 +315,8 @@
                         android:text="e.g.Chapter6"
                         android:textStyle="italic"
                         android:textSize="@dimen/_10sdp"
-                        android:textColor="#000000"/>
+                        android:textColor="#000000"
+                        android:fontFamily="@font/dsds"/>
 
                 </LinearLayout>
 

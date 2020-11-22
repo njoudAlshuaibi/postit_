@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#A6FFFFFF"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <ImageView
             android:layout_width="226dp"
@@ -46,7 +47,8 @@
                 android:inputType="textPersonName"
                 android:textSize="15dp"
                 android:textStyle="italic"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:fontFamily="@font/dsds"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,6 +70,7 @@
                 android:inputType="textEmailAddress"
                 android:textSize="15dp"
                 android:textStyle="italic"
+                android:fontFamily="@font/dsds"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,7 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#888383">
+            app:passwordToggleTint="#888383"
+            >
 
             <EditText
                 android:id="@+id/signupPass"
@@ -88,7 +92,8 @@
                 android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:fontFamily="@font/dsds"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -110,7 +115,8 @@
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:fontFamily="@font/dsds"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -134,7 +140,8 @@
                     android:text="Choose Collage:"
                     android:textAlignment="center"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dsds"/>
 
 
                 <Spinner
@@ -144,7 +151,8 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="250dp"
-                    android:hint="Collage" />
+                    android:hint="Collage"
+                    />
 
 
             </LinearLayout>
@@ -162,7 +170,8 @@
                     android:layout_marginRight="-10dp"
                     android:text="Choose Major:"
                     android:textAlignment="center"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dsds"/>
 
                 <Spinner
                     android:id="@+id/spinner2"
@@ -191,7 +200,8 @@
             android:layout_marginRight="40dp"
             android:background="#ff7058"
             android:text="Create Account"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:fontFamily="@font/dsds"/>
 
         <TextView
             android:id="@+id/haveAccount"
@@ -201,7 +211,8 @@
             android:layout_marginEnd="20dp"
             android:gravity="center"
             android:text="already have an account?Sing in"
-            android:textColor="#03A9F4" />
+            android:textColor="#03A9F4"
+            android:fontFamily="@font/dsds"/>
 
     </LinearLayout>
 

@@ -33,13 +33,15 @@
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:fontFamily="@font/dsds"/>
 
         <TextView android:id="@+id/textview10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="16dp"
+            android:fontFamily="@font/dsds"
            />
 
 
@@ -62,7 +64,8 @@
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="italic" />
+            android:textStyle="bold"
+            android:fontFamily="@font/dsds"/>
 
     </LinearLayout>
 

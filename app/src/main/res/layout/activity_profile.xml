@@ -74,7 +74,8 @@
                         android:hint="Username"
                         android:inputType="textPersonName"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -105,7 +106,8 @@
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -133,7 +135,8 @@
                         android:hint="Major"
                         android:inputType="textEmailAddress"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -160,7 +163,8 @@
                 android:layout_marginRight="40dp"
                 android:background="#2da79b"
                 android:text="Save changes"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
 
 
         </LinearLayout>

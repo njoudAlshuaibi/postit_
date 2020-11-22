@@ -42,7 +42,8 @@
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
             android:text=""
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:fontFamily="@font/dsds"/>
 
         <Button
             android:id="@+id/submitComment"

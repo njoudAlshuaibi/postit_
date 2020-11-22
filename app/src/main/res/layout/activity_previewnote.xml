@@ -33,21 +33,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/ubuntu_bold"
+                android:fontFamily="@font/dsds"
                 android:text="jvbuh hubs  ihbhih chi hi Iij iojoipi pijoijio io"
                 android:textColor="#2da79b"
-                android:textSize="20dp" />
+                android:textSize="22dp" />
 
             <TextView
                 android:id="@+id/notepre"
                 android:layout_width="350dp"
                 android:layout_height="270dp"
                 android:layout_marginLeft="-350dp"
-                android:layout_marginTop="60dp"
-                android:fontFamily="@font/ubuntu_bold"
+                android:layout_marginTop="63dp"
+                android:fontFamily="@font/dsds"
                 android:text="jvbuh hubs  ihbhih chi hi I hit hi ih ih hihi ihihib ibijni jibniubnui ui iufb foph nn upioubni   uunbifujn jvbuh hubs  ihbhih chi hi I hit hi ih ih hihi ihihib ibijni jibniubnui ui iufb foph nn upioubni   uunbifujn  uiphn  buirw b uiphn  buirw bjvbuh hubs  ihbhih chi hi I hit hi ih ih hihi ihihib ibijni jibniubnui ui iufb foph nn upioubni   uunbifujn  uiphn  buirw b"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="21dp"
 
 
                 />
@@ -65,11 +65,11 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/ubuntu_bold"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/dsds"
                     android:text="written by:Lujain ZM"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/notepr3"
@@ -77,9 +77,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-280dp"
                     android:layout_marginTop="90dp"
-                    android:fontFamily="@font/ubuntu_bold"
+                    android:fontFamily="@font/dsds"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="17dp" />
 
                 <RatingBar
                     android:id="@+id/rating_bar"
@@ -121,10 +121,10 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:fontFamily="@font/ubuntu_bold"
+            android:fontFamily="@font/dsds"
             android:text="Comments:"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="22dp"
             android:textStyle="bold" />
 
 
@@ -132,19 +132,27 @@
             android:layout_width="372dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="#A6FFFFFF"
+
             android:orientation="vertical">
 
 
+
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#A6FFFFFF">
             <ListView
                 android:id="@+id/commentstt"
                 android:layout_width="371dp"
-                android:layout_height="200dp"
-
+                android:layout_height="match_parent"
+                android:fontFamily="@font/castoro"
                 android:layout_gravity="center_horizontal"
                 android:dividerHeight="5dp"
                 android:overScrollMode="always"
                 android:scrollbarStyle="insideInset">
+
 
             </ListView>
 
@@ -161,13 +169,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-150dp"
-                android:fontFamily="@font/ubuntu_bold"
+                android:fontFamily="@font/dsds"
                 android:text="No comments yet!!"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="22dp"
                 android:textStyle="bold" />
-
-
+            </ScrollView>
         </LinearLayout>
 
 

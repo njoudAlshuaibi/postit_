@@ -91,7 +91,8 @@
                         android:text="My Notes"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -141,7 +142,8 @@
                         android:text="Browse Notes"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -187,7 +189,8 @@
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -235,7 +238,8 @@
                         android:text="Request"
                         android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:fontFamily="@font/dsds"/>
 
 
         <ImageButton
@@ -43,7 +44,7 @@
             android:layout_marginLeft="350dp"
             android:layout_marginTop="-29dp"
             android:hint="DELETE request"
-            app:srcCompat="@drawable/ic_baseline_delete_24"
+            app:srcCompat="@drawable/ic_baseline_delete_27"
             tools:ignore="VectorDrawableCompat" />
 
     </LinearLayout>
