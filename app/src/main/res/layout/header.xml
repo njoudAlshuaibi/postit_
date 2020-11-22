@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:background="@drawable/drr"
-    android:gravity="bottom"
+
     >
     <ImageView
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginLeft="8dp"
-        android:paddingTop="-200dp"
+        android:layout_marginTop="90dp"
         android:src="@drawable/ic_baseline_account_circle_24"/>
 
     <TextView

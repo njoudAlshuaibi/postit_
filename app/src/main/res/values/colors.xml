@@ -9,7 +9,8 @@
     <color name="noteColor3">#EDD794</color>
     <color name="noteColor4">#CEB8F4</color>
     <color name="noteColor5">#A3D6D1</color>
-    <color name="colorWhite">#FEFEFF</color>
     <color name="FFFBE0EA">#FBE0EA</color>
+    <color name="darkGreen">#2da79b</color>
+    <color name="colorWhite">#FFFFFF</color>
 
 </resources>

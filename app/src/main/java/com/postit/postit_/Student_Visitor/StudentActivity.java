@@ -152,11 +152,13 @@ Toolbar toolbar;
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
+
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
         session = new Session(getApplicationContext());
         Menu menu= navigationView.getMenu();
+      
         if(user==null){
             menu.findItem(R.id.nav_logout).setVisible(false);
             menu.findItem(R.id.nav_profile).setVisible(false);
