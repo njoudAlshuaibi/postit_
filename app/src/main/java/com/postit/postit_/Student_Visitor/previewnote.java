@@ -37,6 +37,7 @@ import com.postit.postit_.Adapter.BrowseCommentAdapter;
 import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.comment;
+import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
@@ -57,12 +58,13 @@ import java.util.Scanner;
 
 
 public class previewnote extends AppCompatActivity {
-    TextView notepre;
-    TextView notepr2,notepr3;
+    public static final String writerEmail = "com.postit.postit_.writerEmail";
+    final rate rateObj = new rate();
+    TextView notepre, NoCommentsYET;
+    TextView notepr2, notepr3;
     TextView notetit;
-    RatingBar ratingBar,rating_bar2;
+    RatingBar ratingBar, rating_bar2;
     Button btnSubmit, submitComment;
-    private DatabaseReference notesRef, favouriteRef, commentsRef, rateRef;
     String rateN;
     int rateCount;
     float currentRate;
@@ -74,25 +76,24 @@ public class previewnote extends AppCompatActivity {
     boolean f;
     String userEmail;
     String Nobjid;
-    private ListView comments;
     BrowseCommentAdapter commentAdapter;
     EditText newComment;
     String scomment;
-    final rate rateObj = new rate();
     ImageView startChat;
-    boolean flagw=false;
+    boolean flagw = false;
     String email;
-    public static final String writerEmail = "com.postit.postit_.writerEmail";
+    String username;
+    private DatabaseReference notesRef, favouriteRef, commentsRef, rateRef;
+    private ListView comments;
     private FirebaseUser user;
-    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
-String username;
-
+    private DatabaseReference g = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previewnote);
         notepre = findViewById(R.id.notepre);
+        NoCommentsYET = findViewById(R.id.NoCommentsYET);
         notepr2 = findViewById(R.id.notepr2);
         notepr3 = findViewById(R.id.notepr3);
         notetit = findViewById(R.id.notetit);
@@ -108,10 +109,6 @@ String username;
         DisplayMetrics aa = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(aa);
 
-//
-//        int width = aa.widthPixels;
-//        int height = aa.heightPixels;
-//        getWindow().setLayout((int) (width * .8), (int) (height * .7));
 
         Intent intent = getIntent();
 
@@ -153,7 +150,7 @@ String username;
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     com.postit.postit_.Objects.user usa = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
-                    if(usa.getEmail().equals(email)){
+                    if (usa.getEmail().equals(email)) {
                         username = usa.getUsername();
                         notepr2.setText("written by : " + username);
 
@@ -227,8 +224,8 @@ String username;
                         rate rateo = snapshotc.getValue(rate.class);
                         if (snapshotc.exists()) {
                             if (rateo.getUserid().equals(user.getUid()) && (rateo.getNoteid().equals(id))) {
-                            ratingBar.setVisibility(View.INVISIBLE);
-                            flagw=true;
+                                ratingBar.setVisibility(View.INVISIBLE);
+                                flagw = true;
                             }
                         }
                     }//
@@ -302,14 +299,41 @@ String username;
         }
 
 
-
-
-
         comments = (ListView) findViewById(R.id.commentstt);
         final ArrayList<comment> commentsList = new ArrayList<>();
         commentAdapter = new BrowseCommentAdapter(this, R.layout.adapter_view_layout, commentsList);
         comments.setAdapter(commentAdapter);
         commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
+
+
+        commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
+
+        commentsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotrf) {
+                for (DataSnapshot childrf6 : snapshotrf.getChildren()) {
+                    comment commentObj66 = childrf6.getValue(comment.class);
+                    if (commentObj66.getNoteID().equals(id)) {
+                      NoCommentsYET.setText("");
+                        break;
+                    }
+
+                    else {
+                        NoCommentsYET.setText("No comments yet!!");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
         commentsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshotq) {
@@ -318,6 +342,7 @@ String username;
                     comment commentObj = snapshotc.getValue(comment.class);
                     if (commentObj.getNoteID().equals(id)) {
                         commentsList.add(commentObj);
+
                     }
 
                 }//
@@ -340,10 +365,10 @@ String username;
                     String ucid = user.getEmail().trim();
                     String commID = commentsRef.push().getKey();
                     comment c = new comment(commID, id, scomment, ucid);
-                        if(newComment.getText().toString().trim().isEmpty()) {
+                    if (newComment.getText().toString().trim().isEmpty()) {
                         Toast.makeText(previewnote.this, "Comment can not be empty!", Toast.LENGTH_LONG).show();
                         return;
-                    } else if(newComment.getText().toString().trim().length()>100){
+                    } else if (newComment.getText().toString().trim().length() > 100) {
                         Toast.makeText(previewnote.this, "Comment can not be more than 100 character!", Toast.LENGTH_LONG).show();
                         return;
                     }
@@ -364,15 +389,7 @@ String username;
                 }
             }
         });
-//// Logging set to help debug issues, remove before releasing your app.
-//        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
-//        // OneSignal Initialization
-//        OneSignal.startInit(this)
-//                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
-//                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-//                .unsubscribeWhenNotificationsAreDisabled(true)
-//                .init();
-        ///////////////////////////////------------------///////////////////////////
+
 
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
@@ -381,11 +398,11 @@ String username;
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
-if(FirebaseAuth.getInstance().getCurrentUser() != null) {
-    String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-    OneSignal.sendTag("User_ID", LoggedIn_User_Email);
-    //End notify
-}
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            String LoggedIn_User_Email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            OneSignal.sendTag("User_ID", LoggedIn_User_Email);
+            //End notify
+        }
     }
 
     public void addNewComment(String noteID, comment c) {
@@ -393,7 +410,7 @@ if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    sendNotification("You have a new comment",email);
+                    sendNotification("You have a new comment", email);
                     Toast.makeText(previewnote.this, "Your comment added successfully", Toast.LENGTH_LONG).show();
                     newComment.setText("");
                 }
@@ -401,7 +418,7 @@ if(FirebaseAuth.getInstance().getCurrentUser() != null) {
         });
     }
 
-    private void sendNotification(final String a,String writer) {
+    private void sendNotification(final String a, String writer) {
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -468,6 +485,7 @@ if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
