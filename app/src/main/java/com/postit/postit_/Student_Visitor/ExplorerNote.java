@@ -86,6 +86,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar4);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("BROWSE NOTES");
+
         toolbar4.setTitleTextColor(0xFF000000);
         navigationView4.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout4, toolbar4, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -112,7 +113,7 @@ public class ExplorerNote extends AppCompatActivity implements NavigationView.On
         c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
         d = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
         currentCandCh = (TextView) findViewById(R.id.currentCandCh);
-        currentCandCh.setText(c + " - " + d);
+        currentCandCh.setText(c.toUpperCase() + " - " + d.toUpperCase());
         button = findViewById(R.id.ExNotefab2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

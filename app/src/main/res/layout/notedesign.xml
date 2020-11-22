@@ -29,10 +29,12 @@
             android:layout_height="60dp"
             android:layout_marginTop="-230dp"
             android:layout_marginLeft="15dp"
-            android:fontFamily="@font/ubuntu_regular"
+            android:fontFamily="@font/dsds"
             android:text="Note Title : "
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
 
 
         <LinearLayout
@@ -116,7 +118,8 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="19dp"
-                android:fontFamily="@font/ubuntu_bold"
+                android:textStyle="bold"
+                android:fontFamily="@font/dsds"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp" />
 

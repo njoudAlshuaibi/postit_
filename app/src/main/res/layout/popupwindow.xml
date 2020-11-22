@@ -35,7 +35,8 @@
                 android:hint="Enter requested Major"
                 android:inputType="textPersonName"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:fontFamily="@font/dsds"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -58,7 +59,8 @@
                 android:hint="Enter requested Course"
                 android:inputType="textPersonName"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:fontFamily="@font/dsds"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -84,7 +86,8 @@
                 android:hint="Enter requested Chapter"
                 android:inputType="textPersonName"
                 android:textSize="15dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:fontFamily="@font/dsds"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -101,7 +104,8 @@
                 android:layout_marginTop="0dp"
                 android:background="#ff7058"
                 android:text="Cancel"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
 
             <Button
                 android:id="@+id/reqBtn"
@@ -111,7 +115,8 @@
                 android:layout_marginTop="0dp"
                 android:background="#ff7058"
                 android:text="Send Request"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
 
         </LinearLayout>
 

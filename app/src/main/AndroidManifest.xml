@@ -32,12 +32,12 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Student_Visitor.mynotes" />
         <activity android:name=".Student_Visitor.favoritelist" />
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".Student_Visitor.StudentActivity" />
         <activity android:name=".Admin.requestadmin" />
         <activity android:name=".Admin.mainAdmin" />
         <activity android:name=".Student_Visitor.forgetPasswordActivity" />
         <activity android:name=".Student_Visitor.CreateAccountActivity" />
-        <activity android:name=".Student_Visitor.StudentActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

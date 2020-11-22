@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/darkGreen</item>
         <item name="colorPrimaryDark">#ACAEB0</item>
-        <item name="colorAccent">#4EC1EA</item>
+        <item name="colorAccent">#FF7058</item>
         <item name="windowNoTitle">true</item>
        
     </style>
