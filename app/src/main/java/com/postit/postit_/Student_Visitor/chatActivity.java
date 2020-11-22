@@ -23,7 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -206,8 +208,21 @@ public class chatActivity extends AppCompatActivity {
         hashMap.put("senderId", sender);
         hashMap.put("receiverId", receiver);
         hashMap.put("msg", message);
-        hashMap.put("msgtime", date.getTime());
-        chat f = new chat(message, sender, receiver,date.getTime());
+
+
+        //Get time and date //
+        //date
+        Calendar calendar=Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MMM dd, yyyy");
+        String date3=simpleDateFormat.format(calendar.getTime());
+        //end date
+        //time
+        Calendar calendar1=Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("h:mm a");
+        String time=simpleDateFormat1.format(calendar1.getTime());
+        //end time
+        //End getting time and date //
+        hashMap.put("msgtime", time+"\n"+date3);
         massagesRef.child(id).setValue(hashMap);
 
         sendNotification("You Have Received A Message", receiverEmail);

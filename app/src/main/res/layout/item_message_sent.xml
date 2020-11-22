@@ -29,6 +29,7 @@ android:paddingTop="8dp">
     android:textSize="10sp"
     android:layout_marginRight="4dp"
     app:layout_constraintBottom_toBottomOf="@+id/text_message_body"
-    app:layout_constraintRight_toLeftOf="@+id/text_message_body" />
+    app:layout_constraintRight_toLeftOf="@+id/text_message_body"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

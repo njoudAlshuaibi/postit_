@@ -5,12 +5,13 @@ public class chat {
     private String msg;
     private String senderId;
     private String receiverId;
-    private long msgtime;
+    private String msgtime;
+
 
     public chat() {
     }
 
-    public chat(String msg, String senderId, String receiverId,long msgtime) {
+    public chat(String msg, String senderId, String receiverId,String msgtime) {
       //  this.id = id;
         this.msg = msg;
         this.senderId = senderId;
@@ -50,11 +51,11 @@ public class chat {
         this.receiverId = receiverId;
     }
 
-    public long getMsgTime() {
+    public String getMsgTime() {
         return msgtime;
     }
 
-    public void setMsgTime(long msgtime) {
+    public void setMsgTime(String msgtime) {
         this.msgtime = msgtime;
     }
 }

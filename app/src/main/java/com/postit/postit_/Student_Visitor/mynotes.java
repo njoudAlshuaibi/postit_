@@ -77,7 +77,7 @@ public class mynotes extends AppCompatActivity implements NavigationView.OnNavig
         toolbar3 = findViewById(R.id.toolbar_mynotes);
         setSupportActionBar(toolbar3);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("My notes");
+        getSupportActionBar().setTitle("MY NOTES");
         toolbar3.setTitleTextColor(0xFF000000);
         navigationView6.bringToFront();
 
