@@ -1,5 +1,4 @@
 package com.postit.postit_.Adapter;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -96,7 +95,6 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
                                 for (DataSnapshot messageSnapshoti : snapshothh.getChildren()) {
                                     comment cobj = messageSnapshoti.getValue(comment.class);
                                     final String cobjId = cobj.getCommID();
-                                    if (cobj.getComR().equals(currentUserid)) {
                                         if (cobj.getCommID().equals(commID)) {
                                             AlertDialog alertDialog = new AlertDialog.Builder(mcontext)
                                                     .setTitle("are you sure?")
@@ -109,7 +107,7 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
                                                     })
                                                     .setNegativeButton("No", null)
                                                     .show();
-                                        }
+
                                     }
                                 }
                             }

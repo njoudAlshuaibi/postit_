@@ -402,6 +402,27 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             return;
         }
+
+        if(username.length()>30){
+            profile_name.setError("Username can't be more than 30 character");
+            profile_name.requestFocus();
+
+            return;
+        }
+        if(username.length()<3){
+            profile_name.setError("Username can't be less than 3 character");
+            profile_name.requestFocus();
+
+            return;
+        }
+
+        if(!username.matches("[a-zA-Z]+")){
+            profile_name.setError("Username must contains letter");
+            profile_name.requestFocus();
+
+            return;
+        }
+
         if(email.isEmpty()){
             profile_email.setError("Email is required");
             profile_email.requestFocus();
