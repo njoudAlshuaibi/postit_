@@ -404,7 +404,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
 
         if(username.length()>20){
-            profile_name.setError("Username can't be more than 30 character");
+            profile_name.setError("Username can't be more than 20 character");
             profile_name.requestFocus();
 
             return;
