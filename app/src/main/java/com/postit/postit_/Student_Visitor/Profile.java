@@ -348,48 +348,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             }
             return true;}
 
-//            public void updateProfile(View view){
-//
-//                if(isNameChanged() ||isPasswordChanged() || isEmailChanged() || isMajorChanged()){
-//
-//                    Toast.makeText(this , "Data has been updated" , Toast.LENGTH_LONG).show();
-//            } else
-//                    Toast.makeText(this , "Data is the same and can not be updated" , Toast.LENGTH_LONG).show();
-//    }
-//
-//    private boolean isMajorChanged() {
-//
-//        if(!major.equals(profile_major.getText().toString())){
-//            g.child(username).child("major").setValue(profile_major.getText().toString());
-//
-//            return true;
-//
-//        }else
-//            return false;
-//    }
-//
-//    private boolean isEmailChanged() {
-//        return false;
-//    }
-//
-//    private boolean isNameChanged() {
-//
-//        if(!username.equals(profile_name.getText().toString())){
-//            g.child(username).child("username").setValue(profile_name.getText().toString());
-//
-//            return true;
-//
-//        }else
-//        return false;
-//    }
-//
-//    private boolean isPasswordChanged() {
-//       return false;
-//    }
-//
+
     private void updateInfo() {
 
-       // Cuser = FirebaseAuth.getInstance().getCurrentUser();
+
         DatabaseReference userRef =  FirebaseDatabase.getInstance().getReference("users").child(userId);
 
         final String username= profile_name.getText().toString().trim();
@@ -401,6 +363,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             profile_name.requestFocus();
 
             return;
+        }
+        if(username.length()>50){
+            profile_name.setError("User name must me less than 50 character");
+            profile_name.requestFocus();
         }
         if(email.isEmpty()){
             profile_email.setError("Email is required");
