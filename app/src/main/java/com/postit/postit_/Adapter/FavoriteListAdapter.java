@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -227,6 +229,8 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                         public void deleteNote(String noteKey) {
                             noteRef.child(noteKey.trim()).removeValue();
+                            Toast.makeText(context , "note has been deleted successfully" , Toast.LENGTH_LONG).show();
+
                         }
 
                         @Override

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -114,6 +115,8 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
 
                             public void deleteNote(String noteKey) {
                                 commentsRef.child(noteKey.trim()).removeValue();
+                                Toast.makeText(getContext() , "comment has been deleted successfully" , Toast.LENGTH_LONG).show();
+
                             }
 
                             @Override
@@ -165,6 +168,8 @@ public class BrowseCommentAdapter extends ArrayAdapter<comment> {
 
                             public void deleteNote(String noteKey) {
                                 commentsRef.child(noteKey.trim()).removeValue();
+                                Toast.makeText(getContext() , "comment has been deleted successfully" , Toast.LENGTH_LONG).show();
+
                             }
 
                             @Override
