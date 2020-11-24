@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".popUpWindow"
-    android:background="#FFFBD4">
+    tools:context=".Student_Visitor.popUpWindow"
+    android:background="@drawable/prof4">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/border2">
+        android:background="@drawable/border2"
+        >
 
         <TextView
             android:layout_width="261dp"
@@ -19,10 +20,11 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="5dp"
-            android:text="Choose Major:"
+            android:text="CHOOSE MAJOR :"
             android:textAlignment="center"
             android:textSize="20dp"
-            android:textStyle="italic" />
+            android:textColor="#000000"
+            android:fontFamily="@font/dsds"/>
 
         <Spinner
             android:id="@+id/spinner1a"
@@ -31,7 +33,9 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
-            android:hint="Collage" />
+            android:hint="Collage"
+            android:textColor="#000000"
+            />
 
 
         <TextView
@@ -40,10 +44,11 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="5dp"
-            android:text="Choose Course:"
+            android:text="CHOOSE COURSE:"
             android:textAlignment="center"
             android:textSize="20dp"
-            android:textStyle="italic" />
+            android:textColor="#000000"
+            android:fontFamily="@font/dsds"/>
 
         <Spinner
             android:id="@+id/spinner2b"
@@ -52,7 +57,9 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
-            android:hint="Collage" />
+            android:hint="Collage"
+
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="267dp"
@@ -60,10 +67,12 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="5dp"
-            android:text="Choose Chapter:"
+            android:text="CHOOSE CHAPTER:"
             android:textAlignment="center"
             android:textSize="20dp"
-            android:textStyle="italic" />
+            android:textColor="#000000"
+            android:fontFamily="@font/dsds"
+            />
 
         <Spinner
             android:id="@+id/spinner3c"
@@ -72,7 +81,9 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="250dp"
-            android:hint="Collage" />
+            android:hint="Collage"
+
+            android:textColor="#000000"/>
 
         <Button
             android:id="@+id/browsen"
@@ -81,9 +92,10 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="40dp"
-            android:background="#EB75B2"
+            android:background="#ff7058"
             android:text="Browse Notes"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:fontFamily="@font/dsds"/>
 
     </LinearLayout>
 </RelativeLayout>

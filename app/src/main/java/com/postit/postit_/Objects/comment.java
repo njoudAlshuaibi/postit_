@@ -1,43 +1,37 @@
 package com.postit.postit_.Objects;
 
 public class comment {
-    private String college;
-    private String major;
-    private String course;
-    private int chapterNum;
+    private String commID;
     private String noteID;
     private String comm;
+    private String comR;
 
-    public String getCollege() {
-        return college;
+
+    public comment(String commID, String noteID, String comm,String comR) {
+        this.commID = commID;
+        this.noteID = noteID;
+        this.comm = comm;
+        this.comR = comR;
     }
 
-    public void setCollege(String college) {
-        this.college = college;
+    public comment() {
     }
 
-    public String getMajor() {
-        return major;
+
+    public String getComR() {
+        return comR;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setComR(String comR) {
+        this.comR = comR;
     }
 
-    public String getCourse() {
-        return course;
+    public String getCommID() {
+        return commID;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    public int getChapterNum() {
-        return chapterNum;
-    }
-
-    public void setChapterNum(int chapterNum) {
-        this.chapterNum = chapterNum;
+    public void setCommID(String commID) {
+        this.commID = commID;
     }
 
     public String getNoteID() {
@@ -53,15 +47,6 @@ public class comment {
     }
 
     public void setComm(String comm) {
-        this.comm = comm;
-    }
-
-    public comment(String college, String major, String course, int chapterNum, String noteID, String comm) {
-        this.college = college;
-        this.major = major;
-        this.course = course;
-        this.chapterNum = chapterNum;
-        this.noteID = noteID;
         this.comm = comm;
     }
 }

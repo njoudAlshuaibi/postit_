@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="370dp"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/border">
+
+
+    <TextView
+        android:id="@+id/noteAdmin"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="notedet"
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        android:textColor="#FF000000"
+        android:fontFamily="@font/dsds"/>
+
+    <ImageView
+        android:id="@+id/deleteNote"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@id/noteAdmin"
+        android:background="@drawable/ic_baseline_delete_24"
+        >
+
+    </ImageView>
+
+
+</RelativeLayout>

@@ -27,8 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.major;
-import com.postit.postit_.Objects.user;
 import com.postit.postit_.R;
+import  com.postit.postit_.Objects.user;
 
 public class CreateAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -184,7 +184,8 @@ public class CreateAccountActivity extends AppCompatActivity implements AdapterV
                                            @Override
                                            public void onComplete(@NonNull Task<AuthResult> task) {
                                                if(task.isSuccessful()){
-                                                   user USER = new user(suserName,semail,ssignupPass,scollege,smajor);
+                                                   String id =FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                   user USER = new user(suserName,semail,ssignupPass,scollege,smajor,id);
                                                    FirebaseDatabase.getInstance().getReference("users")
                                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                            .setValue(USER).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -3,18 +3,16 @@ package com.postit.postit_.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,12 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.postit.postit_.MainActivity;
 import com.postit.postit_.Objects.favoriteList;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.ExplorerNote;
-import com.postit.postit_.Student_Visitor.StudentActivity;
-import com.postit.postit_.Student_Visitor.favoritelist;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import java.util.List;
@@ -157,7 +151,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 Uri uri = Uri
-                        .parse("android.resource://com.postit.postit_/drawable/logo");
+                        .parse("android.resource://com.postit.postit_/drawable/rerebg");
                 myIntent.setType("text/plain");
                 String shareBody = " title: " + title +"\n caption: "+body+"\n Shared from POST-it.";
                 String name=title;
@@ -235,6 +229,8 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                         public void deleteNote(String noteKey) {
                             noteRef.child(noteKey.trim()).removeValue();
+                            Toast.makeText(context , "note has been deleted successfully" , Toast.LENGTH_LONG).show();
+
                         }
 
                         @Override
@@ -266,7 +262,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
                                     if (Nobj.getNid().equals(id5)) {
                                         AlertDialog alertDialog = new AlertDialog.Builder(context)
                                                 .setTitle("are you sure?")
-                                                .setMessage("do you want to remove this note from favorite list? ")
+                                                .setMessage("do you want to remove this note from your Bookmarks? ")
                                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
@@ -281,6 +277,7 @@ public class FavoriteListAdapter  extends RecyclerView.Adapter <FavoriteListAdap
 
                         public void deleteNote(String noteKey) {
                             favouriteRef.child(noteKey.trim()).removeValue();
+//                            noteRef.child(id5).child("color").setValue(0);
                         }
 
                         @Override

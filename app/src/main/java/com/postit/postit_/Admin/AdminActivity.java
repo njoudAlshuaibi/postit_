@@ -35,7 +35,6 @@ import com.postit.postit_.Objects.major;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.popUpWindow;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -65,7 +64,7 @@ private TextView textViewp;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Manage");
-        toolbar.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
 
         Intent intent = getIntent();
         final String maj = intent.getStringExtra(requestadmin.maj);
@@ -75,14 +74,14 @@ private TextView textViewp;
         requestsRef = FirebaseDatabase.getInstance().getReference().child("Requests");
 
         textViewp = (TextView) findViewById(R.id.textViewp);
-        ImageButton imageButtonreq = (ImageButton) findViewById((R.id.imageButtonreq));
-        ImageButton imageButtoncancel = (ImageButton) findViewById((R.id.imageButtoncancel));
+        Button imageButtonreq = (Button) findViewById((R.id.imageButtonreq));
+        Button imageButtoncancel = (Button) findViewById((R.id.imageButtoncancel));
 
         imageButtoncancel.setVisibility(View.INVISIBLE);
         imageButtonreq.setVisibility(View.INVISIBLE);
 
         if (maj != null)
-        {   textViewp.setText("Major: "+ maj +"  Course: " + cou + "  chapter: "+ ch);
+        {   textViewp.setText("Major: "+ maj +"\nCourse: " + cou + "\nChapter: "+ ch);
         imageButtonreq.setVisibility(View.VISIBLE);
         imageButtoncancel.setVisibility(View.VISIBLE);
             imageButtoncancel.setOnClickListener(new View.OnClickListener() {

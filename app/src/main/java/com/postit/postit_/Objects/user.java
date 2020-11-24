@@ -3,18 +3,19 @@ package com.postit.postit_.Objects;
 import android.widget.EditText;
 
 public class user {
-    public String username,email,password,college,major;
+    public String username, email, password, college, major, id;
 
-    public user(){}
-
-    public user(String userName, String email, String signupPass,String scollege, String major){
-        this.username = userName;
-                this.email = email;
-                this.password = signupPass;
-                this.college = scollege;
-                this.major = major;
+    public user() {
     }
-// test
+
+    public user(String username, String email, String password, String college, String major, String id) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.college = college;
+        this.major = major;
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -55,4 +56,13 @@ public class user {
     public void setMajor(String major) {
         this.major = major;
     }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+// test
+
 }

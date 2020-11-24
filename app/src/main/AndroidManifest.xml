@@ -2,27 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.postit.postit_">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/rere"
+        android:label="POST-it"
+        android:roundIcon="@drawable/rere"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="DISABLE" />
+
+        <activity android:name=".Student_Visitor.usersChats" />
+        <activity android:name=".Student_Visitor.chatActivity" />
+        <activity android:name=".Student_Visitor.Profile" />
+        <activity android:name=".profile" />
+        <activity android:name=".navheader" />
         <activity android:name=".Student_Visitor.ExplorerNote" />
         <activity android:name=".Student_Visitor.previewnote" />
         <activity
             android:name=".Admin.admin_browse_notes"
             android:parentActivityName=".Admin.PopUpWindowAdmin" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".Student_Visitor.mynotes" />
         <activity android:name=".Student_Visitor.favoritelist" />
         <activity android:name=".Student_Visitor.StudentActivity" />
         <activity android:name=".Admin.requestadmin" />
         <activity android:name=".Admin.mainAdmin" />
         <activity android:name=".Student_Visitor.forgetPasswordActivity" />
         <activity android:name=".Student_Visitor.CreateAccountActivity" />
-        <activity android:name=".Student_Visitor.mynotes">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

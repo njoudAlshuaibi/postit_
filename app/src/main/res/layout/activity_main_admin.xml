@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentActivity"
-    android:orientation="vertical"
-    android:background="@drawable/bg"
     android:autoMirrored="true"
+    android:background="@drawable/back2"
+    android:orientation="vertical"
+    tools:context="StudentActivity"
+
     >
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +23,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_Admin2"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:background="#FFFBD4" />
+            android:layout_height="42dp" />
 
         <GridLayout
             android:layout_width="421dp"
@@ -49,12 +51,12 @@
 
 
                 <LinearLayout
-                    android:layout_width="149dp"
-                    android:layout_height="170dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_row="0"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
+                    android:background="#c83772"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -77,9 +79,10 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
                         android:text="Manage"
-                        android:textColor="#00BCD4"
+                        android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -96,12 +99,11 @@
 
 
                 <LinearLayout
-                    android:layout_width="149dp"
-                    android:layout_height="222dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_row="0"
                     android:layout_column="0"
-                    android:layout_margin="1dp"
-                    android:layout_marginTop="3dp"
+                    android:background="#ffffff"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -125,9 +127,10 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="2dp"
                         android:text="Requests"
-                        android:textColor="#00BCD4"
+                        android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -145,12 +148,12 @@
 
 
                 <LinearLayout
-                    android:layout_width="149dp"
-                    android:layout_height="170dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_row="0"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
+                    android:background="#90dfaa"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -173,21 +176,15 @@
                         android:layout_marginLeft="9dp"
                         android:layout_marginTop="10dp"
                         android:text="Browse Notes"
-                        android:textColor="#00BCD4"
+                        android:textColor="#000000"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/dsds"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
 
-
-
-
-
         </GridLayout>
-
-
-
 
 
     </LinearLayout>

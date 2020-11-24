@@ -3,15 +3,10 @@ package com.postit.postit_.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -29,31 +24,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.postit.postit_.MainActivity;
+import com.postit.postit_.Objects.comment;
+import com.postit.postit_.Objects.rate;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.ExplorerNote;
-import com.postit.postit_.Student_Visitor.StudentActivity;
-import com.postit.postit_.Student_Visitor.creatnotepopup;
-import com.postit.postit_.Student_Visitor.popUpWindow;
 import com.postit.postit_.helper.CustomItemClickListener;
 import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.favoriteList;
-import com.postit.postit_.Student_Visitor.previewnote;
 
 import java.util.List;
-
-import static android.provider.Settings.System.getString;
 
 public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.ViewHolder> {
 
     Context context;
     private List<note> noteList;
     CustomItemClickListener listener;
-    private DatabaseReference noteRef, favouriteRef;
+    private DatabaseReference noteRef, favouriteRef,commentsRef,ratesRef;
     private FirebaseUser user;
     String userEmail;
     boolean flag = false;
-    boolean flagxx = false;
+    boolean flag1 = false;
     int rateCount = 0;
     String m;
     float rate;
@@ -83,10 +72,14 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull final BrowseNoteAdapter.ViewHolder holder, int position) {
         noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+        commentsRef = FirebaseDatabase.getInstance().getReference().child("Comments");
         favouriteRef = FirebaseDatabase.getInstance().getReference().child("FavoriteList");
+        ratesRef = FirebaseDatabase.getInstance().getReference().child("Rates");
+
         final String id = noteList.get(position).getId();
         final String title = noteList.get(position).getTitle();
         final String body = noteList.get(position).getCaption();
+
         holder.noteTitleD.setText(noteList.get(position).getTitle());
         holder.notedate.setText(noteList.get(position).getDate());
 
@@ -101,7 +94,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                         holder.ratingBar.setRating(rate);
                         break;
 
-                    } else {
+                    }
+                    else {
 
                     }
                 }
@@ -115,7 +109,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
 
         holder.deleten2.setVisibility(View.INVISIBLE);
-        holder.remove.setVisibility(View.INVISIBLE);
+       holder.remove.setVisibility(View.INVISIBLE);
         holder.addFavourite.setVisibility(View.INVISIBLE);
 
 
@@ -125,7 +119,7 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 Uri uri = Uri
-                        .parse("android.resource://com.postit.postit_/drawable/newlogo");
+                        .parse("android.resource://com.postit.postit_/drawable/rerebg");
                 myIntent.setType("text/plain");
                 String shareBody = title +":" +"\n" + body + "\n Shared from POST-it.";
                 String name = title;
@@ -136,15 +130,12 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                 myIntent.setPackage("com.twitter.android");
                 context.startActivity(Intent.createChooser(myIntent, "Share this via"));
             }
-
-
         });
-
-
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userEmail = user.getEmail().trim();
         } else {
+
             // No user is signed in
         }
 
@@ -193,6 +184,55 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                                                         }
                                                     });
+                                                    commentsRef.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshota) {
+                                                            for (DataSnapshot childnn8 : snapshota.getChildren()) {
+                                                                comment findnote34 = childnn8.getValue(comment.class);
+                                                                final String noteid24 = findnote34.getNoteID();
+                                                                final String noteid25 = findnote34.getCommID();
+
+                                                                if (noteid24.equals(id)) {
+                                                                    deleteNote3(noteid25);
+                                                                }
+
+                                                            }
+                                                        }
+
+                                                        public void deleteNote3(String noteKey) {
+                                                            commentsRef.child(noteKey.trim()).removeValue();
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+
+                                                    ratesRef.addValueEventListener(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshota) {
+                                                            for (DataSnapshot childnn8 : snapshota.getChildren()) {
+                                                                rate findnote38 = childnn8.getValue(rate.class);
+                                                                final String noteid27 = findnote38.getNoteid();
+                                                                final String noteid28 = findnote38.getId();
+
+                                                                if (noteid27.equals(id)) {
+                                                                    deleteNote6(noteid28);
+                                                                }
+
+                                                            }
+                                                        }
+
+                                                        public void deleteNote6(String noteKey) {
+                                                            ratesRef.child(noteKey.trim()).removeValue();
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
                                                 }
                                             })
                                             .setNegativeButton("No", null)
@@ -205,6 +245,8 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
 
                         public void deleteNote(String noteKey) {
                             noteRef.child(noteKey.trim()).removeValue();
+                            Toast.makeText(context , "note has been deleted successfully" , Toast.LENGTH_LONG).show();
+
                         }
 
                         @Override
@@ -220,39 +262,50 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
         }
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            holder.addFavourite.setVisibility(View.VISIBLE);
-            holder.addFavourite.setOnClickListener(new View.OnClickListener() {
-                final String currentUserid = user.getUid().trim();
+            final String currentUserid = user.getUid().trim();
+            favouriteRef.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onClick(View view) {
-                    flag=false;
-                    noteRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshothh) {
-                            for (DataSnapshot childnn : snapshothh.getChildren()) {
-                                final note findnote = childnn.getValue(note.class);
-                                final String noteid = findnote.getId();
-                                if (noteid.equals(id)) {
-                                    s = findnote;
-                                }
-                            }
+                public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
+                    for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
+                        favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
+                        if ((Nobj.getNid().equals(id)) && (Nobj.getUserID().equals(currentUserid))){
+                            flag1 = true;
+                            break;
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-                    favouriteRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshotiooo) {
-                            for (DataSnapshot messageSnapshotii : snapshotiooo.getChildren()) {
-                                favoriteList Nobj = messageSnapshotii.getValue(favoriteList.class);
-                                if ((Nobj.getNid().equals(id))&&(Nobj.getUserID().equals(currentUserid))) {
-                                    flag = true;
-                                    break;
-                                }
-                            }
+                        else flag1 =false;
+                    }
 
-                            if (flag==false) {
+                    if (flag1 == true) {
+                        holder.remove.setVisibility(View.VISIBLE);
+                        holder.addFavourite.setVisibility(View.INVISIBLE);
+                    }
+                    else
+                    {
+                        holder.remove.setVisibility(View.INVISIBLE);
+                        holder.addFavourite.setVisibility(View.VISIBLE);
+                        holder.addFavourite.setOnClickListener(new View.OnClickListener() {
+                            final String currentUserid = user.getUid().trim();
+
+                            @Override
+                            public void onClick(View view) {
+                                flag = false;
+                                noteRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshothh) {
+                                        for (DataSnapshot childnn : snapshothh.getChildren()) {
+                                            final note findnote = childnn.getValue(note.class);
+                                            final String noteid = findnote.getId();
+                                            if (noteid.equals(id)) {
+                                                s = findnote;
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
+
                                 new AlertDialog.Builder(context)
                                         .setMessage("do you want to add this note to your bookmarks?")
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -263,43 +316,39 @@ public class BrowseNoteAdapter extends RecyclerView.Adapter<BrowseNoteAdapter.Vi
                                         })
                                         .setNegativeButton("No", null)
                                         .show();
+
                             }
+                            public void addToFavoriteList(final note findnote) {
+                                final favoriteList favNote = new favoriteList();
+                                final String id2 = favouriteRef.push().getKey();
 
-                        }
-                        public void addToFavoriteList(final note findnote) {
-                            final favoriteList favNote = new favoriteList();
-                            final String id2 = favouriteRef.push().getKey();
-
-                            favNote.setCaption(findnote.getCaption());
-                            favNote.setTitle(findnote.getTitle());
-                            favNote.setChapterNum(findnote.getChapterNum());
-                            favNote.setCollege(findnote.getCollege());
-                            favNote.setCourse(findnote.getCourse());
-                            favNote.setMajor(findnote.getMajor());
-                            favNote.setDate(findnote.getDate());
-                            favNote.setEmail(findnote.getEmail());
-                            favNote.setId(id2);
-                            favNote.setNid(findnote.getId());
-                            favNote.setUserID(currentUserid);
-                            favNote.setRate(0);
-                            favNote.setRatingCount(0);
-                            favNote.setAllrates(0);
-                            favouriteRef.child(id2).setValue(favNote);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
+                                favNote.setCaption(findnote.getCaption());
+                                favNote.setTitle(findnote.getTitle());
+                                favNote.setChapterNum(findnote.getChapterNum());
+                                favNote.setCollege(findnote.getCollege());
+                                favNote.setCourse(findnote.getCourse());
+                                favNote.setMajor(findnote.getMajor());
+                                favNote.setDate(findnote.getDate());
+                                favNote.setEmail(findnote.getEmail());
+                                favNote.setId(id2);
+                                favNote.setNid(findnote.getId());
+                                favNote.setUserID(currentUserid);
+                                favNote.setRate(0);
+                                favNote.setRatingCount(0);
+                                favNote.setAllrates(0);
+//                            noteRef.child(findnote.getId()).child("color").setValue(1);
+                                favouriteRef.child(id2).setValue(favNote);
+                            }
+                        });//de
+                    }
                 }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
 
-
-            });//de
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +17,85 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OSNotificationAction;
+import com.onesignal.OSNotificationOpenResult;
+import com.onesignal.OneSignal;
 import com.postit.postit_.Admin.mainAdmin;
+import com.postit.postit_.Admin.requestadmin;
 import com.postit.postit_.Student_Visitor.CreateAccountActivity;
 import com.postit.postit_.Student_Visitor.StudentActivity;
+import com.postit.postit_.Student_Visitor.chatActivity;
 import com.postit.postit_.Student_Visitor.forgetPasswordActivity;
+import com.postit.postit_.Student_Visitor.mynotes;
+import com.postit.postit_.Student_Visitor.usersChats;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+    class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+        // This fires when a notification is opened by tapping on it.
+        @Override
+        public void notificationOpened(OSNotificationOpenResult result) {
+            OSNotificationAction.ActionType actionType = result.action.type;
+            JSONObject data = result.notification.payload.additionalData;
+            String customKey;
 
+            Log.i("OSNotificationPayload", "result.notification.payload.toJSONObject().toString(): " + result.notification.payload.toJSONObject().toString());
+
+
+            if (data != null) {
+                customKey = data.optString("customkey", null);
+                if (customKey != null)
+                    Log.i("OneSignalExample", "customkey set with value: " + customKey);
+            }
+
+            if (actionType == OSNotificationAction.ActionType.ActionTaken)
+                Log.i("OneSignalExample", "Button pressed with id: " + result.action.actionID);
+
+            String desc=result.notification.payload.body;
+            Log.d("123456" , "Body ");
+
+            if (desc.equals("There is a new request"))
+            {
+
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+
+                Intent intent = new Intent(getApplicationContext(), requestadmin.class);
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
+
+            }
+            if (desc.equals("You Have Received A Message"))
+            {
+
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+
+                Intent intent = new Intent(getApplicationContext(), usersChats.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+            if (desc.equals("You have a new comment"))
+            {
+                // The following can be used to open an Activity of your choice.
+                // Replace - getApplicationContext() - with any Android Context.
+
+                Intent intent = new Intent(getApplicationContext(), mynotes.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+
+        }
+    }
+    public static String LoggedIn_User_Email;
     private TextView createAccount;//test
     private TextView forgetPassword;
     private TextView visitor;
@@ -33,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     //juju end
 //n
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +114,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("");
+
+// Logging set to help debug issues, remove before releasing your app.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
 
         //juju start
         mAuth = FirebaseAuth.getInstance();
@@ -93,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
     // juju start
     private void login(){
         final String email = editTextEmail.getText().toString().trim();
+        LoggedIn_User_Email = email;
+        OneSignal.sendTag("User_ID",LoggedIn_User_Email);
         String password = editTextPassword.getText().toString().trim();
 
         if(email.isEmpty()){
@@ -134,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     ///////juju end j
 //vv
 }

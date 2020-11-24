@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin_browse_notes"
+    tools:context=".Admin.admin_browse_notes"
     android:orientation="vertical"
-    android:background="@drawable/bg"
-    android:autoMirrored="true">
+    android:background="@drawable/back2"
+    android:autoMirrored="true"
+    >
+
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A6FFFFFF">
+        >
 
        <androidx.appcompat.widget.Toolbar
            android:id="@+id/toolbar_adminnote"
            android:layout_width="match_parent"
            android:layout_height="42dp"
-           android:background="#FFFBD4"/>
+           />
         <TextView
             android:id="@+id/currentCandChAdmin"
             android:layout_width="363dp"
@@ -30,21 +33,24 @@
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:fontFamily="@font/dsds"/>
 
         <TextView android:id="@+id/textview10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="16dp"
-            android:text="press and hold to delete note"/>
+            android:fontFamily="@font/dsds"
+           />
 
 
         <ListView
             android:id="@+id/listviewadmin"
-            android:layout_width="match_parent"
+            android:layout_width="373dp"
             android:layout_height="600dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal">
 
         </ListView>
 
@@ -58,7 +64,8 @@
             android:textAlignment="center"
             android:textIsSelectable="false"
             android:textSize="25sp"
-            android:textStyle="italic" />
+            android:textStyle="bold"
+            android:fontFamily="@font/dsds"/>
 
     </LinearLayout>
 

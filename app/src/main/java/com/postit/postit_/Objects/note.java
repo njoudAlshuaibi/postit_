@@ -17,6 +17,8 @@ public class note {
     private float rate;
     private float allrates;
     private int ratingCount;
+    private int color;
+
 
 
     public note() {
@@ -44,7 +46,7 @@ public class note {
 //        date = df.format(dateobj);
 //    }
 
-    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,float rate, float allrates ,int ratingCount) {
+    public note(String college, String major, String course, String chapterNum, String title, String caption, String email, String id ,float rate, float allrates ,int ratingCount,int color) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -59,6 +61,7 @@ public class note {
         DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
         Date dateobj = new Date();
         date = df.format(dateobj);
+
     }
 
 

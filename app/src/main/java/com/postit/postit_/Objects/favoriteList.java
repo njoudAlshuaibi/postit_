@@ -19,7 +19,7 @@ public class favoriteList {
     public favoriteList() {
     }
 
-    public favoriteList(String college, String major, String course, String chapterNum, String title, String caption, String email, String id, String nid, String date, String userID, float rate,float allrates, int ratingCount) {
+    public favoriteList(String college, String major, String course, String chapterNum, String title, String caption, String email, String id, String nid, String date, String userID, float rate,float allrates, int ratingCount, int color) {
         this.college = college;
         this.major = major;
         this.course = course;
@@ -35,6 +35,8 @@ public class favoriteList {
         this.allrates = allrates;
         this.ratingCount = ratingCount;
     }
+
+
 
     public String getCollege() {
         return college;

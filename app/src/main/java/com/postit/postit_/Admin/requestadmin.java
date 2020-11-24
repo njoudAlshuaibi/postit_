@@ -13,14 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,16 +26,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.MainActivity;
-import com.postit.postit_.Objects.chapter;
-import com.postit.postit_.Objects.note;
 import com.postit.postit_.Objects.requests;
 import com.postit.postit_.R;
-import com.postit.postit_.Student_Visitor.ExplorerNote;
-import com.postit.postit_.Student_Visitor.popUpWindow;
 
 import java.util.ArrayList;
 
-public class requestadmin extends AppCompatActivity {
+public class requestadmin extends AppCompatActivity  {
     private ListView requestsListView;
     private FirebaseDatabase database;
     private DatabaseReference requestsRef;
@@ -52,12 +45,11 @@ public class requestadmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requestadmin);
-
-        Toolbar tb = findViewById(R.id.toolbar_request);
-        setSupportActionBar(tb);
+        Toolbar toolbar = findViewById(R.id.toolbar_request);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Requests");
-        tb.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
 
 //        requestbutton = findViewById(R.id.requestbutton);
         final ArrayList<requests> requestsList = new ArrayList<>();
@@ -77,7 +69,7 @@ public class requestadmin extends AppCompatActivity {
                 requestsList.clear();
                 for (DataSnapshot snapshotx : snapshotr.getChildren()) {
                     requests reqObj = snapshotx.getValue(requests.class);
-//                    String reqdisplay = "Major: " + reqObj.getRequestedMajor() + "\nCourse: " + reqObj.getRequestedCourse() + "\nChapter/s: " + reqObj.getRequestedChapter();
+//                   String reqdisplay = "Major: " + reqObj.getRequestedMajor() + "\nCourse: " + reqObj.getRequestedCourse() + "\nChapter/s: " + reqObj.getRequestedChapter();
                     requestsList.add(reqObj);
                 }
                 myadpter.notifyDataSetChanged();
@@ -90,8 +82,8 @@ public class requestadmin extends AppCompatActivity {
         });
 
 
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,7 +91,6 @@ public class requestadmin extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.admin_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -116,7 +107,7 @@ public class requestadmin extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(requestadmin.this, MainActivity.class));
-//                    finish();
+
                 }
             });
 

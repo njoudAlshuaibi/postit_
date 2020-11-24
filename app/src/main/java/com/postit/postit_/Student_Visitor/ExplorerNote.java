@@ -2,9 +2,12 @@ package com.postit.postit_.Student_Visitor;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +31,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.postit.postit_.Adapter.BrowseNoteAdapter;
-import com.postit.postit_.Admin.PopUpWindowAdmin;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 import com.postit.postit_.helper.CustomItemClickListener;
@@ -37,8 +40,11 @@ import com.postit.postit_.Objects.note;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExplorerNote extends AppCompatActivity {
-
+public class ExplorerNote extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout4;
+    NavigationView navigationView4;
+    Toolbar toolbar4;
+    String noteWriterUserID = "jj99";
     public static final String preTitel = "com.postit.postit_.preTitel";
     public static final String preCaption = "com.postit.postit_.preCaption";
     public static final String preEmail = "com.postit.postit_.preEmail";
@@ -50,8 +56,12 @@ public class ExplorerNote extends AppCompatActivity {
     public static final String currentMajor = "com.postit.postit_.currentMajor";
     public static final String currentCourse = "com.postit.postit_.currentCourse";
     public static final String currentChapter = "com.postit.postit_.currentChapter";
+    public static final String noteWriterID = "com.postit.postit_.noteWriterID";
+    private TextView welcome;
+    private DatabaseReference g =  FirebaseDatabase.getInstance().getReference("users");
+
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private DatabaseReference notesRef;
+    private DatabaseReference notesRef, usersRef;
     private TextView textView, currentCandCh;
     String m;
     String c;
@@ -59,44 +69,58 @@ public class ExplorerNote extends AppCompatActivity {
 
 
     List<note> noteList = new ArrayList<>();
-    BrowseNoteAdapter noteAdapter ;
+    BrowseNoteAdapter noteAdapter;
     RecyclerView recyclerView;
     private DatabaseReference noteRef;
     private FloatingActionButton button;
     Session session;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explorer_note);
-        Toolbar tool = findViewById(R.id.toolbar_Browsenotes);
-        setSupportActionBar(tool);
+        drawerLayout4 = findViewById(R.id.drawer_layout4);
+        navigationView4 = findViewById(R.id.nav_view4);
+        toolbar4 = findViewById(R.id.toolbar_Browsenotes);
+        setSupportActionBar(toolbar4);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Browse Notes");
-        tool.setTitleTextColor(0xFFB8B8B8);
+        getSupportActionBar().setTitle("BROWSE NOTES");
+
+        toolbar4.setTitleTextColor(0xFF000000);
+        navigationView4.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout4, toolbar4, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout4.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView4.setNavigationItemSelectedListener(this);
 
 
-        mAuth = FirebaseAuth.getInstance();
-        session = new Session(getApplicationContext());
+        Menu menu = navigationView4.getMenu();
+        if (user == null) {
+            menu.findItem(R.id.nav_logout).setVisible(false);
+            menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_chat).setVisible(false);
+            menu.findItem(R.id.nav_login).setVisible(true);
+        } else {
+            menu.findItem(R.id.nav_login).setVisible(false);
 
+            mAuth = FirebaseAuth.getInstance();
+            session = new Session(getApplicationContext());
+        }
         Intent intent = getIntent();
         m = intent.getStringExtra(popUpWindow.EXTRA_TEXT4);
         c = intent.getStringExtra(popUpWindow.EXTRA_TEXT5);
         d = intent.getStringExtra(popUpWindow.EXTRA_TEXT6);
-        currentCandCh = (TextView) findViewById(R.id.currentCandCh) ;
-        currentCandCh.setText(c+" - "+d);
+        currentCandCh = (TextView) findViewById(R.id.currentCandCh);
+        currentCandCh.setText(c.toUpperCase() + " - " + d.toUpperCase());
         button = findViewById(R.id.ExNotefab2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ( user == null )
-                {
-                    Toast.makeText(getApplicationContext() , "You Have To Log In" , Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                if (user == null) {
+                    Toast.makeText(getApplicationContext(), "You Have To Log In", Toast.LENGTH_SHORT).show();
+                } else {
                     openpopupwindowchapters();
                 }
 
@@ -104,7 +128,9 @@ public class ExplorerNote extends AppCompatActivity {
         });
         textView = (TextView) findViewById(R.id.tv);
         notesRef = FirebaseDatabase.getInstance().getReference().child("Notes");
-        noteRef= FirebaseDatabase.getInstance().getReference().child("Notes");
+        noteRef = FirebaseDatabase.getInstance().getReference().child("Notes");
+        usersRef = FirebaseDatabase.getInstance().getReference().child("users");
+
         noteRef.keepSynced(true);
 
         noteAdapter = new BrowseNoteAdapter(this, noteList, new CustomItemClickListener() {
@@ -114,26 +140,25 @@ public class ExplorerNote extends AppCompatActivity {
                 note n = noteList.get(pos);
                 String s = n.getTitle();
                 String a = n.getCaption();
-                String m = n.getEmail();
+                final String m = n.getEmail();
                 String i = n.getId();
                 float r = n.getRate();
-                String ca =String.valueOf(r);
+                String ca = String.valueOf(r);
                 int ratec = n.getRatingCount();
-                String raco =String.valueOf(ratec);
+                String raco = String.valueOf(ratec);
                 float ra = n.getAllrates();
-                String cae =String.valueOf(ra);
-
+                String cae = String.valueOf(ra);
 
 
                 Intent in = new Intent(ExplorerNote.this, previewnote.class);
-                in.putExtra(preTitel,""+s );
-                in.putExtra(preCaption,""+a );
-                in.putExtra(preEmail,""+m );
-                in.putExtra(preID,i);
-                in.putExtra(prerate,ca);
-                in.putExtra(precrate,raco);
-                in.putExtra(precratenum,cae);
-                in.putExtra(precc,"true");
+                in.putExtra(preTitel, "" + s);
+                in.putExtra(preCaption, "" + a);
+                in.putExtra(preEmail, "" + m);
+                in.putExtra(preID, i);
+                in.putExtra(prerate, ca);
+                in.putExtra(precrate, raco);
+                in.putExtra(precratenum, cae);
+                in.putExtra(precc, "true");
 
 
                 startActivity(in);
@@ -142,7 +167,6 @@ public class ExplorerNote extends AppCompatActivity {
         recyclerView = findViewById(R.id.ExNotemyRecycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(noteAdapter);
-
 
 
     }
@@ -154,22 +178,22 @@ public class ExplorerNote extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     noteList.clear();
                     noteAdapter.notifyDataSetChanged();
 
-                    for (DataSnapshot messageSnapshot: snapshot.getChildren()) {
+                    for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
                         note a = messageSnapshot.getValue(note.class);
-                        if (a.getChapterNum().equals(d)&&a.getCourse().equals(c))
+                        if (a.getChapterNum().equals(d) && a.getCourse().equals(c))
                             noteList.add(a);
                     }
-                }
-                else {
-                    Log.d("===" , "No Data Was Found");
+                } else {
+                    Log.d("===", "No Data Was Found");
                 }
 
                 noteAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -187,9 +211,7 @@ public class ExplorerNote extends AppCompatActivity {
                     if (courseId.equals(c) && chapterId.equals(d)) {
                         textView.setText("");
                         break;
-                    }
-
-                    else {
+                    } else {
                         textView.setText("no existing notes");
 
                     }
@@ -201,6 +223,16 @@ public class ExplorerNote extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout4.isDrawerOpen(GravityCompat.START)) {
+
+            drawerLayout4.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private void openpopupwindowchapters() {
@@ -216,58 +248,83 @@ public class ExplorerNote extends AppCompatActivity {
         // start activity for result will save the current activity data
 
 
-        startActivityForResult(popupwindow5 , RESULT_OK);
+        startActivityForResult(popupwindow5, RESULT_OK);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(user == null){
-            getMenuInflater().inflate(R.menu.visitor_menu, menu);}
+        welcome= (TextView) findViewById(R.id.welcome1);
+        if(user!=null){
+            g.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        com.postit.postit_.Objects.user us = postSnapshot.getValue(com.postit.postit_.Objects.user.class);
+                        if(us.getEmail().equals(user.getEmail())){
+                            welcome.setText("Welcome"+" "+us.getUsername());
 
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            });}
         else{
-            getMenuInflater().inflate(R.menu.student_menu, menu);}
+            welcome.setText("Welcome");
+        }
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        int id = item.getItemId();
-        if (id == R.id.exit) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);
-            builder.setMessage("Are you sure you want to logout?");
-            builder.setCancelable(true);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                Intent intent1 = new Intent(ExplorerNote.this, StudentActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.nav_profile:
+                Intent intent2 = new Intent(ExplorerNote.this, Profile.class);
+                startActivity(intent2);
+                break;
+            case R.id.nav_chat:
+                Intent intent3 = new Intent(ExplorerNote.this, usersChats.class);
+                startActivity(intent3);
+                break;
 
-            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+            case R.id.nav_logout:
 
-                // signOut
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(ExplorerNote.this, MainActivity.class));
-                    finish();
-                }
-            });
-
-
-            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-
-        }
-        else if (id==R.id.home){
-                startActivity(new Intent(ExplorerNote.this, StudentActivity.class));
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(ExplorerNote.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
+                builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    // signOut
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(ExplorerNote.this, MainActivity.class));
+                    }
+                });
+                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                break;
+            case R.id.nav_login:
+                Intent intent4 = new Intent(ExplorerNote.this, MainActivity.class);
+                startActivity(intent4);
         }
         return true;
     }

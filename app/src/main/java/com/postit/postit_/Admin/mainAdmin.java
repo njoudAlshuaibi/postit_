@@ -17,18 +17,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.postit.postit_.MainActivity;
 import com.postit.postit_.R;
 
+
 public class mainAdmin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_admin);
-
-        Toolbar toolb = findViewById(R.id.toolbar_Admin2);
-        setSupportActionBar(toolb);
+        Toolbar toolbar = findViewById(R.id.toolbar_Admin2);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("HOME");
-        toolb.setTitleTextColor(0xFFB8B8B8);
+        toolbar.setTitleTextColor(0xFF000000);
+
 
 
 
@@ -63,12 +64,10 @@ public class mainAdmin extends AppCompatActivity {
         Intent popupwindowadmin = new Intent(mainAdmin.this,PopUpWindowAdmin.class);
         startActivity(popupwindowadmin);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.admin_menu, menu);
-
         return true;
     }
 
@@ -87,7 +86,7 @@ public class mainAdmin extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(mainAdmin.this, MainActivity.class));
-//                    finish();
+
                 }
             });
 
@@ -102,13 +101,13 @@ public class mainAdmin extends AppCompatActivity {
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
-        }
-        else if (id==R.id.home){
-            startActivity(new Intent(mainAdmin.this,mainAdmin.class));
+        } else if (id == R.id.home) {
+            startActivity(new Intent(mainAdmin.this, mainAdmin.class));
         }
         return true;
+    }
+
 
 
 
     }
-}

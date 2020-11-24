@@ -4,71 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity"
+    tools:context=".Admin.AdminActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg"
+    android:background="@drawable/back2"
     android:autoMirrored="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_admin"
         android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:background="#FFFBD4"/>
-///lulu
-
-
-
         />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="350dp"
+        android:layout_height="710dp"
         android:background="#A6FFFFFF"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
 
 
         <LinearLayout
 
             android:layout_width="344dp"
             android:layout_height="704dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="50dp"
             android:background="@drawable/border"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="3dp">
             <TextView
                 android:id="@+id/textViewp"
                 android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="-2dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="-18dp"
                 android:textAlignment="center"
                 android:textSize="16dp"
-                android:textColor="#9F0B3E"
-                android:textStyle="bold"/>
+                android:textColor="#c83772"
+                android:textStyle="bold"
+                android:fontFamily="@font/dsds"/>
 
-            <ImageButton
+            <Button
                 android:id="@+id/imageButtonreq"
-                android:layout_width="15dp"
-                android:layout_height="14dp"
-                android:layout_marginLeft="255dp"
-                android:layout_marginTop="-25dp"
-                android:hint="ADD COURSE"
-                app:srcCompat="@drawable/ic_baseline_check_24"
-                tools:ignore="VectorDrawableCompat" />
-
-            <ImageButton
-                android:id="@+id/imageButtoncancel"
-                android:layout_width="19dp"
+                android:layout_width="70dp"
                 android:layout_height="20dp"
-                android:layout_marginLeft="295dp"
-                android:layout_marginTop="-19dp"
-                android:hint="ADD COURSE"
-                app:srcCompat="@drawable/ic_outline_cancel_24"
-                tools:ignore="VectorDrawableCompat" />
+                android:layout_marginLeft="230dp"
+                android:layout_marginTop="-48dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="DONE"
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
+
+            <Button
+                android:id="@+id/imageButtoncancel"
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="230dp"
+                android:layout_marginTop="9dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Cancel"
+                android:textColor="#fff"
+                android:fontFamily="@font/dsds"/>
 
             <LinearLayout
                 android:layout_width="361dp"
-                android:layout_height="44dp"
+                android:layout_height="29dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/line">
 
@@ -83,7 +82,9 @@
                 android:text="MAJOR"
                 android:textAlignment="center"
                 android:textSize="18dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:fontFamily="@font/dsds"
+                android:textColor="#000000"/>
 
 
 
@@ -93,9 +94,10 @@
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="-11dp"
+                android:layout_marginTop="-10dp"
                 android:layout_marginRight="3dp"
-                android:hint="Major" />
+                android:hint="Major"
+                android:textColor="#000000"/>
 
             <LinearLayout
                 android:layout_width="326dp"
@@ -114,7 +116,8 @@
                     android:hint="Enter Major"
                     android:inputType="textPersonName"
                     android:textSize="15dp"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"
+                    android:fontFamily="@font/dsds"/>
 
                 <ImageButton
                     android:id="@+id/imageButton7"
@@ -132,15 +135,16 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginTop="14dp"
                     android:text="e.g.software engineering."
-                    android:textColor="#737070"
                     android:textStyle="italic"
-                    android:textSize="@dimen/_10sdp"/>
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/dsds"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="361dp"
-                android:layout_height="44dp"
+                android:layout_height="29dp"
                 android:background="@drawable/line">
 
             </LinearLayout>
@@ -150,7 +154,7 @@
                 android:layout_width="344dp"
                 android:layout_height="196dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="-11dp"
+                android:layout_marginTop="-7dp"
                 android:layout_marginRight="50dp"
 
                 android:orientation="vertical">
@@ -162,7 +166,9 @@
                     android:text="COURSE"
                     android:textAlignment="center"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/dsds"/>
 
                 <Spinner
                     android:id="@+id/spinnerCourse"
@@ -184,21 +190,22 @@
                         android:layout_width="155dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="60dp"
                         android:layout_marginRight="40dp"
                         android:layout_marginBottom="10dp"
                         android:ems="10"
                         android:hint="Enter Course Code"
                         android:inputType="textPersonName"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
 
                     <ImageButton
                         android:id="@+id/imageButton3"
                         android:layout_width="25dp"
                         android:layout_height="28dp"
                         android:layout_marginLeft="-30dp"
-                        android:layout_marginTop="59dp"
+                        android:layout_marginTop="67dp"
                         android:hint="ADD COURSE"
                         app:srcCompat="@drawable/ic_baseline_add_box_24"
                         tools:ignore="VectorDrawableCompat" />
@@ -207,11 +214,12 @@
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="59dp"
                         android:text="e.g.SWE333."
-                        android:textColor="#737070"
                         android:textSize="@dimen/_10sdp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/dsds"/>
 
 
                 </LinearLayout>
@@ -221,7 +229,8 @@
 
             <LinearLayout
                 android:layout_width="361dp"
-                android:layout_height="44dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="6dp"
                 android:background="@drawable/line">
 
             </LinearLayout>
@@ -232,7 +241,7 @@
                 android:layout_width="344dp"
                 android:layout_height="162dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="-11dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="50dp"
 
                 android:orientation="vertical">
@@ -243,15 +252,17 @@
                     android:layout_height="31dp"
                     android:text="CHAPTER"
                     android:textAlignment="center"
+                    android:textColor="#000000"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:fontFamily="@font/dsds"/>
 
                 <Spinner
                     android:id="@+id/spinnerChapter"
                     android:layout_width="300dp"
                     android:layout_height="65dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="6dp"
                     android:layout_marginRight="3dp"
                     android:hint="Major" />
 
@@ -272,14 +283,15 @@
                         android:hint="Enter Chapter"
                         android:inputType="textPersonName"
                         android:textSize="15dp"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        android:fontFamily="@font/dsds"/>
 
                     <ImageButton
                         android:id="@+id/imageButton5"
                         android:layout_width="25dp"
                         android:layout_height="28dp"
                         android:layout_marginLeft="-30dp"
-                        android:layout_marginTop="29dp"
+                        android:layout_marginTop="34dp"
                         android:hint="ADD CHAPTER"
                         app:srcCompat="@drawable/ic_baseline_add_box_24"
                         tools:ignore="VectorDrawableCompat" />
@@ -289,29 +301,29 @@
                         android:layout_width="16dp"
                         android:layout_height="25dp"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="29dp"
+                        android:layout_marginTop="34dp"
                         android:hint="DELETE CHAPTER"
-                        app:srcCompat="@drawable/ic_baseline_delete_24"
+                        app:srcCompat="@drawable/ic_baseline_delete_27"
+
                         tools:ignore="VectorDrawableCompat" />
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginTop="19dp"
+                        android:layout_marginTop="23dp"
                         android:text="e.g.Chapter6"
-                        android:textColor="#737070"
                         android:textStyle="italic"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/dsds"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
         </LinearLayout>
-
-    </LinearLayout>
+        </LinearLayout>
 </LinearLayout>
 
 
