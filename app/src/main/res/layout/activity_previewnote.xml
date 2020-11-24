@@ -129,7 +129,7 @@
 
         <LinearLayout
             android:layout_width="372dp"
-            android:layout_height="260dp"
+            android:layout_height="265dp"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:background="#A6FFFFFF">
@@ -147,14 +147,16 @@
 
             </ListView>
 
-
             <include
                 android:id="@+id/llComment"
                 layout="@layout/write_comment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="20dp"
+
                 />
+
+
 
             <TextView
                 android:id="@+id/NoCommentsYET"
@@ -168,7 +170,10 @@
                 android:textSize="22dp"
                 android:textStyle="bold" />
 
+
         </LinearLayout>
+
+
 
     </LinearLayout>
 </ScrollView>

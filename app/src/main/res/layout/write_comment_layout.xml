@@ -39,6 +39,7 @@
             android:inputType="textMultiLine"
             android:maxHeight="100dp"
             android:minHeight="42dp"
+            android:padding="10dp"
             android:overScrollMode="always"
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
@@ -50,7 +51,7 @@
             android:id="@+id/submitComment"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="-2dp"
             android:layout_marginLeft="4dp"
             android:background="@drawable/ic_baseline_send_27"
 

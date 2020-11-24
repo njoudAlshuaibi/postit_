@@ -56,7 +56,7 @@
                 android:layout_marginLeft="90dp"
                 android:background="@drawable/corner_orang"
                 android:fontFamily="@font/dsds"
-                android:text="EDIT"
+                android:text="Edit Profile"
                 android:textColor="@color/darkGreen">
 
             </Button>
