@@ -64,7 +64,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="22dp"
+                    android:layout_marginTop="62dp"
                     android:fontFamily="@font/dsds"
                     android:text="written by:Lujain ZM"
                     android:textColor="#000000"

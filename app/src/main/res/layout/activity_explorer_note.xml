@@ -52,7 +52,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ExNotemyRecycleView"
             android:layout_width="337dp"
-            android:layout_height="580dp"
+            android:layout_height="650dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="0dp"
             android:layout_marginRight="-999dp"
@@ -79,7 +79,7 @@
             android:layout_width="185dp"
             android:layout_height="-3343dp"
             android:layout_marginLeft="310dp"
-            android:layout_marginTop="255dp"
+            android:layout_marginTop="200dp"
             android:layout_marginBottom="14dp"
             android:background="#FBE0EA"
             app:backgroundTint="#2da79b"
